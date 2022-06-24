@@ -43,7 +43,7 @@ def upload():
             return t
         except:
             return json.dumps({"msg": "上传失败", "status_code": -1})
-
-
-if __name__ == "__main__":
-    app.run('127.0.0.1', port=501)
+#
+#
+# if __name__ == "__main__":
+#     app.run('127.0.0.1', port=501)
