@@ -6,7 +6,6 @@
 # @Desc  :
 import json
 import uuid
-
 from flask import Flask, render_template, request
 import os
 from python import B2
