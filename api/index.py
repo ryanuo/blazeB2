@@ -5,10 +5,12 @@
 # @Date  : 24/6/2022
 # @Desc  :
 import json
+from PIL import Image
 from flask import Flask, render_template, request
 import os
 import uuid
 from b2sdk.v2 import *
+from werkzeug.datastructures import FileStorage
 
 app = Flask(__name__, template_folder='static', static_url_path='', static_folder='static')
 
@@ -35,9 +37,14 @@ def upload():
         str_name = str(uuid.uuid4()) + '.' + file_format
         saveFile = f'{file_dir_path}/{str_name}'
         file_.save(saveFile)
+        # a = FileStorage(request.files.get('file_'))
+        # b = a.stream.readlines()
+        # print((request.files.get('file_')))
+        # img = Image.open(file_.stream)
         try:
             t = B2(application_key_id, application_key, bucket_name, host_url).uploadLocalImg(saveFile, tofile,
                                                                                               file_format)
+        # t = B2(application_key_id, application_key, bucket_name, host_url).uploadSource(b,tofile,file_format)
             os.remove(saveFile)
             return t
         except:
@@ -67,4 +74,16 @@ class B2:
         print(t)
         print('图片地址\n' + self.host_url + b2_file_name)
         return {"msg": "上传成功", "status_code": 1, 'link': self.host_url + b2_file_name}
+    def uploadSource(self,fileA, to_file,format_):
+        b2_file_name = to_file + str(uuid.uuid4()) + '.' + format_
+        bucket = self.main().get_bucket_by_name(self.bucket_name)
+        print(fileA)
+        t = bucket.upload_bytes(
+            data_bytes=fileA,
+            file_name=b2_file_name
+        )
+        print(t)
+        return {"msg": "上传成功", "status_code": 1, 'link': self.host_url + b2_file_name}
 
+if __name__ == "__main__":
+    app.run('127.0.0.1', port=501)
