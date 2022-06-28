@@ -4,9 +4,8 @@
 # @Author: Harry
 # @Date  : 24/6/2022
 # @Desc  :
-import datetime
+import datetime, time
 import pyperclip, requests, webbrowser, json, threading
-import time
 import tkinter.font as tf
 import tkinter.messagebox
 from io import BytesIO
@@ -15,7 +14,8 @@ from tkinter.filedialog import askopenfilename
 from tkinter.ttk import Progressbar
 from PIL import ImageTk, Image
 import os, uuid
-from b2sdk.v2 import *
+from b2sdk.v2 import InMemoryAccountInfo, B2Api
+import windnd
 
 '''
 图片Api
@@ -57,9 +57,9 @@ class UploadB2:
         self.progressbar['maximum'] = 100
         # 设置进度条长度
         self.progressbar['length'] = 280
-        add_config = Button(window, text='填写配置文件', foreground='red', font=('Arial', 10), width=10, height=1,
+        add_config = Button(window, text='填写配置文件', foreground='black', font=('Arial', 10), width=10, height=1,
                             command=lambda: thread_it(self.write_config))
-        open_config = Button(window, text='打开配置文件', foreground='red', font=('Arial', 10), width=10, height=1,
+        open_config = Button(window, text='打开配置文件', foreground='black', font=('Arial', 10), width=10, height=1,
                              command=lambda: thread_it(self.open_file))
         add_config.place(x=220, y=10)
         open_config.place(x=380, y=10)
@@ -77,6 +77,7 @@ class UploadB2:
         # 绑定label单击时间
         rb_right_Label.bind("<Button-1>", self.open_url)
         canv.bind("<Button-1>", lambda event: thread_it(self.dqFile, event))
+        windnd.hook_dropfiles(canv, lambda file: thread_it(self.drayfile, file))
         return
 
     # 调用上传文件的接口
@@ -96,7 +97,22 @@ class UploadB2:
         else:
             return
 
-            # 调用复制事件
+    # 拖动文件
+    def drayfile(self, file):
+        t_ = file[0].decode('gbk')
+        for i in ['png', 'jpg', 'jpeg', 'gif', 'webp']:
+            if t_.endswith(i):
+                a_ = self.uploadLocalImg(t_, i)
+                if a_:
+                    self.copyurl(a_)
+                else:
+                    tkinter.messagebox.showerror(title='提示', message='上传失败，结果为空!!')
+                break
+            else:
+                tkinter.messagebox.showerror(title='提示',
+                                             message=f'不支持{t_.split(".")[-1]}格式的文件，目前仅支持（jpg,png,jpeg,gif,webp）!!')
+                break
+        return
 
     def copyurl(self, msg):
         status = tkinter.messagebox.askokcancel('提示', '您的远程链接为：' + msg)
@@ -111,7 +127,10 @@ class UploadB2:
     # 上传图片
     def uploadLocalImg(self, file_, format_):
         # a = str(uuid.uuid4()) + '.' + img.format
-        thread_it(self._update_)
+        # thread_it(self._update_)
+        self.is_stop_thread_upd = False
+        t_ = MyThread(self._update_)
+        t_.start()
         c_ = self.read_config()
         b2_file_name = c_['b2_file_path'] + str(uuid.uuid4()) + '.' + format_
         bucket = self.main().get_bucket_by_name(c_['bucket_name'])
@@ -123,6 +142,7 @@ class UploadB2:
         print(t)
         print('图片地址\n' + c_['remote_host_url'] + b2_file_name)
         self.is_stop_thread_upd = True
+        t_.stop()
         return c_['remote_host_url'] + b2_file_name
 
     def _update_(self):
@@ -134,8 +154,10 @@ class UploadB2:
                 self.progressbar['value'] += 1
             time.sleep(0.01)
         self.progressbar['value'] = 0
+        return
 
-    # 进度条
+        # 进度条
+
     def progressRun(self):
         # 标签
         return
@@ -195,6 +217,35 @@ def thread_it(func, *args):
     t.setDaemon(True)
     # 启动
     t.start()
+
+
+class MyThread(threading.Thread):
+    def __init__(self, fn):
+        super().__init__()
+        self.__flag = threading.Event()  # 用于暂停线程的标识
+        self.__flag.set()  # 设置为True
+        self.__running = threading.Event()  # 用于停止线程的标识
+        self.__running.set()  # 将running设置为True
+        self.fn = fn
+        # self.num = num
+        # self.handle = handle
+        # self.barNum = barNum
+
+    def run(self):
+        while self.__running.isSet():
+            self.__flag.wait()  # 为True时立即返回, 为False时阻塞直到内部的标识位为True后返回
+            self.fn()
+            self.stop()
+
+    def pause(self):
+        self.__flag.clear()  # 设置为False, 让线程阻塞
+
+    def resume(self):
+        self.__flag.set()  # 设置为True, 让线程停止阻塞
+
+    def stop(self):
+        self.__flag.set()  # 将线程从暂停状态恢复, 如何已经暂停的话
+        self.__running.clear()  # 设置为False
 
 
 # 设置打开的位置
