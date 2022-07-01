@@ -3,22 +3,172 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 16:28:45
+ * @LastEditTime: 2022-07-01 21:14:35
  * @FilePath: \web\src\views\ImgManage\ImgManage.vue
 -->
 <template>
   <div class="img-m common-container">
-    <el-input placeholder="请输入内容" v-model="input" clearable>
-    </el-input>
+    <div class="inp-w">
+      <el-input placeholder="请输入图片文件夹名称，eg:hexo/2/ 支持多级" v-model="reqParams.prefix" clearable>
+      </el-input>
+      <el-button type="primary" size="medium" round @click="searchList">搜索</el-button>
+      <div class="svg-w">
+        <div title="图片显示方式">
+          <LargeList />
+        </div>
+        <div title="重新加载" @click="refreshData">
+          <Refresh />
+        </div>
+      </div>
+    </div>
+    <div class="pic-list-t1">
+      <image-item v-for="item in picListDatas" :key="item.fileName" :piclink="item.fileName" :pictitle="item.fileName"
+        :fileId="item.fileId" />
+    </div>
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+      :current-page.sync="currentPage" :page-sizes="[50, 80, 100, 200]" :page-size="reqParams.maxFileCount"
+      layout="sizes,next">
+    </el-pagination>
   </div>
 </template>
 
 <script>
+// import { Notification } from 'element-ui'
+import { mapActions, mapState } from 'pinia'
+import { debounce } from '../../plugin/filter'
+import useStore from '../../store'
+import { picList } from '../../utils/api'
+import LargeList from '../svg/LargeList.vue'
+import Refresh from '../svg/Refresh.vue'
+import ImageItem from './ImageItem/ImageItem.vue'
 export default {
-
+  data() {
+    return {
+      inputval: '',
+      picListDatas: [],
+      currentPage: 1,
+      reqParams: {
+        startFileName: '', // 获得下一个文件名称，从该名称开始
+        maxFileCount: 1, // 获取的数量
+        prefix: '' // 指定文件夹前缀
+      }
+    }
+  },
+  components: { LargeList, Refresh, ImageItem },
+  computed: {
+    ...mapState(useStore, ['isLogined']) // 映射函数，取出tagslist
+  },
+  mounted() {
+    this.getPicList()
+  },
+  methods: {
+    ...mapActions(useStore, ['handleIsLogined']),
+    // 获取数据
+    async getPicList() {
+      const auth = localStorage.getItem('authmsg')
+      if (auth) {
+        const p_ = Object.assign(JSON.parse(auth), this.reqParams)
+        const { data: res } = await picList({ params: p_ })
+        console.log(res)
+        if (res.files.length === 0) {
+          Notification({
+            title: '提示',
+            message: '文件夹内无图片',
+            type: 'error'
+          })
+        }
+        this.picListDatas = [...this.picListDatas, ...res.files]
+        this.reqParams.startFileName = res.nextFileName
+      } else {
+        Notification({
+          title: '提示',
+          message: '请检查是否登陆,请检查keyid和key是否填写正确',
+          type: 'error'
+        })
+      }
+    },
+    // 根据文件夹前缀进行搜索
+    searchList: debounce(function () {
+      this.picListDatas = []
+      this.reqParams.startFileName = ''
+      const val = this.reqParams.prefix.trim()
+      if (val) {
+        this.getPicList()
+      }
+    }, 300, true),
+    refreshData: debounce(function () {
+      // this.reqParams.startFileName = ''
+      this.reqParams.prefix = ''
+      this.getPicList()
+    }, 400, true),
+    handleSizeChange(e) {
+      this.reqParams.maxFileCount = e
+      this.getPicList()
+    },
+    handleCurrentChange(e) {
+      this.getPicList()
+    }
+  }
 }
 </script>
 
 <style lang="less" scoped>
-.img-m {}
+.img-m {
+  position: relative;
+  padding-bottom: 20px;
+
+  .el-input {
+    width: 340px;
+  }
+
+  .el-button {
+    margin-left: 10px;
+  }
+
+  .el-pagination {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+}
+
+.inp-w {
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.svg-w {
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+
+  div[title] {
+    margin: 0 5px;
+    width: 30px;
+    cursor: pointer;
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+
+.pic-list-t1 {
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: auto;
+  max-height: 70vh;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 5px 0;
+
+  .image-item {
+    width: 25%;
+  }
+}
 </style>

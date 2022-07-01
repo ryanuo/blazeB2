@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 16:20:37
+ * @LastEditTime: 2022-07-01 19:49:50
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
@@ -142,6 +142,8 @@ export default {
           bucketId: res.bucketId,
           api_url: res.api_url,
           init_token: res.init_token,
+          s3ApiUrl: res.s3ApiUrl,
+          downloadUrl: res.downloadUrl,
           time: (new Date()).getTime()
         }
         localStorage.setItem('authmsg', JSON.stringify(sdata))

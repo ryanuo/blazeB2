@@ -3,7 +3,7 @@
  * @Date: 2022-06-24 16:09:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 11:26:06
+ * @LastEditTime: 2022-07-01 19:18:19
  * @FilePath: \web\src\plugin\elements.js
  */
 /***
@@ -20,6 +20,7 @@ import {
   MessageBox,
   Dialog,
   Upload,
+  Pagination,
   Input,
   Button,
   Form,
@@ -39,6 +40,7 @@ const element = {
     Vue.use(Menu)
     Vue.use(MenuItem)
     Vue.use(Submenu)
+    Vue.use(Pagination)
     Vue.use(Input)
     Vue.use(RadioGroup)
     Vue.use(RadioButton)

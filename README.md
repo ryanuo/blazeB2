@@ -1,39 +1,59 @@
-# 1.仓库介绍
+<!--
+ * @Author: Harry
+ * @Date: 2022-04-20 20:37:06
+ * @LastEditors: harry
+ * @Github: https://github.com/rr210
+ * @LastEditTime: 2022-07-01 17:14:32
+ * @FilePath: \blazeB2\README.md
+-->
+# blaze B2图床
 
-1. 使用b2sdk 连接blake b2 制作图床
-2. api文件可直接在服务器端进行部署，使用的是flask web
-3. exe文件为使用tkinter编写的可视化软件 目前只支持windows
-4. web文件为前端的源码，使用vue2+element-ui
+[![Author](https://img.shields.io/badge/author-Rr210-violet.svg)](https://github.com/Rr210)  [![Release](https://img.shields.io/github/release/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/releases)  [![License](https://img.shields.io/github/license/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/blob/master/LICENSE)  [![Stars](https://img.shields.io/github/stars/Rr210/blazeB2)](https://github.com/Rr210/blazeB2)   [![Issues](https://img.shields.io/github/issues/Rr210/blazeB2)](https://github.com/Rr210/blazeB2/issues)
+## 仓库介绍 | Warehouse introduction
 
-## 1.1 效果展示
+> 该项目为blaze b2 在线图床系统 可进行图床管理，切勿滥用 
+> 图床地址 [backblaze b2](https://www.backblaze.com/b2/)
 
-### 1.1.1 web端
 
-<table>
-<tr>
-<td>
-<img src="https://cloud.mr90.top/file/imagecloud/hexo/4/c381c64f-9f67-4889-9a2c-76e65d8c6b35.png"  />
-</td>
-<td>
-<img src="https://cloud.mr90.top/file/imagecloud/hexo/4/ea438b20-04fb-4ec6-97e3-1d46ed1962e2.png"  />
+1. api文件可直接在服务器端进行部署，使用的是flask web
+2. exe文件为使用 **tkinter** 编写的可视化软件 目前只支持 **windows**
+3. web文件为前端的源码，使用 **vue2** **element-ui** **less** **pinia**
 
-</td>
-</tr>
-</table>
 
-- 预览地址：[在线](https://cloud.mr90.cf/)
+## 功能支持 | Features
 
-### 1.1.2 window端
+- [x] 支持 **拖拽**、**复制粘贴**、**选择文件** 等方式进行选择图片
+- [x] 支持 图片名称**唯一性**，可**设置命名前缀**
+- [x] 支持 **一键复制** 图片外链和支持多种格式(**MarkDown**，**html**,**自定义**)
+- [x] 支持 **一键部署**（vercel,腾讯云serverless）查看部署方法
+- [ ] 支持 **图床管理**（对仓库图片的 **增删改查**）
+- [ ] 支持 **暗夜模式** (自由切换 / 自动切换)
+- [ ] 支持 **PWA**
+- [ ] 支持 **图片压缩**
+- [ ] 支持 **批量上传图片**、**批量删除图片** 和 **批量复制图片外链**
+- [ ] 设置图片水印
+- [ ] 支持其他 厂商 （例如：Git / Gitee)
 
-<table>
-<tr>
-<td>
-<img src="https://cloud.mr90.top/file/imagecloud/hexo/4/ba0e1c3a-0b4d-420d-820b-e8ef91de9147.png"  />
-</td>
-<td>
-<img src="https://cloud.mr90.top/file/imagecloud/hexo/4/01db72e0-b232-4c81-9db8-78ad2a7b75e7.png"  />
-</td>
-</tr>
-</table>
 
-## 欢迎star※
+## 使用教程 | Using the tutorial
+
+待写
+
+## 部署方法 | Deployment method
+
+- 支持vercel一键部署
+- 支持腾讯云server一键部署
+  
+## 贡献 | Contribution
+
+欢迎各种形式的贡献，包括但不限于：美化界面、增加功能、改进代码、 修复 Bug 等
+
+##  反馈 | Feedback
+
+在使用过程中，如遇问题，请仔细阅读 **[官方文档](#)** ，或给作者提 **[Issue](https://github.com/rr210/blazeB2/issues)**
+
+## 许可 | License
+
+**[GPL-3.0](https://github.com/Rr210/blazeB2/blob/master/LICENSE)** 
+
+Copyright © 2022-Present blazeB2 Dev Team

@@ -3,11 +3,15 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 16:24:36
+ * @LastEditTime: 2022-07-01 22:17:46
  * @FilePath: \web\src\views\TabNav\TabNav.vue
 -->
 <template>
   <div class="hd-w">
+    <!-- <GithubView /> -->
+    <div class="logo_w">
+      <img src="https://cloud.mr90.top/file/imagecloud/hexo/4/18f40e5a-0e74-4d77-8f6d-971aa8149dea.png" title="" />
+    </div>
     <div class="lay-out">
       <div v-if="isLogined" @click="openhandle">
         <LayOut />
@@ -16,8 +20,9 @@
         <SignSvg />
       </div>
     </div>
-    <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" background-color="#545c64"
-      text-color="#fff" active-text-color="#ffd04b" router>
+    <!-- background-color="#545c64"
+      text-color="#fff" active-text-color="#ffd04b" -->
+    <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" router>
       <el-menu-item index="home">首页</el-menu-item>
       <el-menu-item v-if="isLogined" index="imanage">图床管理</el-menu-item>
       <el-menu-item index="setting">配置管理</el-menu-item>
@@ -38,6 +43,7 @@ import LayOut from '@/views/LayOut.vue'
 import SignSvg from '@/views/SignSvg.vue'
 import { Message, MessageBox } from 'element-ui'
 import FormView from '../FormView.vue'
+// import GithubView from '../svg/GithubView.vue'
 export default {
   data() {
     return {
@@ -85,6 +91,22 @@ export default {
 .hd-w {
   position: relative;
   height: 100vh;
+
+  .el-menu {
+    padding-left: 8%;
+  }
+
+  .logo_w {
+    position: absolute;
+    top: 0;
+    left: 2%;
+    width: 60px;
+    z-index: 1000;
+
+    img {
+      width: 100%;
+    }
+  }
 }
 
 .lay-out {
@@ -94,6 +116,7 @@ export default {
   width: 30px;
   height: 30px;
   z-index: 2000;
+  cursor: pointer;
 
   .svg {
     width: 100%;
