@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 22:28:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-06-24 19:31:51
+ * @LastEditTime: 2022-07-01 15:30:04
  * @FilePath: \web\vue.config.js
  */
 const path = require('path')
@@ -26,7 +26,7 @@ module.exports = {
     config
       .plugin('html')
       .tap(args => {
-        args[0].title = '图床-@Harry'
+        args[0].title = 'blazeB2图床 @Harry'
         return args
       })
   },

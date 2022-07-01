@@ -3,12 +3,11 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-06-25 11:00:44
+ * @LastEditTime: 2022-07-01 16:20:37
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
   <div class="home-w">
-    <form-view></form-view>
     <div class="upload-w">
       <el-upload class="upload-demo" action="customize" :show-file-list="false" drag :http-request="UploadFile">
         <i class="el-icon-upload"></i>
@@ -17,7 +16,7 @@
       </el-upload>
     </div>
     <h3>链接格式</h3>
-    <div style="margin-top: 20px;text-align: center;">
+    <div style="margin: 20px 0;text-align: center;">
       <el-radio-group v-model="radio2" size="medium" class="e-rg" @change="changeCopyStatus">
         <el-radio-button class="e-rb" label="Markdown"></el-radio-button>
         <el-radio-button class="e-rb" label="Html"></el-radio-button>
@@ -26,7 +25,7 @@
       </el-radio-group>
       <div class="res-upload">
         <div class="res-content" title="点击复制">
-          <span>{{ resultCopy }}</span>
+          <p>{{ resultCopy }}</p>
           <div @click="copyhandle">
             <CopyView class="copy-view" />
           </div>
@@ -42,11 +41,10 @@
 <script>
 import { Message, Notification } from 'element-ui'
 import { debounce } from '../plugin/filter'
-import axios from '../utils/http'
-const FormView = () => import('./FormView.vue')
+import { uploadServer, auth } from '../utils/api/index'
 const CopyView = () => import('./CopyView.vue')
 export default {
-  components: { FormView, CopyView },
+  components: { CopyView },
   data() {
     return {
       fdata: {},
@@ -110,23 +108,76 @@ export default {
         })
       })
     }, 300, true),
-    async UploadFile(params) {
-      const formData = new FormData()
-      formData.append('file_', params.file)
-      for (const i in this.fdata) {
-        formData.append(i, this.fdata[i])
-      }
-      const { data: res } = await axios.post('/api', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+    // 判断是否过期
+    authIsexit() {
+      const _this = this
+      return new Promise((resolve, reject) => {
+        const authmsg = localStorage.getItem('authmsg')
+        if (authmsg) {
+          const currentT = new Date()
+          const t_ = JSON.parse(authmsg)
+          // 过期时间定为23小时
+          if (currentT.getTime() - t_.time > 82800 * 1000) {
+            localStorage.removeItem('authmsg')
+            _this.setAuthStorage().then(() => {
+              resolve()
+            })
+          } else {
+            resolve()
+          }
+        } else {
+          _this.setAuthStorage().then(() => {
+            resolve()
+          })
         }
       })
+    },
+    // 设置授权信息缓冲
+    async setAuthStorage() {
+      const { data: res } = await auth(this.fdata)
+      if (res.bucketId) {
+        const sdata = {
+          uploadUrl: res.uploadUrl,
+          authorizationToken: res.authorizationToken,
+          bucketId: res.bucketId,
+          api_url: res.api_url,
+          init_token: res.init_token,
+          time: (new Date()).getTime()
+        }
+        localStorage.setItem('authmsg', JSON.stringify(sdata))
+      } else {
+        Notification({
+          title: '提示',
+          message: `状态码:${res.status},错误信息：${res.message},请检查keyid和key是否填写正确`,
+          type: 'error'
+        })
+      }
       console.log(res)
-      this.copycontent = res.link
-      Notification({
-        title: '提示',
-        message: res.msg,
-        type: res.status_code === 1 ? 'success' : 'error'
+    },
+    UploadFile(params) {
+      this.authIsexit().then(async () => {
+        const authmsg = localStorage.getItem('authmsg')
+        const formData = new FormData()
+        formData.append('file_', params.file)
+        const list_ = Object.assign(JSON.parse(authmsg), { tofile: this.fdata.tofile })
+        console.log(list_)
+        for (const i in list_) {
+          formData.append(i, list_[i])
+        }
+        const { data: res } = await uploadServer(formData)
+        console.log(res)
+        this.copycontent = res.action ? this.fdata.host_url + res.fileName : ''
+        Notification({
+          title: '提示',
+          message: res.action ? '上传成功' : `状态码:${res.status},错误信息：${res.message},请检查keyid和key是否填写正确`,
+          type: res.action ? 'success' : 'error'
+        })
+      }).catch(() => {
+        Notification({
+          title: '提示',
+          message: '请检查是否登陆,请检查keyid和key是否填写正确',
+          type: 'error'
+        })
       })
     }
   }
@@ -142,14 +193,6 @@ export default {
 .el-radio-button:first-child .el-radio-button__inner {
   border-radius: 40px !important;
 }
-
-// .e-rg {
-//   .e-rb {
-//     &:first-child {
-//       .el-radio-button__innerr {}
-//     }
-//   }
-// }
 
 footer {
   position: absolute;
@@ -177,8 +220,15 @@ h3 {
     border: 1px dashed #ccc;
     height: 50px;
     line-height: 50px;
+    padding: 0 30px 0 10px;
 
-    // span {}
+    p {
+      word-break: keep-all;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 

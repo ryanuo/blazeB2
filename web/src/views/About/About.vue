@@ -1,21 +1,22 @@
 <!--
  * @Author: Harry
- * @Date: 2022-04-20 20:40:43
+ * @Date: 2022-07-01 14:18:36
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 12:31:52
- * @FilePath: \web\src\App.vue
+ * @LastEditTime: 2022-07-01 14:18:44
+ * @FilePath: \web\src\views\About\About.vue
 -->
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div>
+
   </div>
 </template>
 
 <script>
 export default {
+
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 </style>

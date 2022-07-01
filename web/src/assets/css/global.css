@@ -160,3 +160,15 @@ li {
 .home-w .el-radio-button:last-child .el-radio-button__inner {
   border-radius: 0 18px 18px 0;
 }
+body {
+  background-color: #f2f2f2;
+}
+.common-container {
+  width: 98vw;
+  height: 90vh;
+  background-color: #fff;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+}
