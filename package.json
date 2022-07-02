@@ -1,0 +1,21 @@
+{
+  "name": "blazeb2",
+  "version": "1.0.0",
+  "description": "<!--\r  * @Author: Harry\r  * @Date: 2022-04-20 20:37:06\r  * @LastEditors: harry\r  * @Github: https://github.com/rr210\r  * @LastEditTime: 2022-07-01 17:14:32\r  * @FilePath: \\blazeB2\\README.md\r -->\r # blaze B2图床",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "gh": "gh-pages -d docs/docs/.vuepress/dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@b.github.com:Rr210/blakeB2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^4.0.0"
+  }
+}
