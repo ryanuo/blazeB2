@@ -5,6 +5,7 @@ import clientConfig3 from 'D:/Github/blazeB2/docs/node_modules/@vuepress/plugin-
 import clientConfig4 from 'D:/Github/blazeB2/docs/node_modules/@vuepress/plugin-nprogress/lib/client/config.js'
 import clientConfig5 from 'D:/Github/blazeB2/docs/node_modules/@vuepress/plugin-theme-data/lib/client/config.js'
 import clientConfig6 from 'D:/Github/blazeB2/docs/node_modules/@vuepress/theme-default/lib/client/config.js'
+import clientConfig7 from 'D:/Github/blazeB2/docs/node_modules/@vuepress/plugin-docsearch/lib/client/config.js'
 
 export const clientConfigs = [
   clientConfig0,
@@ -14,4 +15,5 @@ export const clientConfigs = [
   clientConfig4,
   clientConfig5,
   clientConfig6,
+  clientConfig7,
 ]
