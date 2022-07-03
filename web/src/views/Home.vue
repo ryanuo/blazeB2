@@ -3,15 +3,18 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 19:49:50
+ * @LastEditTime: 2022-07-03 19:22:17
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
   <div class="home-w">
     <div class="upload-w">
-      <el-upload class="upload-demo" action="customize" :show-file-list="false" drag :http-request="UploadFile">
+      <!-- @mouseenter="mouseHandle" @mouseleave.stop="mouseMoveHandle" -->
+      <div id="tar_box" contenteditable=""></div>
+      <el-upload ref="upload" class="upload-demo" action="customize" :show-file-list="false" drag
+        :http-request="UploadFile">
         <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__text">支持<em>拖动、点击、粘贴</em>图片<em>上传</em></div>
         <div class="el-upload__tip" slot="tip">只能上传图片文件，且不超过50MB</div>
       </el-upload>
     </div>
@@ -32,16 +35,15 @@
         </div>
       </div>
     </div>
-    <footer>
-      Copyright ©2021-{{ timeE }} <a href="https://u.mr90.top" target="_blank">u.mr90.top</a> .All Rights Reserved
-    </footer>
   </div>
 </template>
 
 <script>
 import { Message, Notification } from 'element-ui'
 import { debounce } from '../plugin/filter'
-import { uploadServer, auth } from '../utils/api/index'
+import { uploadServer } from '../utils/api/index'
+import { authIsexit } from '../utils/common/login'
+import { picPaste } from '../utils/common/paste'
 const CopyView = () => import('./CopyView.vue')
 export default {
   components: { CopyView },
@@ -52,7 +54,11 @@ export default {
       copycontent: ''
     }
   },
+  created() {
+    window.addEventListener('paste', this.pasteHandle)
+  },
   mounted() {
+    window.addEventListener('paste', this.pasteHandle)
     const token = localStorage.getItem('token_api')
     if (token) {
       this.fdata = JSON.parse(token)
@@ -67,9 +73,13 @@ export default {
       return this.copycontent !== '' ? this.changeCopyStatus(this.radio2) : '暂无内容'
     }
   },
+  destroyed() {
+    window.removeEventListener('paste', this.pasteHandle)
+  },
   methods: {
-    changeFile(file, fileList) {
-    },
+    pasteHandle: debounce(function (event) {
+      picPaste(event, this)
+    }, 500, true),
     changeCopyStatus(e) {
       const a_ = this.copycontent
       if (a_ !== '') {
@@ -108,61 +118,12 @@ export default {
         })
       })
     }, 300, true),
-    // 判断是否过期
-    authIsexit() {
-      const _this = this
-      return new Promise((resolve, reject) => {
-        const authmsg = localStorage.getItem('authmsg')
-        if (authmsg) {
-          const currentT = new Date()
-          const t_ = JSON.parse(authmsg)
-          // 过期时间定为23小时
-          if (currentT.getTime() - t_.time > 82800 * 1000) {
-            localStorage.removeItem('authmsg')
-            _this.setAuthStorage().then(() => {
-              resolve()
-            })
-          } else {
-            resolve()
-          }
-        } else {
-          _this.setAuthStorage().then(() => {
-            resolve()
-          })
-        }
-      })
-    },
-    // 设置授权信息缓冲
-    async setAuthStorage() {
-      const { data: res } = await auth(this.fdata)
-      if (res.bucketId) {
-        const sdata = {
-          uploadUrl: res.uploadUrl,
-          authorizationToken: res.authorizationToken,
-          bucketId: res.bucketId,
-          api_url: res.api_url,
-          init_token: res.init_token,
-          s3ApiUrl: res.s3ApiUrl,
-          downloadUrl: res.downloadUrl,
-          time: (new Date()).getTime()
-        }
-        localStorage.setItem('authmsg', JSON.stringify(sdata))
-      } else {
-        Notification({
-          title: '提示',
-          message: `状态码:${res.status},错误信息：${res.message},请检查keyid和key是否填写正确`,
-          type: 'error'
-        })
-      }
-      console.log(res)
-    },
     UploadFile(params) {
-      this.authIsexit().then(async () => {
+      authIsexit().then(async () => {
         const authmsg = localStorage.getItem('authmsg')
         const formData = new FormData()
         formData.append('file_', params.file)
         const list_ = Object.assign(JSON.parse(authmsg), { tofile: this.fdata.tofile })
-        console.log(list_)
         for (const i in list_) {
           formData.append(i, list_[i])
         }
@@ -174,6 +135,7 @@ export default {
           message: res.action ? '上传成功' : `状态码:${res.status},错误信息：${res.message},请检查keyid和key是否填写正确`,
           type: res.action ? 'success' : 'error'
         })
+        document.getElementById('tar_box').innerHTML = ''
       }).catch(() => {
         Notification({
           title: '提示',
@@ -194,16 +156,6 @@ export default {
 
 .el-radio-button:first-child .el-radio-button__inner {
   border-radius: 40px !important;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  font-size: 16px;
 }
 
 h3 {
@@ -245,6 +197,21 @@ h3 {
   &:hover {
     transition: all .3s cubic-bezier(0.25, 0.88, 1, 1);
     width: 22px;
+  }
+}
+
+@media only screen and (max-width: 537px) {
+  .upload-w {
+    margin-bottom: 50px;
+
+    /deep/ .el-upload-dragger {
+      width: 90vw;
+      height: 253px;
+    }
+  }
+
+  h3 {
+    display: none;
   }
 }
 </style>

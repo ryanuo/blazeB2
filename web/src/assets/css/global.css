@@ -172,3 +172,18 @@ body {
   box-sizing: border-box;
   padding: 20px;
 }
+.pic-list-t1::-webkit-scrollbar {
+  /* 滚动条宽度和高度 */
+  width: 8px;
+  height: 8px;
+}
+.pic-list-t1::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  background: #d4d6d9;
+}
+.pic-list-t1::-webkit-scrollbar-track-piece {
+  /*滚动条里面轨道*/
+  background-color: #fff;
+  border-radius: 10px;
+}

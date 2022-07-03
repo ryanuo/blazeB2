@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 21:14:35
+ * @LastEditTime: 2022-07-03 11:20:06
  * @FilePath: \web\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-// import { Notification } from 'element-ui'
+import { Notification } from 'element-ui'
 import { mapActions, mapState } from 'pinia'
 import { debounce } from '../../plugin/filter'
 import useStore from '../../store'
@@ -49,7 +49,7 @@ export default {
       currentPage: 1,
       reqParams: {
         startFileName: '', // 获得下一个文件名称，从该名称开始
-        maxFileCount: 1, // 获取的数量
+        maxFileCount: 50, // 获取的数量
         prefix: '' // 指定文件夹前缀
       }
     }
@@ -69,7 +69,6 @@ export default {
       if (auth) {
         const p_ = Object.assign(JSON.parse(auth), this.reqParams)
         const { data: res } = await picList({ params: p_ })
-        console.log(res)
         if (res.files.length === 0) {
           Notification({
             title: '提示',
@@ -161,7 +160,7 @@ export default {
   margin: 10px 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  // justify-content: space-evenly;
   overflow: auto;
   max-height: 70vh;
   border-bottom: 1px solid #f2f2f2;

@@ -3,7 +3,7 @@
  * @Date: 2022-06-24 16:09:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 19:18:19
+ * @LastEditTime: 2022-07-03 19:14:00
  * @FilePath: \web\src\plugin\elements.js
  */
 /***
@@ -24,6 +24,8 @@ import {
   Input,
   Button,
   Form,
+  Collapse,
+  CollapseItem,
   Menu,
   MenuItem,
   Submenu,
@@ -38,6 +40,8 @@ const element = {
     Vue.use(Dialog)
     Vue.use(Upload)
     Vue.use(Menu)
+    Vue.use(Collapse)
+    Vue.use(CollapseItem)
     Vue.use(MenuItem)
     Vue.use(Submenu)
     Vue.use(Pagination)
