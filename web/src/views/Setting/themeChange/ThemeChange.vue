@@ -3,7 +3,7 @@
  * @Date: 2022-07-04 12:24:22
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 13:13:17
+ * @LastEditTime: 2022-07-04 14:14:55
  * @FilePath: \web\src\views\Setting\themeChange\ThemeChange.vue
 -->
 <template>
@@ -34,7 +34,9 @@ export default {
   },
   mounted() {
     const theme = localStorage.getItem('themeb2')
-    this.value = JSON.parse(theme).theme
+    if (theme) {
+      this.value = JSON.parse(theme).theme
+    }
   },
   methods: {
     handleSelect(e) {

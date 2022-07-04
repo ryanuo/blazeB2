@@ -14,13 +14,13 @@ description: 图床功能的介绍
 [![Author](https://img.shields.io/badge/author-Rr210-violet.svg)](https://github.com/Rr210)  [![Release](https://img.shields.io/github/release/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/releases)  [![License](https://img.shields.io/github/license/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/blob/master/LICENSE)  [![Stars](https://img.shields.io/github/stars/Rr210/blazeB2)](https://github.com/Rr210/blazeB2)   [![Issues](https://img.shields.io/github/issues/Rr210/blazeB2)](https://github.com/Rr210/blazeB2/issues)
 
 
-- [x] 支持 **拖拽**、**复制粘贴**、**选择文件** 等方式进行选择图片
-- [x] 支持 图片名称**唯一性**，可**设置命名前缀**
-- [x] 支持 **一键复制** 图片外链和支持多种格式(**MarkDown**，**html**,**自定义**)
-- [x] 支持 **一键部署**（vercel,腾讯云serverless）查看部署方法
-- [ ] 支持 **图床管理**（对仓库图片的 **增删改查**）
-- [ ] 支持 **暗夜模式** (自由切换 / 自动切换)
-- [ ] 支持 **PWA**
-- [ ] 支持 **图片压缩**
-- [ ] 支持 **批量上传图片**、**批量删除图片** 和 **批量复制图片外链**
-- [ ] 设置图片水印
+- 支持 **拖拽**、**复制粘贴**、**选择文件** 等方式进行选择图片
+- 支持 图片名称**唯一性** 后端生成uuid字符串，暂不支持自定义名称
+- 支持 **一键复制** 图片外链和支持多种格式(**MarkDown**，**html**,**自定义**)
+- 支持 **一键部署**（vercel,腾讯云serverless）查看部署方法
+- 支持 **图床管理**（对仓库图片的 **增删改查**）
+- 支持 **暗夜模式** (自由切换 / 自动切换)
+- 支持 **PWA**  待完成
+- 支持 **图片压缩**  待完成
+- 支持 **批量上传图片**、**批量删除图片** 和 **批量复制图片外链** 待完成
+- 支持 **图片水印** 待完成

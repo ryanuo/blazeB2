@@ -6,15 +6,15 @@
 <h2 id="功能支持" tabindex="-1"><a class="header-anchor" href="#功能支持" aria-hidden="true">#</a> 功能支持</h2>
 <p><a href="https://github.com/Rr210" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/author-Rr210-violet.svg" alt="Author"><ExternalLinkIcon/></a>  <a href="https://github.com/Rr210/blazeB2/releases" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/github/release/Rr210/blazeB2.svg" alt="Release"><ExternalLinkIcon/></a>  <a href="https://github.com/Rr210/blazeB2/blob/master/LICENSE" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/github/license/Rr210/blazeB2.svg" alt="License"><ExternalLinkIcon/></a>  <a href="https://github.com/Rr210/blazeB2" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/github/stars/Rr210/blazeB2" alt="Stars"><ExternalLinkIcon/></a>   <a href="https://github.com/Rr210/blazeB2/issues" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/github/issues/Rr210/blazeB2" alt="Issues"><ExternalLinkIcon/></a></p>
 <ul>
-<li>[x] 支持 <strong>拖拽</strong>、<strong>复制粘贴</strong>、<strong>选择文件</strong> 等方式进行选择图片</li>
-<li>[x] 支持 图片名称<strong>唯一性</strong>，可<strong>设置命名前缀</strong></li>
-<li>[x] 支持 <strong>一键复制</strong> 图片外链和支持多种格式(<strong>MarkDown</strong>，<strong>html</strong>,<strong>自定义</strong>)</li>
-<li>[x] 支持 <strong>一键部署</strong>（vercel,腾讯云serverless）查看部署方法</li>
-<li>[ ] 支持 <strong>图床管理</strong>（对仓库图片的 <strong>增删改查</strong>）</li>
-<li>[ ] 支持 <strong>暗夜模式</strong> (自由切换 / 自动切换)</li>
-<li>[ ] 支持 <strong>PWA</strong></li>
-<li>[ ] 支持 <strong>图片压缩</strong></li>
-<li>[ ] 支持 <strong>批量上传图片</strong>、<strong>批量删除图片</strong> 和 <strong>批量复制图片外链</strong></li>
-<li>[ ] 设置图片水印</li>
+<li>支持 <strong>拖拽</strong>、<strong>复制粘贴</strong>、<strong>选择文件</strong> 等方式进行选择图片</li>
+<li>支持 图片名称<strong>唯一性</strong> 后端生成uuid字符串，暂不支持自定义名称</li>
+<li>支持 <strong>一键复制</strong> 图片外链和支持多种格式(<strong>MarkDown</strong>，<strong>html</strong>,<strong>自定义</strong>)</li>
+<li>支持 <strong>一键部署</strong>（vercel,腾讯云serverless）查看部署方法</li>
+<li>支持 <strong>图床管理</strong>（对仓库图片的 <strong>增删改查</strong>）</li>
+<li>支持 <strong>暗夜模式</strong> (自由切换 / 自动切换)</li>
+<li>支持 <strong>PWA</strong>  待完成</li>
+<li>支持 <strong>图片压缩</strong>  待完成</li>
+<li>支持 <strong>批量上传图片</strong>、<strong>批量删除图片</strong> 和 <strong>批量复制图片外链</strong> 待完成</li>
+<li>支持 <strong>图片水印</strong> 待完成</li>
 </ul>
 </div></template>

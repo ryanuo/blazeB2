@@ -124,5 +124,8 @@ class B2:
                                 {'bucketId': bucket_id, 'startFileName': startFileName, 'maxFileCount': maxFileCount,
                                  'prefix': prefix}),
                             headers={'Authorization': account_authorization_token})
-        # print(res.json())
-        return res.json()
+        return json.dumps(res.json(), ensure_ascii=False)
+
+
+if __name__ == '__main__':
+   app.run(host='0.0.0.0',port=9000)
