@@ -56,6 +56,20 @@ def list():
         return B2().cList(api_url, bucketId, init_token, startFileName, int(maxFileCount), prefix)
 
 
+# 删除单个图片
+@app.route('/img', methods=['DELETE'])
+def imglist():
+    if request.method == 'DELETE':
+        api_url = request.args.get('api_url')  # Provided by b2_authorize_account
+        init_token = request.args.get('init_token')  # Provided by b2_authorize_account
+        file_name = request.args.get('file_name')  # The name of the file you want to delete
+        file_id = request.args.get('file_id')  # The fileId of the file you want to delete
+        res = requests.post('%s/b2api/v2/b2_delete_file_version' % api_url,
+                            json.dumps({'fileName': file_name, 'fileId': file_id}),
+                            headers={'Authorization': init_token})
+        return res.json()
+
+
 # 登录后请求接口
 
 class B2:
@@ -124,7 +138,9 @@ class B2:
                                 {'bucketId': bucket_id, 'startFileName': startFileName, 'maxFileCount': maxFileCount,
                                  'prefix': prefix}),
                             headers={'Authorization': account_authorization_token})
+        # print(res.json())
         return json.dumps(res.json(), ensure_ascii=False)
+
 
 
 if __name__ == '__main__':
