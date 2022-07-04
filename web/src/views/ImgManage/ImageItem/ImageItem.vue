@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 21:16:30
+ * @LastEditTime: 2022-07-04 13:57:18
  * @FilePath: \web\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
@@ -14,6 +14,9 @@
 </template>
 
 <script>
+import { mapState } from 'pinia'
+import useStore from '../../../store'
+
 export default {
   props: {
     piclink: {
@@ -36,18 +39,23 @@ export default {
   },
   computed: {
     picL() {
-      return this.loadimg + '/' + this.piclink
+      return this.loadimg + this.piclink
     },
     ptit() {
       const a_ = this.pictitle.split('/')
       return a_[a_.length - 1]
-    }
+    },
+    ...mapState(useStore, ['prefixImg'])
   },
   mounted() {
     const auth = localStorage.getItem('authmsg')
     const token = localStorage.getItem('token_api')
     if (auth && token) {
-      this.loadimg = JSON.parse(auth).downloadUrl + '/file/' + JSON.parse(token).bucket_name
+      const picD = this.prefixImg.defaultUrl.replace(/\/file\/(.*?)$/, '')
+      const reg = /.s3/
+      console.log(picD)
+      const n_ = picD + '/file/' + JSON.parse(token).bucket_name + '/'
+      this.loadimg = reg.test(picD) ? picD + '/' : n_
     }
   }
 }
@@ -81,5 +89,16 @@ export default {
     white-space: nowrap; //溢出不换行
   }
 
+}
+
+@media only screen and (max-width: 537px) {
+  .img-item-w {
+    margin: 5px;
+    width: 30%;
+
+    img {
+      width: 100%;
+    }
+  }
 }
 </style>

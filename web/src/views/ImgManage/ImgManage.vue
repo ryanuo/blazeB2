@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-03 11:20:06
+ * @LastEditTime: 2022-07-04 13:55:58
  * @FilePath: \web\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="pic-list-t1">
+    <div class="pic-list-t1 animate__animated animate__fadeIn">
       <image-item v-for="item in picListDatas" :key="item.fileName" :piclink="item.fileName" :pictitle="item.fileName"
         :fileId="item.fileId" />
     </div>
@@ -58,8 +58,23 @@ export default {
   computed: {
     ...mapState(useStore, ['isLogined']) // 映射函数，取出tagslist
   },
+  watch: {
+    isLogined: {
+      // immediate: true,
+      deep: true, // 深度监听
+      handler(newValue) {
+        console.log(newValue)
+        if (newValue) {
+          this.getPicList()
+        }
+      }
+    }
+  },
   mounted() {
-    this.getPicList()
+    const auth = localStorage.getItem('authmsg')
+    if (auth) {
+      this.getPicList()
+    }
   },
   methods: {
     ...mapActions(useStore, ['handleIsLogined']),
@@ -78,12 +93,6 @@ export default {
         }
         this.picListDatas = [...this.picListDatas, ...res.files]
         this.reqParams.startFileName = res.nextFileName
-      } else {
-        Notification({
-          title: '提示',
-          message: '请检查是否登陆,请检查keyid和key是否填写正确',
-          type: 'error'
-        })
       }
     },
     // 根据文件夹前缀进行搜索

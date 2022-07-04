@@ -3,23 +3,23 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-03 10:37:14
- * @FilePath: \web\src\views\setting\Setting.vue
+ * @LastEditTime: 2022-07-04 13:53:25
+ * @FilePath: \web\src\views\Setting\Setting.vue
 -->
 <template>
   <div class="common-container">
-    <el-collapse v-model="activeName" accordion>
+    <h1 class="set-tit">⌜全局配置⌟</h1>
+    <el-collapse class="img-manage" v-model="activeName" accordion>
       <el-collapse-item title="🗝️ 密钥配置管理" name="1">
         <form-view />
       </el-collapse-item>
       <el-collapse-item title="🍥 主题设置" name="2">
-        <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
-        <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+        <h2>主题选择</h2>
+        <theme-change />
       </el-collapse-item>
       <el-collapse-item title="🎃 页面图片管理" name="3">
-        <div>简化流程：设计简洁直观的操作流程；</div>
-        <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-        <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+        <h2>图片前缀(默认选择host_url)</h2>
+        <set-prefix />
       </el-collapse-item>
     </el-collapse>
 
@@ -28,9 +28,13 @@
 
 <script>
 import FormView from '../FormView.vue'
+import SetPrefix from './setprefix/SetPrefix.vue'
+import ThemeChange from './themeChange/ThemeChange.vue'
 export default {
   components: {
-    FormView
+    FormView,
+    SetPrefix,
+    ThemeChange
   },
   data() {
     return {
@@ -42,11 +46,58 @@ export default {
 
 <style lang="less" scoped>
 .el-collapse-item {
+  color: var(--b2-text);
+
   /deep/ .el-collapse-item__header {
     font-size: 16px;
     font-weight: bold;
     height: 68px;
     line-height: 68px;
+    background-color: var(--b2-bg);
+    color: var(--b2-text);
+    border-bottom: 1px solid var(--b2-border);
   }
+
+  /deep/ .el-form-item__label {
+    color: var(--b2-text);
+  }
+
+  /deep/ .el-collapse-item__content {
+    padding-left: 5px;
+    color: var(--b2-text);
+  }
+
+  /deep/ .el-collapse-item__wrap {
+    background-color: var(--b2-pre-bg);
+  }
+}
+
+.el-collapse {
+  margin: 0 20px;
+  height: 70vh;
+  max-height: 70vh;
+  overflow: auto;
+  border-top: 1px solid var(--b2-border);
+  border-bottom: 1px solid var(--b2-border);
+
+  /deep/ .el-select {
+    margin-top: 10px;
+  }
+
+  h2 {
+    margin-top: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    border-left: 5px solid var(--b2-theme-c);
+  }
+}
+
+.set-tit {
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin: 20px 0;
 }
 </style>

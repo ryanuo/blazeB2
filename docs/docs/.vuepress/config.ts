@@ -3,7 +3,7 @@
  * @Date: 2022-07-02 10:00:55
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-02 22:57:02
+ * @LastEditTime: 2022-07-03 19:58:01
  * @FilePath: \docs\docs\.vuepress\config.ts
  */
 import { defineUserConfig } from 'vuepress'
@@ -29,7 +29,9 @@ export default defineUserConfig({
     },
     plugins: [
         docsearchPlugin({
-            // 配置项
+            apiKey: 'b33f513f74064f76939843da6ad00b52',
+            indexName: 'BlazeB2',
+            appId: 'NMU3PE3UD9'
         }),
     ],
     theme: defaultTheme({

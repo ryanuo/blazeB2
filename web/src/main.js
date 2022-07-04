@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 13:09:07
+ * @LastEditTime: 2022-07-04 13:50:27
  * @FilePath: \web\src\main.js
  */
 import Vue from 'vue'
@@ -14,7 +14,8 @@ import App from './App.vue'
 import router from './router'
 import element from './plugin/elements.js'
 import './assets/css/global.css'
-import 'element-ui/lib/theme-chalk/index.css'
+// import 'element-ui/lib/theme-chalk/index.css'
+import './assets/css/element-variables.scss'
 import VueClipboard from 'vue-clipboard2'
 // main.js
 // 全局组件

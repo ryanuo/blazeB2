@@ -3,14 +3,14 @@
  * @Date: 2022-04-20 22:28:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 15:30:04
- * @FilePath: \web\vue.config.js
+ * @LastEditTime: 2022-07-03 19:33:05
+ * @FilePath: \blazeB2\web\vue.config.js
  */
 const path = require('path')
 module.exports = {
   // ...
   publicPath: './', // 文件加载设置为相对路径
-  outputDir: 'dist',
+  outputDir: '../api/static',
   // lintOnSave: false, // 关闭eslint
   // productionGzip: process.env.NODE_ENV === 'pro', //  开启gzip压缩代码
   productionSourceMap: process.env.NODE_ENV === 'pro', // 生产环境下css 分离文件

@@ -161,29 +161,37 @@ li {
   border-radius: 0 18px 18px 0;
 }
 body {
-  background-color: #f8f8f8;
+  background-color: var(--b2-bg);
+  color: var(--b2-text);
 }
 .common-container {
   width: 98vw;
   height: 90vh;
-  background-color: #fff;
+  background-color: var(--b2-pre-bg);
   margin: 20px auto;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 20px;
 }
+.img-manage::-webkit-scrollbar,
 .pic-list-t1::-webkit-scrollbar {
   /* 滚动条宽度和高度 */
   width: 8px;
   height: 8px;
 }
+.img-manage::-webkit-scrollbar-thumb,
 .pic-list-t1::-webkit-scrollbar-thumb {
   /*滚动条里面小方块*/
   border-radius: 10px;
   background: #d4d6d9;
 }
+.img-manage::-webkit-scrollbar-track-piece,
 .pic-list-t1::-webkit-scrollbar-track-piece {
   /*滚动条里面轨道*/
   background-color: #fff;
   border-radius: 10px;
+}
+#app .el-input__inner {
+  background-color: var(--b2-pre-bg);
+  color: var(--bg-text);
 }

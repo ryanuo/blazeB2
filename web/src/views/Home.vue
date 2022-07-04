@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-03 19:22:17
+ * @LastEditTime: 2022-07-04 13:40:01
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
@@ -152,6 +152,16 @@ export default {
   display: flex;
   justify-content: center;
   margin: 80px 0;
+
+  /deep/ .el-upload-dragger {
+    background-color: var(--b2-pre-bg);
+  }
+}
+
+/deep/ .el-radio-button__inner {
+  background-color: var(--b2-pre-bg);
+  border: 1px solid var(--b2-border);
+  color: var(--bg-text);
 }
 
 .el-radio-button:first-child .el-radio-button__inner {

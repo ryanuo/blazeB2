@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-03 19:18:52
+ * @LastEditTime: 2022-07-04 13:19:45
  * @FilePath: \web\src\views\TabNav\TabNav.vue
 -->
 <template>
@@ -59,6 +59,12 @@ export default {
   components: { LayOut, SignSvg, PhoneTab },
   mounted() {
     this.handleIsLogined()
+    const theme = localStorage.getItem('themeb2')
+    if (theme) {
+      const dom = document.documentElement
+      const t_ = JSON.parse(theme).theme
+      if (dom.className !== t_) { document.documentElement.className = t_ }
+    }
   },
   computed: {
     timeE() { return (new Date()).getFullYear() },
@@ -103,6 +109,17 @@ export default {
 .hd-w {
   .el-menu {
     padding-left: 15%;
+    background-color: var(--b2-pre-bg);
+  }
+
+  /deep/ .el-menu--horizontal>.el-menu-item.is-active {
+    color: var(--bg-text);
+  }
+
+  /deep/ .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover,
+  .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus {
+    background-color: var(--b2-active);
+    border-radius: 10px;
   }
 
   .logo_w {

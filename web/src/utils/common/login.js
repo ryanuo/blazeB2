@@ -3,11 +3,12 @@
  * @Date: 2022-07-03 08:59:18
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-03 11:10:00
+ * @LastEditTime: 2022-07-04 12:06:19
  * @FilePath: \web\src\utils\common\login.js
  */
 import { auth } from '@/utils/api'
 import { Notification } from 'element-ui'
+import useStore from '../../store'
 function authIsexit() {
   return new Promise((resolve, reject) => {
     const authmsg = localStorage.getItem('authmsg')
@@ -45,17 +46,42 @@ async function setAuthStorage(token) {
   const { data: res } = await auth(fdata)
   if (res.bucketId) {
     console.log(1)
+    // https://imagecloud.s3.us-west-004.backblazeb2.com/
+    const urlList = {
+      s3ApiUrl: `https://${fdata.bucket_name}.${res.s3ApiUrl.replace('https://', '')}`,
+      downloadUrl: res.downloadUrl,
+      api_url: res.api_url,
+      host_url: fdata.host_url
+    }
     const sdata = {
       uploadUrl: res.uploadUrl,
       authorizationToken: res.authorizationToken,
       bucketId: res.bucketId,
-      api_url: res.api_url,
       init_token: res.init_token,
-      s3ApiUrl: res.s3ApiUrl,
-      downloadUrl: res.downloadUrl,
       time: (new Date()).getTime()
     }
-    localStorage.setItem('authmsg', JSON.stringify(sdata))
+    const resStorData = Object.assign(sdata, urlList)
+    console.log(resStorData)
+    setPrefixImg(urlList, fdata.host_url)
+    localStorage.setItem('authmsg', JSON.stringify(resStorData))
+  }
+}
+
+/**
+ * 设置全局图片前缀
+ */
+const setPrefixImg = function (obj, defu) {
+  const l_ = []
+  const store = useStore()
+  if (store.prefixImg.defaultUrl === '') {
+    for (const i of Object.entries(obj)) {
+      l_.push({ label: i[0], url: i[1] })
+    }
+    const prefixImg = {
+      support: l_,
+      defaultUrl: defu
+    }
+    store.setprefixImg(prefixImg)
   }
 }
 

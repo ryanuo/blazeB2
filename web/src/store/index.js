@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-03 09:54:22
+ * @LastEditTime: 2022-07-04 11:20:42
  * @FilePath: \web\src\store\index.js
  */
 import { defineStore } from 'pinia'
@@ -15,13 +15,22 @@ const useStore = defineStore('store', {
   },
   state: () => {
     return {
-      isLogined: false
+      isLogined: false,
+      prefixImg: {
+        support: [],
+        defaultUrl: ''
+      }
     }
   },
   getters: {
     // 登录状态
     siginStatus(state) {
       return !state.isLogined
+    },
+    prefixStatus(state) {
+      const a = state.prefixImg.support.filter(v => v.url === state.prefixImg.defaultUrl)
+      console.log(a)
+      return a[0].url
     }
   },
   actions: {
@@ -33,6 +42,12 @@ const useStore = defineStore('store', {
       authIsexit().then(() => {
         this.isLogined = true
       })
+    },
+    setprefixImg(obj) {
+      this.prefixImg = obj
+    },
+    setDefaultPrefix(name) {
+      this.prefixImg.defaultUrl = name
     }
   }
 })
