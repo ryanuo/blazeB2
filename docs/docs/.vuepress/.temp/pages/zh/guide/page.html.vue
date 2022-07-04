@@ -8,7 +8,7 @@
 <li>首先在blazeb2申请一个 <strong>应用密钥</strong> <a href="https://secure.backblaze.com/app_keys.htm" target="_blank" rel="noopener noreferrer">申请地址<ExternalLinkIcon/></a></li>
 <li>点击添加新的应用程序密钥,然后按照图片操作</li>
 </ul>
-<p><img src="https://cloud.mr90.top/file/imagecloud/hexo/4/c85aceb4-475c-450d-8f9b-b26ced99e563.png" alt=""></p>
+<p><img src="https://cloud.mr90.top/hexo/4/c85aceb4-475c-450d-8f9b-b26ced99e563.png" alt=""></p>
 <ul>
 <li>确认添加后将生成的<strong>密钥复制保存</strong></li>
 </ul>
@@ -16,5 +16,5 @@
 <ul>
 <li>按照图片填写，保存至本地就可以使用</li>
 </ul>
-<p><img src="https://cloud.mr90.top/file/imagecloud/hexo/4/79140172-f18a-4c28-a63e-01e9171d26ea.png" alt=""></p>
+<p><img src="https://cloud.mr90.top/hexo/4/79140172-f18a-4c28-a63e-01e9171d26ea.png" alt=""></p>
 </div></template>

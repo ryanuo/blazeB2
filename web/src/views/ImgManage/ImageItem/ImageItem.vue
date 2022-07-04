@@ -3,20 +3,25 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 13:57:18
+ * @LastEditTime: 2022-07-04 21:32:13
  * @FilePath: \web\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
   <div class="img-item-w">
-    <img :src="picL" alt="pictitle" srcset="">
+    <MoreMsg :piclink="piclink" :pictitle="pictitle" :fileId="fileId" :picid="picid" v-on="$listeners" />
+    <img @click="imgshow(picL)" :src="picL" alt="pictitle" srcset="">
     <div class="pic-tit">{{ ptit }}</div>
+    <div class="link-copy-w">
+      <mark-down :link="picL" />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'pinia'
-import useStore from '../../../store'
-
+import useStore from '@/store'
+import MoreMsg from './moremsg/MoreMsg.vue'
+import MarkDown from '@/views/svg/MarkDown.vue'
 export default {
   props: {
     piclink: {
@@ -30,11 +35,21 @@ export default {
     fileId: {
       type: String,
       required: true
+    },
+    picid: {
+      type: Number,
+      required: true
     }
   },
+  emits: ['ishow'],
   data() {
     return {
       loadimg: ''
+    }
+  },
+  methods: {
+    imgshow() {
+      this.$emit('ishow', { id: this.picid, f_: this.picL })
     }
   },
   computed: {
@@ -52,33 +67,37 @@ export default {
     const token = localStorage.getItem('token_api')
     if (auth && token) {
       const picD = this.prefixImg.defaultUrl.replace(/\/file\/(.*?)$/, '')
-      const reg = /.s3/
-      console.log(picD)
-      const n_ = picD + '/file/' + JSON.parse(token).bucket_name + '/'
-      this.loadimg = reg.test(picD) ? picD + '/' : n_
+      this.loadimg = picD + '/'
     }
-  }
+  },
+  components: { MoreMsg, MarkDown }
 }
 </script>
 
 <style lang="less" scoped>
 .img-item-w {
+  position: relative;
   border-radius: 10px;
   box-shadow: 0 0 5px #ccc;
-  width: 10%;
   text-align: center;
+  width: 15%;
   padding: 5px;
   box-sizing: border-box;
-  margin: 20px;
+  margin: 10px;
   cursor: pointer;
 
   &:hover {
     box-shadow: 0 0 12px #ccc;
+
+    .more-w {
+      transition: all .4s linear;
+      opacity: 1;
+    }
   }
 
   img {
-    width: 80%;
-    height: 100px;
+    width: 90%;
+    height: 150px;
     border-radius: 10px;
   }
 
@@ -87,6 +106,7 @@ export default {
     overflow: hidden; //超出的文本隐藏
     text-overflow: ellipsis; //溢出用省略号显示
     white-space: nowrap; //溢出不换行
+    border-bottom: 1px dashed #f2f2f2;
   }
 
 }
@@ -98,7 +118,12 @@ export default {
 
     img {
       width: 100%;
+      height: 120px;
     }
   }
+}
+
+.ink-copy-w {
+  text-align: left;
 }
 </style>

@@ -3,13 +3,14 @@
  * @Date: 2022-04-20 20:37:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 16:32:05
+ * @LastEditTime: 2022-07-04 19:51:43
  * @FilePath: \blazeB2\README.md
 -->
-# Blaze B2图床
 <a href="https://blaze-b2.vercel.app/" >
 <img width="100" align="right" alt="blazeB2" src="https://cloud.mr90.top/file/imagecloud/hexo/4/16533db7-b477-46ec-bbf8-44ae848bc771.png">
 </a>
+
+# Blaze B2图床
 
 [![文档](https://img.shields.io/badge/docs-%E6%96%87%E6%A1%A3-blueviolet)](https://m.mr90.top/blazeB2/) [![Author](https://img.shields.io/badge/author-Rr210-violet.svg)](https://github.com/Rr210)  [![Release](https://img.shields.io/github/release/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/releases)  [![License](https://img.shields.io/github/license/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/blob/master/LICENSE)  [![Stars](https://img.shields.io/github/stars/Rr210/blazeB2)](https://github.com/Rr210/blazeB2)   [![Issues](https://img.shields.io/github/issues/Rr210/blazeB2)](https://github.com/Rr210/blazeB2/issues)
 ## 仓库介绍 | Warehouse introduction

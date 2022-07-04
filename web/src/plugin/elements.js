@@ -3,7 +3,7 @@
  * @Date: 2022-06-24 16:09:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 09:54:11
+ * @LastEditTime: 2022-07-04 21:33:59
  * @FilePath: \web\src\plugin\elements.js
  */
 /***
@@ -27,11 +27,15 @@ import {
   Select,
   Option,
   Collapse,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
   CollapseItem,
   Menu,
   MenuItem,
   Submenu,
   RadioGroup,
+  Tooltip,
   FormItem,
   RadioButton,
   Message
@@ -42,6 +46,10 @@ const element = {
     Vue.use(Dialog)
     Vue.use(Upload)
     Vue.use(Select)
+    Vue.use(Tooltip)
+    Vue.use(Dropdown)
+    Vue.use(DropdownItem)
+    Vue.use(DropdownMenu)
     Vue.use(Option)
     Vue.use(Menu)
     Vue.use(Collapse)

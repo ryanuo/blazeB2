@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 13:55:58
+ * @LastEditTime: 2022-07-04 21:44:16
  * @FilePath: \web\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -22,31 +22,43 @@
       </div>
     </div>
     <div class="pic-list-t1 animate__animated animate__fadeIn">
-      <image-item v-for="item in picListDatas" :key="item.fileName" :piclink="item.fileName" :pictitle="item.fileName"
-        :fileId="item.fileId" />
+      <image-item @setshowdiag="handleDiag" @ishow="imgshow" @update="updatePicLists"
+        v-for="(item, index) in picListDatas" :key="item.fileName" :picid="index" :piclink="item.fileName"
+        :pictitle="item.fileName" :fileId="item.fileId" />
     </div>
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
       :current-page.sync="currentPage" :page-sizes="[50, 80, 100, 200]" :page-size="reqParams.maxFileCount"
       layout="sizes,next">
     </el-pagination>
+    <el-dialog title="图片详情" :visible.sync="centerDialogVisible" width="30%" center>
+      <div><span>图片名称：</span>{{ currentitemdetail.filename }}</div>
+      <div><span>图片大小：</span>{{ currentitemdetail.filesize }}</div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { Notification } from 'element-ui'
-import { mapActions, mapState } from 'pinia'
+import { mapActions, mapState, mapWritableState } from 'pinia'
 import { debounce } from '../../plugin/filter'
 import useStore from '../../store'
 import { picList } from '../../utils/api'
 import LargeList from '../svg/LargeList.vue'
 import Refresh from '../svg/Refresh.vue'
 import ImageItem from './ImageItem/ImageItem.vue'
+import 'viewerjs/dist/viewer.css'
+import { api as viewerApi } from 'v-viewer'
 export default {
   data() {
     return {
       inputval: '',
+      centerDialogVisible: false,
       picListDatas: [],
       currentPage: 1,
+      currentitemdetail: {
+        filesize: '',
+        filename: ''
+      },
       reqParams: {
         startFileName: '', // 获得下一个文件名称，从该名称开始
         maxFileCount: 50, // 获取的数量
@@ -56,7 +68,9 @@ export default {
   },
   components: { LargeList, Refresh, ImageItem },
   computed: {
-    ...mapState(useStore, ['isLogined']) // 映射函数，取出tagslist
+    ...mapWritableState(useStore, ['isLogined']), // 映射函数，取出isLogined
+    ...mapWritableState(useStore, ['prefixImg']), // 映射函数，取出prefixImg
+    ...mapState(useStore, ['setdefaultFile']) // 映射函数，取出setdefaultFile
   },
   watch: {
     isLogined: {
@@ -72,11 +86,30 @@ export default {
   },
   mounted() {
     const auth = localStorage.getItem('authmsg')
+    if (this.setdefaultFile) {
+      this.reqParams.prefix = this.setdefaultFile
+    }
     if (auth) {
       this.getPicList()
     }
   },
   methods: {
+    handleDiag(e) {
+      const a_ = this.picListDatas[e]
+      this.currentitemdetail = {
+        filesize: (a_.contentLength / 1000).toFixed(2) + 'kb',
+        filename: a_.fileName
+      }
+      this.centerDialogVisible = true
+    },
+    imgshow(e) {
+      viewerApi({
+        images: [e.f_]
+      })
+    },
+    updatePicLists(e) {
+      this.picListDatas.splice(e, 1)
+    },
     ...mapActions(useStore, ['handleIsLogined']),
     // 获取数据
     async getPicList() {
@@ -169,14 +202,10 @@ export default {
   margin: 10px 0;
   display: flex;
   flex-wrap: wrap;
-  // justify-content: space-evenly;
   overflow: auto;
   max-height: 70vh;
   border-bottom: 1px solid #f2f2f2;
   padding: 5px 0;
 
-  .image-item {
-    width: 25%;
-  }
 }
 </style>

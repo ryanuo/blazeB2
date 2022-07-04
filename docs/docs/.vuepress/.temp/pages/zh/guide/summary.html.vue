@@ -8,9 +8,10 @@
 <ul>
 <li>支持 <strong>拖拽</strong>、<strong>复制粘贴</strong>、<strong>选择文件</strong> 等方式进行选择图片</li>
 <li>支持 图片名称<strong>唯一性</strong> 后端生成uuid字符串，暂不支持自定义名称</li>
+<li>支持 自定义<strong>检索</strong>某个指定文件夹</li>
 <li>支持 <strong>一键复制</strong> 图片外链和支持多种格式(<strong>MarkDown</strong>，<strong>html</strong>,<strong>自定义</strong>)</li>
 <li>支持 <strong>一键部署</strong>（vercel,腾讯云serverless）查看部署方法</li>
-<li>支持 <strong>图床管理</strong>（对仓库图片的 <strong>增删改查</strong>）</li>
+<li>支持 <strong>图床管理</strong>（对仓库图片的 <strong>增删查</strong> 预览）</li>
 <li>支持 <strong>暗夜模式</strong> (自由切换 / 自动切换)</li>
 <li>支持 <strong>PWA</strong>  待完成</li>
 <li>支持 <strong>图片压缩</strong>  待完成</li>

@@ -3,7 +3,7 @@
  * @Date: 2022-07-02 10:00:55
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 16:21:46
+ * @LastEditTime: 2022-07-04 21:45:46
  * @FilePath: \docs\docs\.vuepress\config.ts
  */
 import { defineUserConfig } from 'vuepress'
@@ -13,7 +13,7 @@ export default defineUserConfig({
     lang: 'zh-CN',
     title: 'BlazeB2 图床',
     description: '基于 backBlazeb2 API & cloudflare 开发的具有 CDN 加速功能的图床工具',
-    base: "/blazeB2/",
+    // base: "/blazeB2/",
     head: [
         [
             'link', { rel: 'icon', href: './favicon.ico' }

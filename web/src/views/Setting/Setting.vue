@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 13:53:25
+ * @LastEditTime: 2022-07-04 20:44:12
  * @FilePath: \web\src\views\Setting\Setting.vue
 -->
 <template>
@@ -18,8 +18,10 @@
         <theme-change />
       </el-collapse-item>
       <el-collapse-item title="🎃 页面图片管理" name="3">
-        <h2>图片前缀(默认选择host_url)</h2>
+        <h2>图片前缀(默认选择host_url 在密钥配置中可修改)</h2>
         <set-prefix />
+        <h2>默认检索的图片文件夹</h2>
+        <set-default />
       </el-collapse-item>
     </el-collapse>
 
@@ -30,11 +32,13 @@
 import FormView from '../FormView.vue'
 import SetPrefix from './setprefix/SetPrefix.vue'
 import ThemeChange from './themeChange/ThemeChange.vue'
+import SetDefault from './setDefault/SetDefault.vue'
 export default {
   components: {
     FormView,
     SetPrefix,
-    ThemeChange
+    ThemeChange,
+    SetDefault
   },
   data() {
     return {
@@ -82,6 +86,7 @@ export default {
 
   /deep/ .el-select {
     margin-top: 10px;
+    margin-right: 10px;
   }
 
   h2 {

@@ -3,7 +3,7 @@
  * @Date: 2022-07-04 09:45:30
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 11:31:47
+ * @LastEditTime: 2022-07-04 20:42:09
  * @FilePath: \web\src\views\Setting\setprefix\SetPrefix.vue
 -->
 <template>
@@ -51,6 +51,7 @@ export default {
   .el-input {
     width: 217px;
     margin-top: 10px;
+    margin-right: 10px;
   }
 }
 </style>
