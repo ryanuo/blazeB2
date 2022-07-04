@@ -3,7 +3,7 @@
  * @Date: 2022-07-02 10:00:55
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-03 19:58:01
+ * @LastEditTime: 2022-07-04 16:21:46
  * @FilePath: \docs\docs\.vuepress\config.ts
  */
 import { defineUserConfig } from 'vuepress'
@@ -11,9 +11,9 @@ const { defaultTheme } = require('vuepress')
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 export default defineUserConfig({
     lang: 'zh-CN',
-    title: 'blazeB2 图床',
-    description: '这是我的第一个 VuePress 站点',
-    // base: "/blazeB2/",
+    title: 'BlazeB2 图床',
+    description: '基于 backBlazeb2 API & cloudflare 开发的具有 CDN 加速功能的图床工具',
+    base: "/blazeB2/",
     head: [
         [
             'link', { rel: 'icon', href: './favicon.ico' }
