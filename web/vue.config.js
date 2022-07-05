@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 22:28:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 16:35:11
+ * @LastEditTime: 2022-07-05 18:22:02
  * @FilePath: \web\vue.config.js
  */
 const path = require('path')
@@ -41,16 +41,16 @@ module.exports = {
         }
       }
     }
-  },
-  pwa: {
-    workboxOptions: {
-      // https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
-      skipWaiting: true,
-      clientsClaim: true,
-      importWorkboxFrom: 'local',
-      importsDirectory: 'js',
-      navigateFallback: '/',
-      navigateFallbackBlacklist: [/\/api\//]
-    }
   }
+  // pwa: {
+  //   workboxOptions: {
+  //     // https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
+  //     skipWaiting: true,
+  //     clientsClaim: true,
+  //     importWorkboxFrom: 'local',
+  //     importsDirectory: 'js',
+  //     navigateFallback: '/',
+  //     navigateFallbackBlacklist: [/\/api\//]
+  //   }
+  // }
 }

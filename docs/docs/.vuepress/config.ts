@@ -3,8 +3,8 @@
  * @Date: 2022-07-02 10:00:55
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 11:35:14
- * @FilePath: \blazeB2\docs\docs\.vuepress\config.ts
+ * @LastEditTime: 2022-07-05 21:41:09
+ * @FilePath: \docs\docs\.vuepress\config.ts
  */
 import { defineUserConfig } from 'vuepress'
 const { path } = require('@vuepress/utils')
@@ -12,7 +12,7 @@ const { defaultTheme } = require('vuepress')
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { registerComponentsPlugin } = require('@vuepress/plugin-register-components')
 const str_ = process.env.npm_config_argv
-const linkout = str_!.match(/(dev)/)! ? '/' : '/balzeB2/'
+const linkout = str_!.match(/(dev)/)! ? '/' : '/blazeB2/'
 // import './enhanceApp.js'
 console.log('当前的环境路径为:' + linkout)
 export default defineUserConfig({
