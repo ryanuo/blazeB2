@@ -13,8 +13,8 @@
 <li>支持 <strong>一键部署</strong>（vercel,腾讯云serverless）查看部署方法</li>
 <li>支持 <strong>图床管理</strong>（对仓库图片的 <strong>增删查</strong> 预览）</li>
 <li>支持 <strong>暗夜模式</strong> (自由切换 / 自动切换)</li>
+<li>支持 <strong>图片压缩</strong> 可自定义压缩等级 默认关闭，开启默认(0.8)</li>
 <li>支持 <strong>PWA</strong>  待完成</li>
-<li>支持 <strong>图片压缩</strong>  待完成</li>
 <li>支持 <strong>批量上传图片</strong>、<strong>批量删除图片</strong> 和 <strong>批量复制图片外链</strong> 待完成</li>
 <li>支持 <strong>图片水印</strong> 待完成</li>
 </ul>
