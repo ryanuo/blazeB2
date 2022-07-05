@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 13:19:45
+ * @LastEditTime: 2022-07-05 15:12:27
  * @FilePath: \web\src\views\TabNav\TabNav.vue
 -->
 <template>
@@ -33,7 +33,6 @@
       <el-menu-item v-if="isLogined" index="imanage">图床管理</el-menu-item>
       <el-menu-item index="setting">配置管理</el-menu-item>
       <el-menu-item index="about">关于程序</el-menu-item>
-      <!-- <el-menu-item><a href="https://github.com/Rr210/blazeB2/issues/" target="_blank">帮助与反馈</a></el-menu-item> -->
     </el-menu>
     <router-view />
     <footer>
@@ -89,6 +88,7 @@ export default {
         this.dialogVisible = true
         localStorage.removeItem('token_api')
         localStorage.removeItem('authmsg')
+        localStorage.removeItem('pinia-store')
         this.handleIsLogined()
       }).then(() => {
         Message({

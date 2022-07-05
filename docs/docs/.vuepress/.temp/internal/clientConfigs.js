@@ -6,6 +6,7 @@ import clientConfig4 from 'D:/Github/blazeB2/docs/node_modules/@vuepress/plugin-
 import clientConfig5 from 'D:/Github/blazeB2/docs/node_modules/@vuepress/plugin-theme-data/lib/client/config.js'
 import clientConfig6 from 'D:/Github/blazeB2/docs/node_modules/@vuepress/theme-default/lib/client/config.js'
 import clientConfig7 from 'D:/Github/blazeB2/docs/node_modules/@vuepress/plugin-docsearch/lib/client/config.js'
+import clientConfig8 from 'D:/Github/blazeB2/docs/docs/.vuepress/.temp/register-components/clientConfig.63e01fae.js'
 
 export const clientConfigs = [
   clientConfig0,
@@ -16,4 +17,5 @@ export const clientConfigs = [
   clientConfig5,
   clientConfig6,
   clientConfig7,
+  clientConfig8,
 ]

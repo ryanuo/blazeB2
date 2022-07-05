@@ -25,11 +25,33 @@ import {
   unref,
   watch,
   watchEffect
-} from "./chunk-BOU42QRB.js";
-import "./chunk-BPO3JMQ3.js";
-import "./chunk-JRATMO35.js";
+} from "./chunk-4MVJ6YGS.js";
+import "./chunk-YRNW5TRV.js";
+import {
+  init_define_DOCSEARCH_OPTIONS,
+  init_define_EXTERNAL_LINK_ICON_LOCALES,
+  init_define_MZ_ZOOM_OPTIONS
+} from "./chunk-CQMWPJMN.js";
+
+// dep:@vueuse_core
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
+// node_modules/@vueuse/core/index.mjs
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
+// node_modules/@vueuse/shared/index.mjs
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 
 // node_modules/vue-demi/lib/index.mjs
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 var isVue2 = false;
 var isVue3 = true;
 function set(target, key, val) {

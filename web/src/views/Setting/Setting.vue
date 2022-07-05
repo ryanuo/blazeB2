@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 20:44:12
+ * @LastEditTime: 2022-07-05 13:05:02
  * @FilePath: \web\src\views\Setting\Setting.vue
 -->
 <template>
@@ -23,6 +23,11 @@
         <h2>默认检索的图片文件夹</h2>
         <set-default />
       </el-collapse-item>
+      <el-collapse-item title="📷 上传图片设置" name="4">
+        <h2>是否开启压缩</h2>
+        <set-compress />
+        <h2>是否修改图片格式</h2>
+      </el-collapse-item>
     </el-collapse>
 
   </div>
@@ -33,12 +38,14 @@ import FormView from '../FormView.vue'
 import SetPrefix from './setprefix/SetPrefix.vue'
 import ThemeChange from './themeChange/ThemeChange.vue'
 import SetDefault from './setDefault/SetDefault.vue'
+import SetCompress from './setMain/SetCompress.vue'
 export default {
   components: {
     FormView,
     SetPrefix,
     ThemeChange,
-    SetDefault
+    SetDefault,
+    SetCompress
   },
   data() {
     return {

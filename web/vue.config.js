@@ -3,8 +3,8 @@
  * @Date: 2022-04-20 22:28:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 14:03:06
- * @FilePath: \blazeB2\web\vue.config.js
+ * @LastEditTime: 2022-07-05 16:35:11
+ * @FilePath: \web\vue.config.js
  */
 const path = require('path')
 module.exports = {
@@ -40,6 +40,17 @@ module.exports = {
           '^/v1': ''
         }
       }
+    }
+  },
+  pwa: {
+    workboxOptions: {
+      // https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
+      skipWaiting: true,
+      clientsClaim: true,
+      importWorkboxFrom: 'local',
+      importsDirectory: 'js',
+      navigateFallback: '/',
+      navigateFallbackBlacklist: [/\/api\//]
     }
   }
 }

@@ -1,11 +1,3 @@
-<!--
- * @Author: Harry
- * @Date: 2022-07-02 17:36:41
- * @LastEditors: harry
- * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 20:13:28
- * @FilePath: \blazeB2\docs\docs\zh\guide\index.md
--->
 ---
 lang: zh-CN
 title: 快速上手
@@ -46,7 +38,7 @@ navbar: true
 ![](https://cloud.mr90.top/hexo/4/a30a1d56-54fa-4d29-bddb-a4c860755e14.png)
 ![](https://cloud.mr90.top/hexo/4/45890fbe-3237-48d5-97c1-7cff4ce9e30c.png)
 
-## Cloudflare配置（非必要）
+## Cloudflare配置
 
 - 准备：域名 可使用cf域名【[cf免费域名](https://blog.csdn.net/pqowlaksmznx/article/details/124911996)】
 - 登录【[cloudflare](https://dash.cloudflare.com/)】，给你的域名添加一个子域名，并新增一条cname记录，指向文件地址中的域名。
@@ -60,9 +52,9 @@ navbar: true
 ![](https://cloud.mr90.top/hexo/4/e729288c-06a6-4992-a850-ce41f54c5ca9.png)
 
 
-### 重写URL隐藏桶名称
+### 重写URL
 
-- 将/file/bucket/名称隐藏
+- 将 **/file/bucket/** 名称隐藏 隐藏桶名称
 
 ```
 concat("/file/bucket", http.request.uri.path)
@@ -84,8 +76,12 @@ x-bz-file-id
 x-bz-file-name
 x-bz-upload-timestamp
 ```
+
 - 虽然影响不大，但是一看这些参数就知道你用的B2，并且这些参数头一般拿来也没啥用，我们也可以通过CloudFlare的重写规则将其去掉。
 - 依然在转换规则那里 - 创建转换规则 - 修改响应头。
 
 ![](https://cloud.mr90.top/hexo/4/e0b95f22-0aae-40d0-a6c9-30071bfa8035.png)
 ![](https://cloud.mr90.top/hexo/4/084fb813-cd49-47d8-9260-8af6c709e73b.png)
+
+
+<Comments></Comments>

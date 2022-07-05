@@ -3,7 +3,7 @@
  * @Date: 2022-07-04 21:11:48
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 21:43:49
+ * @LastEditTime: 2022-07-05 16:11:25
  * @FilePath: \web\src\views\svg\MarkDown.vue
 -->
 <template>
@@ -54,6 +54,9 @@ export default {
       default: ''
     }
   },
+  mounted() {
+    this.linktemp = this.isMark ? `![](${this.link})` : this.link
+  },
   methods: {
     handleMark() {
       this.isMark = !this.isMark
@@ -64,7 +67,7 @@ export default {
       this.$copyText(copyData).then(() => {
         // element ui的弹窗
         Message({
-          message: this.linktemp !== '' ? '已复制到剪贴板' : '您还未上传图片',
+          message: this.linktemp !== '' ? `已复制剪切板：${copyData}` : '复制失败',
           type: this.linktemp !== '' ? 'success' : 'error'
         })
       }).catch(() => {

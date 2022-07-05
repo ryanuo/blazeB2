@@ -40,9 +40,17 @@ import {
   toHandlerKey,
   toNumber,
   toRawType
-} from "./chunk-BPO3JMQ3.js";
+} from "./chunk-YRNW5TRV.js";
+import {
+  init_define_DOCSEARCH_OPTIONS,
+  init_define_EXTERNAL_LINK_ICON_LOCALES,
+  init_define_MZ_ZOOM_OPTIONS
+} from "./chunk-CQMWPJMN.js";
 
 // node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 function warn(msg, ...args) {
   console.warn(`[Vue warn] ${msg}`, ...args);
 }
@@ -1044,6 +1052,9 @@ var tick = Promise.resolve();
 _a = "__v_isReadonly";
 
 // node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 var stack = [];
 function pushWarningContext(vnode) {
   stack.push(vnode);
@@ -6977,6 +6988,9 @@ var resolveFilter = null;
 var compatUtils = null;
 
 // node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 var svgNS = "http://www.w3.org/2000/svg";
 var doc = typeof document !== "undefined" ? document : null;
 var templateContainer = doc && doc.createElement("template");
@@ -8355,6 +8369,9 @@ var initDirectivesForSSR = () => {
 };
 
 // node_modules/vue/dist/vue.runtime.esm-bundler.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 function initDev() {
   {
     initCustomFormatter();
@@ -8509,4 +8526,4 @@ export {
   initDirectivesForSSR,
   compile2 as compile
 };
-//# sourceMappingURL=chunk-BOU42QRB.js.map
+//# sourceMappingURL=chunk-4MVJ6YGS.js.map

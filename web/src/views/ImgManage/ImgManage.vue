@@ -3,11 +3,11 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 21:44:16
+ * @LastEditTime: 2022-07-05 16:21:53
  * @FilePath: \web\src\views\ImgManage\ImgManage.vue
 -->
 <template>
-  <div class="img-m common-container">
+  <div v-loading="loadingPicShow" class="img-m common-container">
     <div class="inp-w">
       <el-input placeholder="请输入图片文件夹名称，eg:hexo/2/ 支持多级" v-model="reqParams.prefix" clearable>
       </el-input>
@@ -48,6 +48,7 @@ import Refresh from '../svg/Refresh.vue'
 import ImageItem from './ImageItem/ImageItem.vue'
 import 'viewerjs/dist/viewer.css'
 import { api as viewerApi } from 'v-viewer'
+import { endLoading, startLoading } from '../../utils/common/loading'
 export default {
   data() {
     return {
@@ -63,7 +64,8 @@ export default {
         startFileName: '', // 获得下一个文件名称，从该名称开始
         maxFileCount: 50, // 获取的数量
         prefix: '' // 指定文件夹前缀
-      }
+      },
+      loadingPicShow: false
     }
   },
   components: { LargeList, Refresh, ImageItem },
@@ -113,6 +115,7 @@ export default {
     ...mapActions(useStore, ['handleIsLogined']),
     // 获取数据
     async getPicList() {
+      startLoading(document.querySelector('.img-m'), '正在加载....')
       const auth = localStorage.getItem('authmsg')
       if (auth) {
         const p_ = Object.assign(JSON.parse(auth), this.reqParams)
@@ -126,6 +129,7 @@ export default {
         }
         this.picListDatas = [...this.picListDatas, ...res.files]
         this.reqParams.startFileName = res.nextFileName
+        endLoading()
       }
     },
     // 根据文件夹前缀进行搜索

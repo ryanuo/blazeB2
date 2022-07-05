@@ -17,4 +17,4 @@
 <li>按照图片填写，保存至本地就可以使用</li>
 </ul>
 <p><img src="https://cloud.mr90.top/hexo/4/79140172-f18a-4c28-a63e-01e9171d26ea.png" alt=""></p>
-</div></template>
+<Comments /></div></template>

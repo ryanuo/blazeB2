@@ -3,7 +3,7 @@
  * @Date: 2022-06-24 16:09:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 21:33:59
+ * @LastEditTime: 2022-07-05 13:13:51
  * @FilePath: \web\src\plugin\elements.js
  */
 /***
@@ -17,7 +17,6 @@
  */
 // 导入自己需要的组件
 import {
-  MessageBox,
   Dialog,
   Upload,
   Pagination,
@@ -25,6 +24,7 @@ import {
   Button,
   Form,
   Select,
+  Switch,
   Option,
   Collapse,
   Dropdown,
@@ -32,20 +32,22 @@ import {
   DropdownItem,
   CollapseItem,
   Menu,
+  Slider,
   MenuItem,
   Submenu,
   RadioGroup,
   Tooltip,
   FormItem,
-  RadioButton,
-  Message
+  RadioButton
 } from 'element-ui'
 
 const element = {
   install: function (Vue) {
+    Vue.use(Slider)
     Vue.use(Dialog)
     Vue.use(Upload)
     Vue.use(Select)
+    Vue.use(Switch)
     Vue.use(Tooltip)
     Vue.use(Dropdown)
     Vue.use(DropdownItem)
@@ -64,8 +66,6 @@ const element = {
     Vue.use(Button)
     Vue.use(FormItem)
   },
-  other: {
-    Message, MessageBox
-  }
+  other: {}
 }
 export default element

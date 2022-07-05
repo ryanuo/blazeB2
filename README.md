@@ -3,11 +3,11 @@
  * @Date: 2022-04-20 20:37:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 19:51:43
+ * @LastEditTime: 2022-07-05 16:05:02
  * @FilePath: \blazeB2\README.md
 -->
 <a href="https://blaze-b2.vercel.app/" >
-<img width="100" align="right" alt="blazeB2" src="https://cloud.mr90.top/file/imagecloud/hexo/4/16533db7-b477-46ec-bbf8-44ae848bc771.png">
+<img width="100" align="right" alt="blazeB2" src="https://cloud.mr90.top/hexo/4/16533db7-b477-46ec-bbf8-44ae848bc771.png">
 </a>
 
 # Blaze B2图床
@@ -27,13 +27,14 @@
 ## 功能支持 | Features
 
 - 支持 **拖拽**、**复制粘贴**、**选择文件** 等方式进行选择图片
-- 支持 图片名称**唯一性** 后端使用**uuid**生成随机字符串，暂不支持自定义名称
-- 支持 **一键复制** 图片外链和支持多种格式(**MarkDown**，**Html**,**自定义**)
-- 支持 **一键部署**（Vercel,腾讯云Serverless）查看部署方法
-- 支持 **图床管理**（对仓库图片的 **增删改查**）
+- 支持 图片名称**唯一性** 后端生成uuid字符串，暂不支持自定义名称
+- 支持 自定义**检索**某个指定文件夹
+- 支持 **一键复制** 图片外链和支持多种格式(**MarkDown**，**html**,**自定义**)
+- 支持 **一键部署**（vercel,腾讯云serverless）查看部署方法
+- 支持 **图床管理**（对仓库图片的 **增删查** 预览）
 - 支持 **暗夜模式** (自由切换 / 自动切换)
+- 支持 **图片压缩** 可自定义压缩等级 默认关闭，开启默认(0.8)
 - 支持 **PWA**  待完成
-- 支持 **图片压缩**  待完成
 - 支持 **批量上传图片**、**批量删除图片** 和 **批量复制图片外链** 待完成
 - 支持 **图片水印** 待完成
 

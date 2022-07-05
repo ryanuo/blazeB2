@@ -18,4 +18,4 @@
 <li>支持 <strong>批量上传图片</strong>、<strong>批量删除图片</strong> 和 <strong>批量复制图片外链</strong> 待完成</li>
 <li>支持 <strong>图片水印</strong> 待完成</li>
 </ul>
-</div></template>
+<Comments /></div></template>

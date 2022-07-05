@@ -1,4 +1,13 @@
+import {
+  init_define_DOCSEARCH_OPTIONS,
+  init_define_EXTERNAL_LINK_ICON_LOCALES,
+  init_define_MZ_ZOOM_OPTIONS
+} from "./chunk-CQMWPJMN.js";
+
 // node_modules/@vue/devtools-api/lib/esm/time.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 var supported;
 var perf;
 function isPerformanceSupported() {
@@ -21,7 +30,15 @@ function now() {
   return isPerformanceSupported() ? perf.now() : Date.now();
 }
 
+// node_modules/@vue/devtools-api/lib/esm/index.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
 // node_modules/@vue/devtools-api/lib/esm/env.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 function getDevtoolsGlobalHook() {
   return getTarget().__VUE_DEVTOOLS_GLOBAL_HOOK__;
 }
@@ -31,10 +48,16 @@ function getTarget() {
 var isProxyAvailable = typeof Proxy === "function";
 
 // node_modules/@vue/devtools-api/lib/esm/const.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 var HOOK_SETUP = "devtools-plugin:setup";
 var HOOK_PLUGIN_SETTINGS_SET = "plugin:settings:set";
 
 // node_modules/@vue/devtools-api/lib/esm/proxy.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
 var ApiProxy = class {
   constructor(plugin, hook) {
     this.target = null;
@@ -134,6 +157,46 @@ var ApiProxy = class {
   }
 };
 
+// node_modules/@vue/devtools-api/lib/esm/api/index.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
+// node_modules/@vue/devtools-api/lib/esm/api/api.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
+// node_modules/@vue/devtools-api/lib/esm/api/app.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
+// node_modules/@vue/devtools-api/lib/esm/api/component.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
+// node_modules/@vue/devtools-api/lib/esm/api/context.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
+// node_modules/@vue/devtools-api/lib/esm/api/hooks.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
+// node_modules/@vue/devtools-api/lib/esm/api/util.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
+// node_modules/@vue/devtools-api/lib/esm/plugin.js
+init_define_DOCSEARCH_OPTIONS();
+init_define_EXTERNAL_LINK_ICON_LOCALES();
+init_define_MZ_ZOOM_OPTIONS();
+
 // node_modules/@vue/devtools-api/lib/esm/index.js
 function setupDevtoolsPlugin(pluginDescriptor, setupFn) {
   const descriptor = pluginDescriptor;
@@ -160,4 +223,4 @@ export {
   now,
   setupDevtoolsPlugin
 };
-//# sourceMappingURL=chunk-WSMOBWUB.js.map
+//# sourceMappingURL=chunk-3JMTFEZV.js.map

@@ -3,19 +3,21 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 13:40:01
+ * @LastEditTime: 2022-07-05 16:22:30
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
   <div class="home-w">
-    <div class="upload-w">
+    <div class="upload-w" style="width: 100%">
       <!-- @mouseenter="mouseHandle" @mouseleave.stop="mouseMoveHandle" -->
       <div id="tar_box" contenteditable=""></div>
-      <el-upload ref="upload" class="upload-demo" action="customize" :show-file-list="false" drag
+      <el-upload ref="upload" v-loading="loadings" class="upload-demo" action="customize" :show-file-list="false" drag
         :http-request="UploadFile">
+        <div class="compress-remind" v-if="compressMsg.iscompress">开启压缩，压缩等级（{{ compressMsg.rank }}）</div>
         <i class="el-icon-upload"></i>
-        <div class="el-upload__text">支持<em>拖动、点击、粘贴</em>图片<em>上传</em></div>
-        <div class="el-upload__tip" slot="tip">只能上传图片文件，且不超过50MB</div>
+        <div class="el-upload__text">
+          支持<em>拖动、点击、粘贴</em>图片<em>上传</em>
+        </div>
       </el-upload>
     </div>
     <h3>链接格式</h3>
@@ -44,6 +46,9 @@ import { debounce } from '../plugin/filter'
 import { uploadServer } from '../utils/api/index'
 import { authIsexit } from '../utils/common/login'
 import { picPaste } from '../utils/common/paste'
+import { startLoading, endLoading } from '../utils/common/loading'
+import { HandleCompressor } from '../utils/common/compress'
+import useStore from '../store'
 const CopyView = () => import('./CopyView.vue')
 export default {
   components: { CopyView },
@@ -51,13 +56,20 @@ export default {
     return {
       fdata: {},
       radio2: 'URL',
-      copycontent: ''
+      copycontent: '',
+      loadings: false,
+      compressMsg: {
+        iscompress: false,
+        rank: 0.8
+      }
     }
   },
   created() {
     window.addEventListener('paste', this.pasteHandle)
   },
   mounted() {
+    const store = useStore()
+    this.compressMsg = store.CompressData
     window.addEventListener('paste', this.pasteHandle)
     const token = localStorage.getItem('token_api')
     if (token) {
@@ -119,35 +131,53 @@ export default {
       })
     }, 300, true),
     UploadFile(params) {
-      authIsexit().then(async () => {
+      const _this = this
+      authIsexit().then(() => {
+        startLoading(document.querySelector('.upload-demo'), '正在上传图片...')
         const authmsg = localStorage.getItem('authmsg')
-        const formData = new FormData()
-        formData.append('file_', params.file)
         const list_ = Object.assign(JSON.parse(authmsg), { tofile: this.fdata.tofile })
-        for (const i in list_) {
-          formData.append(i, list_[i])
+        if (_this.compressMsg.iscompress) {
+          HandleCompressor(params.file, _this.compressMsg.rank, this.nocommpress, list_)
+        } else {
+          _this.nocommpress(params.file, list_)
         }
-        const { data: res } = await uploadServer(formData)
-        console.log(res)
-        this.copycontent = res.action ? this.fdata.host_url + res.fileName : ''
-        Notification({
-          title: '提示',
-          message: res.action ? '上传成功' : `状态码:${res.status},错误信息：${res.message},请检查keyid和key是否填写正确`,
-          type: res.action ? 'success' : 'error'
-        })
-        document.getElementById('tar_box').innerHTML = ''
       }).catch(() => {
+        endLoading()
         Notification({
           title: '提示',
           message: '请检查是否登陆,请检查keyid和key是否填写正确',
           type: 'error'
         })
       })
+    },
+    async nocommpress(file, list_) {
+      const formData = new FormData()
+      formData.append('file_', file)
+      for (const i in list_) {
+        formData.append(i, list_[i])
+      }
+      const { data: res } = await uploadServer(formData)
+      console.log(res)
+      this.copycontent = res.action ? this.fdata.host_url + res.fileName : ''
+      Notification({
+        title: '提示',
+        message: res.action ? '上传成功' : `状态码:${res.status},错误信息：${res.message},请检查keyid和key是否填写正确`,
+        type: res.action ? 'success' : 'error'
+      })
+      document.getElementById('tar_box').innerHTML = ''
+      endLoading()
     }
   }
 }
 </script>
 <style lang='less' scoped>
+.compress-remind {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+
 .upload-w {
   display: flex;
   justify-content: center;

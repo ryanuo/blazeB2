@@ -27,4 +27,4 @@ pip3 install Flask requests <span class="token operator">-</span>t <span class="
 <li>点击一键部署 <a href="https://vercel.com/new/clone?s=https://github.com/Rr210/blazeB2.git" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&amp;logo=vercel&amp;logoColor=white" alt="Vercel"><ExternalLinkIcon/></a></li>
 </ul>
 <p><img src="https://cloud.mr90.top/hexo/4/38c9dcba-97bc-413d-a6a7-c8681937fa59.png" alt=""></p>
-</div></template>
+<Comments /></div></template>
