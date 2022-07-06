@@ -13,6 +13,6 @@ features:
 - title: 🍩 稳定可靠
   details: 依托于巨头大厂成熟技术，完全免费，稳定可靠，随时可用。
 - title: ⚡️ 极速高效
-  details: PicX 生成的图片外链自带全球 CDN 加速功能，极速高效。
+  details: BlazeB2 & Cloudflare CDN 加速功能，极速高效。
 footer: MIT Licensed | Copyright © 2018-present @Harry
 ---

@@ -3,12 +3,13 @@
  * @Date: 2022-07-02 10:00:55
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 21:41:09
+ * @LastEditTime: 2022-07-06 12:30:20
  * @FilePath: \docs\docs\.vuepress\config.ts
  */
 import { defineUserConfig } from 'vuepress'
 const { path } = require('@vuepress/utils')
-const { defaultTheme } = require('vuepress')
+// const { defaultTheme } = require('vuepress')
+const BlazeTheme = require('./theme')
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { registerComponentsPlugin } = require('@vuepress/plugin-register-components')
 const str_ = process.env.npm_config_argv
@@ -35,7 +36,7 @@ export default defineUserConfig({
     },
     plugins: [
         docsearchPlugin({
-            apiKey: 'b33f513f74064f76939843da6ad00b52',
+            apiKey: 'cf1d8a01f6ea082eb7e186491f304ad6',
             indexName: 'BlazeB2',
             appId: 'NMU3PE3UD9'
         }),
@@ -45,11 +46,11 @@ export default defineUserConfig({
             },
         })
     ],
-    theme: defaultTheme({
+    theme: BlazeTheme({
         navbar: [
             {
                 text: '在线使用',
-                link: 'https://blaze-b2.vercel.app/'
+                link: 'https://b2.mr90.cf/'
             },
             {
                 text: 'Github',

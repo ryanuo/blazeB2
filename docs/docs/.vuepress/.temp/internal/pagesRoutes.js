@@ -10,7 +10,7 @@ export const pagesRoutes = [
   ["v-361c421a","/en/guide/summary.html",{"title":"概述"},["/en/guide/summary","/en/guide/summary.md"]],
   ["v-f928d7c8","/zh/guide/config.html",{"title":"图床配置"},["/zh/guide/config","/zh/guide/config.md"]],
   ["v-1a85fc4e","/zh/guide/contribution.html",{"title":"贡献指南"},["/zh/guide/contribution","/zh/guide/contribution.md"]],
-  ["v-fd4334d2","/zh/guide/deploy.html",{"title":""},["/zh/guide/deploy","/zh/guide/deploy.md"]],
+  ["v-fd4334d2","/zh/guide/deploy.html",{"title":"一键部署"},["/zh/guide/deploy","/zh/guide/deploy.md"]],
   ["v-47357bdb","/zh/guide/",{"title":"快速上手"},["/zh/guide/index.html","/zh/guide/index.md"]],
   ["v-7a8fca2f","/zh/guide/page.html",{"title":"开始使用"},["/zh/guide/page","/zh/guide/page.md"]],
   ["v-7fb2fc4e","/zh/guide/summary.html",{"title":"概述"},["/zh/guide/summary","/zh/guide/summary.md"]],

@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 22:28:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 18:22:02
+ * @LastEditTime: 2022-07-06 09:37:48
  * @FilePath: \web\vue.config.js
  */
 const path = require('path')
@@ -13,7 +13,7 @@ module.exports = {
   outputDir: '../api/static',
   // lintOnSave: false, // 关闭eslint
   // productionGzip: process.env.NODE_ENV === 'pro', //  开启gzip压缩代码
-  productionSourceMap: process.env.NODE_ENV === 'pro', // 生产环境下css 分离文件
+  productionSourceMap: process.env.NODE_ENV === 'dev', // map去除生产环境下
   configureWebpack: {
     resolve: {
       alias: {

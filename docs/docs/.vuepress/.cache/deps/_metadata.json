@@ -1,62 +1,50 @@
 {
-  "hash": "8a3d47d7",
-  "browserHash": "fe633c29",
+  "hash": "a3886210",
+  "browserHash": "4a1657e9",
   "optimized": {
     "@vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/lib/esm/index.js",
       "file": "@vue_devtools-api.js",
-      "fileHash": "7c205d96",
+      "fileHash": "c5b66783",
       "needsInterop": false
     },
     "@vuepress/shared": {
       "src": "../../../../node_modules/@vuepress/shared/dist/index.js",
       "file": "@vuepress_shared.js",
-      "fileHash": "901f6188",
+      "fileHash": "a91da7d3",
       "needsInterop": false
     },
     "@vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "@vueuse_core.js",
-      "fileHash": "35d183e1",
+      "fileHash": "74e1f6c7",
       "needsInterop": false
     },
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "592a9c69",
+      "fileHash": "e1a4aa19",
       "needsInterop": false
     },
     "vue-router": {
       "src": "../../../../node_modules/vue-router/dist/vue-router.esm-bundler.js",
       "file": "vue-router.js",
-      "fileHash": "e04d1683",
+      "fileHash": "50a5ecee",
       "needsInterop": false
-    },
-    "gitalk": {
-      "src": "../../../../node_modules/gitalk/dist/gitalk.js",
-      "file": "gitalk.js",
-      "fileHash": "fdfe0924",
-      "needsInterop": true
-    },
-    "blueimp-md5": {
-      "src": "../../../../../node_modules/blueimp-md5/js/md5.js",
-      "file": "blueimp-md5.js",
-      "fileHash": "2a7c9236",
-      "needsInterop": true
     }
   },
   "chunks": {
-    "chunk-3JMTFEZV": {
-      "file": "chunk-3JMTFEZV.js"
+    "chunk-WSMOBWUB": {
+      "file": "chunk-WSMOBWUB.js"
     },
-    "chunk-4MVJ6YGS": {
-      "file": "chunk-4MVJ6YGS.js"
+    "chunk-BOU42QRB": {
+      "file": "chunk-BOU42QRB.js"
     },
-    "chunk-YRNW5TRV": {
-      "file": "chunk-YRNW5TRV.js"
+    "chunk-BPO3JMQ3": {
+      "file": "chunk-BPO3JMQ3.js"
     },
-    "chunk-CQMWPJMN": {
-      "file": "chunk-CQMWPJMN.js"
+    "chunk-JRATMO35": {
+      "file": "chunk-JRATMO35.js"
     }
   }
 }

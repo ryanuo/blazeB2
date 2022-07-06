@@ -13,6 +13,6 @@ features:
 - title: 🍩 Stable and reliable
   details: Relying on the mature technology of giant factories, it is completely free, stable, reliable and available at any time.
 - title: ⚡️ Extremely fast and efficient
-  details: Picx generated picture chain has its own global CDN acceleration function, which is extremely fast and efficient.
+  details: blazeb2 &amp; cloudflare CDN acceleration function, extremely fast and efficient.
 footer: MIT Licensed | Copyright © 2018-present @Harry
 ---
