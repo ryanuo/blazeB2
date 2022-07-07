@@ -53,7 +53,8 @@ def list():
         startFileName = request.args.get('startFileName')
         maxFileCount = request.args.get('maxFileCount')
         prefix = request.args.get('prefix')
-        return B2().cList(api_url, bucketId, init_token, startFileName, int(maxFileCount), prefix)
+        delimiter = request.args.get('delimiter')
+        return B2().cList(api_url, bucketId, init_token, startFileName, int(maxFileCount), prefix, delimiter)
 
 
 # 删除单个图片
@@ -123,7 +124,8 @@ class B2:
         return res.json()
 
     # 查询列表
-    def cList(self, api_url, bucket_id, account_authorization_token, startFileName='', maxFileCount=10, prefix=''):
+    def cList(self, api_url, bucket_id, account_authorization_token, startFileName='', maxFileCount=10, prefix='',
+              delimiter=''):
         '''
         :param api_url: 初始api
         :param bucket_id: 桶id
@@ -131,17 +133,17 @@ class B2:
         :param startFileName: 获得已某个文件开头的
         :param maxFileCount: 获取的数量
         :param prefix: 指定前缀文件夹
+        :param delimiter: 文件分隔符
         :return:
         '''
+        params = {'bucketId': bucket_id, 'startFileName': startFileName, 'maxFileCount': maxFileCount, 'prefix': prefix}
+        if delimiter:
+            params['delimiter'] = delimiter
         res = requests.post('%s/b2api/v2/b2_list_file_names' % api_url,
-                            data=json.dumps(
-                                {'bucketId': bucket_id, 'startFileName': startFileName, 'maxFileCount': maxFileCount,
-                                 'prefix': prefix}),
+                            data=json.dumps(params),
                             headers={'Authorization': account_authorization_token})
-        # print(res.json())
+        print(res.json())
         return json.dumps(res.json(), ensure_ascii=False)
-
-
 
 if __name__ == '__main__':
    app.run(host='0.0.0.0',port=9000)
