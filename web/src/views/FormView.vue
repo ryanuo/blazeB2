@@ -3,7 +3,7 @@
  * @Date: 2022-06-24 17:04:27
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-03 10:54:44
+ * @LastEditTime: 2022-07-07 20:43:19
  * @FilePath: \web\src\views\FormView.vue
 -->
 <template>
@@ -22,12 +22,9 @@
       <el-form-item label=" bucket_name" prop="bucket_name">
         <el-input v-model="form.bucket_name" placeholder="请填写存储桶名称"></el-input>
       </el-form-item>
-      <el-form-item label="存储桶上传目标文件路径" prop="tofile">
-        <el-input v-model="form.tofile" placeholder="请填写上传到储存桶的文件路径，eg:hexo/2/"></el-input>
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('formRef')">保存本地</el-button>
-        <el-button>重置</el-button>
+        <el-button @click="resetForm('formRef')">重置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -44,8 +41,7 @@ export default {
         application_key_id: '',
         application_key: '',
         bucket_name: '',
-        host_url: '',
-        tofile: ''
+        host_url: ''
       },
       rules: {
         application_key_id: [
@@ -62,10 +58,6 @@ export default {
         ],
         host_url: [
           { required: true, validator: this.validateURL, trigger: 'blur' }
-        ],
-        tofile: [
-          { required: true, message: '请输入tofile', trigger: 'blur' },
-          { min: 5, max: 20, message: '长度在 5 到 20 个字符,格式：hexo/3/', trigger: 'blur' }
         ]
       }
     }
@@ -106,7 +98,10 @@ export default {
           return false
         }
       })
-    }, 400, true)
+    }, 400, true),
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
+    }
   }
 }
 </script>

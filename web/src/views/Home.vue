@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 16:22:30
+ * @LastEditTime: 2022-07-07 21:55:51
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
@@ -13,14 +13,25 @@
       <div id="tar_box" contenteditable=""></div>
       <el-upload ref="upload" v-loading="loadings" class="upload-demo" action="customize" :show-file-list="false" drag
         :http-request="UploadFile">
-        <div class="compress-remind" v-if="compressMsg.iscompress">开启压缩，压缩等级（{{ compressMsg.rank }}）</div>
+        <div class="compress-remind" v-if="compressMsg.iscompress">开启压缩，压缩等级（<span class="red-c">{{ compressMsg.rank
+        }}</span>）
+        </div>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">
           支持<em>拖动、点击、粘贴</em>图片<em>上传</em>
         </div>
+        <div slot="tip" class="el-upload__tip">
+          <div>当前上传路径:<el-tag :type="fdata.tofile ? '' : 'danger'" size="mini"
+              @click="$router.replace({ name: 'setting', query: { id: '2' } })">{{
+                  fdata.tofile ? fdata.tofile : '你还未填写路径，点击这里'
+              }}</el-tag>
+          </div>
+          <div v-if="fdata.bucket_name" @click="$router.replace({ name: 'setting', query: { id: '1' } })">当前B2桶名称:
+            <el-tag size="mini">{{ fdata.bucket_name }}</el-tag>
+          </div>
+        </div>
       </el-upload>
     </div>
-    <h3>链接格式</h3>
     <div style="margin: 20px 0;text-align: center;">
       <el-radio-group v-model="radio2" size="medium" class="e-rg" @change="changeCopyStatus">
         <el-radio-button class="e-rb" label="Markdown"></el-radio-button>
@@ -49,6 +60,7 @@ import { picPaste } from '../utils/common/paste'
 import { startLoading, endLoading } from '../utils/common/loading'
 import { HandleCompressor } from '../utils/common/compress'
 import useStore from '../store'
+import { mapState } from 'pinia'
 const CopyView = () => import('./CopyView.vue')
 export default {
   components: { CopyView },
@@ -61,11 +73,22 @@ export default {
       compressMsg: {
         iscompress: false,
         rank: 0.8
-      }
+      },
+      tofile: ''
     }
   },
   created() {
     window.addEventListener('paste', this.pasteHandle)
+  },
+  computed: {
+    ...mapState(useStore, ['toFile']),
+    timeE() {
+      const t = new Date()
+      return t.getFullYear()
+    },
+    resultCopy() {
+      return this.copycontent !== '' ? this.changeCopyStatus(this.radio2) : '暂无内容'
+    }
   },
   mounted() {
     const store = useStore()
@@ -74,15 +97,7 @@ export default {
     const token = localStorage.getItem('token_api')
     if (token) {
       this.fdata = JSON.parse(token)
-    }
-  },
-  computed: {
-    timeE() {
-      const t = new Date()
-      return t.getFullYear()
-    },
-    resultCopy() {
-      return this.copycontent !== '' ? this.changeCopyStatus(this.radio2) : '暂无内容'
+      this.fdata.tofile = this.toFile
     }
   },
   destroyed() {
@@ -133,7 +148,7 @@ export default {
     UploadFile(params) {
       const _this = this
       authIsexit().then(() => {
-        startLoading(document.querySelector('.upload-demo'), '正在上传图片...')
+        startLoading(document.querySelector('.el-upload'), '正在上传图片...')
         const authmsg = localStorage.getItem('authmsg')
         const list_ = Object.assign(JSON.parse(authmsg), { tofile: this.fdata.tofile })
         if (_this.compressMsg.iscompress) {
@@ -176,16 +191,32 @@ export default {
   top: 0;
   right: 0;
   margin: 10px;
+  line-height: 20px;
 }
 
 .upload-w {
   display: flex;
   justify-content: center;
-  margin: 80px 0;
+  margin-top: 80px;
+  margin-bottom: 50px;
 
   /deep/ .el-upload-dragger {
     background-color: var(--b2-pre-bg);
   }
+
+  /deep/ .el-upload__tip {
+    display: flex;
+    justify-content: space-between;
+
+    .el-tag {
+      cursor: pointer;
+    }
+  }
+
+}
+
+.remind-upload-file {
+  text-align: center;
 }
 
 /deep/ .el-radio-button__inner {

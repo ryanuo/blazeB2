@@ -3,6 +3,9 @@ lang: zh-CN
 title: 概述
 description: 图床功能的介绍
 ---
+## 视频展示
+
+<iframe height=400px width=100% src="//player.bilibili.com/player.html?bvid=BV1fv4y1T72e&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ## 项目介绍
 

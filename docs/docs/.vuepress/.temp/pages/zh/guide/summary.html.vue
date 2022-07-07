@@ -1,4 +1,6 @@
-<template><div><h2 id="项目介绍" tabindex="-1"><a class="header-anchor" href="#项目介绍" aria-hidden="true">#</a> 项目介绍</h2>
+<template><div><h2 id="视频展示" tabindex="-1"><a class="header-anchor" href="#视频展示" aria-hidden="true">#</a> 视频展示</h2>
+<iframe height=400px width=100% src="//player.bilibili.com/player.html?bvid=BV1fv4y1T72e&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<h2 id="项目介绍" tabindex="-1"><a class="header-anchor" href="#项目介绍" aria-hidden="true">#</a> 项目介绍</h2>
 <ol>
 <li><strong>backblaze</strong>：又叫b2，是一家云存储平台，可以把自己的文件上传至云端，同时提供一个可以在外界访问的url地址。</li>
 <li><strong>cloudflare</strong>：CDN，缓存网页，我们的目的是缓存backblaze的图片,并且做CDN加速，使用户看图的流量不走 backblaze，走 cloudflare。backblaze 在 cloudflare 的带宽联盟中，二者之间的流量免费，在这里使用backblaze，使用户流量全部走带宽联盟。</li>

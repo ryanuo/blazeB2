@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 13:24:30
+ * @LastEditTime: 2022-07-07 21:35:36
  * @FilePath: \web\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -15,9 +15,9 @@
       <el-tag>
         {{ imgDefaultFile === '' ? '配置页面修改默认仓库地址' : `当前的仓库名：${imgDefaultFile}` }}
       </el-tag>
-      <el-tag type="info" @click="$router.replace({ name: 'setting' })">修改</el-tag>
+      <el-tag type="info" @click="$router.replace({ name: 'setting', query: { id: '3' } })">修改</el-tag>
       <!-- <el-button size="small"></el-button> -->
-      <div class="svg-w">
+      <div class="svg-w" @click="classType = !classType">
         <div title="图片显示方式">
           <LargeList />
         </div>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="pic-list-t1 animate__animated animate__fadeIn">
+    <div class="pic-list-t1 animate__animated animate__fadeIn" :class="classType ? 'pic-list-t2' : ''">
       <image-item @setshowdiag="handleDiag" @ishow="imgshow" @update="updatePicLists"
         v-for="(item, index) in picListDatas" :key="item.fileName" :picid="index" :piclink="item.fileName"
         :pictitle="item.fileName" :fileId="item.fileId" :picTime="item.uploadTimestamp" />
@@ -67,6 +67,7 @@ export default {
         filename: '',
         filetime: ''
       },
+      classType: '',
       reqParams: {
         startFileName: '', // 获得下一个文件名称，从该名称开始
         maxFileCount: 50, // 获取的数量
@@ -226,7 +227,30 @@ export default {
   max-height: 70vh;
   border-bottom: 1px solid #f2f2f2;
   padding: 5px 0;
+}
 
+.pic-list-t2 {
+  .img-item-t1 {
+    width: 46%;
+    display: flex;
+
+    /deep/ img {
+      // flex: 1;
+      width: 28%;
+    }
+
+    /deep/ .item-t {
+      flex: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 15px 0;
+
+      .pic-tit {
+        border: none;
+      }
+    }
+  }
 }
 
 .tpxq_w {

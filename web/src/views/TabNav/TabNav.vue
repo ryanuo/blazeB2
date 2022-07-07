@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 15:12:27
+ * @LastEditTime: 2022-07-07 21:46:28
  * @FilePath: \web\src\views\TabNav\TabNav.vue
 -->
 <template>
@@ -85,7 +85,6 @@ export default {
         showCancelButton: true,
         type: 'warning'
       }).then(() => {
-        this.dialogVisible = true
         localStorage.removeItem('token_api')
         localStorage.removeItem('authmsg')
         localStorage.removeItem('pinia-store')
@@ -99,7 +98,9 @@ export default {
     },
     // 跳转登录页面
     tapLoginPage: debounce(function () {
-      this.$router.push({ name: 'setting' })
+      if (this.$route.name !== 'setting') {
+        this.$router.push({ name: 'setting', query: { id: '1' } })
+      }
     }, 300, true)
   }
 }

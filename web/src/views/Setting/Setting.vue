@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 13:05:02
+ * @LastEditTime: 2022-07-07 21:45:26
  * @FilePath: \web\src\views\Setting\Setting.vue
 -->
 <template>
@@ -13,9 +13,12 @@
       <el-collapse-item title="🗝️ 密钥配置管理" name="1">
         <form-view />
       </el-collapse-item>
-      <el-collapse-item title="🍥 主题设置" name="2">
-        <h2>主题选择</h2>
-        <theme-change />
+      <el-collapse-item title="📷 上传图片设置" name="2">
+        <h2>B2桶图片上传路径（文件夹路径/名称） <span class="red-c">必填</span>（默认根目录下）</h2>
+        <set-upload />
+        <h2>是否开启压缩</h2>
+        <set-compress />
+        <h2>是否修改图片格式</h2>
       </el-collapse-item>
       <el-collapse-item title="🎃 页面图片管理" name="3">
         <h2>图片前缀(默认选择host_url 在密钥配置中可修改)</h2>
@@ -23,10 +26,9 @@
         <h2>默认检索的图片文件夹</h2>
         <set-default />
       </el-collapse-item>
-      <el-collapse-item title="📷 上传图片设置" name="4">
-        <h2>是否开启压缩</h2>
-        <set-compress />
-        <h2>是否修改图片格式</h2>
+      <el-collapse-item title="🍥 主题设置" name="4">
+        <h2>主题选择</h2>
+        <theme-change />
       </el-collapse-item>
     </el-collapse>
 
@@ -39,17 +41,25 @@ import SetPrefix from './setprefix/SetPrefix.vue'
 import ThemeChange from './themeChange/ThemeChange.vue'
 import SetDefault from './setDefault/SetDefault.vue'
 import SetCompress from './setMain/SetCompress.vue'
+import SetUpload from './setUploadFile/SetUpload.vue'
 export default {
   components: {
     FormView,
     SetPrefix,
     ThemeChange,
     SetDefault,
-    SetCompress
+    SetCompress,
+    SetUpload
   },
   data() {
     return {
       activeName: ''
+    }
+  },
+  mounted() {
+    const { id } = this.$route.query
+    if (id) {
+      this.activeName = id + ''
     }
   }
 }

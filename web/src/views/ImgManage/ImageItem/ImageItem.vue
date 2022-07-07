@@ -3,16 +3,18 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 13:20:09
+ * @LastEditTime: 2022-07-07 21:28:11
  * @FilePath: \web\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
-  <div class="img-item-w">
+  <div class="img-item-t1">
     <MoreMsg :piclink="piclink" :pictitle="pictitle" :fileId="fileId" :picid="picid" v-on="$listeners" />
     <img @click="imgshow(picL)" :src="picL" alt="pictitle" srcset="">
-    <div class="pic-tit">{{ ptit }}</div>
-    <div class="link-copy-w">
-      <mark-down :link="picL" />
+    <div class="item-t">
+      <div class="pic-tit">{{ ptit }}</div>
+      <div class="link-copy-w">
+        <mark-down :link="picL" />
+      </div>
     </div>
   </div>
 </template>
@@ -75,7 +77,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.img-item-w {
+// .img-item-t2{
+
+// }
+.img-item-t1 {
   position: relative;
   border-radius: 10px;
   box-shadow: 0 0 5px #ccc;
@@ -112,7 +117,7 @@ export default {
 }
 
 @media only screen and (max-width: 537px) {
-  .img-item-w {
+  .img-item-t1 {
     margin: 5px;
     width: 45%;
 
@@ -124,12 +129,8 @@ export default {
 }
 
 @media only screen and (max-width: 820px) {
-  .img-item-w {
+  .img-item-t1 {
     width: 30%;
   }
-}
-
-.ink-copy-w {
-  text-align: left;
 }
 </style>

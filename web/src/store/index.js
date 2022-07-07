@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 12:33:54
+ * @LastEditTime: 2022-07-07 20:02:30
  * @FilePath: \web\src\store\index.js
  */
 import { defineStore } from 'pinia'
@@ -28,7 +28,8 @@ const useStore = defineStore('store', {
       commpressParams: {
         iscompress: false,
         rank: 0.8
-      }
+      },
+      toFile: ''
     }
   },
   getters: {
@@ -58,6 +59,9 @@ const useStore = defineStore('store', {
     },
     CompressData(state) {
       return state.commpressParams
+    },
+    DefaultToFile(state) {
+      return state.toFile
     }
   },
   actions: {
@@ -83,6 +87,9 @@ const useStore = defineStore('store', {
     },
     setDefaultCompress(obj) {
       this.commpressParams = obj
+    },
+    setDefaultToFile(a) {
+      this.toFile = a
     }
   }
 })
