@@ -3,7 +3,7 @@
  * @Date: 2022-06-24 16:09:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 13:13:51
+ * @LastEditTime: 2022-07-07 10:55:28
  * @FilePath: \web\src\plugin\elements.js
  */
 /***
@@ -19,8 +19,10 @@
 import {
   Dialog,
   Upload,
+  Tag,
   Pagination,
   Input,
+  Cascader,
   Button,
   Form,
   Select,
@@ -35,6 +37,7 @@ import {
   Slider,
   MenuItem,
   Submenu,
+  Radio,
   RadioGroup,
   Tooltip,
   FormItem,
@@ -44,7 +47,10 @@ import {
 const element = {
   install: function (Vue) {
     Vue.use(Slider)
+    Vue.use(Radio)
+    Vue.use(Tag)
     Vue.use(Dialog)
+    Vue.use(Cascader)
     Vue.use(Upload)
     Vue.use(Select)
     Vue.use(Switch)

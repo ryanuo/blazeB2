@@ -238,8 +238,20 @@ body {
 }
 
 
-#app .el-input__inner {
-    background-color: var(--b2-pre-bg);
-    // border: 1px solid var(--bg-border);
-    color: var(--bg-text);
+#app {
+    .el-input__inner {
+        background-color: var(--b2-pre-bg);
+        // border: 1px solid var(--bg-border);
+        color: var(--bg-text);
+
+    }
+
+    .el-input.is-disabled {
+        .el-input__inner {
+            background-color: #F5F7FA;
+            border-color: #E4E7ED;
+            color: #C0C4CC;
+            cursor: not-allowed;
+        }
+    }
 }

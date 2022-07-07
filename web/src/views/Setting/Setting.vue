@@ -64,6 +64,7 @@ export default {
     font-weight: bold;
     height: 68px;
     line-height: 68px;
+    padding-left: 20px;
     background-color: var(--b2-bg);
     color: var(--b2-text);
     border-bottom: 1px solid var(--b2-border);

@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 15:37:09
+ * @LastEditTime: 2022-07-07 12:33:54
  * @FilePath: \web\src\store\index.js
  */
 import { defineStore } from 'pinia'
@@ -20,7 +20,11 @@ const useStore = defineStore('store', {
         support: [],
         defaultUrl: ''
       },
-      setdefaultFile: '',
+      setdefaultFile: {
+        methods: '',
+        valPt: '',
+        valAt: []
+      },
       commpressParams: {
         iscompress: false,
         rank: 0.8
@@ -37,6 +41,18 @@ const useStore = defineStore('store', {
       console.log(a)
       return a[0].url
     },
+    // 图片默认返回
+    imgDefaultFile(state) {
+      const med = state.setdefaultFile.methods
+      if (med === '1') {
+        return state.setdefaultFile.valPt
+      } else if (med === '2') {
+        return state.setdefaultFile.valAt.join('/') + '/'
+      } else {
+        return ''
+      }
+    },
+    // 配置默认返回
     defaultFile(state) {
       return state.setdefaultFile
     },
@@ -60,8 +76,10 @@ const useStore = defineStore('store', {
     setDefaultPrefix(name) {
       this.prefixImg.defaultUrl = name
     },
-    setDefaultFile(val) {
-      this.setdefaultFile = val.trim()
+    setDefaultFile(o) {
+      this.setdefaultFile.methods = o.methods
+      this.setdefaultFile.valAt = o.valAt
+      this.setdefaultFile.valPt = o.valPt
     },
     setDefaultCompress(obj) {
       this.commpressParams = obj

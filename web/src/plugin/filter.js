@@ -3,14 +3,14 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-04-20 21:00:47
- * @FilePath: \webcli\src\plugin\filter.js
+ * @LastEditTime: 2022-07-07 13:22:50
+ * @FilePath: \web\src\plugin\filter.js
  */
 export function transiTime(timestamp) {
   /**
    *  时间戳转时间（10位）
    */
-  const date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  const date = new Date(timestamp) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
   const Y = date.getFullYear()
   const M =
     date.getMonth() + 1 < 10

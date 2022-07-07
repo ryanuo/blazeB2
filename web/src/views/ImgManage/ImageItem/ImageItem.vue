@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 21:32:13
+ * @LastEditTime: 2022-07-07 13:20:09
  * @FilePath: \web\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
@@ -114,12 +114,18 @@ export default {
 @media only screen and (max-width: 537px) {
   .img-item-w {
     margin: 5px;
-    width: 30%;
+    width: 45%;
 
     img {
       width: 100%;
       height: 120px;
     }
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  .img-item-w {
+    width: 30%;
   }
 }
 

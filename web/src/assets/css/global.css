@@ -195,3 +195,9 @@ body {
   background-color: var(--b2-pre-bg);
   color: var(--bg-text);
 }
+#app .el-input.is-disabled .el-input__inner {
+  background-color: #F5F7FA;
+  border-color: #E4E7ED;
+  color: #C0C4CC;
+  cursor: not-allowed;
+}
