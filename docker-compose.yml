@@ -1,0 +1,9 @@
+version: "3"
+services:
+  flask_test:
+    image: flask-test:1.0 # 生成的镜像的名称 和 tag
+    build: . # 一键构建镜像  =================  以上为构建命令，以下为运行命令
+    restart: always # 总是重启
+    container_name: flask_v1 # 运行后的容器的名称
+    ports:
+      - "7008:9000" # 端口映射， 这里是将 docker 容器内的 80 端口映射到云服务器的 7008 端口
