@@ -3,7 +3,7 @@
  * @Date: 2022-07-02 10:00:55
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-06 13:11:38
+ * @LastEditTime: 2022-07-08 16:26:15
  * @FilePath: \docs\docs\.vuepress\config.ts
  */
 import { defineUserConfig } from 'vuepress'
@@ -50,7 +50,7 @@ export default defineUserConfig({
         navbar: [
             {
                 text: '在线使用',
-                link: 'https://b2.mr90.cf/'
+                link: 'https://b2.mr90.top/'
             },
             {
                 text: 'Github',

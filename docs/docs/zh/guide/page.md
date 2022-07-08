@@ -6,7 +6,7 @@ description: 使用方法
 
 ## 进入页面
 
-- [在线地址](https://b2.mr90.cf/)
+- [在线地址](https://b2.mr90.top/)
 
 ## 开始配置
 

@@ -1,6 +1,6 @@
 <template><div><h2 id="进入页面" tabindex="-1"><a class="header-anchor" href="#进入页面" aria-hidden="true">#</a> 进入页面</h2>
 <ul>
-<li><a href="https://b2.mr90.cf/" target="_blank" rel="noopener noreferrer">在线地址<ExternalLinkIcon/></a></li>
+<li><a href="https://b2.mr90.top/" target="_blank" rel="noopener noreferrer">在线地址<ExternalLinkIcon/></a></li>
 </ul>
 <h2 id="开始配置" tabindex="-1"><a class="header-anchor" href="#开始配置" aria-hidden="true">#</a> 开始配置</h2>
 <ul>

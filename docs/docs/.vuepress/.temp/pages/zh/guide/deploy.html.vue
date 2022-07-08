@@ -10,7 +10,71 @@
 └─requirements<span class="token punctuation">.</span>txt <span class="token comment">//项目依赖库</span>
 └─scf_bootstrap  <span class="token comment">// 腾讯云部署启动文件</span>
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="部署" tabindex="-1"><a class="header-anchor" href="#部署" aria-hidden="true">#</a> 部署</h2>
-<h3 id="heroku-部署" tabindex="-1"><a class="header-anchor" href="#heroku-部署" aria-hidden="true">#</a> Heroku 部署</h3>
+<h3 id="基于docker-nginx-部署" tabindex="-1"><a class="header-anchor" href="#基于docker-nginx-部署" aria-hidden="true">#</a> 基于docker + nginx 部署</h3>
+<ol>
+<li>docker安装 【<a href="https://blog.csdn.net/weixin_40118894/article/details/117221102" target="_blank" rel="noopener noreferrer">安装<ExternalLinkIcon/></a>】</li>
+<li>拉取代码到服务端</li>
+</ol>
+<div class="language-python ext-py line-numbers-mode"><pre v-pre class="language-python"><code>git clone <span class="token operator">-</span>b build https<span class="token punctuation">:</span><span class="token operator">//</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>Rr210<span class="token operator">/</span>blazeB2<span class="token punctuation">.</span>git
+<span class="token comment"># gitee</span>
+git clone <span class="token operator">-</span>b build https<span class="token punctuation">:</span><span class="token operator">//</span>gitee<span class="token punctuation">.</span>com<span class="token operator">/</span>rbozo<span class="token operator">/</span>blazeB2<span class="token punctuation">.</span>git
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ol start="3">
+<li>打开docker-compose.yml 文件修改映射端口号</li>
+</ol>
+<div class="language-docker ext-docker line-numbers-mode"><pre v-pre class="language-docker"><code>version: "3"
+services:
+  flask_test:
+    image: flask-test:1.0 # 生成的镜像的名称 和 tag
+    build: . # 一键构建镜像  =================  以上为构建命令，以下为运行命令
+    restart: always # 总是重启
+    container_name: flask_v1 # 运行后的容器的名称
+    ports:
+      - "7008:9000" # 端口映射， 这里是将 docker 容器内的 9000 端口映射到云服务器的 7008 端口  7008为外网端口号
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ol start="4">
+<li>在当前目录下执行</li>
+</ol>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>docker-compose up -d --build
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ol start="5">
+<li>检查项目是否启动</li>
+</ol>
+<div class="language-python ext-py line-numbers-mode"><pre v-pre class="language-python"><code><span class="token comment">#检查是否启动</span>
+docker<span class="token operator">-</span>compose ps 
+<span class="token comment"># 查看端口是否启动占用</span>
+netstat <span class="token operator">-</span>nltp
+<span class="token comment"># 查看日志是否报错</span>
+docker logs flask_v1
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ol start="6">
+<li>配置nginx</li>
+</ol>
+<ul>
+<li>可以开启gzip加速</li>
+</ul>
+<div class="language-nginx ext-nginx line-numbers-mode"><pre v-pre class="language-nginx"><code><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+    <span class="token directive"><span class="token keyword">listen</span>  <span class="token number">80</span></span><span class="token punctuation">;</span> <span class="token comment"># 监听80端口</span>
+    <span class="token directive"><span class="token keyword">root</span>       /www/wwwroot/b2.mr90.top</span><span class="token punctuation">;</span> 
+    <span class="token directive"><span class="token keyword">server_name</span> b2.mr90.top</span><span class="token punctuation">;</span> <span class="token comment"># 配置域名</span>
+    <span class="token comment"># 处理静态资源:</span>
+    <span class="token directive"><span class="token keyword">location</span> ~ ^\/static\/.*$</span> <span class="token punctuation">{</span>
+        <span class="token directive"><span class="token keyword">root</span> /www/wwwroot/b2.mr90.top/static/</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token directive"><span class="token keyword">fastcgi_param</span>   HTTPS    <span class="token boolean">on</span></span><span class="token punctuation">;</span>
+	<span class="token directive"><span class="token keyword">fastcgi_param</span>   HTTP_SCHEME   https</span><span class="token punctuation">;</span>
+	<span class="token directive"><span class="token keyword">gzip_static</span> <span class="token boolean">on</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">gzip_proxied</span> expired no-cache no-store private auth</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">gzip</span> <span class="token boolean">on</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">gzip_min_length</span> <span class="token number">1k</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">gzip_types</span> text/plain application/javascript application/x-javascript text/css application/xml text/javascript</span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">gzip_vary</span> <span class="token boolean">on</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">gzip_disable</span> <span class="token string">"MSIE [1-6]\."</span></span><span class="token punctuation">;</span>
+    <span class="token comment"># 动态请求转发到7008端口(gunicorn):</span>
+    <span class="token directive"><span class="token keyword">location</span> /</span> <span class="token punctuation">{</span>
+        <span class="token directive"><span class="token keyword">proxy_pass</span>       http://127.0.0.1:7008</span><span class="token punctuation">;</span>
+        <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Real-IP <span class="token variable">$remote_addr</span></span><span class="token punctuation">;</span>
+        <span class="token directive"><span class="token keyword">proxy_set_header</span> Host <span class="token variable">$host</span></span><span class="token punctuation">;</span>
+        <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Forwarded-For <span class="token variable">$proxy_add_x_forwarded_for</span></span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="heroku-部署" tabindex="-1"><a class="header-anchor" href="#heroku-部署" aria-hidden="true">#</a> Heroku 部署</h3>
 <ul>
 <li>方式一：</li>
 </ul>
@@ -20,7 +84,7 @@
 <li>创建新的 Heroku App</li>
 <li>拉取代码部署（或者直接<a href="https://github.com/Rr210/blazeB2" target="_blank" rel="noopener noreferrer">fork<ExternalLinkIcon/></a>本仓库）</li>
 </ol>
-<div class="language-git ext-git line-numbers-mode"><pre v-pre class="language-git"><code>git clone -b build https://github.com/Rr210/blazeB2
+<div class="language-git ext-git line-numbers-mode"><pre v-pre class="language-git"><code>git clone -b build https://github.com/Rr210/blazeB2.git
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ul>
 <li>fork无需拉取上传</li>
 <li>将代码创建并保存到自己的github仓库</li>
