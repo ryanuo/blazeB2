@@ -3,13 +3,13 @@
  * @Date: 2022-07-03 08:59:18
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 12:06:19
- * @FilePath: \web\src\utils\common\login.js
+ * @LastEditTime: 2022-07-09 15:07:02
+ * @FilePath: \master\src\utils\common\login.js
  */
 import { auth } from '@/utils/api'
 import { Notification } from 'element-ui'
 import useStore from '../../store'
-function authIsexit() {
+function authIsexit(fn = null) {
   return new Promise((resolve, reject) => {
     const authmsg = localStorage.getItem('authmsg')
     const token = localStorage.getItem('token_api')
@@ -45,8 +45,6 @@ async function setAuthStorage(token) {
   console.log(fdata)
   const { data: res } = await auth(fdata)
   if (res.bucketId) {
-    console.log(1)
-    // https://imagecloud.s3.us-west-004.backblazeb2.com/
     const urlList = {
       s3ApiUrl: `https://${fdata.bucket_name}.${res.s3ApiUrl.replace('https://', '')}`,
       downloadUrl: res.downloadUrl,
@@ -61,9 +59,9 @@ async function setAuthStorage(token) {
       time: (new Date()).getTime()
     }
     const resStorData = Object.assign(sdata, urlList)
-    console.log(resStorData)
     setPrefixImg(urlList, fdata.host_url)
     localStorage.setItem('authmsg', JSON.stringify(resStorData))
+    useStore().handleIsLogined()
   }
 }
 

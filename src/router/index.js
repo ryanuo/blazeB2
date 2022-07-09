@@ -3,8 +3,8 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 20:52:17
- * @FilePath: \web\src\router\index.js
+ * @LastEditTime: 2022-07-09 14:45:26
+ * @FilePath: \master\src\router\index.js
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -20,7 +20,7 @@ const routes = [
       {
         path: '/home',
         name: 'home',
-        component: () => import('@/views/Home.vue')
+        component: () => import('@/views/home/Home.vue')
       },
       {
         path: '/imanage',
@@ -62,6 +62,8 @@ router.afterEach(
       storeInit.handleIsLogined()
       if (storeInit.isLogined) {
         storeInit.setNewAuthMsg()
+      } else {
+        console.log('您还未输入信息，还无法使用该程序')
       }
     }
   }

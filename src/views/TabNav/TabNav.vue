@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-08 22:49:02
+ * @LastEditTime: 2022-07-09 13:54:00
  * @FilePath: \master\src\views\TabNav\TabNav.vue
 -->
 <template>
@@ -49,7 +49,7 @@
 import useStore from '@/store' // 引入store
 import { mapState, mapActions } from 'pinia'
 import LayOut from '@/views/svg/LayOut.vue'
-import SignSvg from '@/views/SignSvg.vue'
+import SignSvg from '@/views/svg/SignSvg.vue'
 import { Message, MessageBox } from 'element-ui'
 import { debounce } from '../../plugin/filter'
 export default {
@@ -110,106 +110,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.hd-w {
-  .el-menu {
-    padding-left: 15%;
-    background-color: var(--b2-pre-bg);
-  }
-
-  /deep/ .el-menu--horizontal>.el-menu-item.is-active {
-    color: var(--bg-text);
-  }
-
-  /deep/ .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover,
-  .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus {
-    background-color: var(--b2-active);
-    border-radius: 10px;
-  }
-
-  .logo_w {
-    position: absolute;
-    top: 0;
-    left: 2%;
-    width: 120px;
-    z-index: 1000;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    height: 60px;
-
-    div> {
-      flex: auto;
-
-      img {
-        width: 100%;
-      }
-    }
-
-    span {
-      flex: 1;
-      font-size: 20px;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    }
-  }
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  font-size: 16px;
-  padding-top: 20px;
-  // border-top: 1px solid #f2f2f2;
-
-  svg {
-    vertical-align: middle;
-    margin: 0 5px;
-  }
-}
-
-.lay-out {
-  position: absolute;
-  top: 2%;
-  right: 2%;
-  width: 25px;
-  height: 25px;
-  z-index: 2000;
-  cursor: pointer;
-
-  .svg {
-    width: 100%;
-  }
-}
-
-.phone-tab {
-  display: none;
-}
-
-@media screen and (max-width: 539px) {
-  .el-menu {
-    // visibility: hidden;
-    display: none;
-  }
-
-  footer {
-    display: none;
-  }
-
-  .phone-tab {
-    position: absolute;
-    display: block;
-    top: 2%;
-    right: 14%;
-    // width: 3rem;
-    // height: 3rem;
-    z-index: 2000;
-
-    /deep/ svg {
-      width: 25px;
-    }
-  }
-}
+@import './tannav.module.less';
 </style>

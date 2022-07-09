@@ -5,22 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link rel="stylesheet" href="./css/themeSet.css">
-    <% if (process.env.NODE_ENV === 'pro') { %>
-      <% for(var css of htmlWebpackPlugin.options.cdn.css) { %>
-        <link href="<%=css%>" rel="preload" as="style">
-        <link rel="stylesheet" href="<%=css%>" as="style">
-      <% } %>
-      <% for(var js of htmlWebpackPlugin.options.cdn.js) { %>
-        <link href="<%=js%>" rel="preload" as="script">
-        <script src="<%=js%>"></script>
-      <% } %>
-
-    <% } %>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
       />
+      <% for (var i in htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
+        <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="preload" as="style" />
+        <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
+      <% } %>
     <title><%= htmlWebpackPlugin.options.title %></title>
     </head>
     <body>
@@ -31,5 +23,8 @@
         </noscript>
         <div id="app"></div>
         <!-- built files will be auto injected -->
+        <% for (let i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+          <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+        <% } %>
       </body>
     </html>

@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-08 09:59:18
- * @FilePath: \web\src\views\ImgManage\ImageItem\ImageItem.vue
+ * @LastEditTime: 2022-07-09 13:53:28
+ * @FilePath: \master\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
   <div class="img-item-t1">
@@ -78,60 +78,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-// .img-item-t2{
-
-// }
-.img-item-t1 {
-  position: relative;
-  border-radius: 10px;
-  box-shadow: 0 0 5px #ccc;
-  text-align: center;
-  width: 15%;
-  padding: 5px;
-  box-sizing: border-box;
-  margin: 10px;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 0 0 12px #ccc;
-
-    .more-w {
-      transition: all .4s linear;
-      opacity: 1;
-    }
-  }
-
-  img {
-    width: 90%;
-    height: 150px;
-    border-radius: 10px;
-  }
-
-  .pic-tit {
-    padding: 10px 0;
-    overflow: hidden; //超出的文本隐藏
-    text-overflow: ellipsis; //溢出用省略号显示
-    white-space: nowrap; //溢出不换行
-    border-bottom: 1px dashed #f2f2f2;
-  }
-
-}
-
-@media only screen and (max-width: 537px) {
-  .img-item-t1 {
-    margin: 5px;
-    width: 45%;
-
-    img {
-      width: 100%;
-      height: 120px;
-    }
-  }
-}
-
-@media only screen and (max-width: 820px) {
-  .img-item-t1 {
-    width: 30%;
-  }
-}
+@import './imageitem.module.less';
 </style>

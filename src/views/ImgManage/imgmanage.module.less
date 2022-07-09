@@ -1,0 +1,92 @@
+.img-m {
+    position: relative;
+    padding-bottom: 20px;
+  
+    .el-input {
+      width: 340px;
+    }
+  
+    .el-button {
+      margin-left: 10px;
+    }
+  
+    .el-pagination {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+  }
+  
+  .inp-w {
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f2f2f2;
+  
+    .el-tag {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+  
+  .svg-w {
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+  
+    div[title] {
+      margin: 0 5px;
+      width: 30px;
+      cursor: pointer;
+  
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+  
+  .pic-list-t1 {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    max-height: 70vh;
+    border-bottom: 1px solid #f2f2f2;
+    padding: 5px 0;
+  }
+  
+  .pic-list-t2 {
+    .img-item-t1 {
+      width: 46%;
+      display: flex;
+  
+      /deep/ img {
+        // flex: 1;
+        width: 28%;
+      }
+  
+      /deep/ .item-t {
+        flex: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 15px 0;
+  
+        .pic-tit {
+          border: none;
+        }
+      }
+    }
+  }
+  
+  .tpxq_w {
+    line-height: 20px;
+  }
+  
+  @media only screen and (max-width: 537px) {
+    .inp-w {
+      padding-top: 20px;
+    }
+  }

@@ -3,8 +3,8 @@
  * @Date: 2022-07-04 09:45:30
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 20:42:09
- * @FilePath: \web\src\views\Setting\setprefix\SetPrefix.vue
+ * @LastEditTime: 2022-07-09 15:10:47
+ * @FilePath: \master\src\views\Setting\setprefix\SetPrefix.vue
 -->
 <template>
   <div class="set-prefix">
@@ -35,7 +35,10 @@ export default {
     }
   },
   mounted() {
-    this.value = this.defaultUrl
+    const auth = localStorage.getItem('authmsg')
+    if (auth) {
+      this.value = this.defaultUrl
+    }
   },
   methods: {
     ...mapActions(useStore, ['setDefaultPrefix']),
@@ -47,11 +50,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.set-prefix {
-  .el-input {
-    width: 217px;
-    margin-top: 10px;
-    margin-right: 10px;
-  }
-}
+@import './setpre.module.less';
 </style>

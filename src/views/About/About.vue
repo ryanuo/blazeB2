@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 14:18:36
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-08 22:57:59
+ * @LastEditTime: 2022-07-09 12:59:12
  * @FilePath: \master\src\views\About\About.vue
 -->
 <template>
@@ -40,30 +40,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.main-title {
-  margin: 1.8rem auto;
-  font-size: 3rem;
-}
-
-.p-shield {
-  a {
-    padding: 5px;
-
-    img {
-      margin: 7px 0;
-    }
-  }
-}
-
-.p-statement {
-  margin: 10px 0;
-}
-
-.p-simple {
-  font-size: 20px;
-  margin: 20px 0;
-  line-height: 30px;
-  border-bottom: 1px solid #f2f2f2;
-  padding: 5px 0;
-}
+@import 'about.module.less';
 </style>

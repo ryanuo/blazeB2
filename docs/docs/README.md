@@ -5,7 +5,7 @@ heroText: BlazeB2 图床
 tagline: 基于backblazeb2 Api开发 Cloudflare加速图床工具
 actions:
   - text: 快速上手
-    link: /zh/guide/index.html
+    link: /zh/guide/summary.html
     type: primary
 features:
 - title: 🛠️ 简洁至上

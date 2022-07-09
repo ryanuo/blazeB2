@@ -3,8 +3,8 @@
  * @Date: 2022-07-05 11:54:55
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 15:35:39
- * @FilePath: \web\src\views\Setting\setMain\SetCompress.vue
+ * @LastEditTime: 2022-07-09 15:10:12
+ * @FilePath: \master\src\views\Setting\setMain\SetCompress.vue
 -->
 <template>
   <div class="set-commpress">
@@ -58,15 +58,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.set-commpress {
-  padding: 10px 0;
-}
-
-.block-compress {
-  padding: 20px 0;
-}
-
-.slide-w {
-  padding: 0 20px;
-}
+@import './setcom.module.less';
 </style>

@@ -3,8 +3,8 @@
  * @Date: 2022-07-04 20:19:12
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 12:14:47
- * @FilePath: \web\src\views\Setting\setDefault\SetDefault.vue
+ * @LastEditTime: 2022-07-09 15:09:47
+ * @FilePath: \master\src\views\Setting\setDefault\SetDefault.vue
 -->
 <template>
   <div class="set-defalut">
@@ -94,13 +94,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.set-defalut {
-
-  .el-cascader,
-  .el-input {
-    width: 249px;
-    margin-top: 10px;
-    margin-right: 10px;
-  }
-}
+@import './setdefault.module.less';
 </style>

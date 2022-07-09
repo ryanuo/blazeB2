@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 21:45:26
- * @FilePath: \web\src\views\Setting\Setting.vue
+ * @LastEditTime: 2022-07-09 15:16:13
+ * @FilePath: \master\src\views\Setting\Setting.vue
 -->
 <template>
   <div class="common-container">
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import FormView from '../FormView.vue'
+import FormView from '@/views/formview/FormView.vue'
 import SetPrefix from './setprefix/SetPrefix.vue'
 import ThemeChange from './themeChange/ThemeChange.vue'
 import SetDefault from './setDefault/SetDefault.vue'
@@ -66,61 +66,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-collapse-item {
-  color: var(--b2-text);
-
-  /deep/ .el-collapse-item__header {
-    font-size: 16px;
-    font-weight: bold;
-    height: 68px;
-    line-height: 68px;
-    padding-left: 20px;
-    background-color: var(--b2-bg);
-    color: var(--b2-text);
-    border-bottom: 1px solid var(--b2-border);
-  }
-
-  /deep/ .el-form-item__label {
-    color: var(--b2-text);
-  }
-
-  /deep/ .el-collapse-item__content {
-    padding-left: 5px;
-    color: var(--b2-text);
-  }
-
-  /deep/ .el-collapse-item__wrap {
-    background-color: var(--b2-pre-bg);
-  }
-}
-
-.el-collapse {
-  margin: 0 20px;
-  height: 70vh;
-  max-height: 70vh;
-  overflow: auto;
-  border-top: 1px solid var(--b2-border);
-  border-bottom: 1px solid var(--b2-border);
-
-  /deep/ .el-select {
-    margin-top: 10px;
-    margin-right: 10px;
-  }
-
-  h2 {
-    margin-top: 10px;
-    padding-left: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    border-left: 5px solid var(--b2-theme-c);
-  }
-}
-
-.set-tit {
-  font-size: 3rem;
-  font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-  margin: 20px 0;
-}
+@import './setting.module.less';
 </style>

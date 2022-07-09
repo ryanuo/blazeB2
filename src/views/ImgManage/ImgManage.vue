@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 21:35:36
- * @FilePath: \web\src\views\ImgManage\ImgManage.vue
+ * @LastEditTime: 2022-07-09 15:08:10
+ * @FilePath: \master\src\views\ImgManage\ImgManage.vue
 -->
 <template>
   <div v-loading="loadingPicShow" class="img-m common-container">
@@ -82,10 +82,11 @@ export default {
     ...mapWritableState(useStore, ['isLogined']), // 映射函数，取出isLogined
     ...mapWritableState(useStore, ['prefixImg']), // 映射函数，取出prefixImg
     ...mapState(useStore, ['setdefaultFile']), // 映射函数，取出setdefaultFile
-    ...mapState(useStore, ['imgDefaultFile']) // 映射函数，取出setdefaultFile
+    ...mapState(useStore, ['imgDefaultFile']), // 映射函数，取出setdefaultFile
+    ...mapState(useStore, ['noInvalid'])
   },
   watch: {
-    isLogined: {
+    noInvalid: {
       // immediate: true,
       deep: true, // 深度监听
       handler(newValue) {
@@ -97,11 +98,10 @@ export default {
     }
   },
   mounted() {
-    const auth = localStorage.getItem('authmsg')
     if (this.imgDefaultFile) {
       this.reqParams.prefix = this.imgDefaultFile
     }
-    if (auth) {
+    if (this.noInvalid) {
       this.getPicList()
     }
   },
@@ -170,96 +170,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.img-m {
-  position: relative;
-  padding-bottom: 20px;
-
-  .el-input {
-    width: 340px;
-  }
-
-  .el-button {
-    margin-left: 10px;
-  }
-
-  .el-pagination {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-  }
-}
-
-.inp-w {
-  width: 100%;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #f2f2f2;
-
-  .el-tag {
-    margin-right: 10px;
-    cursor: pointer;
-  }
-}
-
-.svg-w {
-  float: right;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-
-  div[title] {
-    margin: 0 5px;
-    width: 30px;
-    cursor: pointer;
-
-    svg {
-      width: 30px;
-      height: 30px;
-    }
-  }
-}
-
-.pic-list-t1 {
-  margin: 10px 0;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: auto;
-  max-height: 70vh;
-  border-bottom: 1px solid #f2f2f2;
-  padding: 5px 0;
-}
-
-.pic-list-t2 {
-  .img-item-t1 {
-    width: 46%;
-    display: flex;
-
-    /deep/ img {
-      // flex: 1;
-      width: 28%;
-    }
-
-    /deep/ .item-t {
-      flex: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 15px 0;
-
-      .pic-tit {
-        border: none;
-      }
-    }
-  }
-}
-
-.tpxq_w {
-  line-height: 20px;
-}
-
-@media only screen and (max-width: 537px) {
-  .inp-w {
-    padding-top: 20px;
-  }
-}
+@import './imgmanage.module.less';
 </style>

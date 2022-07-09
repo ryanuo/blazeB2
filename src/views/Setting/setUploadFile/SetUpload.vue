@@ -3,8 +3,8 @@
  * @Date: 2022-07-07 19:33:08
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 19:59:58
- * @FilePath: \web\src\views\Setting\setUploadFile\SetUpload.vue
+ * @LastEditTime: 2022-07-09 15:11:25
+ * @FilePath: \master\src\views\Setting\setUploadFile\SetUpload.vue
 -->
 <template>
   <div class="set-upload">
@@ -48,11 +48,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.set-upload {
-  .el-input {
-    width: 249px;
-    margin-top: 10px;
-    margin-right: 10px;
-  }
-}
+@import './setupload.module.less';
 </style>

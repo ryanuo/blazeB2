@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 20:02:30
- * @FilePath: \web\src\store\index.js
+ * @LastEditTime: 2022-07-09 15:02:41
+ * @FilePath: \master\src\store\index.js
  */
 import { defineStore } from 'pinia'
 import { authIsexit } from '../utils/common/login'
@@ -15,7 +15,8 @@ const useStore = defineStore('store', {
   },
   state: () => {
     return {
-      isLogined: false,
+      isLogined: false, // 是否输入formview
+      noInvalid: false, // 是否验证过期，默认过期
       prefixImg: {
         support: [],
         defaultUrl: ''
@@ -66,8 +67,8 @@ const useStore = defineStore('store', {
   },
   actions: {
     handleIsLogined() {
-      const tokenApi = localStorage.getItem('token_api')
-      this.isLogined = !!tokenApi
+      this.isLogined = !!localStorage.getItem('token_api')
+      this.noInvalid = !!localStorage.getItem('authmsg')
     },
     setNewAuthMsg() {
       authIsexit().then(() => {

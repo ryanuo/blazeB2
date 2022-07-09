@@ -3,12 +3,12 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-08 13:03:23
- * @FilePath: \web\src\main.prod.js
+ * @LastEditTime: 2022-07-09 11:52:43
+ * @FilePath: \master\src\main.prod.js
  */
 
 /* eslint-disable */
-// import Vue from 'vue'
+import Vue from 'vue'
 import { createPersistedState } from 'pinia-persistedstate-plugin'
 import { createPinia, PiniaVuePlugin } from 'pinia'
 import App from './App.vue'
