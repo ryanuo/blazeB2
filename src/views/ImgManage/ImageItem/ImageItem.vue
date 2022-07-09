@@ -3,13 +3,15 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 13:53:28
+ * @LastEditTime: 2022-07-09 22:20:15
  * @FilePath: \master\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
   <div class="img-item-t1">
     <MoreMsg :piclink="piclink" :pictitle="pictitle" :fileId="fileId" :picid="picid" v-on="$listeners" />
-    <img @click="imgshow(picL)" :src="picL" alt="pictitle" srcset="">
+    <el-image @click.stop="imgshow(picL)" :src="picL">
+    </el-image>
+    <!-- <img  :src="picL" alt="pictitle" srcset=""> -->
     <div class="item-t">
       <div class="pic-tit">{{ ptit }}</div>
       <div class="link-copy-w">

@@ -3,20 +3,19 @@
  * @Date: 2022-07-04 20:19:12
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 15:09:47
+ * @LastEditTime: 2022-07-09 18:50:42
  * @FilePath: \master\src\views\Setting\setDefault\SetDefault.vue
 -->
 <template>
   <div class="set-defalut">
     <div style="margin-top: 20px;padding-bottom: 20px; border-bottom: 1px solid #f2f2f2;">
-      <el-radio-group @change="handleRadio" v-model="radio" size="small">
+      <el-radio-group v-model="radio" size="small">
         <el-radio label="1" border>手动输入目录</el-radio>
         <el-radio label="2" border>自动填写目录</el-radio>
       </el-radio-group>
     </div>
     <el-input v-if="radio === '1'" v-model="valuePrint" placeholder="图片文件夹(格式：hexo/4/)"></el-input>
-    <el-cascader v-else @expand-change="handleexpandChange" @change="handleCascader" v-model="valueAuto"
-      :props="options" clearable></el-cascader>
+    <el-cascader v-else v-model="valueAuto" :props="options" clearable></el-cascader>
     <el-button @click="saveDefault">保存</el-button>
   </div>
 </template>
@@ -70,15 +69,6 @@ export default {
         this.valuePrint = ''
         this.valueAuto = this.defaultFile.valAt
       }
-    },
-    // 切换按钮时的操作
-    handleRadio(e) {
-      this.initData(e)
-    },
-    handleCascader(e) {
-      console.log(e)
-    },
-    handleexpandChange(e) {
     },
     ...mapActions(useStore, ['setDefaultFile']),
     saveDefault() {

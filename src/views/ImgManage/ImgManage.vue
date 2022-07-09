@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 15:08:10
+ * @LastEditTime: 2022-07-09 22:22:24
  * @FilePath: \master\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -21,16 +21,18 @@
         <div title="图片显示方式">
           <LargeList />
         </div>
-        <div title="重新加载" @click="refreshData">
+        <div title="重新加载" @click.stop="refreshData">
           <Refresh />
         </div>
       </div>
     </div>
-    <div class="pic-list-t1 animate__animated animate__fadeIn" :class="classType ? 'pic-list-t2' : ''">
+    <!-- <div class="waterfall-w"> -->
+    <div class="pic-list-t1 animate__animated animate__fadeIn" :class="classType ? 'pic-list-t2' : ''" ref="picListRef">
       <image-item @setshowdiag="handleDiag" @ishow="imgshow" @update="updatePicLists"
-        v-for="(item, index) in picListDatas" :key="item.fileName" :picid="index" :piclink="item.fileName"
+        v-for="(item, index) in picListDatas" :key="item.fileName + index" :picid="index" :piclink="item.fileName"
         :pictitle="item.fileName" :fileId="item.fileId" :picTime="item.uploadTimestamp" />
     </div>
+    <!-- </div> -->
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
       :current-page.sync="currentPage" :page-sizes="[50, 80, 100, 200]" :page-size="reqParams.maxFileCount"
       layout="sizes,next">
@@ -54,7 +56,7 @@ import Refresh from '../svg/Refresh.vue'
 import ImageItem from './ImageItem/ImageItem.vue'
 import 'viewerjs/dist/viewer.css'
 import { api as viewerApi } from 'v-viewer'
-import { endLoading, startLoading } from '../../utils/common/loading'
+import { endLoading, startLoading } from '@/utils/common/loading'
 export default {
   data() {
     return {
@@ -125,22 +127,26 @@ export default {
     },
     ...mapActions(useStore, ['handleIsLogined']),
     // 获取数据
-    async getPicList() {
+    getPicList(fn = null) {
+      const _this = this
       startLoading(document.querySelector('.img-m'), '正在加载....')
       const auth = localStorage.getItem('authmsg')
       if (auth) {
-        const p_ = Object.assign(JSON.parse(auth), this.reqParams)
-        const { data: res } = await picList({ params: p_ })
-        if (res.files.length === 0) {
-          Notification({
-            title: '提示',
-            message: '文件夹内无图片',
-            type: 'error'
+        const p_ = Object.assign(JSON.parse(auth), _this.reqParams)
+        picList({ params: p_ })
+          .then((res) => {
+            if (res.data.files.length === 0) {
+              Notification({
+                title: '提示',
+                message: '文件夹内无图片',
+                type: 'error'
+              })
+            }
+            _this.picListDatas = [..._this.picListDatas, ...res.data.files]
+            _this.reqParams.startFileName = res.data.nextFileName
+            endLoading()
+            if (fn) return fn()
           })
-        }
-        this.picListDatas = [...this.picListDatas, ...res.files]
-        this.reqParams.startFileName = res.nextFileName
-        endLoading()
       }
     },
     // 根据文件夹前缀进行搜索
@@ -152,6 +158,27 @@ export default {
         this.getPicList()
       }
     }, 300, true),
+    // 刷新完成后滑轮滑到最底部
+    setRollBottom() {
+      // 文档内容的实际高度
+      const blockScrollHeight = this.$refs.picListRef.scrollHeight
+      // this.$refs.picListRef.scrollTop = blockScrollHeight
+      // // 滚动条滚动高度
+      let blockScrollTop = this.$refs.picListRef.scrollTop
+      const _this = this
+      Roll()
+      function Roll() {
+        blockScrollTop += 100
+        if (blockScrollHeight <= blockScrollTop) return false
+        setTimeout(() => {
+          _this.$refs.picListRef.scrollTop = blockScrollTop
+          return Roll()
+        }, 10)
+      }
+      // // 可视窗口高度
+      // const blockClientHeight = this.$refs.picListRef.clientHeight
+      // console.log(blockScrollHeight, blockScrollTop, blockClientHeight)
+    },
     refreshData: debounce(function () {
       this.picListDatas = []
       this.reqParams.startFileName = ''
@@ -162,8 +189,8 @@ export default {
       this.reqParams.maxFileCount = e
       this.getPicList()
     },
-    handleCurrentChange(e) {
-      this.getPicList()
+    handleCurrentChange(_e) {
+      this.getPicList(this.setRollBottom)
     }
   }
 }

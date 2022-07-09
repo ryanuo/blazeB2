@@ -3,7 +3,7 @@
  * @Date: 2022-07-04 09:45:30
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 15:10:47
+ * @LastEditTime: 2022-07-09 18:47:52
  * @FilePath: \master\src\views\Setting\setprefix\SetPrefix.vue
 -->
 <template>
@@ -28,16 +28,26 @@ export default {
   },
   computed: {
     ...mapState(useStore, ['prefixImg']),
-    defaultUrl() {
-      const store = useStore()
-      console.log(store.prefixStatus)
-      return store.prefixStatus
+    ...mapState(useStore, ['noInvalid']),
+    ...mapState(useStore, ['prefixStatus'])
+  },
+  watch: {
+    noInvalid: {
+      // immediate: true,
+      deep: true, // 深度监听
+      handler(newValue) {
+        console.log(newValue)
+        if (newValue) {
+          this.value = this.prefixStatus
+        }
+      }
     }
   },
   mounted() {
-    const auth = localStorage.getItem('authmsg')
-    if (auth) {
-      this.value = this.defaultUrl
+    const a_ = this.noInvalid
+    // const auth = localStorage.getItem('authmsg')
+    if (a_) {
+      this.value = this.prefixStatus
     }
   },
   methods: {
