@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 22:22:24
+ * @LastEditTime: 2022-07-10 18:14:00
  * @FilePath: \master\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -17,8 +17,11 @@
       </el-tag>
       <el-tag type="info" @click="$router.replace({ name: 'setting', query: { id: '3' } })">修改</el-tag>
       <!-- <el-button size="small"></el-button> -->
-      <div class="svg-w" @click="classType = !classType">
-        <div title="图片显示方式">
+      <div class="svg-w">
+        <div title="升降序排列" @click="handleSort">
+          <sort-view />
+        </div>
+        <div title="图片显示方式" @click="classType = !classType">
           <LargeList />
         </div>
         <div title="重新加载" @click.stop="refreshData">
@@ -29,8 +32,9 @@
     <!-- <div class="waterfall-w"> -->
     <div class="pic-list-t1 animate__animated animate__fadeIn" :class="classType ? 'pic-list-t2' : ''" ref="picListRef">
       <image-item @setshowdiag="handleDiag" @ishow="imgshow" @update="updatePicLists"
-        v-for="(item, index) in picListDatas" :key="item.fileName + index" :picid="index" :piclink="item.fileName"
-        :pictitle="item.fileName" :fileId="item.fileId" :picTime="item.uploadTimestamp" />
+        v-for="(item, index) in picListDatas" :key="item.fileName + index" :picid="index"
+        :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
+        :picTime="timespan(item.uploadTimestamp)" />
     </div>
     <!-- </div> -->
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
@@ -48,11 +52,12 @@
 <script>
 import { Notification } from 'element-ui'
 import { mapActions, mapState, mapWritableState } from 'pinia'
-import { debounce, transiTime } from '../../plugin/filter'
-import useStore from '../../store'
-import { picList } from '../../utils/api'
+import { debounce, transiTime } from '@/plugin/filter'
+import useStore from '@/store'
+import { picList } from '@/utils/api'
 import LargeList from '../svg/LargeList.vue'
 import Refresh from '../svg/Refresh.vue'
+import sortView from '../svg/sortView.vue'
 import ImageItem from './ImageItem/ImageItem.vue'
 import 'viewerjs/dist/viewer.css'
 import { api as viewerApi } from 'v-viewer'
@@ -76,16 +81,22 @@ export default {
         prefix: '', // 指定文件夹前缀
         delimiter: ''
       },
-      loadingPicShow: false
+      loadingPicShow: false,
+      isUpSort: true
     }
   },
-  components: { LargeList, Refresh, ImageItem },
+  components: { LargeList, Refresh, ImageItem, sortView },
   computed: {
     ...mapWritableState(useStore, ['isLogined']), // 映射函数，取出isLogined
-    ...mapWritableState(useStore, ['prefixImg']), // 映射函数，取出prefixImg
+    ...mapState(useStore, ['prefixStatus']),
     ...mapState(useStore, ['setdefaultFile']), // 映射函数，取出setdefaultFile
     ...mapState(useStore, ['imgDefaultFile']), // 映射函数，取出setdefaultFile
-    ...mapState(useStore, ['noInvalid'])
+    ...mapState(useStore, ['noInvalid']),
+    timespan() {
+      return function (val) {
+        return transiTime(val)
+      }
+    }
   },
   watch: {
     noInvalid: {
@@ -143,6 +154,7 @@ export default {
               })
             }
             _this.picListDatas = [..._this.picListDatas, ...res.data.files]
+            _this.handleUd()
             _this.reqParams.startFileName = res.data.nextFileName
             endLoading()
             if (fn) return fn()
@@ -162,22 +174,42 @@ export default {
     setRollBottom() {
       // 文档内容的实际高度
       const blockScrollHeight = this.$refs.picListRef.scrollHeight
-      // this.$refs.picListRef.scrollTop = blockScrollHeight
+      this.$refs.picListRef.scrollTop = blockScrollHeight
       // // 滚动条滚动高度
-      let blockScrollTop = this.$refs.picListRef.scrollTop
-      const _this = this
-      Roll()
-      function Roll() {
-        blockScrollTop += 100
-        if (blockScrollHeight <= blockScrollTop) return false
-        setTimeout(() => {
-          _this.$refs.picListRef.scrollTop = blockScrollTop
-          return Roll()
-        }, 10)
-      }
+      // const blockScrollTop = this.$refs.picListRef.scrollTop
+      // const _this = this
+      // Roll()
+      // function Roll() {
+      //   blockScrollTop += 100
+      //   if (blockScrollHeight <= blockScrollTop) return false
+      //   setTimeout(() => {
+      //     _this.$refs.picListRef.scrollTop = blockScrollTop
+      //     return Roll()
+      //   }, 10)
+      // }
       // // 可视窗口高度
       // const blockClientHeight = this.$refs.picListRef.clientHeight
       // console.log(blockScrollHeight, blockScrollTop, blockClientHeight)
+    },
+    // 按升序降序排列
+    handleSort() {
+      this.isUpSort = !this.isUpSort
+      this.handleUd()
+    },
+    // 处理升序降序
+    handleUd() {
+      if (this.isUpSort) {
+        this.picListDatas.sort((a, b) => {
+          // console.log(a.uploadTimestamp - b.uploadTimestamp)
+          return a.uploadTimestamp - b.uploadTimestamp
+        })
+        console.log('时间升序')
+      } else {
+        this.picListDatas.sort((a, b) => {
+          return b.uploadTimestamp - a.uploadTimestamp
+        })
+        console.log('时间降序')
+      }
     },
     refreshData: debounce(function () {
       this.picListDatas = []

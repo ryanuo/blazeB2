@@ -3,7 +3,7 @@
  * @Date: 2022-07-04 09:45:30
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 18:47:52
+ * @LastEditTime: 2022-07-10 11:06:33
  * @FilePath: \master\src\views\Setting\setprefix\SetPrefix.vue
 -->
 <template>
@@ -44,9 +44,7 @@ export default {
     }
   },
   mounted() {
-    const a_ = this.noInvalid
-    // const auth = localStorage.getItem('authmsg')
-    if (a_) {
+    if (this.noInvalid) {
       this.value = this.prefixStatus
     }
   },

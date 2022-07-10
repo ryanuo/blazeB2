@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 15:02:41
+ * @LastEditTime: 2022-07-10 18:28:33
  * @FilePath: \master\src\store\index.js
  */
 import { defineStore } from 'pinia'
@@ -17,12 +17,21 @@ const useStore = defineStore('store', {
     return {
       isLogined: false, // 是否输入formview
       noInvalid: false, // 是否验证过期，默认过期
+      defaultcopyformat: {
+        formatList: {
+          HTML: '<img src="%s" alt="" />',
+          MarkDown: '![](%s)',
+          URL: '%s',
+          Custom: ''
+        },
+        formatStr: 'URL'
+      },
       prefixImg: {
         support: [],
         defaultUrl: ''
       },
       setdefaultFile: {
-        methods: '',
+        methods: '1',
         valPt: '',
         valAt: []
       },
@@ -38,10 +47,15 @@ const useStore = defineStore('store', {
     siginStatus(state) {
       return !state.isLogined
     },
+    defaultCopy(state) {
+      return state.defaultcopyformat.formatStr
+    },
+    defaultCopyUrl(state) {
+      const a_ = state.defaultcopyformat.formatStr
+      return state.defaultcopyformat.formatList[a_]
+    },
     prefixStatus(state) {
-      const a = state.prefixImg.support.filter(v => v.url === state.prefixImg.defaultUrl)
-      console.log(a)
-      return a[0].url
+      return state.prefixImg.defaultUrl
     },
     // 图片默认返回
     imgDefaultFile(state) {
@@ -91,6 +105,14 @@ const useStore = defineStore('store', {
     },
     setDefaultToFile(a) {
       this.toFile = a
+    },
+    // 处理格式问题
+    setDefaultFormat(e) {
+      this.defaultcopyformat.formatStr = e
+    },
+    // 设置自定义格式
+    setCustomFormat(e) {
+      this.defaultcopyformat.formatList.Custom = e
     }
   }
 })

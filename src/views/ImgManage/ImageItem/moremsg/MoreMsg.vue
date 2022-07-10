@@ -3,8 +3,8 @@
  * @Date: 2022-07-04 17:32:17
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 20:55:54
- * @FilePath: \web\src\views\ImgManage\ImageItem\moremsg\MoreMsg.vue
+ * @LastEditTime: 2022-07-10 11:01:04
+ * @FilePath: \master\src\views\ImgManage\ImageItem\moremsg\MoreMsg.vue
 -->
 <template>
   <div class="more-w">
@@ -33,10 +33,6 @@ export default {
     return {}
   },
   props: {
-    piclink: {
-      type: String,
-      required: true
-    },
     pictitle: {
       type: String,
       required: true

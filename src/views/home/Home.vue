@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 13:13:39
+ * @LastEditTime: 2022-07-10 18:32:00
  * @FilePath: \master\src\views\home\Home.vue
 -->
 <template>
@@ -34,10 +34,10 @@
     </div>
     <div style="margin: 20px 0;text-align: center;">
       <el-radio-group v-model="radio2" size="medium" class="e-rg" @change="changeCopyStatus">
-        <el-radio-button class="e-rb" label="Markdown"></el-radio-button>
-        <el-radio-button class="e-rb" label="Html"></el-radio-button>
-        <el-radio-button class="e-rb" label="URL"></el-radio-button>
-        <el-radio-button class="e-rb" label="自定义"></el-radio-button>
+        <el-tooltip v-for="(item, index) in defaultcopyformat.formatList" :content="item.replace(/%s/g, copycontent)"
+          :key="index" class="item" effect="dark" placement="top-start">
+          <el-radio-button class="e-rb" :label="index"></el-radio-button>
+        </el-tooltip>
       </el-radio-group>
       <div class="res-upload">
         <div class="res-content" title="点击复制">
@@ -60,7 +60,7 @@ import { picPaste } from '@/utils/common/paste'
 import { startLoading, endLoading } from '@/utils/common/loading'
 import { HandleCompressor } from '@/utils/common/compress'
 import useStore from '@/store'
-import { mapState } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 const CopyView = () => import('@/views/svg/CopyView.vue')
 export default {
   components: { CopyView },
@@ -82,17 +82,21 @@ export default {
   },
   computed: {
     ...mapState(useStore, ['toFile']),
+    ...mapState(useStore, ['defaultcopyformat']),
+    ...mapState(useStore, ['defaultCopy']),
+    ...mapState(useStore, ['defaultCopyUrl']),
+    ...mapState(useStore, ['CompressData']),
     timeE() {
       const t = new Date()
       return t.getFullYear()
     },
     resultCopy() {
-      return this.copycontent !== '' ? this.changeCopyStatus(this.radio2) : '暂无内容'
+      return this.copycontent !== '' ? this.defaultCopyUrl.replace(/%s/g, this.copycontent) : '暂无内容'
     }
   },
   mounted() {
-    const store = useStore()
-    this.compressMsg = store.CompressData
+    this.compressMsg = this.CompressData
+    this.radio2 = this.defaultCopy
     window.addEventListener('paste', this.pasteHandle)
     const token = localStorage.getItem('token_api')
     if (token) {
@@ -104,31 +108,12 @@ export default {
     window.removeEventListener('paste', this.pasteHandle)
   },
   methods: {
+    ...mapActions(useStore, ['setDefaultFormat']),
     pasteHandle: debounce(function (event) {
       picPaste(event, this)
     }, 500, true),
     changeCopyStatus(e) {
-      const a_ = this.copycontent
-      if (a_ !== '') {
-        let u = ''
-        switch (e) {
-          case 'URL':
-            u = a_
-            break
-          case 'Html':
-            u = `<img src="${a_}" title="" />`
-            break
-          case 'Markdown':
-            u = `![](${a_})`
-            break
-        }
-        return u
-      } else {
-        Message({
-          message: '您还未上传图片',
-          type: 'error'
-        })
-      }
+      this.setDefaultFormat(e)
     },
     copyhandle: debounce(function () {
       const copyData = this.resultCopy

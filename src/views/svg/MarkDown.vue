@@ -3,8 +3,8 @@
  * @Date: 2022-07-04 21:11:48
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-08 10:02:34
- * @FilePath: \web\src\views\svg\MarkDown.vue
+ * @LastEditTime: 2022-07-10 11:21:45
+ * @FilePath: \master\src\views\svg\MarkDown.vue
 -->
 <template>
   <div class="mark-w">
@@ -61,9 +61,10 @@ export default {
     handleMark() {
       this.isMark = !this.isMark
       this.linktemp = this.isMark ? `![](${this.link})` : this.link
+      console.log(1)
     },
     copyhandle: debounce(function () {
-      const copyData = this.link
+      const copyData = this.linktemp
       this.$copyText(copyData).then(() => {
         // element ui的弹窗
         Message({

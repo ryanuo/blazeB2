@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 15:16:13
+ * @LastEditTime: 2022-07-10 17:37:17
  * @FilePath: \master\src\views\Setting\Setting.vue
 -->
 <template>
@@ -18,7 +18,8 @@
         <set-upload />
         <h2>是否开启压缩</h2>
         <set-compress />
-        <h2>是否修改图片格式</h2>
+        <h2>上传成功图片外链默认复制格式 <span class="red-c">%s</span>为外链地址</h2>
+        <set-copy />
       </el-collapse-item>
       <el-collapse-item title="🎃 页面图片管理" name="3">
         <h2>图片前缀(默认选择host_url 在密钥配置中可修改)</h2>
@@ -42,6 +43,7 @@ import ThemeChange from './themeChange/ThemeChange.vue'
 import SetDefault from './setDefault/SetDefault.vue'
 import SetCompress from './setMain/SetCompress.vue'
 import SetUpload from './setUploadFile/SetUpload.vue'
+import SetCopy from './setcopy/SetCopy.vue'
 export default {
   components: {
     FormView,
@@ -49,7 +51,8 @@ export default {
     ThemeChange,
     SetDefault,
     SetCompress,
-    SetUpload
+    SetUpload,
+    SetCopy
   },
   data() {
     return {
