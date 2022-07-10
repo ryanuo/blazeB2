@@ -53,14 +53,13 @@
 
 .set-prefix .el-input[data-v-6ff34b10] {
   width: 217px;
-  margin-top: 10px;
   margin-right: 10px;
 }
 
 .set-defalut .el-cascader[data-v-04bbfc34],
 .set-defalut .el-input[data-v-04bbfc34] {
   width: 249px;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-right: 10px;
 }
 
@@ -72,11 +71,18 @@
 }
 .slide-w[data-v-8fe18032] {
   padding: 0 20px;
+  width: 50%;
+}
+@media only screen and (max-width: 537px) {
+.slide-w[data-v-8fe18032] {
+    padding: 0 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
 }
 
 .set-upload .el-input[data-v-ef07802c] {
   width: 249px;
-  margin-top: 10px;
   margin-right: 10px;
 }
 
@@ -117,6 +123,7 @@
 }
 .el-collapse h2[data-v-0e0ad9a7] {
   margin-top: 10px;
+  margin-bottom: 20px;
   padding-left: 10px;
   font-size: 15px;
   font-weight: bold;
