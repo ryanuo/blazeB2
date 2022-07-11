@@ -1,0 +1,1 @@
+export const siteData = JSON.parse("{\"base\":\"/\",\"lang\":\"zh-CN\",\"title\":\"BlazeB2 图床\",\"description\":\"基于 backBlazeb2 API & cloudflare 开发的具有 CDN 加速功能的图床工具\",\"head\":[[\"link\",{\"rel\":\"icon\",\"href\":\"/favicon.ico\"}]],\"locales\":{\"/en/\":{\"lang\":\"en-US\"},\"/zh/\":{\"lang\":\"zh-CN\"}}}")

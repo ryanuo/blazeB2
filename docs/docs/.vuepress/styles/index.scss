@@ -1,0 +1,26 @@
+.home {
+    .hero {
+        .description {
+            max-width: 40rem;
+        }
+
+        // 按钮
+        .action-button {
+            padding: .5rem 1.8rem;
+        }
+    }
+}
+.sidebar-item.sidebar-heading{
+    padding-top: 1.1rem;
+}
+
+// 主题色
+:root {
+    --c-brand: #379ae8;
+    --c-brand-light: #4ea3e4;
+}
+
+html.dark{
+    --c-brand: #f7c099;
+    --c-brand-light: #d8a682;
+}

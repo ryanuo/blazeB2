@@ -1,0 +1,18 @@
+:root {
+  --b2-theme-c: #379ae8;
+  --b2-theme-c-light: #4ea3e4;
+  --b2-bg: #f8f8f8;
+  --b2-pre-bg: #fff;
+  --b2-text: #2c3e50;
+  --b2-active: #fff;
+  --b2-border: #EBEEF5;
+}
+html.dark {
+  --b2-theme-c: #f7c099;
+  --b2-theme-c-light: #d8a682;
+  --b2-bg: #2a2a2f;
+  --b2-pre-bg: #22272e;
+  --b2-text: #adbac7;
+  --b2-active: #78757c;
+  --b2-border: #78757c;
+}
