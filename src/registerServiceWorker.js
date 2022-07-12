@@ -3,15 +3,15 @@
  * @Date: 2022-07-05 16:36:36
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 17:13:55
- * @FilePath: \web\src\registerServiceWorker.js
+ * @LastEditTime: 2022-07-12 16:39:14
+ * @FilePath: \master\src\registerServiceWorker.js
  */
 /* eslint-disable no-console */
 
 import { register } from 'register-service-worker'
 
 if (process.env.NODE_ENV === 'pro') {
-  register(`${process.env.BASE_URL}service-worker.js`, {
+  register(`${process.env.BASE_URL}sw.js`, {
     ready () {
       console.log(
         'App is being served from cache by a service worker.\n' +
