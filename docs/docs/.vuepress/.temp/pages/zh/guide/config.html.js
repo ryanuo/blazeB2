@@ -1,1 +1,0 @@
-export const data = JSON.parse("{\"key\":\"v-f928d7c8\",\"path\":\"/zh/guide/config.html\",\"title\":\"图床配置\",\"lang\":\"zh-CN\",\"frontmatter\":{\"lang\":\"zh-CN\",\"title\":\"图床配置\",\"description\":\"使用方法\"},\"excerpt\":\"\",\"headers\":[],\"git\":{\"updatedTime\":null,\"contributors\":[]},\"filePathRelative\":\"zh/guide/config.md\"}")
