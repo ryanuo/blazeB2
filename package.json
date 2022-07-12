@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve --mode dev",
     "build": "vue-cli-service build --mode pro",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "sw":"workbox generateSW workbox.config.js",
+    "build:sw": "npm run build && npm run sw"
   },
   "dependencies": {
     "@vue/composition-api": "^1.6.3",
@@ -21,7 +23,6 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
     "pinia-persistedstate-plugin": "^0.1.0",
-    "register-service-worker": "^1.7.2",
     "v-viewer": "^1.6.4",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.3",
@@ -30,7 +31,6 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-pwa": "^4.5.13",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-standard": "^5.1.2",
