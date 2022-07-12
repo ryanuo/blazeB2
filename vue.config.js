@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 22:28:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-12 16:51:05
+ * @LastEditTime: 2022-07-12 21:54:51
  * @FilePath: \dev\vue.config.js
  */
 const path = require('path')
@@ -44,7 +44,7 @@ const cdn = {
 module.exports = {
   // ...
   publicPath: './', // 文件加载设置为相对路径
-  outputDir: isProd ? 'deploys/thd/static/' : 'build',
+  outputDir: isProd ? 'dist' : 'build',
   // lintOnSave: false, // 关闭eslint
   productionSourceMap: !isProd, // map去除生产环境下
   // vue.config.js
@@ -108,27 +108,26 @@ module.exports = {
         }
       }
     }
-  },
-  pwa: {
-    name: 'BlazeB2 图床',
-    // workboxPluginMode: 'GenerateSW',
-    // iconPaths: null,
-    appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black',
-    iconPaths: {
-      favicon32: 'img/icons/favicon-32x32.png',
-      favicon16: 'img/icons/logo-16x16.png',
-      appleTouchIcon: 'img/icons/apple-touch-icon-152x152.png',
-      maskIcon: 'img/icons/safari-pinned-tab.svg',
-      msTileImage: 'img/icons/msapplication-icon-144x144.png'
-    },
-    workboxPluginMode: 'InjectManifest',
-    workboxOptions: {
-      // 自定义的service worker文件的位置
-      swSrc: 'public/sw.js',
-      // ...other Workbox options...
-      importWorkboxFrom: 'disabled' // 是否要引入线上的service-worker文件，我们只需要自己定义的文件，不需要谷歌提供的sw文件
-    }
-
   }
+  // pwa: {
+  //   name: 'BlazeB2 图床',
+  //   // workboxPluginMode: 'GenerateSW',
+  //   // iconPaths: null,
+  //   appleMobileWebAppCapable: 'yes',
+  //   appleMobileWebAppStatusBarStyle: 'black',
+  //   iconPaths: {
+  //     favicon32: 'img/icons/favicon-32x32.png',
+  //     favicon16: 'img/icons/logo-16x16.png',
+  //     appleTouchIcon: 'img/icons/apple-touch-icon-152x152.png',
+  //     maskIcon: 'img/icons/safari-pinned-tab.svg',
+  //     msTileImage: 'img/icons/msapplication-icon-144x144.png'
+  //   },
+  //   workboxPluginMode: 'InjectManifest',
+  //   workboxOptions: {
+  //     // 自定义的service worker文件的位置
+  //     swSrc: 'public/sw.js',
+  //     // ...other Workbox options...
+  //     importWorkboxFrom: 'disabled' // 是否要引入线上的service-worker文件，我们只需要自己定义的文件，不需要谷歌提供的sw文件
+  //   }
+  // }
 }

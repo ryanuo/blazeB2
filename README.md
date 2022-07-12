@@ -3,8 +3,8 @@
  * @Date: 2022-04-20 20:37:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-08 23:05:24
- * @FilePath: \master\README.md
+ * @LastEditTime: 2022-07-12 16:59:52
+ * @FilePath: \dev\README.md
 -->
 <a href="https://b2.mr90.top/" >
 <img width="100" align="right" alt="blazeB2" src="https://cloud.mr90.top/hexo/4/16533db7-b477-46ec-bbf8-44ae848bc771.png">
@@ -35,7 +35,7 @@
 - 支持 **显示仓库下所有文件夹名称** 支持自定义默认搜索仓库名
 - 支持 **暗夜模式** (自由切换 / 自动切换)
 - 支持 **图片压缩** 可自定义压缩等级 默认关闭，开启默认(**0.8**)
-- 支持 **PWA**  待完成
+- 支持 **PWA**
 - 支持 **批量上传图片**、**批量删除图片** 和 **批量复制图片外链** 待完成
 - 支持 **图片水印** 待完成
 
