@@ -1,23 +1,8 @@
-<<<<<<< HEAD
-/*
- * @Author: Harry
- * @Date: 2022-07-12 16:42:36
- * @LastEditors: harry
- * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-12 16:47:21
- * @FilePath: \master\public\sw.js
- */
-=======
->>>>>>> dev
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js')
 
 // set the prefix and suffix of our sw's name
 workbox.core.setCacheNameDetails({
-<<<<<<< HEAD
-  prefix: 'BlazeB2',
-=======
   prefix: 'blazeb2',
->>>>>>> dev
   suffix: 'v1.0.1'
 })
 // have our sw update and control a web page as soon as possible.
@@ -27,11 +12,7 @@ workbox.core.setCacheNameDetails({
 // vue-cli3.0 supports pwa with the help of workbox-webpack-plugin, we need to get the precacheing list through this sentence.
 workbox.precaching.precacheAndRoute(self.__precacheManifest || [])
 
-<<<<<<< HEAD
-// cache our data, and use networkFirst strategy.
-=======
 // // cache our data, and use networkFirst strategy.
->>>>>>> dev
 // workbox.routing.registerRoute(
 //   // Cache CSS files
 //   /.*\.css/,

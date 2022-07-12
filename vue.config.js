@@ -3,8 +3,13 @@
  * @Date: 2022-04-20 22:28:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
+<<<<<<< HEAD
  * @LastEditTime: 2022-07-12 16:48:32
  * @FilePath: \master\vue.config.js
+=======
+ * @LastEditTime: 2022-07-12 16:51:05
+ * @FilePath: \dev\vue.config.js
+>>>>>>> dev
  */
 const path = require('path')
 // const webpack = require('webpack')
