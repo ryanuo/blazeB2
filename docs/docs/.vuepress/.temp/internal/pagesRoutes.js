@@ -5,7 +5,7 @@ export const pagesRoutes = [
   ["v-552348d7","/en/guide/config.html",{"title":"图床配置"},["/en/guide/config","/en/guide/config.md"]],
   ["v-0cd3f8c9","/en/guide/contribution.html",{"title":"贡献指南"},["/en/guide/contribution","/en/guide/contribution.md"]],
   ["v-53161a52","/en/guide/deploy.html",{"title":"一键部署"},["/en/guide/deploy","/en/guide/deploy.md"]],
-  ["v-e6412400","/en/guide/",{"title":"快速上手"},["/en/guide/index.html","/en/guide/index.md"]],
+  ["v-e6412400","/en/guide/",{"title":"Get started quickly"},["/en/guide/index.html","/en/guide/index.md"]],
   ["v-3e9371aa","/en/guide/page.html",{"title":"开始使用"},["/en/guide/page","/en/guide/page.md"]],
   ["v-361c421a","/en/guide/summary.html",{"title":"概述"},["/en/guide/summary","/en/guide/summary.md"]],
   ["v-f928d7c8","/zh/guide/config.html",{"title":"图床配置"},["/zh/guide/config","/zh/guide/config.md"]],

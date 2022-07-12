@@ -3,8 +3,8 @@
  * @Date: 2022-07-02 10:00:55
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 07:01:20
- * @FilePath: \master\docs\docs\.vuepress\config.ts
+ * @LastEditTime: 2022-07-11 13:39:09
+ * @FilePath: \dev\docs\docs\.vuepress\config.ts
  */
 import { defineUserConfig } from 'vuepress'
 const { path } = require('@vuepress/utils')
@@ -27,8 +27,8 @@ export default defineUserConfig({
         ]
     ],
     locales: {
-        '/en/': {
-            lang: 'en-US',
+        '/en': {
+            lang: 'English',
         },
         '/zh/': {
             lang: 'zh-CN',
@@ -36,9 +36,13 @@ export default defineUserConfig({
     },
     plugins: [
         docsearchPlugin({
-            apiKey: 'cf1d8a01f6ea082eb7e186491f304ad6',
+            apiKey: '96df3907aa74556f4746511deee28203',
             indexName: 'BlazeB2',
-            appId: 'NMU3PE3UD9'
+            appId: 'NMU3PE3UD9',
+            algoliaOptions: {
+                hitsPerPage: 10,
+                facetFilters: ""
+            }
         }),
         registerComponentsPlugin({
             components: {
@@ -49,7 +53,7 @@ export default defineUserConfig({
     theme: BlazeTheme({
         navbar: [
             {
-                text: '在线使用',
+                text: 'Online Use',
                 link: 'https://b2.mr90.top/'
             },
             {
@@ -57,18 +61,21 @@ export default defineUserConfig({
                 link: 'https://github.com/Rr210/blazeB2'
             }
         ],
-
         locales: {
             '/en/': {
                 selectLanguageName: 'English',
+                sidebar: [
+                    // SidebarItem
+                    '/en/guide/summary', '/en/guide/', '/en/guide/page/', '/en/guide/deploy/', '/en/guide/config/', '/en/guide/contribution'
+                ],
             },
             '/zh/': {
                 selectLanguageName: '简体中文',
+                sidebar: [
+                    // SidebarItem
+                    '/zh/guide/summary', '/zh/guide/', '/zh/guide/page/', '/zh/guide/deploy/', '/zh/guide/config/', '/zh/guide/contribution'
+                ],
             },
         },
-        sidebar: [
-            // SidebarItem
-            '/zh/guide/summary', '/zh/guide/', '/zh/guide/page/', '/zh/guide/deploy/', '/zh/guide/config/', '/zh/guide/contribution'
-        ],
     })
 })
