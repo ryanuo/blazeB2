@@ -1,0 +1,103 @@
+@import './themeSet.less';
+.home-w .el-upload-dragger {
+    width: 70vw;
+    height: 300px;
+}
+
+.home-w .el-upload-dragger .el-icon-upload {
+    font-size: 200px;
+    margin: 100px 0 85px;
+    line-height: 0;
+}
+
+.home-w {
+    .el-radio-button {
+        &:first-child {
+            .el-radio-button__inner {
+                border-radius: 18px 0 0 18px;
+            }
+        }
+
+        &:last-child {
+            .el-radio-button__inner {
+                border-radius: 0 18px 18px 0;
+            }
+        }
+    }
+}
+
+body {
+    background-color: var(--b2-bg);
+    color: var(--b2-text);
+    font-family: 'myfont';
+}
+
+// @font-face {
+//     font-family: 'cat-test';
+//     src: url(https://cloud.mr90.top/cdn/cat-test.ttf);
+// }
+@font-face {
+    font-family: 'myfont';
+    src: url(https://cdn.staticaly.com/gh/Rr210/image@master/hexo/4/myfont.woff2);
+}
+
+.common-container {
+    width: 98vw;
+    height: 89vh;
+    background-color: var(--b2-pre-bg);
+    margin: 20px auto;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.img-manage,
+.pic-list-t1 {
+    &::-webkit-scrollbar {
+        /* 滚动条宽度和高度 */
+        width: 8px;
+        height: 8px;
+    }
+}
+
+.img-manage,
+.pic-list-t1 {
+    &::-webkit-scrollbar-thumb {
+        /*滚动条里面小方块*/
+        border-radius: 10px;
+        // box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        background: #d4d6d9;
+    }
+}
+
+.img-manage,
+.pic-list-t1 {
+    &::-webkit-scrollbar-track-piece {
+        /*滚动条里面轨道*/
+        background-color: #fff;
+        border-radius: 10px;
+    }
+}
+
+
+#app {
+    .el-input__inner {
+        background-color: var(--b2-pre-bg);
+        // border: 1px solid var(--bg-border);
+        color: var(--bg-text);
+
+    }
+
+    .el-input.is-disabled {
+        .el-input__inner {
+            background-color: #F5F7FA;
+            border-color: #E4E7ED;
+            color: #C0C4CC;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.red-c {
+    color: red;
+}
