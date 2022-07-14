@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:37:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-12 16:59:52
+ * @LastEditTime: 2022-07-14 11:10:17
  * @FilePath: \dev\README.md
 -->
 <a href="https://b2.mr90.top/" >
@@ -16,10 +16,11 @@
 ## 仓库介绍 | Warehouse introduction
 
 > 该项目为blaze b2 在线图床系统 可进行图床管理，切勿滥用 
-> 图床地址 [backblaze b2](https://www.backblaze.com/b2/)
+> 图床地址 [backblaze b2](https://b2.mr90.top)
+> 镜像站点 【[这里](https://blazeb2.mr90.cf)】
 
 
-1. 【[文件结构介绍](https://m.mr90.top/blazeB2/zh/guide/deploy.html#%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84)】
+1. 【[文件结构介绍](https://blazeb2.js.org/zh/guide/deploy.html#%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84)】
 2. **deploys** 文件为项目部署文件，详情进入查看
 
 
@@ -42,11 +43,11 @@
 
 ## 使用教程 | Using the tutorial
 
-- 点击这里查看 [使用方法](https://m.mr90.top/blazeB2/zh/guide/)
+- 点击这里查看 [使用方法](https://blazeb2.js.org/zh/guide/)
 
 ## 部署方法 | Deployment method
 
-- 点击这里查看 [部署方法](https://m.mr90.top/blazeB2/zh/guide/deploy.html)
+- 点击这里查看 [部署方法](https://blazeb2.js.org/zh/guide/deploy.html)
 
 - 支持vercel一键部署 [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/new/clone?s=https://github.com/Rr210/blazeB2/tree/master/deploys/vercel-api/)
 

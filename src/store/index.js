@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-10 18:28:33
- * @FilePath: \master\src\store\index.js
+ * @LastEditTime: 2022-07-14 20:40:07
+ * @FilePath: \dev\src\store\index.js
  */
 import { defineStore } from 'pinia'
 import { authIsexit } from '../utils/common/login'
@@ -25,6 +25,27 @@ const useStore = defineStore('store', {
           Custom: ''
         },
         formatStr: 'URL'
+      },
+      watermarkConfig: {
+        isopen: false,
+        detailconfig: {
+          gapX: 100,
+          gapY: 100,
+          opacity: 0.2,
+          rotate: -22,
+          fontSize: 20,
+          fontStyle: 'normal',
+          fontVariant: 'normal',
+          fontWeight: '300',
+          fontColor: '#000',
+          fontFamily: 'sans-serif',
+          textAlign: 'center',
+          monitor: true,
+          zIndex: 9999,
+          mode: 'interval',
+          pack: true,
+          text: 'Blazeb2水印'
+        }
       },
       prefixImg: {
         support: [],
