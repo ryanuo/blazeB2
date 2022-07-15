@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-14 20:40:07
+ * @LastEditTime: 2022-07-15 15:41:20
  * @FilePath: \dev\src\store\index.js
  */
 import { defineStore } from 'pinia'
@@ -29,6 +29,7 @@ const useStore = defineStore('store', {
       watermarkConfig: {
         isopen: false,
         detailconfig: {
+          image: '',
           gapX: 100,
           gapY: 100,
           opacity: 0.2,
@@ -36,14 +37,13 @@ const useStore = defineStore('store', {
           fontSize: 20,
           fontStyle: 'normal',
           fontVariant: 'normal',
-          fontWeight: '300',
+          fontWeight: '400',
           fontColor: '#000',
           fontFamily: 'sans-serif',
           textAlign: 'center',
           monitor: true,
           zIndex: 9999,
           mode: 'interval',
-          pack: true,
           text: 'Blazeb2水印'
         }
       },
@@ -64,6 +64,9 @@ const useStore = defineStore('store', {
     }
   },
   getters: {
+    watermarkStatus(state) {
+      return state.watermarkConfig
+    },
     // 登录状态
     siginStatus(state) {
       return !state.isLogined
@@ -101,6 +104,12 @@ const useStore = defineStore('store', {
     }
   },
   actions: {
+    setwatermak(status, data = null) {
+      this.watermarkConfig.isopen = status
+      if (data) {
+        this.watermarkConfig.detailconfig = data
+      }
+    },
     handleIsLogined() {
       this.isLogined = !!localStorage.getItem('token_api')
       this.noInvalid = !!localStorage.getItem('authmsg')

@@ -3,16 +3,17 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-10 18:32:00
- * @FilePath: \master\src\views\home\Home.vue
+ * @LastEditTime: 2022-07-15 22:03:16
+ * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
   <div class="home-w">
     <div class="upload-w" style="width: 100%">
       <!-- @mouseenter="mouseHandle" @mouseleave.stop="mouseMoveHandle" -->
       <div id="tar_box" contenteditable=""></div>
-      <el-upload ref="upload" v-loading="loadings" class="upload-demo" action="customize" :show-file-list="false" drag
-        :http-request="UploadFile">
+      <el-upload ref="uploadRef" v-loading="loadings" :auto-upload="false" class="upload-demo" action="customize"
+        :file-list="fileList" multiple :show-file-list="false" :limit="5" :on-change="handleChangeImage"
+        :on-remove="handleFileRemove" drag :http-request="UploadFile">
         <div class="compress-remind" v-if="compressMsg.iscompress">开启压缩，压缩等级（<span class="red-c">{{ compressMsg.rank
         }}</span>）
         </div>
@@ -20,19 +21,26 @@
         <div class="el-upload__text">
           支持<em>拖动、点击、粘贴</em>图片<em>上传</em>
         </div>
-        <div slot="tip" class="el-upload__tip">
-          <div>当前上传路径:<el-tag :type="fdata.tofile ? '' : 'danger'" size="mini"
-              @click="$router.replace({ name: 'setting', query: { id: '2' } })">{{
-                  fdata.tofile ? fdata.tofile : '你还未填写路径，点击这里'
-              }}</el-tag>
+        <div slot="tip">
+          <div class="el-upload__tip">
+            <div>当前上传路径:<el-tag :type="fdata.tofile ? '' : 'danger'" size="mini"
+                @click="$router.replace({ name: 'setting', query: { id: '2' } })">{{
+                    fdata.tofile ? fdata.tofile : '你还未填写路径，点击这里'
+                }}</el-tag>
+            </div>
+            <div v-if="fdata.bucket_name" @click="$router.replace({ name: 'setting', query: { id: '1' } })">当前B2桶名称:
+              <el-tag size="mini">{{ fdata.bucket_name }}</el-tag>
+            </div>
           </div>
-          <div v-if="fdata.bucket_name" @click="$router.replace({ name: 'setting', query: { id: '1' } })">当前B2桶名称:
-            <el-tag size="mini">{{ fdata.bucket_name }}</el-tag>
-          </div>
+          <span v-if="fileList.length > 0">
+            <UploadList :fileList="fileList" />
+            <el-button class="btn-upload" @click="handleSumbit">上传</el-button>
+            <el-button class="btn-upload" @click="handleSumbit">重置</el-button>
+          </span>
         </div>
       </el-upload>
     </div>
-    <div style="margin: 20px 0;text-align: center;">
+    <div style="margin: 20px 0;text-align: center;" v-if="fileList.lenght <= 0">
       <el-radio-group v-model="radio2" size="medium" class="e-rg" @change="changeCopyStatus">
         <el-tooltip v-for="(item, index) in defaultcopyformat.formatList" :content="item.replace(/%s/g, copycontent)"
           :key="index" class="item" effect="dark" placement="top-start">
@@ -61,15 +69,17 @@ import { startLoading, endLoading } from '@/utils/common/loading'
 import { HandleCompressor } from '@/utils/common/compress'
 import useStore from '@/store'
 import { mapActions, mapState } from 'pinia'
+import UploadList from './components/UploadList.vue'
 const CopyView = () => import('@/views/svg/CopyView.vue')
 export default {
-  components: { CopyView },
+  components: { CopyView, UploadList },
   data() {
     return {
       fdata: {},
       radio2: 'URL',
       copycontent: '',
       loadings: false,
+      fileList: [],
       compressMsg: {
         iscompress: false,
         rank: 0.8
@@ -109,12 +119,29 @@ export default {
   },
   methods: {
     ...mapActions(useStore, ['setDefaultFormat']),
+    // 处理文件更改事件
+    handleChangeImage(file, filelist) {
+      this.fileList = filelist
+    },
+    // 文件移除事件
+    handleFileRemove(file, fileList) {
+      const i = this.fileList.findIndex(v => file.uid === v.uid)
+      this.fileList.splice(i, 1)
+      console.log(file)
+    },
+    // 处理文件上传事件，手动控制
+    handleSumbit: debounce(function () {
+      this.$refs.uploadRef.submit()
+    }, 450, true),
+    // 图片的粘贴事件
     pasteHandle: debounce(function (event) {
       picPaste(event, this)
     }, 500, true),
+    // 链接赋值事件
     changeCopyStatus(e) {
       this.setDefaultFormat(e)
     },
+    // 复制事件
     copyhandle: debounce(function () {
       const copyData = this.resultCopy
       this.$copyText(copyData).then(() => {
@@ -130,6 +157,7 @@ export default {
         })
       })
     }, 300, true),
+    // 上传文件事件
     UploadFile(params) {
       const _this = this
       authIsexit().then(() => {
@@ -165,6 +193,8 @@ export default {
         type: res.action ? 'success' : 'error'
       })
       document.getElementById('tar_box').innerHTML = ''
+      this.$refs.uploadRef.clearFiles()
+      this.fileList = []
       endLoading()
     }
   }

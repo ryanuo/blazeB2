@@ -3,79 +3,73 @@
  * @Date: 2022-07-14 13:02:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-15 17:05:25
- * @FilePath: \dev\src\views\Setting\setwatermark\watermark\watermarkview.vue
+ * @LastEditTime: 2022-07-15 17:59:52
+ * @FilePath: \dev\src\views\home\components\wm\wmarkview.vue
 -->
 <template>
   <div>
-    <el-upload :on-change="handleChange" :auto-upload="false" action :http-request="handleupload"
-      list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
-      <i class="el-icon-plus"></i>
-    </el-upload>
-    <div class="wm-contaniner" @click.self="handleClose" :class="dialogVisible ? 'wm-active' : ''">
-      <div class="wm-isshow">
-        <div class="wm-header"><span>添加水印</span>
-        </div>
-        <div class="wm-main">
-          <div class="wm-left">
-            <div class="wm-i-w">
-              <h2 class="">水印</h2>
-              <div>
-                <el-radio @change="handleRadio" v-model="radio" label="1">文本水印</el-radio>
-                <el-input v-model="wmConfig.text" :disabled="radio === '2'" placeholder="" />
-                <div :class="radio !== '1' ? 'noshow' : ''">
-                  <TextSet @textEvent="handleSetText" />
-                </div>
-                <div class="wm-t2">
-                  <el-radio @change="handleRadio" v-model="radio" label="2">图片水印</el-radio>
-                  <el-button size="mini" :disabled="radio !== '2'">添加图片(不推荐)
-                    <input :disabled="radio !== '2' ? 'disabled' : false" class="o-btn1" id="upload" type="file"
-                      @change="viewer" />
-                  </el-button>
-                </div>
+    <div class="wm-isshow">
+      <div class="wm-header"><span>添加水印</span>
+      </div>
+      <div class="wm-main">
+        <div class="wm-left">
+          <div class="wm-i-w">
+            <h2 class="">水印</h2>
+            <div>
+              <el-radio @change="handleRadio" v-model="radio" label="1">文本水印</el-radio>
+              <el-input v-model="wmConfig.text" :disabled="radio === '2'" placeholder="" />
+              <div :class="radio !== '1' ? 'noshow' : ''">
+                <TextSet @textEvent="handleSetText" />
               </div>
-            </div>
-            <div class="wm-i-w">
-              <h2 class="">外观</h2>
-              <div :class="radio === '2' ? 'noshow' : ''" class="wm-block">
-                <span class="demonstration">大小</span>
-                <el-slider v-model="wmConfig.fontSize" :max="80"></el-slider>
+              <div class="wm-t2">
+                <el-radio @change="handleRadio" v-model="radio" label="2">图片水印</el-radio>
+                <el-button size="mini" :disabled="radio !== '2'">添加图片(不推荐)
+                  <input :disabled="radio !== '2' ? 'disabled' : false" class="o-btn1" id="upload" type="file"
+                    @change="viewer" />
+                </el-button>
               </div>
-              <div class="wm-block">
-                <span class="demonstration">透明度</span>
-                <el-slider v-model="wmConfig.opacity" :step=".1" :max="1"></el-slider>
-              </div>
-              <div class="wm-block">
-                <span class="demonstration">旋转</span>
-                <el-slider v-model="wmConfig.rotate" :min="-90" :max="90" :show-tooltip="false"></el-slider>
-              </div>
-              <div class="wm-block">
-                <span class="demonstration">水平间距</span>
-                <el-slider v-model="wmConfig.gapX" :max="400"></el-slider>
-              </div>
-              <div class="wm-block">
-                <span class="demonstration">垂直间距</span>
-                <el-slider v-model="wmConfig.gapY" :disabled="false" :max="400"></el-slider>
-              </div>
-            </div>
-            <div class="wm-i-w">
-              <h2 class="">位置</h2>
-              <el-switch v-model="wmConfig.mode" active-text="重复展示" active-value="repeat" inactive-value="interval"
-                inactive-text="错行展示">
-              </el-switch>
             </div>
           </div>
-          <div class="wm-right">
-            <p>预览</p>
-            <div class="preview">
-              <Watermark :options="newOption" :visible="true">
-                <canvas id="imageEffectCanvas" ref="canvasRef"></canvas>
-              </Watermark>
+          <div class="wm-i-w">
+            <h2 class="">外观</h2>
+            <div :class="radio === '2' ? 'noshow' : ''" class="wm-block">
+              <span class="demonstration">大小</span>
+              <el-slider v-model="wmConfig.fontSize" :max="80"></el-slider>
             </div>
-            <div class="tipsFooter">
-              <div class="cancel" @click="resetHandle">取消</div>
-              <div class="true_w" @click="submitHandle">保存设置</div>
+            <div class="wm-block">
+              <span class="demonstration">透明度</span>
+              <el-slider v-model="wmConfig.opacity" :step=".1" :max="1"></el-slider>
             </div>
+            <div class="wm-block">
+              <span class="demonstration">旋转</span>
+              <el-slider v-model="wmConfig.rotate" :min="-90" :max="90" :show-tooltip="false"></el-slider>
+            </div>
+            <div class="wm-block">
+              <span class="demonstration">水平间距</span>
+              <el-slider v-model="wmConfig.gapX" :max="400"></el-slider>
+            </div>
+            <div class="wm-block">
+              <span class="demonstration">垂直间距</span>
+              <el-slider v-model="wmConfig.gapY" :disabled="false" :max="400"></el-slider>
+            </div>
+          </div>
+          <div class="wm-i-w">
+            <h2 class="">位置</h2>
+            <el-switch v-model="wmConfig.mode" active-text="重复展示" active-value="repeat" inactive-value="interval"
+              inactive-text="错行展示">
+            </el-switch>
+          </div>
+        </div>
+        <div class="wm-right">
+          <p>预览</p>
+          <div class="preview">
+            <Watermark :options="newOption" :visible="true">
+              <canvas id="imageEffectCanvas" ref="canvasRef"></canvas>
+            </Watermark>
+          </div>
+          <div class="tipsFooter">
+            <div class="cancel" @click="resetHandle">取消</div>
+            <div class="true_w" @click="submitHandle">保存设置</div>
           </div>
         </div>
       </div>
@@ -87,13 +81,12 @@
 import { Watermark } from '@pansy/vue-watermark'
 import TextSet from '@/views/svg/TextSet.vue'
 import { mapActions, mapState } from 'pinia'
-import useStore from '../../../../store'
+import useStore from '@/store'
 import { Notification } from 'element-ui'
 export default {
   data() {
     return {
       dialogImageUrl: '',
-      dialogVisible: false,
       radio: '1',
       wmConfig: {
         image: '',
@@ -115,6 +108,12 @@ export default {
       }
     }
   },
+  props: {
+    file: {
+      type: Object
+    }
+  },
+  emits: ['resfile', 'uninstall'],
   computed: {
     newOption() {
       return this.wmConfig
@@ -122,6 +121,7 @@ export default {
     ...mapState(useStore, ['watermarkStatus'])
   },
   mounted() {
+    this.handlePictureCardPreview(this.file)
     // this.wmConfig = this.watermarkStatus.detailconfig
   },
   methods: {
@@ -133,10 +133,9 @@ export default {
         message: '水印设置已保存完成',
         type: 'success'
       })
-      this.dialogVisible = false
     },
     resetHandle() {
-      this.dialogVisible = false
+      this.$emit('uninstall', false)
     },
     handleRadio() {
       if (this.radio === '1') {
@@ -176,9 +175,6 @@ export default {
     },
     handleRemove(file, fileList) {
       console.log(file, fileList)
-    },
-    handleClose() {
-      this.dialogVisible = false
     },
     blobToImg(blob) {
       return new Promise((resolve, reject) => {
@@ -227,7 +223,6 @@ export default {
       this.dialogImageUrl = file.url
       const img = await this.blobToImg(file.raw)
       this.ImageToCanvas(img)
-      this.dialogVisible = true
     }
   },
   components: { TextSet, Watermark }
@@ -235,5 +230,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './watermark.module.less';
+@import './wmarkview.module.less';
 </style>

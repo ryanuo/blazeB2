@@ -3,8 +3,8 @@
  * @Date: 2022-07-05 12:33:10
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-05 15:58:07
- * @FilePath: \web\src\utils\common\compress.js
+ * @LastEditTime: 2022-07-15 16:20:41
+ * @FilePath: \dev\src\utils\common\compress.js
  */
 import Compressor from 'compressorjs'
 const HandleCompressor = function (file, quality, func, params) {

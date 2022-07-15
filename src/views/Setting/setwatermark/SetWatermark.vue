@@ -3,7 +3,7 @@
  * @Date: 2022-07-14 12:00:18
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-14 21:42:45
+ * @LastEditTime: 2022-07-15 15:43:32
  * @FilePath: \dev\src\views\Setting\setwatermark\SetWatermark.vue
 -->
 <template>
@@ -20,6 +20,8 @@
 
 <script>
 
+import { mapActions, mapState } from 'pinia'
+import useStore from '@/store'
 import Watermarkview from './watermark/watermarkview.vue'
 export default {
   data() {
@@ -27,8 +29,16 @@ export default {
       value: false
     }
   },
+  mounted() {
+    this.value = this.watermarkStatus.isopen
+  },
+  computed: {
+    ...mapState(useStore, ['watermarkStatus'])
+  },
   methods: {
+    ...mapActions(useStore, ['setwatermak']),
     handleComp() {
+      this.setwatermak(this.value)
     }
   },
   components: { Watermarkview }
