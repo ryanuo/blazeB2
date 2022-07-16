@@ -1,7 +1,7 @@
 {
     "name": "BlazeB2 图床",
-    "short_name": "BlazeB2 图床",
-    "theme_color": "#379ae8",
+    "short_name": "📷基于 backBlazeb2 API & ⚡ cloudflare 开发的具有 CDN 加速功能的图床工具",
+    "theme_color": "#e3dbd7",
     "icons": [
         {
             "src": "./img/icons/android-chrome-192x192.png",
