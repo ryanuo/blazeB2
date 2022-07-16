@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-14 21:48:57
+ * @LastEditTime: 2022-07-16 20:52:10
  * @FilePath: \dev\src\views\Setting\Setting.vue
 -->
 <template>
@@ -14,8 +14,8 @@
         <form-view />
       </el-collapse-item>
       <el-collapse-item title="📷 上传图片设置" name="2">
-        <h2>是否给图片添加水印 <span class="red-c">默认False</span></h2>
-        <set-watermark />
+        <!-- <h2>是否给图片添加水印 <span class="red-c">默认False(待完成--功能暂未实现)</span></h2>
+        <set-watermark /> -->
         <h2>B2桶图片上传路径（文件夹路径/名称） <span class="red-c">必填</span>（默认根目录下）</h2>
         <set-upload />
         <h2>是否开启压缩</h2>
@@ -46,7 +46,7 @@ import SetDefault from './setDefault/SetDefault.vue'
 import SetCompress from './setMain/SetCompress.vue'
 import SetUpload from './setUploadFile/SetUpload.vue'
 import SetCopy from './setcopy/SetCopy.vue'
-import SetWatermark from './setwatermark/SetWatermark.vue'
+// import SetWatermark from './setwatermark/SetWatermark.vue'
 export default {
   components: {
     FormView,
@@ -55,8 +55,8 @@ export default {
     SetDefault,
     SetCompress,
     SetUpload,
-    SetCopy,
-    SetWatermark
+    SetCopy
+    // SetWatermark
   },
   data() {
     return {

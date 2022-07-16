@@ -3,7 +3,7 @@
  * @Date: 2022-07-14 13:02:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-15 17:59:52
+ * @LastEditTime: 2022-07-16 20:48:22
  * @FilePath: \dev\src\views\home\components\wm\wmarkview.vue
 -->
 <template>
@@ -63,13 +63,15 @@
         <div class="wm-right">
           <p>预览</p>
           <div class="preview">
-            <Watermark :options="newOption" :visible="true">
-              <canvas id="imageEffectCanvas" ref="canvasRef"></canvas>
-            </Watermark>
+            <div ref="previewImg">
+              <Watermark :options="wmConfig" :visible="true">
+                <canvas id="imageEffectCanvas" ref="canvasRef"></canvas>
+              </Watermark>
+            </div>
           </div>
           <div class="tipsFooter">
             <div class="cancel" @click="resetHandle">取消</div>
-            <div class="true_w" @click="submitHandle">保存设置</div>
+            <div class="true_w" @click="submitHandle">立即上传</div>
           </div>
         </div>
       </div>
@@ -83,10 +85,14 @@ import TextSet from '@/views/svg/TextSet.vue'
 import { mapActions, mapState } from 'pinia'
 import useStore from '@/store'
 import { Notification } from 'element-ui'
+import { doCut } from '@/plugin/htmlcav.js'
+import { uploadServer } from '../../../../utils/api'
+// import { uploadServer } from '@/utils/api'
 export default {
   data() {
     return {
       dialogImageUrl: '',
+      afterFile: {},
       radio: '1',
       wmConfig: {
         image: '',
@@ -118,19 +124,22 @@ export default {
     newOption() {
       return this.wmConfig
     },
+    ...mapState(useStore, ['toFile']),
     ...mapState(useStore, ['watermarkStatus'])
   },
   mounted() {
     this.handlePictureCardPreview(this.file)
-    // this.wmConfig = this.watermarkStatus.detailconfig
+    // console.log(first)
   },
   methods: {
     ...mapActions(useStore, ['setwatermak']),
     submitHandle() {
       this.setwatermak(true, this.newOption)
+      this.uploadSumit()
+      this.$emit('uninstall')
       Notification({
         title: '提示',
-        message: '水印设置已保存完成',
+        message: '水印图片已上传',
         type: 'success'
       })
     },
@@ -164,17 +173,6 @@ export default {
         url = window.webkitURL.createObjectURL(file)
       }
       return url
-    },
-    handleupload(e) {
-      console.log(e)
-    },
-    handleChange(file, fileList) {
-      console.log(file)
-      this.currentLocalPic = file.url
-      console.log(fileList)
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList)
     },
     blobToImg(blob) {
       return new Promise((resolve, reject) => {
@@ -223,6 +221,24 @@ export default {
       this.dialogImageUrl = file.url
       const img = await this.blobToImg(file.raw)
       this.ImageToCanvas(img)
+    },
+    async uploadSumit() {
+      const dom = this.$refs.previewImg
+      const file = await doCut(dom, this)
+      return new Promise((resolve) => {
+        // const file = this.afterFile
+        const formData = new FormData()
+        const authmsg = localStorage.getItem('authmsg')
+        const list_ = Object.assign(JSON.parse(authmsg), { tofile: this.toFile })
+        formData.append('file_', file)
+        for (const i in list_) {
+          formData.append(i, list_[i])
+        }
+        uploadServer(formData).then((res) => {
+          console.log(res)
+          resolve(res.data)
+        })
+      })
     }
   },
   components: { TextSet, Watermark }

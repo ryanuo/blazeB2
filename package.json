@@ -17,6 +17,7 @@
     "compressorjs": "^1.1.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.6",
+    "html2canvas": "^1.4.1",
     "html-webpack-plugin": "^4.5.0",
     "less": "3.9.0",
     "less-loader": "4.1.0",

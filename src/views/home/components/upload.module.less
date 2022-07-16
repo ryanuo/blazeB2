@@ -1,44 +1,15 @@
-.wm-contaniner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, .32);
-    z-index: 1999;
-
-    // opacity: 0;
-}
-.upload-wrap{
-    margin-top: 10px;
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 10px;
-    border:1px dashed #dbdbf7;
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
 
 .upload-i {
     width: 48%;
     position: relative;
     overflow: hidden;
-    background-color: #fff;
+    background-color: var(--b2-pre-bg);
     border: 1px solid #c0ccda;
     border-radius: 6px;
     box-sizing: border-box;
     margin-top: 10px;
     padding: 10px 10px 10px 90px;
     height: 92px;
-    &:hover{
-        svg{
-            transition: all .2s ease-out;
-            opacity: 1;
-        }
-    }   
 
     img {
         vertical-align: middle;
@@ -49,41 +20,68 @@
         position: relative;
         z-index: 1;
         margin-left: -80px;
-        background-color: #fff;
+        object-fit: cover;
+        background-color: var(--b2-pre-bg);
+
         cursor: pointer;
     }
 
     .up_title {
         display: block;
-        margin-top: 20px;
+        margin-top: 10px;
+        margin-left: 13px;
+        padding-bottom: 2px;
         color: #606266;
         display: block;
-        margin-right: 40px;
+        // margin-right: 40px;
         overflow: hidden;
-        padding-left: 4px;
         text-overflow: ellipsis;
         transition: color .3s;
         white-space: nowrap;
     }
-    svg{
+
+    svg {
         position: absolute;
         top: 4%;
-        right: 2%;
+        right: 2px;
         cursor: pointer;
-        opacity: 0;
-        &:hover{
+
+        &:hover {
             transition: all .2s ease-in;
             width: 23px;
             height: 23px;
         }
     }
-    .config-warp{
+
+    .config-warp {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        span{
-            margin: 10px;
-            cursor: pointer;
+        padding-right: 30px;
+    }
+}
+
+.up-span {
+    margin: 30px 10px 0 10px;
+    cursor: pointer;
+    padding: 3px 5px;
+    background-color: var(--b2-main-span);
+    border-radius: 2rem;
+    color: var(--bg-text);
+}
+
+.home-md.mark-w {
+    position: absolute;
+    top: 10%;
+    right: 2%;
+    justify-content: flex-end;
+    cursor: pointer;
+    /deep/svg{
+        margin-left: 20px;
+        &:hover{
+            width: 28px;
+            height: 28px;
+            transition: all .5s inherit;
         }
     }
 }

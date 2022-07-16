@@ -1,2 +1,49 @@
-if(!self.define){let e,s={};const c=(c,r)=>(c=new URL(c+".js",r).href,s[c]||new Promise((s=>{if("document"in self){const e=document.createElement("script");e.src=c,e.onload=s,document.head.appendChild(e)}else e=c,importScripts(c),s()})).then((()=>{let e=s[c];if(!e)throw new Error(`Module ${c} didn’t register its module`);return e})));self.define=(r,i)=>{const f=e||("document"in self?document.currentScript.src:"")||location.href;if(s[f])return;let d={};const n=e=>c(e,f),o={module:{uri:f},exports:d,require:n};s[f]=Promise.all(r.map((e=>o[e]||n(e)))).then((e=>(i(...e),d)))}}define(["./workbox-63ff0813"],(function(e){"use strict";self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"css/1.5c520653.css",revision:"45267685acabc81ec0d2f27012a16798"},{url:"css/2.e1fea58b.css",revision:"fe011c6d84a5f80fa59c2e3658c0c560"},{url:"css/3.11eaddb6.css",revision:"5df4474e16f2cb1dd6b92c5e83b2b0d4"},{url:"css/4.4e2a2e7d.css",revision:"40f40a9801a293c83dd39e8578b2592e"},{url:"css/5.fb1efea4.css",revision:"61f6faf83f32ed346816843798deb80a"},{url:"css/app.4e367524.css",revision:"c2ac4d25bc008e5e67161cb8f1401965"},{url:"css/themeSet.css",revision:"d7c5240880738dc5776d9f0ec298cb1f"},{url:"index.html",revision:"6841f57c9f32b5040072ef93939c6ec4"},{url:"js/0.js",revision:"a16de48580a506edd8537089a5069ba1"},{url:"js/1.js",revision:"c83b328b88ee38b596f7945a0d28c567"},{url:"js/2.js",revision:"28ce11f76f511f3bc8d944e6533c78ad"},{url:"js/3.js",revision:"65ab9a003fc1a906e0d0db3611ae4601"},{url:"js/4.js",revision:"bb4de51d9cfd5bdf1fa544068551ea55"},{url:"js/5.js",revision:"074d2290e40a70d872101fd2ecf9360f"},{url:"js/6.js",revision:"b630f071990c5b7882f0ca3d34a5b24f"},{url:"js/app.js",revision:"b6c8c750a8be1941ee1af5c1491e3742"},{url:"js/chunk-vendors.js",revision:"bb81d47a62352a52307c81f692cc86a8"}],{ignoreURLParametersMatching:[/^utm_/,/^fbclid$/]})}));
-//# sourceMappingURL=sw.js.map
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js')
+
+// set the prefix and suffix of our sw's name
+workbox.core.setCacheNameDetails({
+  prefix: 'blazeb2',
+  suffix: 'v1.0.1'
+})
+// have our sw update and control a web page as soon as possible.
+// workbox.skipWaiting();
+// workbox.clientsClaim();
+
+// vue-cli3.0 supports pwa with the help of workbox-webpack-plugin, we need to get the precacheing list through this sentence.
+workbox.precaching.precacheAndRoute(self.__precacheManifest || [])
+
+// // cache our data, and use networkFirst strategy.
+// workbox.routing.registerRoute(
+//   // Cache CSS files
+//   /.*\.css/,
+//   // 使用缓存，但尽快在后台更新
+//   workbox.strategies.staleWhileRevalidate({
+//     // 使用自定义缓存名称
+//     cacheName: 'css-cache'
+//   })
+// )
+
+// // 缓存web的js资源
+// workbox.routing.registerRoute(
+//   // 缓存JS文件
+//   /.*\.js/,
+//   // 使用缓存，但尽快在后台更新
+//   workbox.strategies.staleWhileRevalidate({
+//     // 使用自定义缓存名称
+//     cacheName: 'js-cache'
+//   })
+// )
+
+// // 缓存web的图片资源
+// workbox.routing.registerRoute(
+//   /\.(?:png|gif|jpg|jpeg|svg)$/,
+//   workbox.strategies.staleWhileRevalidate({
+//     cacheName: 'images-cache',
+//     plugins: [
+//       new workbox.expiration.Plugin({
+//         maxEntries: 60,
+//         maxAgeSeconds: 1 * 24 * 60 * 60 // 设置缓存有效期为30天
+//       })
+//     ]
+//   })
+// )

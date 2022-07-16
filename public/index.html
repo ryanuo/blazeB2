@@ -3,7 +3,7 @@
  * @Date: 2022-07-11 09:46:39
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-15 21:22:50
+ * @LastEditTime: 2022-07-16 21:12:30
  * @FilePath: \dev\public\index.html
 -->
 <!DOCTYPE html>
@@ -14,8 +14,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet">
+  <link crossorigin="anonymous" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
   <% for (var i in htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
     <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="preload" as="style" />
@@ -24,7 +24,6 @@
       <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="img/icons/logo-16x16.png">
       <link rel="manifest" href="manifest.json">
-      <meta name="theme-color" content="#4DBA87">
       <meta name="apple-mobile-web-app-capable" content="yes">
       <meta name="apple-mobile-web-app-status-bar-style" content="black">
       <meta name="apple-mobile-web-app-title" content="BlazeB2 图床">

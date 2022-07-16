@@ -55,3 +55,28 @@ export function debounce(fn, wait = 500, isImmediate = false) {
     }
   }
 }
+
+const deepCopy = (obj) => {
+  let target = null
+  if (typeof obj === 'object') {
+    if (Array.isArray(obj)) { // 数组
+      target = []
+      obj.forEach(item => {
+        target.push(deepCopy(item))
+      })
+    } else if (obj) {
+      target = {}
+      const objKeys = Object.keys(obj)
+      objKeys.forEach(key => {
+        target[key] = deepCopy(obj[key])
+      })
+    } else {
+      target = obj
+    }
+  } else {
+    target = obj
+  }
+  return target
+}
+
+export { deepCopy }

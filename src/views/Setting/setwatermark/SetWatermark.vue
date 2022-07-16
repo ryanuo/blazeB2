@@ -3,7 +3,7 @@
  * @Date: 2022-07-14 12:00:18
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-15 15:43:32
+ * @LastEditTime: 2022-07-16 11:39:42
  * @FilePath: \dev\src\views\Setting\setwatermark\SetWatermark.vue
 -->
 <template>
@@ -12,7 +12,7 @@
       :inactive-value="false">
     </el-switch>
     <div v-if="value">
-      <Watermarkview />
+      <!-- <Watermarkview /> -->
       <p>注：点击上传图片然后<span class="red-c">预览图片</span>进行水印的设置</p>
     </div>
   </div>
@@ -22,7 +22,7 @@
 
 import { mapActions, mapState } from 'pinia'
 import useStore from '@/store'
-import Watermarkview from './watermark/watermarkview.vue'
+// import Watermarkview from './watermark/watermarkview.vue'
 export default {
   data() {
     return {
@@ -40,8 +40,8 @@ export default {
     handleComp() {
       this.setwatermak(this.value)
     }
-  },
-  components: { Watermarkview }
+  }
+  // components: { Watermarkview }
 }
 </script>
 
