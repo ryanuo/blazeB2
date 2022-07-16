@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-10 18:14:00
- * @FilePath: \master\src\views\ImgManage\ImgManage.vue
+ * @LastEditTime: 2022-07-15 21:45:36
+ * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
   <div v-loading="loadingPicShow" class="img-m common-container">
@@ -31,10 +31,9 @@
     </div>
     <!-- <div class="waterfall-w"> -->
     <div class="pic-list-t1 animate__animated animate__fadeIn" :class="classType ? 'pic-list-t2' : ''" ref="picListRef">
-      <image-item @setshowdiag="handleDiag" @ishow="imgshow" @update="updatePicLists"
-        v-for="(item, index) in picListDatas" :key="item.fileName + index" :picid="index"
-        :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
-        :picTime="timespan(item.uploadTimestamp)" />
+      <image-item @setshowdiag="handleDiag" @update="updatePicLists" v-for="(item, index) in picListDatas"
+        :key="item.fileName + index" :picid="index" :piclink="prefixStatus + item.fileName" :pictitle="item.fileName"
+        :fileId="item.fileId" :picTime="timespan(item.uploadTimestamp)" />
     </div>
     <!-- </div> -->
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
@@ -59,8 +58,6 @@ import LargeList from '../svg/LargeList.vue'
 import Refresh from '../svg/Refresh.vue'
 import sortView from '../svg/sortView.vue'
 import ImageItem from './ImageItem/ImageItem.vue'
-import 'viewerjs/dist/viewer.css'
-import { api as viewerApi } from 'v-viewer'
 import { endLoading, startLoading } from '@/utils/common/loading'
 export default {
   data() {
@@ -127,11 +124,6 @@ export default {
         filetime: transiTime(a_.uploadTimestamp)
       }
       this.centerDialogVisible = true
-    },
-    imgshow(e) {
-      viewerApi({
-        images: [e.f_]
-      })
     },
     updatePicLists(e) {
       this.picListDatas.splice(e, 1)

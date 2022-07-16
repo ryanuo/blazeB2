@@ -3,14 +3,14 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-10 12:46:56
- * @FilePath: \master\src\views\ImgManage\ImageItem\ImageItem.vue
+ * @LastEditTime: 2022-07-15 21:43:13
+ * @FilePath: \dev\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
   <div class="img-item-t1">
     <MoreMsg :pictitle="pictitle" :fileId="fileId" :picid="picid" v-on="$listeners" />
     <div class="time-span">{{ picTime }}</div>
-    <el-image @click.stop="imgshow(piclink)" :src="piclink">
+    <el-image data-fancybox="gallery" :src="piclink">
     </el-image>
     <!-- <img  :src="piclink" alt="pictitle" srcset=""> -->
     <div class="item-t">
@@ -46,16 +46,6 @@ export default {
     picTime: {
       type: String,
       required: true
-    }
-  },
-  emits: ['ishow'],
-  data() {
-    return {
-    }
-  },
-  methods: {
-    imgshow() {
-      this.$emit('ishow', { id: this.picid, f_: this.piclink })
     }
   },
   computed: {

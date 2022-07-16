@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-10 18:28:33
- * @FilePath: \master\src\store\index.js
+ * @LastEditTime: 2022-07-15 15:41:20
+ * @FilePath: \dev\src\store\index.js
  */
 import { defineStore } from 'pinia'
 import { authIsexit } from '../utils/common/login'
@@ -26,6 +26,27 @@ const useStore = defineStore('store', {
         },
         formatStr: 'URL'
       },
+      watermarkConfig: {
+        isopen: false,
+        detailconfig: {
+          image: '',
+          gapX: 100,
+          gapY: 100,
+          opacity: 0.2,
+          rotate: -22,
+          fontSize: 20,
+          fontStyle: 'normal',
+          fontVariant: 'normal',
+          fontWeight: '400',
+          fontColor: '#000',
+          fontFamily: 'sans-serif',
+          textAlign: 'center',
+          monitor: true,
+          zIndex: 9999,
+          mode: 'interval',
+          text: 'Blazeb2水印'
+        }
+      },
       prefixImg: {
         support: [],
         defaultUrl: ''
@@ -43,6 +64,9 @@ const useStore = defineStore('store', {
     }
   },
   getters: {
+    watermarkStatus(state) {
+      return state.watermarkConfig
+    },
     // 登录状态
     siginStatus(state) {
       return !state.isLogined
@@ -80,6 +104,12 @@ const useStore = defineStore('store', {
     }
   },
   actions: {
+    setwatermak(status, data = null) {
+      this.watermarkConfig.isopen = status
+      if (data) {
+        this.watermarkConfig.detailconfig = data
+      }
+    },
     handleIsLogined() {
       this.isLogined = !!localStorage.getItem('token_api')
       this.noInvalid = !!localStorage.getItem('authmsg')
