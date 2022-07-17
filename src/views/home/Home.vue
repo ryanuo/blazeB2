@@ -3,16 +3,19 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-16 20:50:26
+ * @LastEditTime: 2022-07-17 14:17:54
  * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
   <div class="home-w">
+    <div class="left-aside" v-if="leftTempList.length > 0">
+      <LeftUpload v-model="leftTempList" />
+    </div>
     <div class="upload-w" style="width: 100%">
       <!-- @mouseenter="mouseHandle" @mouseleave.stop="mouseMoveHandle" -->
       <div id="tar_box" contenteditable=""></div>
       <el-upload ref="uploadRef" v-loading="loadings" :auto-upload="false" class="upload-demo" action="customize"
-        :file-list="fileList" multiple :show-file-list="false" :limit="8" :on-change="handleChangeImage" drag>
+        :file-list="fileList" multiple :show-file-list="false" :limit="8" :on-change="checkFileType" drag>
         <div class="compress-remind" v-if="compressMsg.iscompress">开启压缩，压缩等级（<span class="red-c">{{ compressMsg.rank
         }}</span>）
         </div>
@@ -22,9 +25,9 @@
         </div>
         <div slot="tip">
           <div class="el-upload__tip">
-            <div>当前上传路径:<el-tag :type="fdata.tofile ? '' : 'danger'" size="mini"
+            <div>当前上传路径:<el-tag :type="tofile ? '' : 'danger'" size="mini"
                 @click="$router.replace({ name: 'setting', query: { id: '2' } })">{{
-                    fdata.tofile ? fdata.tofile : '你还未填写路径，点击这里'
+                    tofile ? tofile : '你还未填写路径，点击这里'
                 }}</el-tag>
             </div>
             <div v-if="fdata.bucket_name" @click="$router.replace({ name: 'setting', query: { id: '1' } })">当前B2桶名称:
@@ -45,12 +48,13 @@
             </div>
             <!-- <el-button class="btn-upload" @click="handleSumbit" type="primary" plain>上传</el-button> -->
             <el-button class="btn-upload" @click="moreUploadPic" type="primary" plain>上传</el-button>
-            <el-button class="btn-upload" @click="handleReSet" type="info" plain>重置</el-button>
+            <el-button class="btn-upload" @click="handleReSet" type="info" plain>清空</el-button>
           </span>
         </div>
       </el-upload>
     </div>
-    <div style="margin: 20px 0;text-align: center;" v-if="fileList.lenght <= 0">
+    <!-- fileList.length <= 0 -->
+    <div style="margin: 20px 0;text-align: center;" v-if="0">
       <el-radio-group v-model="radio2" size="medium" class="e-rg" @change="changeCopyStatus">
         <el-tooltip v-for="(item, index) in defaultcopyformat.formatList" :content="item.replace(/%s/g, copycontent)"
           :key="index" class="item" effect="dark" placement="top-start">
@@ -78,9 +82,10 @@ import useStore from '@/store'
 import { mapActions, mapState } from 'pinia'
 import UploadList from './components/UploadList.vue'
 import Wmarkview from './components/wm/wmarkview.vue'
+import LeftUpload from './components/leftcontainer/LeftUpload.vue'
 const CopyView = () => import('@/views/svg/CopyView.vue')
 export default {
-  components: { CopyView, UploadList, Wmarkview },
+  components: { CopyView, UploadList, Wmarkview, LeftUpload },
   data() {
     return {
       fdata: {},
@@ -91,6 +96,7 @@ export default {
       loadings: false,
       fileList: [],
       uploadProgress: 0,
+      leftTempList: [],
       compressMsg: {
         iscompress: false,
         rank: 0.8
@@ -128,11 +134,10 @@ export default {
     this.compressMsg = this.CompressData
     this.radio2 = this.defaultCopy
     window.addEventListener('paste', this.pasteHandle)
-    const token = localStorage.getItem('token_api')
-    if (token) {
-      this.fdata = JSON.parse(token)
-      this.fdata.tofile = this.toFile
-    }
+    const templist = sessionStorage.getItem('templist')
+    this.tofile = this.toFile && this.toFile
+    this.fdata = localStorage.getItem('token_api') && JSON.parse(localStorage.getItem('token_api'))
+    if (templist) this.leftTempList = JSON.parse(templist)
   },
   destroyed() {
     window.removeEventListener('paste', this.pasteHandle)
@@ -156,11 +161,6 @@ export default {
       this.$refs.uploadRef.clearFiles()
       this.fileList = []
       this.uploadProgress = 0
-    },
-    // 处理文件更改事件
-    handleChangeImage(file, filelist) {
-      this.fileList = filelist
-      console.log(file)
     },
     // 图片的粘贴事件
     pasteHandle: debounce(function (event) {
@@ -206,7 +206,10 @@ export default {
       arr.forEach(function (item) {
         sequence = sequence.then(item).then(r => {
           data.push(r)
-          if (r.fileName) _this.uploadProgress += 1
+          if (r.fileName) {
+            _this.uploadProgress += 1
+            _this.leftTempList.push(r)
+          }
           return data
         })
       })
@@ -223,13 +226,13 @@ export default {
           pros.push(
             _this.$refs['uploadRef' + i][0].uploadSumit)
         })
-        const res = await this.queue(pros)
-        const len = res.filter(v => v.fileName).length
-        const errorL = _this.fileList.length - len
+        await this.queue(pros)
+        const errorL = _this.fileList.length - _this.uploadProgress
+        _this.handletempList(this.leftTempList)
         Notification({
           title: '上传提示',
           type: errorL ? 'error' : 'success',
-          message: `上传成功：${len}张,上传失败：${errorL}张；${errorL > 0 ? '失败原因：请求过于频繁，建议单张上传' : ''}`
+          message: `上传成功：${_this.uploadProgress}张,上传失败：${errorL}张；${errorL > 0 ? '失败原因：请求过于频繁，建议单张上传' : ''}`
         })
         document.getElementById('tar_box').innerHTML = ''
         endLoading()
@@ -241,6 +244,70 @@ export default {
           type: 'error'
         })
       })
+    },
+    // 临时列表展示
+    handletempList(list) {
+      const tep = sessionStorage.getItem('templist')
+      const data_ = tep ? [...JSON.parse(tep), ...list] : list
+      sessionStorage.setItem('templist', JSON.stringify(data_))
+    },
+    // 文件检查
+    checkFileType(file) {
+      const { uid, name } = file
+      //   文件类型限制
+      const fileTypeFlag = /^.png|.jpg|.jpeg|.gif|.webp$/.test(
+        name.substring(name.lastIndexOf('.')).toLowerCase()
+      )
+      console.log(fileTypeFlag)
+      if (!fileTypeFlag) {
+        Message({
+          message: '文件类型只能是.png|.jpg|.jpeg|.gif|.webp',
+          type: 'warning'
+        })
+        const selectFileList = this.fileList.filter(item => {
+          return item.uid !== uid
+        })
+        this.fileList = selectFileList
+        return
+      }
+      const findCommonNameIndex = this.fileList.findIndex(
+        item => item.name === name
+      )
+      if (findCommonNameIndex !== -1) {
+        Message({
+          message: '不能上传同名的文件',
+          type: 'warning'
+        })
+        const selectFileList = this.fileList.filter(item => {
+          return item.uid !== uid
+        })
+        this.fileList = selectFileList
+        return false
+      }
+      this.fileList.push(file)
+      // //   文件大小进行校验
+      // if (size > 1024 * 1024 * 100) {
+      //   this.$message.warning('文件大小不能超过100Mb')
+      //   const selectFileList = this.modelForm.fileList.filter(item => {
+      //     return item.uid !== uid
+      //   })
+      //   this.modelForm.fileList = selectFileList
+      //   return
+      // }
+      // //   文件总大小限制
+      // const totalSize = this.modelForm.fileList.reduce(
+      //   (total, item) => total + item.size,
+      //   0
+      // )
+      // if (totalSize + size > 1024 * 1024 * 100) {
+      //   this.$message.warning('总文件大小不能超过100Mb')
+      //   const selectFileList = this.modelForm.fileList.filter(item => {
+      //     return item.uid !== uid
+      //   })
+      //   this.modelForm.fileList = selectFileList
+      //   return
+      // }
+      //   文件重名限制
     }
     // 上传文件事件
     // UploadFile(params) {

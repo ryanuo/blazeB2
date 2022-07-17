@@ -3,7 +3,7 @@
  * @Date: 2022-07-14 13:02:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-16 20:48:22
+ * @LastEditTime: 2022-07-17 10:19:35
  * @FilePath: \dev\src\views\home\components\wm\wmarkview.vue
 -->
 <template>
@@ -129,7 +129,6 @@ export default {
   },
   mounted() {
     this.handlePictureCardPreview(this.file)
-    // console.log(first)
   },
   methods: {
     ...mapActions(useStore, ['setwatermak']),
@@ -137,11 +136,6 @@ export default {
       this.setwatermak(true, this.newOption)
       this.uploadSumit()
       this.$emit('uninstall')
-      Notification({
-        title: '提示',
-        message: '水印图片已上传',
-        type: 'success'
-      })
     },
     resetHandle() {
       this.$emit('uninstall', false)
@@ -210,7 +204,7 @@ export default {
     },
     ImageToCanvas(image) {
       const canvas = document.getElementById('imageEffectCanvas')
-      const img_ = this.SetImgAutoSize(442, 442, image)
+      const img_ = this.SetImgAutoSize(572, 442, image)
       canvas.width = img_.width
       canvas.height = img_.height
       canvas.getContext('2d').drawImage(img_, 0, 0, img_.width, img_.height) // 0, 0参数画布上的坐标点，图片将会拷贝到这个地方
@@ -236,6 +230,11 @@ export default {
         }
         uploadServer(formData).then((res) => {
           console.log(res)
+          Notification({
+            title: '提示',
+            message: '水印图片已上传',
+            type: 'success'
+          })
           resolve(res.data)
         })
       })

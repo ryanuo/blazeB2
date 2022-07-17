@@ -3,8 +3,8 @@
  * @Date: 2022-07-04 21:11:48
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-10 11:21:45
- * @FilePath: \master\src\views\svg\MarkDown.vue
+ * @LastEditTime: 2022-07-17 22:09:28
+ * @FilePath: \dev\src\views\svg\MarkDown.vue
 -->
 <template>
   <div class="mark-w">
@@ -86,6 +86,6 @@ export default {
 .mark-w {
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 15px;
 }
 </style>

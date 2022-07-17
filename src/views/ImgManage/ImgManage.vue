@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-15 21:45:36
+ * @LastEditTime: 2022-07-17 23:36:46
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -31,9 +31,14 @@
     </div>
     <!-- <div class="waterfall-w"> -->
     <div class="pic-list-t1 animate__animated animate__fadeIn" :class="classType ? 'pic-list-t2' : ''" ref="picListRef">
-      <image-item @setshowdiag="handleDiag" @update="updatePicLists" v-for="(item, index) in picListDatas"
-        :key="item.fileName + index" :picid="index" :piclink="prefixStatus + item.fileName" :pictitle="item.fileName"
-        :fileId="item.fileId" :picTime="timespan(item.uploadTimestamp)" />
+      <el-button @click="delSelect">删除</el-button>
+      <el-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange">
+        <el-checkbox v-for="(item, index) in picListDatas" :label="index" :key="item.uid">
+          <image-item @setshowdiag="handleDiag" @update="updatePicLists" :picid="index"
+            :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
+            :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index" />
+        </el-checkbox>
+      </el-checkbox-group>
     </div>
     <!-- </div> -->
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
@@ -53,16 +58,18 @@ import { Notification } from 'element-ui'
 import { mapActions, mapState, mapWritableState } from 'pinia'
 import { debounce, transiTime } from '@/plugin/filter'
 import useStore from '@/store'
-import { picList } from '@/utils/api'
+import { picList, deleteitemImg } from '@/utils/api'
 import LargeList from '../svg/LargeList.vue'
 import Refresh from '../svg/Refresh.vue'
 import sortView from '../svg/sortView.vue'
 import ImageItem from './ImageItem/ImageItem.vue'
 import { endLoading, startLoading } from '@/utils/common/loading'
+
 export default {
   data() {
     return {
       inputval: '',
+      selectList: [],
       centerDialogVisible: false,
       picListDatas: [],
       currentPage: 1,
@@ -116,6 +123,46 @@ export default {
     }
   },
   methods: {
+    handleCheckedCitiesChange(e) {
+      console.log(e)
+    },
+    delqueue(arr) {
+      // const _this = this
+      const data = []
+      let sequence = Promise.resolve()
+      arr.forEach(function (item) {
+        sequence = sequence.then(item).then(r => {
+          data.push(r)
+          console.log(r)
+          return data
+        })
+      })
+      return sequence
+    },
+    delSelect() {
+      const waitDelList = []
+      const that = this
+      for (const i of this.selectList) {
+        console.log(i)
+        waitDelList.push(function () { that.deleteImg(that.picListDatas[i], i) })
+      }
+      // console.log(waitDelList)
+      this.delqueue(waitDelList)
+    },
+    async deleteImg(obj, index) {
+      const auth = JSON.parse(localStorage.getItem('authmsg'))
+      const { fileName, fileId } = obj
+      const params = {
+        api_url: auth.api_url,
+        init_token: auth.init_token,
+        file_name: fileName,
+        file_id: fileId
+      }
+      const { data: res } = await deleteitemImg({ params })
+      this.picListDatas.splice(index, 1)
+      console.log(res)
+    },
+    // 执行删除的指令
     handleDiag(e) {
       const a_ = this.picListDatas[e]
       this.currentitemdetail = {
