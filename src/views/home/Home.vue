@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-17 14:17:54
+ * @LastEditTime: 2022-07-18 15:31:20
  * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
@@ -15,13 +15,13 @@
       <!-- @mouseenter="mouseHandle" @mouseleave.stop="mouseMoveHandle" -->
       <div id="tar_box" contenteditable=""></div>
       <el-upload ref="uploadRef" v-loading="loadings" :auto-upload="false" class="upload-demo" action="customize"
-        :file-list="fileList" multiple :show-file-list="false" :limit="8" :on-change="checkFileType" drag>
+        :file-list="fileList" multiple :show-file-list="false" :limit="limit" :on-change="checkFileType" drag>
         <div class="compress-remind" v-if="compressMsg.iscompress">开启压缩，压缩等级（<span class="red-c">{{ compressMsg.rank
         }}</span>）
         </div>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">
-          支持<em>拖动、点击、粘贴</em>图片<em>上传</em>
+          支持<em>拖动、点击、粘贴</em>图片<em>上传，</em>每次最多<em>{{ limit }}</em>张
         </div>
         <div slot="tip">
           <div class="el-upload__tip">
@@ -97,6 +97,7 @@ export default {
       fileList: [],
       uploadProgress: 0,
       leftTempList: [],
+      limit: 10,
       compressMsg: {
         iscompress: false,
         rank: 0.8
