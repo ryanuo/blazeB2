@@ -3,7 +3,7 @@
  * @Date: 2022-07-14 17:19:21
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-14 21:10:54
+ * @LastEditTime: 2022-07-17 10:16:57
  * @FilePath: \dev\src\views\svg\TextSet.vue
 -->
 <template>
@@ -23,7 +23,7 @@
       <path d="M620.8 896m-48 0l-288 0q-48 0-48-48l0 0q0-48 48-48l288 0q48 0 48 48l0 0q0 48-48 48Z"
         :fill="svgIC ? 'var(--b2-theme-c)' : 'var(--b2-text)'" p-id="2128"></path>
     </svg>
-    <el-color-picker @change="handleChangeColor" v-model="color" size="mini" />
+    <el-color-picker @active-change="handleChangeColor" v-model="color" size="mini" />
     <el-select @change="handleFontFamily" v-model="Textvalue" placeholder="请选择">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
       </el-option>

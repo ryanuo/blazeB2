@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-15 21:45:36
+ * @LastEditTime: 2022-07-18 15:25:50
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -31,9 +31,21 @@
     </div>
     <!-- <div class="waterfall-w"> -->
     <div class="pic-list-t1 animate__animated animate__fadeIn" :class="classType ? 'pic-list-t2' : ''" ref="picListRef">
-      <image-item @setshowdiag="handleDiag" @update="updatePicLists" v-for="(item, index) in picListDatas"
-        :key="item.fileName + index" :picid="index" :piclink="prefixStatus + item.fileName" :pictitle="item.fileName"
-        :fileId="item.fileId" :picTime="timespan(item.uploadTimestamp)" />
+      <div class="checkbox-wrap" v-if="selectList.length > 0">
+        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">{{ selectText }}
+        </el-checkbox>
+        <span class="red-c">已选中{{ this.selectList.length }}张图片</span>
+        <span class="cancel-btn" @click="handleCancel">取消选择</span>
+        <CopyAll class="svg-btn" @click.native="copyAllHandle" />
+        <DeleteSelect class="svg-btn" @click.native="delSelect" />
+      </div>
+      <el-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange">
+        <el-checkbox v-for="(item, index) in picListDatas" :label="index" :key="item.uid">
+          <image-item @setshowdiag="handleDiag" @update="updatePicLists" :picid="index"
+            :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
+            :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index" />
+        </el-checkbox>
+      </el-checkbox-group>
     </div>
     <!-- </div> -->
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
@@ -49,23 +61,30 @@
 </template>
 
 <script>
-import { Notification } from 'element-ui'
+import { Message, MessageBox, Notification } from 'element-ui'
 import { mapActions, mapState, mapWritableState } from 'pinia'
 import { debounce, transiTime } from '@/plugin/filter'
 import useStore from '@/store'
-import { picList } from '@/utils/api'
+import { picList, deleteitemImg } from '@/utils/api'
 import LargeList from '../svg/LargeList.vue'
 import Refresh from '../svg/Refresh.vue'
 import sortView from '../svg/sortView.vue'
 import ImageItem from './ImageItem/ImageItem.vue'
 import { endLoading, startLoading } from '@/utils/common/loading'
+import CopyAll from '../svg/CopyAll.vue'
+import DeleteSelect from '../svg/DeleteSelect.vue'
+
 export default {
   data() {
     return {
       inputval: '',
+      selectList: [],
       centerDialogVisible: false,
       picListDatas: [],
       currentPage: 1,
+      checkAll: false,
+      isIndeterminate: false,
+      deleteprogress: 0,
       currentitemdetail: {
         filesize: '',
         filename: '',
@@ -82,17 +101,26 @@ export default {
       isUpSort: true
     }
   },
-  components: { LargeList, Refresh, ImageItem, sortView },
+  components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect },
   computed: {
     ...mapWritableState(useStore, ['isLogined']), // 映射函数，取出isLogined
     ...mapState(useStore, ['prefixStatus']),
     ...mapState(useStore, ['setdefaultFile']), // 映射函数，取出setdefaultFile
     ...mapState(useStore, ['imgDefaultFile']), // 映射函数，取出setdefaultFile
     ...mapState(useStore, ['noInvalid']),
+    ...mapState(useStore, ['defaultCopyUrl']),
     timespan() {
       return function (val) {
         return transiTime(val)
       }
+    },
+    selectText() {
+      let str_ = ''
+      if (this.isIndeterminate) {
+        str_ = '选择部分'
+        return str_
+      }
+      return this.checkAll ? '取消全选' : '全选'
     }
   },
   watch: {
@@ -116,6 +144,117 @@ export default {
     }
   },
   methods: {
+    // 取消选择
+    handleCancel() {
+      if (this.selectList.length > 0) {
+        this.selectList = []
+        this.isIndeterminate = false
+      }
+    },
+    // 批量复制事件
+    copyAllHandle() {
+      let copycon = ''
+      for (const i of this.selectList) {
+        const a_ = this.defaultCopyUrl.replace(/%s/g, this.prefixStatus + this.picListDatas[i].fileName)
+        copycon += a_ + '\n'
+      }
+      this.$copyText(copycon).then(() => {
+        // element ui的弹窗
+        Message({
+          message: this.copycon !== '' ? '已批量复制到剪贴板' : '您还未上传图片',
+          type: this.copycon !== '' ? 'success' : 'error'
+        })
+      }).catch(() => {
+        Message({
+          message: '复制失败，请手动复制',
+          type: 'error'
+        })
+      })
+      console.log(copycon)
+    },
+    handleCheckAllChange(val) {
+      const sAll = [...(new Array(this.picListDatas.length)).keys()]
+      console.log(sAll)
+      this.selectList = val ? sAll : []
+      this.isIndeterminate = false
+    },
+    handleCheckedCitiesChange(e) {
+      this.selectList.sort((a, b) => b - a)
+      console.log(this.selectList)
+      const len = this.picListDatas.length
+      if (e.length < len) this.isIndeterminate = true
+      if (e.length === 0 || e.length === len) {
+        this.isIndeterminate = false
+      }
+      this.checkAll = e.length === len
+    },
+    delqueue(arr) {
+      const _this = this
+      const data = []
+      let sequence = Promise.resolve()
+      arr.forEach(function (item) {
+        sequence = sequence.then(item).then(r => {
+          data.push(r)
+          if (!r.status) {
+            _this.deleteprogress += 1
+          }
+          console.log(r)
+          return data
+        })
+      })
+      return sequence
+    },
+    delSelect() {
+      const that = this
+      MessageBox({
+        title: '提示',
+        message: '此操作将删除选中图片, 是否继续?',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        showCancelButton: true,
+        type: 'warning'
+      }).then(async () => {
+        sessionStorage.removeItem('templist')
+        const waitDelList = []
+        const len = that.selectList.length
+        that.currentTempNum = len
+        that.deleteprogress = 0
+        for (const i of that.selectList) {
+          waitDelList.push(function () {
+            return new Promise((resolve, reject) => {
+              const n = that.deleteImg(that.picListDatas[i], i)
+              resolve(n)
+            })
+          })
+        }
+        // console.log(waitDelList)
+        const r_ = await that.delqueue(waitDelList)
+        console.log(r_)
+        const errorL = len - that.deleteprogress
+        Notification({
+          title: '删除提示',
+          type: errorL ? 'error' : 'success',
+          message: `删除成功：${that.deleteprogress}张,删除失败：${errorL}张；${errorL > 0 ? '失败原因：请求过于频繁，建议单张上传' : ''}`
+        })
+      })
+    },
+    async deleteImg(obj, val) {
+      const auth = JSON.parse(localStorage.getItem('authmsg'))
+      console.log(this.currentIndex)
+      // this.picListDatas[this.currentIndex]
+      const { fileName, fileId } = obj
+      const params = {
+        api_url: auth.api_url,
+        init_token: auth.init_token,
+        file_name: fileName,
+        file_id: fileId
+      }
+      const { data: res } = await deleteitemImg({ params })
+      this.picListDatas.splice(val, 1)
+      this.selectList.shift()
+      return res
+    },
+    // 执行删除的指令
     handleDiag(e) {
       const a_ = this.picListDatas[e]
       this.currentitemdetail = {

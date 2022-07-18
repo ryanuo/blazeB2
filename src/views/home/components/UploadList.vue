@@ -3,7 +3,7 @@
  * @Date: 2022-07-15 16:42:08
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-16 18:39:35
+ * @LastEditTime: 2022-07-17 11:53:29
  * @FilePath: \dev\src\views\home\components\UploadList.vue
 -->
 <template>
@@ -47,8 +47,6 @@ import { mapState } from 'pinia'
 import useStore from '@/store'
 import { uploadServer } from '@/utils/api'
 import MarkDown from '../../svg/MarkDown.vue'
-// import { Notification } from 'element-ui'
-// import Wmarkview from './wm/wmarkview.vue'
 export default {
   data() {
     return {
@@ -108,6 +106,7 @@ export default {
     // 执行上传图片的功能
     uploadSumit() {
       return new Promise((resolve) => {
+        console.log(this.svgType)
         if (this.svgType === '0') {
           this.svgType = '1'
           const file = this.afterFile
@@ -132,9 +131,6 @@ export default {
     changeHandleFile(index) {
       this.$emit('changefilelist', index)
     },
-    handleClose(status) {
-      this.isShowWm = status
-    },
     setwarterMark(index) {
       this.$emit('watermarkhandle', index)
     },
@@ -148,7 +144,7 @@ export default {
           _this.afterFile = res.result
         }
       } else {
-        _this.nocommpress(params)
+        _this.afterFile = params
       }
     }
   }

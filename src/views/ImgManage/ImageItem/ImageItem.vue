@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-15 21:43:13
+ * @LastEditTime: 2022-07-17 23:27:50
  * @FilePath: \dev\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import MoreMsg from './moremsg/MoreMsg.vue'
+import MoreMsg from '@/views/ImgManage/ImageItem/moremsg/MoreMsg.vue'
 import MarkDown from '@/views/svg/MarkDown.vue'
 export default {
   props: {
