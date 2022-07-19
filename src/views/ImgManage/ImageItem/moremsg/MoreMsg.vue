@@ -3,8 +3,8 @@
  * @Date: 2022-07-04 17:32:17
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-10 11:01:04
- * @FilePath: \master\src\views\ImgManage\ImageItem\moremsg\MoreMsg.vue
+ * @LastEditTime: 2022-07-18 18:41:33
+ * @FilePath: \dev\src\views\ImgManage\ImageItem\moremsg\MoreMsg.vue
 -->
 <template>
   <div class="more-w">
@@ -92,20 +92,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.more-w {
-  position: absolute;
-  top: 2%;
-  right: 2%;
-  width: 30px;
-  height: 30px;
-  background-color: var(--b2-bg);
-  border-radius: 20px;
-  box-shadow: 0 0 5px #ccc;
-  z-index: 200;
-  opacity: 0;
-}
-
-.icon-more {
-  width: 30px;
-}
 </style>

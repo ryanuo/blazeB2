@@ -3,12 +3,13 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 14:45:26
- * @FilePath: \master\src\router\index.js
+ * @LastEditTime: 2022-07-18 20:05:07
+ * @FilePath: \dev\src\router\index.js
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import useStore from '@/store'
+import Home from '@/views/home/Home.vue'
 Vue.use(VueRouter)
 let storeInit = null
 const routes = [
@@ -20,7 +21,7 @@ const routes = [
       {
         path: '/home',
         name: 'home',
-        component: () => import('@/views/home/Home.vue')
+        component: Home
       },
       {
         path: '/imanage',

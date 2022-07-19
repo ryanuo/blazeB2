@@ -7,6 +7,7 @@
     border-radius: 10px;
     object-fit: cover;
   }
+
 }
 
 .pic-tit {
@@ -32,12 +33,13 @@
   z-index: 2;
 }
 
-&:hover {
-
-  /deep/ .more-w,
-  /deep/ .el-checkbox__inner {
-    box-shadow: 0 0 5px 0 #ccc;
-    transition: all .4s ease-in;
-    opacity: 1;
+.img-item-t1{
+  &:hover {
+    .moremsg,
+    /deep/ .el-checkbox__inner {
+      box-shadow: 0 0 5px 0 #ccc;
+      transition: all .4s ease-in;
+      opacity: 1;
+    }
   }
 }

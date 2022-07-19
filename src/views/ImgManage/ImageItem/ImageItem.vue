@@ -3,12 +3,12 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-17 23:27:50
+ * @LastEditTime: 2022-07-18 18:28:07
  * @FilePath: \dev\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
   <div class="img-item-t1">
-    <MoreMsg :pictitle="pictitle" :fileId="fileId" :picid="picid" v-on="$listeners" />
+    <MoreMsg class="moremsg" :pictitle="pictitle" :fileId="fileId" :picid="picid" v-on="$listeners" />
     <div class="time-span">{{ picTime }}</div>
     <el-image data-fancybox="gallery" :src="piclink">
     </el-image>
