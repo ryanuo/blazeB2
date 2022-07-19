@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve --mode dev",
     "build": "vue-cli-service build --mode pro",
     "lint": "vue-cli-service lint",
-    "sw": "workbox generateSW workbox.config.js",
+    "sw": "workbox generateSW workbox-config.js",
     "build:sw": "npm run build && npm run sw"
   },
   "dependencies": {

@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-18 15:31:20
+ * @LastEditTime: 2022-07-19 11:09:35
  * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
@@ -30,7 +30,8 @@
                     tofile ? tofile : '你还未填写路径，点击这里'
                 }}</el-tag>
             </div>
-            <div v-if="fdata.bucket_name" @click="$router.replace({ name: 'setting', query: { id: '1' } })">当前B2桶名称:
+            <div v-if="fdata && fdata.bucket_name" @click="$router.replace({ name: 'setting', query: { id: '1' } })">
+              当前B2桶名称:
               <el-tag size="mini">{{ fdata.bucket_name }}</el-tag>
             </div>
           </div>
@@ -88,7 +89,7 @@ export default {
   components: { CopyView, UploadList, Wmarkview, LeftUpload },
   data() {
     return {
-      fdata: {},
+      fdata: null,
       radio2: 'URL',
       isShowWm: false,
       currentfileIndex: 0,
