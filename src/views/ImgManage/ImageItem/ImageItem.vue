@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-18 18:28:07
+ * @LastEditTime: 2022-07-23 17:54:50
  * @FilePath: \dev\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
@@ -11,6 +11,11 @@
     <MoreMsg class="moremsg" :pictitle="pictitle" :fileId="fileId" :picid="picid" v-on="$listeners" />
     <div class="time-span">{{ picTime }}</div>
     <el-image data-fancybox="gallery" :src="piclink">
+      <div slot="placeholder" class="image-slot image-slot-placeholder">
+      </div>
+      <div slot="error" class="image-slot">
+        <i class="el-icon-picture-outline"></i>
+      </div>
     </el-image>
     <!-- <img  :src="piclink" alt="pictitle" srcset=""> -->
     <div class="item-t">

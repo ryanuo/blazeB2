@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-19 11:09:35
+ * @LastEditTime: 2022-07-23 18:16:58
  * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
@@ -44,7 +44,7 @@
             </ul>
             <div v-if="isShowWm">
               <div class="wm-contaniner" @click.self="handleClose(false)">
-                <Wmarkview @uninstall="handleClose" :file="fileList[currentfileIndex]" />
+                <Wmarkview @waterpic="handleWatermarkEnd" @uninstall="handleClose" :file="fileList[currentfileIndex]" />
               </div>
             </div>
             <!-- <el-button class="btn-upload" @click="handleSumbit" type="primary" plain>上传</el-button> -->
@@ -149,6 +149,13 @@ export default {
     handleDelete(index) {
       this.fileList.splice(index, 1)
     },
+    // 处理水印结果
+    handleWatermarkEnd(e) {
+      console.log(e)
+      this.leftTempList.unshift(e)
+      this.handletempList(this.leftTempList)
+      console.log(this.leftTempList)
+    },
     // 处理水印
     handleMark(index) {
       this.isShowWm = true
@@ -156,7 +163,6 @@ export default {
     },
     handleClose() {
       this.isShowWm = false
-      this.handleReSet()
     },
     // 重置列表
     handleReSet() {
@@ -210,7 +216,7 @@ export default {
           data.push(r)
           if (r.fileName) {
             _this.uploadProgress += 1
-            _this.leftTempList.push(r)
+            _this.leftTempList.unshift(r)
           }
           return data
         })
@@ -231,13 +237,13 @@ export default {
         await this.queue(pros)
         const errorL = _this.fileList.length - _this.uploadProgress
         _this.handletempList(this.leftTempList)
+        document.getElementById('tar_box').innerHTML = ''
+        endLoading()
         Notification({
           title: '上传提示',
           type: errorL ? 'error' : 'success',
           message: `上传成功：${_this.uploadProgress}张,上传失败：${errorL}张；${errorL > 0 ? '失败原因：请求过于频繁，建议单张上传' : ''}`
         })
-        document.getElementById('tar_box').innerHTML = ''
-        endLoading()
       }).catch(() => {
         endLoading()
         Notification({
@@ -249,9 +255,7 @@ export default {
     },
     // 临时列表展示
     handletempList(list) {
-      const tep = sessionStorage.getItem('templist')
-      const data_ = tep ? [...JSON.parse(tep), ...list] : list
-      sessionStorage.setItem('templist', JSON.stringify(data_))
+      sessionStorage.setItem('templist', JSON.stringify(list))
     },
     // 文件检查
     checkFileType(file) {
@@ -311,52 +315,6 @@ export default {
       // }
       //   文件重名限制
     }
-    // 上传文件事件
-    // UploadFile(params) {
-    //   const _this = this
-    //   console.log(params)
-    //   authIsexit().then(() => {
-    //     startLoading(document.querySelector('.el-upload'), '正在上传图片...')
-    //     const authmsg = localStorage.getItem('authmsg')
-    //     const list_ = Object.assign(JSON.parse(authmsg), { tofile: this.fdata.tofile })
-    //     if (_this.compressMsg.iscompress) {
-    //       HandleCompressor(params.file, _this.compressMsg.rank, list_, this.nocommpress)
-    //     } else {
-    //       _this.nocommpress(params.file, list_)
-    //     }
-    //   }).catch(() => {
-    //     endLoading()
-    //     Notification({
-    //       title: '提示',
-    //       message: '请检查是否登陆,请检查keyid和key是否填写正确',
-    //       type: 'error'
-    //     })
-    //   })
-    // }
-    // 处理文件上传事件，手动控制
-    // handleSumbit: debounce(function () {
-    //   this.$refs.uploadRef.submit()
-    //   }, 450, true),
-    // 上传单张图片
-    // async nocommpress(file, list_) {
-    //   const formData = new FormData()
-    //   formData.append('file_', file)
-    //   for (const i in list_) {
-    //     formData.append(i, list_[i])
-    //   }
-    //   const { data: res } = await uploadServer(formData)
-    //   console.log(res)
-    //   this.copycontent = res.action ? this.fdata.host_url + res.fileName : ''
-    //   Notification({
-    //     title: '提示',
-    //     message: res.action ? '上传成功' : `状态码:${res.status},错误信息：${res.message},请检查keyid和key是否填写正确`,
-    //     type: res.action ? 'success' : 'error'
-    //   })
-    //   document.getElementById('tar_box').innerHTML = ''
-    //   // this.$refs.uploadRef.clearFiles()
-    //   // this.fileList = []
-    //   endLoading()
-    // }
   }
 }
 </script>

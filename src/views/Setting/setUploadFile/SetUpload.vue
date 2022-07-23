@@ -3,13 +3,14 @@
  * @Date: 2022-07-07 19:33:08
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 15:11:25
- * @FilePath: \master\src\views\Setting\setUploadFile\SetUpload.vue
+ * @LastEditTime: 2022-07-23 18:21:32
+ * @FilePath: \dev\src\views\Setting\setUploadFile\SetUpload.vue
 -->
 <template>
   <div class="set-upload">
     <el-input v-model="tofile" placeholder="eg:hexo/2/"></el-input>
     <el-button @click="saveToFile">保存</el-button>
+    <el-button @click="$router.replace({ name: 'home' })">返回</el-button>
   </div>
 </template>
 

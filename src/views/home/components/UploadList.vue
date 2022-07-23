@@ -3,7 +3,7 @@
  * @Date: 2022-07-15 16:42:08
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-17 11:53:29
+ * @LastEditTime: 2022-07-23 17:45:16
  * @FilePath: \dev\src\views\home\components\UploadList.vue
 -->
 <template>
@@ -12,7 +12,7 @@
     <div>
       <h2 class="up_title">{{ file.name }} <span class="up-span"><del>{{ (file.size / 1024).toFixed(2) + 'KB'
       }}</del></span>
-        <span class="up-span" style="color:var(--b2-theme-c)">{{ newSize + 'KB' }}</span>
+        <span class="up-span" v-if="CompressData.iscompress" style="color:var(--b2-theme-c)">{{ newSize + 'KB' }}</span>
       </h2>
       <svg v-if="svgType === '0'" @click="changeHandleFile(pid)" t="1657877004609" class="icon" viewBox="0 0 1024 1024"
         version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1342" width="22" height="22">
@@ -30,23 +30,23 @@
       <UploadTaggle :isshow="svgType" />
       <div class="config-warp">
         <span class="up-span" style="margin-right:auto">{{ TimeTran(file.uid) }}</span>
-        <span class="up-span" v-if="svgType === '0'"
-          @click="$router.push({ name: 'setting', query: { id: 2 } })">压缩配置</span>
-        <span v-if="svgType === '0'" class="up-span" @click="setwarterMark(pid)">水印设置</span>
+        <span class="up-span" v-if="svgType === '0'" @click="$router.push({ name: 'setting', query: { id: 2 } })">{{
+            CompressData.iscompress ? '已开启压缩' : '未开启压缩'
+        }}</span>
+        <span class="up-span" @click="setwarterMark(pid)">水印设置</span>
       </div>
-      <div><span></span><span></span></div>
     </div>
   </li>
 </template>
 
 <script>
 import { transiTime } from '@/plugin/filter'
-import UploadTaggle from '../../svg/uploadTaggle.vue'
+import UploadTaggle from '@/views/svg/uploadTaggle.vue'
 import { NewHandleCompressor } from '@/utils/common/compress'
 import { mapState } from 'pinia'
 import useStore from '@/store'
 import { uploadServer } from '@/utils/api'
-import MarkDown from '../../svg/MarkDown.vue'
+import MarkDown from '@/views/svg/MarkDown.vue'
 export default {
   data() {
     return {
@@ -136,7 +136,6 @@ export default {
     },
     async UploadFile(params) {
       const _this = this
-      console.log(params)
       if (_this.compressMsg.iscompress) {
         const res = await NewHandleCompressor(params, _this.compressMsg.rank)
         if (res.result) {

@@ -3,7 +3,7 @@
  * @Date: 2022-07-14 13:02:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-17 10:19:35
+ * @LastEditTime: 2022-07-23 17:03:48
  * @FilePath: \dev\src\views\home\components\wm\wmarkview.vue
 -->
 <template>
@@ -86,8 +86,8 @@ import { mapActions, mapState } from 'pinia'
 import useStore from '@/store'
 import { Notification } from 'element-ui'
 import { doCut } from '@/plugin/htmlcav.js'
-import { uploadServer } from '../../../../utils/api'
-// import { uploadServer } from '@/utils/api'
+import { uploadServer } from '@/utils/api'
+
 export default {
   data() {
     return {
@@ -119,7 +119,7 @@ export default {
       type: Object
     }
   },
-  emits: ['resfile', 'uninstall'],
+  emits: ['resfile', 'uninstall', 'waterpic'],
   computed: {
     newOption() {
       return this.wmConfig
@@ -135,7 +135,6 @@ export default {
     submitHandle() {
       this.setwatermak(true, this.newOption)
       this.uploadSumit()
-      this.$emit('uninstall')
     },
     resetHandle() {
       this.$emit('uninstall', false)
@@ -230,6 +229,9 @@ export default {
         }
         uploadServer(formData).then((res) => {
           console.log(res)
+          console.log(1)
+          this.$emit('uninstall')
+          this.$emit('waterpic', res.data)
           Notification({
             title: '提示',
             message: '水印图片已上传',
