@@ -1,21 +1,11 @@
 /*
  * @Author: Harry
- * @Date: 2022-04-20 20:40:43
+ * @Date: 2022-07-12 08:56:50
  * @LastEditors: harry
  * @Github: https://github.com/rr210
-<<<<<<< HEAD
-<<<<<<< HEAD
- * @LastEditTime: 2022-07-12 16:43:19
+ * @LastEditTime: 2022-07-23 19:35:45
  * @FilePath: \master\src\main.prod.js
-=======
- * @LastEditTime: 2022-07-12 16:53:16
-=======
- * @LastEditTime: 2022-07-12 21:34:35
->>>>>>> dev
- * @FilePath: \dev\src\main.prod.js
->>>>>>> dev
  */
-
 /* eslint-disable */
 import Vue from 'vue'
 import { createPersistedState } from 'pinia-persistedstate-plugin'
