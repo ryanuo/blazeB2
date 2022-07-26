@@ -6,22 +6,17 @@ node_modules
 # local env files
 #.env.local
 #.env.*.local
-<<<<<<< HEAD
 
-=======
 *.bat
->>>>>>> dev
+package-lock.json
 # Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-<<<<<<< HEAD
 
-=======
 docs
 thd
->>>>>>> dev
 # Editor directories and files
 .idea
 .vscode
