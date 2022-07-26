@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 18:13:09
+ * @LastEditTime: 2022-07-26 20:26:05
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -98,7 +98,7 @@ export default {
         delimiter: ''
       },
       loadingPicShow: false,
-      isUpSort: true
+      isUpSort: false
     }
   },
   components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect },
@@ -278,15 +278,15 @@ export default {
         picList({ params: p_ })
           .then((res) => {
             if (res.data.files.length === 0) {
-              Notification({
-                title: '提示',
-                message: '文件夹内无图片',
-                type: 'error'
-              })
+              Notification({ title: '提示', message: '文件夹内无图片', type: 'error' })
             }
-            _this.picListDatas = [..._this.picListDatas, ...res.data.files]
-            _this.handleUd()
-            _this.reqParams.startFileName = res.data.nextFileName
+            if (_this.reqParams.startFileName === res.data.nextFileName) {
+              Notification({ type: 'warning', message: '当前文件夹下图片已全部加载', title: '提示' })
+            } else {
+              _this.reqParams.startFileName = res.data.nextFileName
+              _this.picListDatas = [..._this.picListDatas, ...res.data.files]
+              _this.handleUd()
+            }
             endLoading()
             if (fn) return fn()
           })

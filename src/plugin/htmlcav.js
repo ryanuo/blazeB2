@@ -3,7 +3,7 @@
  * @Date: 2022-07-16 20:35:30
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-16 20:45:39
+ * @LastEditTime: 2022-07-26 18:59:41
  * @FilePath: \dev\src\plugin\htmlcav.js
  */
 import html2canvas from 'html2canvas'
@@ -15,7 +15,7 @@ export const doCut = function (shareDom, state) {
       scale: 1,
       allowTaint: true,
       useCORS: true,
-      height: shareDom.offsetHeight,
+      height: shareDom.offsetHeight - 2,
       width: shareDom.offsetWidth,
       scrollY: 0,
       scrollX: 0

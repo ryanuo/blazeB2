@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 09:21:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-07 12:05:53
- * @FilePath: \web\src\utils\api\index.js
+ * @LastEditTime: 2022-07-26 21:16:40
+ * @FilePath: \dev\src\utils\api\index.js
  */
 import axios from '../http'
 
@@ -61,91 +61,11 @@ const dataTitleGet = async function (prefix) {
       const val = v.fileName.split('/')
       return { value: val[val.length - 2], label: val[val.length - 2], parentId: n, children: [] }
     })
-    // _list.push(...a_)
-    // // 深拷贝
-    // const listCopy = JSON.parse(JSON.stringify(_list))
-    // const treeList = dkFn(listCopy, 'label')
-    // console.log(treeList)
-    // localStorage.setItem('treeList', JSON.stringify(treeList))
     return a_
   } else {
     return []
   }
 }
-
-/**
- * 递归计算
- * 数据转换为树形（递归），示例：toTreeByRecursion(source, 'id', 'parentId', null, 'children')
- * @param {*} data 数据源
- * @param {*} id id字段 默认 'id'
- * @param {*} parentId 父节点字段 默认 'parentId'
- * @param {*} children 孩子节点字段 默认 'children'
- */
-const dkFn = function (data, id, parentId, children) {
-  // 删除所有的children,以防多次调用
-  const config = {
-    id: id || 'id',
-    parentId: parentId || 'parentId',
-    childrenList: children || 'children'
-  }
-
-  var childrenListMap = {}
-  var nodeIds = {}
-  var tree = []
-
-  for (const d of data) {
-    const parentId = d[config.parentId]
-    if (childrenListMap[parentId] == null) {
-      childrenListMap[parentId] = []
-    }
-    nodeIds[d[config.id]] = d
-    childrenListMap[parentId].push(d)
-  }
-
-  for (const d of data) {
-    const parentId = d[config.parentId]
-    if (nodeIds[parentId] == null) {
-      tree.push(d)
-    }
-  }
-
-  for (const t of tree) {
-    adaptToChildrenList(t)
-  }
-
-  function adaptToChildrenList(o) {
-    if (childrenListMap[o[config.id]] !== null) {
-      o[config.childrenList] = childrenListMap[o[config.id]]
-    }
-    if (o[config.childrenList]) {
-      for (const c of o[config.childrenList]) {
-        adaptToChildrenList(c)
-      }
-    }
-  }
-
-  return tree
-}
-
-/**
- * 保存文件夹
- */
-// const saveFileOptions = function (level, label, params) {
-//   if (list_ === []) {
-//     list_ = params
-//   } else {
-//     for (const i of list_) {
-//       console.log(i.label, label)
-//       console.log(i.label === label)
-//       if (i.label === label) {
-//         i.children = params
-//         // console.log(i)
-//       }
-//     }
-//   }
-//   console.log(list_)
-// saveFileOptions
-// }
 export {
-  auth, uploadServer, picList, deleteitemImg, dataTitleGet, dkFn
+  auth, uploadServer, picList, deleteitemImg, dataTitleGet
 }

@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 17:54:50
+ * @LastEditTime: 2022-07-26 21:10:43
  * @FilePath: \dev\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
@@ -59,7 +59,6 @@ export default {
       return a_[a_.length - 1]
     }
   },
-  mounted() { },
   components: { MoreMsg, MarkDown }
 }
 </script>

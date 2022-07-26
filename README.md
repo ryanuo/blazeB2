@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:37:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 19:19:41
+ * @LastEditTime: 2022-07-25 11:03:17
  * @FilePath: \dev\README.md
 -->
 <a href="https://b2.mr90.top/" >
@@ -44,7 +44,7 @@
 
 ## 🍥 部署方法 | Deployment method
 
-- 支持 `vercel` 一键部署 [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=flat&logo=vercel&logoColor=white)](https://vercel.com/new/clone?s=https://github.com/Rr210/blazeB2/tree/master/deploys/vercel-api/)
+- 支持 `vercel` 一键部署 [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=flat&logo=vercel&logoColor=white)](https://blazeb2.js.org/zh/guide/deploy.html#vercel%E4%B8%80%E9%94%AE%E7%A7%92%E9%83%A8%E7%BD%B2)
 
 - 支持 `serverless` [![serverless](https://img.shields.io/badge/serverless-%23000000.svg?style=flat&logo=serverless&logoColor=white)](https://cloud.tencent.com/login?s_url=https%3A%2F%2Fconsole.cloud.tencent.com%2Fscf%2Flist-create%3Frid%3D1%26ns%3Ddefault%26createType%3Dempty)
 

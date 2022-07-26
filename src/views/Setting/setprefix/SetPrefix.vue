@@ -3,8 +3,8 @@
  * @Date: 2022-07-04 09:45:30
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-10 11:06:33
- * @FilePath: \master\src\views\Setting\setprefix\SetPrefix.vue
+ * @LastEditTime: 2022-07-26 21:41:33
+ * @FilePath: \dev\src\views\Setting\setprefix\SetPrefix.vue
 -->
 <template>
   <div class="set-prefix">
@@ -32,6 +32,15 @@ export default {
     ...mapState(useStore, ['prefixStatus'])
   },
   watch: {
+    prefixStatus: {
+      deep: true, // 深度监听
+      handler(newValue) {
+        console.log(newValue)
+        if (newValue) {
+          this.value = this.prefixStatus
+        }
+      }
+    },
     noInvalid: {
       // immediate: true,
       deep: true, // 深度监听

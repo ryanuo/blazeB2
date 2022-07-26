@@ -3,11 +3,11 @@
  * @Date: 2022-07-04 17:32:17
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-18 18:41:33
+ * @LastEditTime: 2022-07-26 21:11:25
  * @FilePath: \dev\src\views\ImgManage\ImageItem\moremsg\MoreMsg.vue
 -->
 <template>
-  <div class="more-w">
+  <div class="more-w" @click.prevent>
     <el-dropdown @command="handleDrop">
       <span>
         <svg t="1656927071071" class="icon-more" viewBox="0 0 1024 1024" version="1.1"

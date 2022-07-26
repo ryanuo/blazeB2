@@ -46,8 +46,8 @@ async function setAuthStorage(token) {
   const { data: res } = await auth(fdata)
   if (res.bucketId) {
     const urlList = {
-      s3ApiUrl: `https://${fdata.bucket_name}.${res.s3ApiUrl.replace('https://', '')}`,
-      downloadUrl: res.downloadUrl,
+      // s3ApiUrl: `https://${fdata.bucket_name}.${res.s3ApiUrl.replace('https://', '')}`,
+      // downloadUrl: res.downloadUrl,
       api_url: res.api_url,
       host_url: fdata.host_url
     }

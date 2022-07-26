@@ -3,7 +3,7 @@
  * @Date: 2022-07-14 13:02:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 17:03:48
+ * @LastEditTime: 2022-07-26 19:15:04
  * @FilePath: \dev\src\views\home\components\wm\wmarkview.vue
 -->
 <template>
@@ -70,8 +70,9 @@
             </div>
           </div>
           <div class="tipsFooter">
-            <div class="cancel" @click="resetHandle">取消</div>
-            <div class="true_w" @click="submitHandle">立即上传</div>
+            <el-button class="cancel" @click="resetHandle">取消</el-button>
+            <el-button class="true_w" type="primary" @click="submitHandle" :loading="isLoad">{{ isLoad ? '正在上传' : '立即上传'
+            }}</el-button>
           </div>
         </div>
       </div>
@@ -82,7 +83,7 @@
 <script>
 import { Watermark } from '@pansy/vue-watermark'
 import TextSet from '@/views/svg/TextSet.vue'
-import { mapActions, mapState } from 'pinia'
+import { mapState } from 'pinia'
 import useStore from '@/store'
 import { Notification } from 'element-ui'
 import { doCut } from '@/plugin/htmlcav.js'
@@ -94,6 +95,7 @@ export default {
       dialogImageUrl: '',
       afterFile: {},
       radio: '1',
+      isLoad: false,
       wmConfig: {
         image: '',
         gapX: 100,
@@ -119,21 +121,19 @@ export default {
       type: Object
     }
   },
-  emits: ['resfile', 'uninstall', 'waterpic'],
+  emits: ['resfile', 'uninstall'],
   computed: {
     newOption() {
       return this.wmConfig
     },
-    ...mapState(useStore, ['toFile']),
-    ...mapState(useStore, ['watermarkStatus'])
+    ...mapState(useStore, ['toFile'])
   },
   mounted() {
     this.handlePictureCardPreview(this.file)
   },
   methods: {
-    ...mapActions(useStore, ['setwatermak']),
     submitHandle() {
-      this.setwatermak(true, this.newOption)
+      this.isLoad = true
       this.uploadSumit()
     },
     resetHandle() {

@@ -3,7 +3,7 @@
  * @Date: 2022-07-04 21:11:48
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-18 18:40:57
+ * @LastEditTime: 2022-07-26 19:57:58
  * @FilePath: \dev\src\views\svg\MarkDown.vue
 -->
 <template>
@@ -39,7 +39,9 @@
 
 <script>
 import { Message } from 'element-ui'
+import { mapState } from 'pinia'
 import { debounce } from '../../plugin/filter'
+import useStore from '../../store'
 
 export default {
   data() {
@@ -54,7 +56,11 @@ export default {
       default: ''
     }
   },
+  computed: {
+    ...mapState(useStore, ['openUploadOutMD'])
+  },
   mounted() {
+    this.isMark = !!this.openUploadOutMD
     this.linktemp = this.isMark ? `![](${this.link})` : this.link
   },
   methods: {
