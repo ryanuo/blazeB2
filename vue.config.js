@@ -3,8 +3,6 @@
  * @Date: 2022-04-20 22:28:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-18 20:01:30
- * @FilePath: \dev\vue.config.js
  */
 const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
