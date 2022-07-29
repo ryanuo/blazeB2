@@ -1,0 +1,87 @@
+
+.upload-i {
+    width: 48%;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--b2-pre-bg);
+    border: 1px solid #c0ccda;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    padding: 10px 10px 10px 90px;
+    height: 92px;
+
+    img {
+        vertical-align: middle;
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+        float: left;
+        position: relative;
+        z-index: 1;
+        margin-left: -80px;
+        object-fit: cover;
+        background-color: var(--b2-pre-bg);
+
+        cursor: pointer;
+    }
+
+    .up_title {
+        display: block;
+        margin-top: 10px;
+        margin-left: 13px;
+        padding-bottom: 2px;
+        color: #606266;
+        display: block;
+        // margin-right: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color .3s;
+        white-space: nowrap;
+    }
+
+    svg {
+        position: absolute;
+        top: 4%;
+        right: 2px;
+        cursor: pointer;
+
+        &:hover {
+            transition: all .2s ease-in;
+            width: 23px;
+            height: 23px;
+        }
+    }
+
+    .config-warp {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 30px;
+    }
+}
+
+.up-span {
+    margin: 30px 10px 0 10px;
+    cursor: pointer;
+    padding: 3px 5px;
+    background-color: var(--b2-main-span);
+    border-radius: 2rem;
+    color: var(--bg-text);
+}
+
+.home-md.mark-w {
+    position: absolute;
+    top: 10%;
+    right: 2%;
+    justify-content: flex-end;
+    cursor: pointer;
+    /deep/svg{
+        margin-left: 20px;
+        &:hover{
+            width: 28px;
+            height: 28px;
+            transition: all .5s inherit;
+        }
+    }
+}

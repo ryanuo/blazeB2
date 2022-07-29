@@ -1,0 +1,139 @@
+.home-w{
+  display: flex;
+}
+.wm-contaniner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .32);
+  z-index: 1999;
+  // opacity: 0;
+}
+
+.compress-remind {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  line-height: 20px;
+}
+
+.btn-upload {
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.upload-w {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 50px;
+
+  /deep/ .el-upload-dragger {
+    background-color: var(--b2-pre-bg);
+  }
+
+  /deep/ .el-upload__tip {
+    display: flex;
+    justify-content: space-between;
+
+    .el-tag {
+      cursor: pointer;
+    }
+  }
+
+}
+
+.p-upload-hd {
+  text-align: right;
+  margin: 10px 5px;
+}
+
+.remind-upload-file {
+  text-align: center;
+}
+
+/deep/ .el-radio-button__inner {
+  background-color: var(--b2-pre-bg);
+  border: 1px solid var(--b2-border);
+  color: var(--bg-text);
+}
+
+.el-radio-button:first-child .el-radio-button__inner {
+  border-radius: 40px !important;
+}
+
+h3 {
+  text-align: center;
+  font-size: 18px;
+}
+
+.res-upload {
+  text-align: center;
+
+  .res-content {
+    position: relative;
+    width: 50%;
+    margin: 20px auto;
+    box-shadow: 0 0 2px #dddbdb;
+    border: 1px dashed #ccc;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px 0 10px;
+
+    p {
+      word-break: keep-all;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.copy-view {
+  position: absolute;
+  top: calc(50% - 10px);
+  right: 10px;
+  width: 20px;
+  z-index: 2;
+  cursor: pointer;
+
+  &:hover {
+    transition: all .3s cubic-bezier(0.25, 0.88, 1, 1);
+    width: 22px;
+  }
+}
+
+@media only screen and (max-width: 537px) {
+  .upload-w {
+    margin-bottom: 50px;
+
+    /deep/ .el-upload-dragger {
+      width: 90vw;
+      height: 253px;
+    }
+  }
+
+  h3 {
+    display: none;
+  }
+}
+
+
+.upload-wrap {
+  margin-top: 10px;
+  max-height: 300px;
+  width: 70vw;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px dashed #dbdbf7;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
