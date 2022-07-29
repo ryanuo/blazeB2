@@ -3,8 +3,8 @@
  * @Date: 2022-07-03 08:59:18
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 15:07:02
- * @FilePath: \master\src\utils\common\login.js
+ * @LastEditTime: 2022-07-29 20:27:53
+ * @FilePath: \dev\src\utils\common\login.js
  */
 import { auth } from '@/utils/api'
 import { Notification } from 'element-ui'

@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-26 20:26:05
+ * @LastEditTime: 2022-07-29 22:12:47
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -43,7 +43,9 @@
         <el-checkbox v-for="(item, index) in picListDatas" :label="index" :key="item.uid">
           <image-item @setshowdiag="handleDiag" @update="updatePicLists" :picid="index"
             :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
-            :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index" />
+            :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index">
+            <TogChecked class="tog-container" />
+          </image-item>
         </el-checkbox>
       </el-checkbox-group>
     </div>
@@ -73,6 +75,7 @@ import ImageItem from './ImageItem/ImageItem.vue'
 import { endLoading, startLoading } from '@/utils/common/loading'
 import CopyAll from '../svg/CopyAll.vue'
 import DeleteSelect from '../svg/DeleteSelect.vue'
+import TogChecked from '../svg/TogChecked.vue'
 
 export default {
   data() {
@@ -101,7 +104,7 @@ export default {
       isUpSort: false
     }
   },
-  components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect },
+  components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect, TogChecked },
   computed: {
     ...mapWritableState(useStore, ['isLogined']), // 映射函数，取出isLogined
     ...mapState(useStore, ['prefixStatus']),

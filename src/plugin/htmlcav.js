@@ -3,7 +3,7 @@
  * @Date: 2022-07-16 20:35:30
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-26 18:59:41
+ * @LastEditTime: 2022-07-29 20:24:43
  * @FilePath: \dev\src\plugin\htmlcav.js
  */
 import html2canvas from 'html2canvas'

@@ -3,15 +3,15 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 13:54:00
- * @FilePath: \master\src\views\TabNav\TabNav.vue
+ * @LastEditTime: 2022-07-24 17:11:47
+ * @FilePath: \vite\src\views\TabNav\TabNav.vue
 -->
 <template>
   <div class="hd-w">
     <!-- <GithubView /> -->
     <div class="logo_w" @click="handleMainLogo">
       <div>
-        <img src="img/logo.svg" title="" />
+        <img src="@/icons/logo.svg" title="" />
       </div>
       <span>BlazeB2</span>
     </div>

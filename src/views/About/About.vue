@@ -3,13 +3,13 @@
  * @Date: 2022-07-01 14:18:36
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 12:59:12
- * @FilePath: \master\src\views\About\About.vue
+ * @LastEditTime: 2022-07-24 17:07:42
+ * @FilePath: \vite\src\views\About\About.vue
 -->
 <template>
   <div class="common-container">
     <div style="text-align: center;">
-      <img src="img/logo.svg" alt="" srcset="">
+      <img src="@/icons/logo.svg" alt="" srcset="">
       <h1 class="main-title">BlazeB2 图床</h1>
       <p class="p-simple">📷基于 backBlazeb2 API & ⚡ cloudflare 开发的具有 CDN 加速功能的图床工具</p>
       <p class="p-statement">郑重声明：请勿通过本站上传违反你当地法律的图片，所造成的一切后果与本站无关。</p>

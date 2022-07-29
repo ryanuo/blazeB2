@@ -3,8 +3,8 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-01 12:31:52
- * @FilePath: \web\src\App.vue
+ * @LastEditTime: 2022-07-29 20:46:10
+ * @FilePath: \dev\src\App.vue
 -->
 <template>
   <div id="app">
@@ -14,8 +14,6 @@
 
 <script>
 export default {
+  name: 'App'
 }
 </script>
-
-<style lang="less">
-</style>

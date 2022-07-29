@@ -118,6 +118,7 @@
   border-bottom: 1px solid var(--b2-border);
 }
 .el-collapse[data-v-0e0ad9a7] .el-select {
+  margin-top: 10px;
   margin-right: 10px;
 }
 .el-collapse h2[data-v-0e0ad9a7] {

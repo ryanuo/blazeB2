@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 09:21:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-26 21:16:40
- * @FilePath: \dev\src\utils\api\index.js
+ * @LastEditTime: 2022-07-07 12:05:53
+ * @FilePath: \web\src\utils\api\index.js
  */
 import axios from '../http'
 
@@ -66,6 +66,7 @@ const dataTitleGet = async function (prefix) {
     return []
   }
 }
+
 export {
   auth, uploadServer, picList, deleteitemImg, dataTitleGet
 }

@@ -1,11 +1,12 @@
 /*
  * @Author: Harry
- * @Date: 2022-07-12 08:56:50
+ * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 19:35:45
- * @FilePath: \master\src\main.prod.js
+ * @LastEditTime: 2022-07-24 17:36:56
+ * @FilePath: \vite\src\main.prod.js
  */
+
 /* eslint-disable */
 import Vue from 'vue'
 import { createPersistedState } from 'pinia-persistedstate-plugin'
@@ -14,10 +15,7 @@ import App from './App.vue'
 import router from './router'
 import ELEMENT from 'element-ui'
 import VueClipboard from 'vue-clipboard2'
-// import element from './plugin/elements.js'
-import './registerServiceWorker'
 import './assets/css/global.less'
-import './assets/css/element-variables.scss'
 const pinia = createPinia()
 pinia.use(createPersistedState())
 VueClipboard.config.autoSetContainer = true

@@ -1,20 +1,17 @@
 .DS_Store
 node_modules
 /dist
-
+docs1
 *.map
 # local env files
 #.env.local
 #.env.*.local
-
 *.bat
-package-lock.json
 # Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
 docs
 thd
 # Editor directories and files
