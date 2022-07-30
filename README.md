@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:37:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-25 11:03:17
+ * @LastEditTime: 2022-07-29 20:20:47
  * @FilePath: \dev\README.md
 -->
 <a href="https://b2.mr90.top/" >
@@ -93,12 +93,16 @@
 
 欢迎各种形式的贡献，包括但不限于：美化界面、增加功能、改进代码、 修复 Bug 等
 
+<a href="https://github.com/rr210/blazeB2/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=rr210/blazeB2" />
+</a>
+
 ## 🎃 反馈 | Feedback
 
-在使用过程中，如遇问题，请仔细阅读 **[官方文档](https://blazeb2.js.org)** ，或给作者提 **[Issue](https://github.com/rr210/blazeB2/issues)**
+在使用过程中，如遇问题，请仔细阅读 **[文档](https://blazeb2.js.org)** ，或给作者提 **[Issue](https://github.com/rr210/blazeB2/issues)**
 
 ## 💿 许可 | License
 
-**[GPL-3.0](https://github.com/Rr210/blazeB2/blob/master/LICENSE)** 
+**[Apache License 2.0](https://github.com/Rr210/blazeB2/blob/master/LICENSE)** 
 
-Copyright © 2022-Present blazeB2 Dev Team
+Copyright © 2022-Present blazeB2
