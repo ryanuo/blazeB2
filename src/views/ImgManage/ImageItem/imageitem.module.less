@@ -2,8 +2,8 @@
   width: 100%;
 
   /deep/ img.el-image__inner {
-    width: 92%;
-    height: 155px;
+    width: 98%;
+    height: 100px;
     border-radius: 10px;
     object-fit: cover;
   }
@@ -11,31 +11,50 @@
 }
 
 .pic-tit {
-  padding: 10px 0;
-  overflow: hidden; //超出的文本隐藏
-  text-overflow: ellipsis; //溢出用省略号显示
-  white-space: nowrap; //溢出不换行
+  padding: 3px 10px;
+  display: flex;
   border-bottom: 1px dashed #f2f2f2;
+  align-items: center;
+
+  span {
+    flex: auto;
+    // padding-left: 15px;
+    overflow: hidden; //超出的文本隐藏
+    text-overflow: ellipsis; //溢出用省略号显示
+    white-space: nowrap; //溢出不换行
+    // border-bottom: 1px dashed #f2f2f2;
+  }
+
+  // >div {
+  //   svg {
+  //     width: 100%;
+  //   }
+  // }
+}
+
+.pic-tit-checked {
+  background-color: var(--b2-btn-time);
+  border-radius: 6px;
 }
 
 .time-span {
   position: absolute;
-  padding: 2px 6px;
+  padding: 1px 3px;
   background: var(--b2-btn-time);
   border-radius: 8px;
   margin-left: 0;
   font-size: .5rem;
   font-weight: 700;
-  color: #fff;
-  bottom: 32%;
-  right: 6%;
-  backdrop-filter: saturate(180%) blur(20px);
+  color: var(--bg-text);;
+  bottom: 3%;
+  left: 3%;
   z-index: 2;
 }
 
-.img-item-t1{
+.img-item-t1 {
   &:hover {
-    .moremsg,
+
+    // .moremsg,
     /deep/ .el-checkbox__inner {
       box-shadow: 0 0 5px 0 #ccc;
       transition: all .4s ease-in;
@@ -44,9 +63,9 @@
   }
 }
 
-/deep/.image-slot{
-  width: 92%;
-  height: 155px;
+/deep/.image-slot {
+  width: 98%;
+  height: 100px;
   background: url(/img/loading1.gif) no-repeat;
   background-position: center center;
 }

@@ -3,7 +3,7 @@
  * @Date: 2022-07-14 13:02:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-26 19:15:04
+ * @LastEditTime: 2022-07-29 20:38:51
  * @FilePath: \dev\src\views\home\components\wm\wmarkview.vue
 -->
 <template>
@@ -83,12 +83,11 @@
 <script>
 import { Watermark } from '@pansy/vue-watermark'
 import TextSet from '@/views/svg/TextSet.vue'
-import { mapState } from 'pinia'
 import useStore from '@/store'
 import { Notification } from 'element-ui'
 import { doCut } from '@/plugin/htmlcav.js'
 import { uploadServer } from '@/utils/api'
-
+import { mapState } from 'pinia'
 export default {
   data() {
     return {
@@ -246,6 +245,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 @import './wmarkview.module.less';
 </style>

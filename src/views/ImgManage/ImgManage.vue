@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-26 20:26:05
+ * @LastEditTime: 2022-07-30 21:48:17
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -32,20 +32,42 @@
     <!-- <div class="waterfall-w"> -->
     <div class="pic-list-t1 animate__animated animate__fadeIn" :class="classType ? 'pic-list-t2' : ''" ref="picListRef">
       <div class="checkbox-wrap" v-if="selectList.length > 0">
-        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">{{ selectText }}
+        <b2-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">{{ selectText }}
+        </b2-checkbox>
+        <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">{{ selectText }}
+        </el-checkbox> -->
+        <!-- <el-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange">
+        <el-checkbox v-for="(item, index) in picListDatas" :label="index" :key="item.uid"
+          @contextmenu.prevent.stop.native="handleKeyClick($event, index)">
+          <template slot="csvg" slot-scope="content">
+            <TogChecked :isshow="content.checked" class="tog-container" />
+          </template>
+          <image-item @setshowdiag="handleDiag" @update="updatePicLists" :checked="checkAll" :picid="index"
+            :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
+            :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index">
+          </image-item>
         </el-checkbox>
+      </el-checkbox-group> -->
         <span class="red-c">已选中{{ this.selectList.length }}张图片</span>
         <span class="cancel-btn" @click="handleCancel">取消选择</span>
         <CopyAll class="svg-btn" @click.native="copyAllHandle" />
         <DeleteSelect class="svg-btn" @click.native="delSelect" />
       </div>
-      <el-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange">
-        <el-checkbox v-for="(item, index) in picListDatas" :label="index" :key="item.uid">
-          <image-item @setshowdiag="handleDiag" @update="updatePicLists" :picid="index"
+      <b2-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange">
+        <b2-checkbox v-for="(item, index) in picListDatas" :label="index" :key="item.uid"
+          @contextmenu.prevent.stop.native="handleKeyClick($event, index)">
+          <template slot="csvg" slot-scope="content">
+            <TogChecked :isshow="content.checked" class="tog-container" />
+          </template>
+          <image-item @setshowdiag="handleDiag" @update="updatePicLists" :checked="checkAll" :picid="index"
             :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
-            :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index" />
-        </el-checkbox>
-      </el-checkbox-group>
+            :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index">
+          </image-item>
+        </b2-checkbox>
+      </b2-checkbox-group>
+    </div>
+    <div v-if="showMenu" class="mark-cont" @click="showMenu = false" @contextmenu.prevent.stop="showMenu = false">
+      <contextmenu @menuEvent="handleMenuEvent" ref="contextmenu" :menu-style="menuTopLeft" />
     </div>
     <!-- </div> -->
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
@@ -66,18 +88,23 @@ import { mapActions, mapState, mapWritableState } from 'pinia'
 import { debounce, transiTime } from '@/plugin/filter'
 import useStore from '@/store'
 import { picList, deleteitemImg } from '@/utils/api'
-import LargeList from '../svg/LargeList.vue'
-import Refresh from '../svg/Refresh.vue'
-import sortView from '../svg/sortView.vue'
+import LargeList from '@/views/svg/LargeList.vue'
+import Refresh from '@/views/svg/Refresh.vue'
+import sortView from '@/views/svg/sortView.vue'
 import ImageItem from './ImageItem/ImageItem.vue'
 import { endLoading, startLoading } from '@/utils/common/loading'
-import CopyAll from '../svg/CopyAll.vue'
-import DeleteSelect from '../svg/DeleteSelect.vue'
-
+import CopyAll from '@/views/svg/CopyAll.vue'
+import DeleteSelect from '@/views/svg/DeleteSelect.vue'
+import TogChecked from '@/views/svg/TogChecked.vue'
+import Contextmenu from '@/views/ImgManage/contextMenu/ContextMenu.vue'
+import { B2Checkbox, B2CheckboxGroup } from '@/package/checkbox/'
 export default {
   data() {
     return {
       inputval: '',
+      onShfit: false,
+      onCtrl: false,
+      onAKey: false,
       selectList: [],
       centerDialogVisible: false,
       picListDatas: [],
@@ -97,11 +124,16 @@ export default {
         prefix: '', // 指定文件夹前缀
         delimiter: ''
       },
+      menuTopLeft: {
+        top: '',
+        left: ''
+      },
       loadingPicShow: false,
-      isUpSort: false
+      isUpSort: false,
+      showMenu: false
     }
   },
-  components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect },
+  components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect, Contextmenu, TogChecked, B2Checkbox, B2CheckboxGroup },
   computed: {
     ...mapWritableState(useStore, ['isLogined']), // 映射函数，取出isLogined
     ...mapState(useStore, ['prefixStatus']),
@@ -133,9 +165,15 @@ export default {
           this.getPicList()
         }
       }
+    },
+    val: {
+      handler(n, o) {
+        console.log(n, o)
+      }
     }
   },
   mounted() {
+    this.watchKeyEvent()
     if (this.imgDefaultFile) {
       this.reqParams.prefix = this.imgDefaultFile
     }
@@ -143,12 +181,93 @@ export default {
       this.getPicList()
     }
   },
+  beforeDestroy() {
+    const _this = this
+    // 销毁监听键盘事件
+    window.removeEventListener('keydown', _this.watchKeyEvent)
+    window.removeEventListener('keyup', _this.watchKeyEvent)
+  },
   methods: {
+    handleMenuEvent(e) {
+      console.log(e)
+      const _this = this
+      switch (e) {
+        case 0: // 打开图片到新的窗口
+          _this.handleMenuAfter(function (i) {
+            window.open(_this.prefixStatus + _this.picListDatas[i].fileName)
+          })
+          break
+        case 1: // 复制选中的所有图片链接
+          _this.copyAllHandle()
+          break
+        case 5: // 删除选中的所有图片
+          _this.delSelect()
+          break
+      }
+    },
+    handleMenuAfter(callback) {
+      for (const i of this.selectList) {
+        callback(i)
+      }
+    },
+    handleKeyClick(e, i) {
+      console.log(e)
+      const { x, y } = e
+      this.menuTopLeft.top = (y - 40) + 'px'
+      this.menuTopLeft.left = x + 'px'
+      if (!this.selectList.includes(i)) {
+        this.selectList = []
+        this.selectList.push(i)
+        this.isIndeterminate = true
+      }
+      this.showMenu = true
+    },
+    watchKeyEvent() {
+      const handleKey = debounce((key, status) => {
+        // console.log(key)
+        switch (key) {
+          case 'Shift':
+            this.onShfit = status
+            break
+          case 'Control':
+            this.onCtrl = status
+            break
+          case 'a':
+            console.log(this.onCtrl)
+            this.onAKey = status
+            if (this.onCtrl && this.onAKey) {
+              const flag = !this.selectList.length
+              this.handleCheckAllChange(flag)
+            }
+            break
+        }
+      }, 100, true)
+      window.addEventListener('keydown', function (e) {
+        e.stopPropagation()
+        document.body.onselectstart = function () {
+          return false
+        }
+        // document.getElementById('app').style.userSelect = 'none'
+        handleKey(e.key, true)
+      })
+      window.addEventListener('keyup', function (e) {
+        e.stopPropagation()
+        document.body.onselectstart = function () {
+          return false
+        }
+        // document.getElementById('app').style.userSelect = 'none'
+        handleKey(e.key, false)
+      })
+    },
+    handleIsshowChecked(item) {
+      return !this.selectList.includes(item)
+    },
     // 取消选择
     handleCancel() {
       if (this.selectList.length > 0) {
         this.selectList = []
         this.isIndeterminate = false
+        this.checkAll = false
       }
     },
     // 批量复制事件
@@ -176,6 +295,7 @@ export default {
       const sAll = [...(new Array(this.picListDatas.length)).keys()]
       console.log(sAll)
       this.selectList = val ? sAll : []
+      this.checkAll = val
       this.isIndeterminate = false
     },
     handleCheckedCitiesChange(e) {
@@ -204,6 +324,7 @@ export default {
       })
       return sequence
     },
+    // 批量删除
     delSelect() {
       const that = this
       MessageBox({
@@ -280,6 +401,9 @@ export default {
             if (res.data.files.length === 0) {
               Notification({ title: '提示', message: '文件夹内无图片', type: 'error' })
             }
+            // const r_ = res.data.files.map((item) => {
+            //   return Object.assign({}, item, { disabled: false })
+            // })
             if (_this.reqParams.startFileName === res.data.nextFileName) {
               Notification({ type: 'warning', message: '当前文件夹下图片已全部加载', title: '提示' })
             } else {
@@ -306,21 +430,6 @@ export default {
       // 文档内容的实际高度
       const blockScrollHeight = this.$refs.picListRef.scrollHeight
       this.$refs.picListRef.scrollTop = blockScrollHeight
-      // // 滚动条滚动高度
-      // const blockScrollTop = this.$refs.picListRef.scrollTop
-      // const _this = this
-      // Roll()
-      // function Roll() {
-      //   blockScrollTop += 100
-      //   if (blockScrollHeight <= blockScrollTop) return false
-      //   setTimeout(() => {
-      //     _this.$refs.picListRef.scrollTop = blockScrollTop
-      //     return Roll()
-      //   }, 10)
-      // }
-      // // 可视窗口高度
-      // const blockClientHeight = this.$refs.picListRef.clientHeight
-      // console.log(blockScrollHeight, blockScrollTop, blockClientHeight)
     },
     // 按升序降序排列
     handleSort() {

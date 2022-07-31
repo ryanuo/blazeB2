@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-26 21:37:26
+ * @LastEditTime: 2022-07-29 20:26:08
  * @FilePath: \dev\src\store\index.js
  */
 import { defineStore } from 'pinia'
@@ -39,8 +39,8 @@ const useStore = defineStore('store', {
         iscompress: false,
         rank: 0.8
       },
-      openUploadOutMD: false,
-      toFile: ''
+      toFile: '',
+      openUploadOutMD: false
     }
   },
   getters: {

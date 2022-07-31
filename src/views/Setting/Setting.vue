@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-26 21:16:22
+ * @LastEditTime: 2022-07-29 20:30:16
  * @FilePath: \dev\src\views\Setting\Setting.vue
 -->
 <template>
@@ -24,7 +24,7 @@
       <el-collapse-item title="🎃 页面图片管理" name="3">
         <h2>图片前缀(默认选择 host_url 在密钥配置中可修改)</h2>
         <set-prefix />
-        <h2>图片批量复制外链格式 <span class="red-c">%s</span>为外链地址</h2>
+        <h2>图片外链默认复制格式 <span class="red-c">%s</span>为外链地址</h2>
         <set-copy />
         <h2>默认检索的图片文件夹</h2>
         <set-default />
@@ -56,9 +56,9 @@ export default {
     SetDefault,
     SetCompress,
     SetUpload,
-    SetCopy, // SetWatermark
-
+    SetCopy,
     SetDefaultCopy
+    // SetWatermark
   },
   data() {
     return {

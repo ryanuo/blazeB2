@@ -3,12 +3,12 @@
  * @Date: 2022-07-01 19:21:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-26 21:10:43
+ * @LastEditTime: 2022-07-30 21:40:16
  * @FilePath: \dev\src\views\ImgManage\ImageItem\ImageItem.vue
 -->
 <template>
-  <div class="img-item-t1">
-    <MoreMsg class="moremsg" :pictitle="pictitle" :fileId="fileId" :picid="picid" v-on="$listeners" />
+  <div class="img-item-t1" :title="ptit">
+    <!-- <MoreMsg class="moremsg" :pictitle="pictitle" :fileId="fileId" :picid="picid" v-on="$listeners" /> -->
     <div class="time-span">{{ picTime }}</div>
     <el-image data-fancybox="gallery" :src="piclink">
       <div slot="placeholder" class="image-slot image-slot-placeholder">
@@ -19,7 +19,10 @@
     </el-image>
     <!-- <img  :src="piclink" alt="pictitle" srcset=""> -->
     <div class="item-t">
-      <div class="pic-tit">{{ ptit }}</div>
+      <div class="pic-tit">
+        <!-- <slot name="pic" :checked="nochecked"></slot> -->
+        <span>{{ ptit }}</span>
+      </div>
       <div class="link-copy-w">
         <mark-down :link="piclink" />
       </div>
@@ -28,9 +31,12 @@
 </template>
 
 <script>
-import MoreMsg from '@/views/ImgManage/ImageItem/moremsg/MoreMsg.vue'
+// import MoreMsg from '@/views/ImgManage/ImageItem/moremsg/MoreMsg.vue'
 import MarkDown from '@/views/svg/MarkDown.vue'
 export default {
+  data() {
+    return {}
+  },
   props: {
     piclink: {
       type: String,
@@ -59,7 +65,7 @@ export default {
       return a_[a_.length - 1]
     }
   },
-  components: { MoreMsg, MarkDown }
+  components: { MarkDown }
 }
 </script>
 

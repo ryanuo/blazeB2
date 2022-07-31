@@ -3,7 +3,7 @@
  * @Date: 2022-07-16 11:48:46
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-16 15:54:36
+ * @LastEditTime: 2022-07-30 15:27:11
  * @FilePath: \dev\src\views\svg\uploadTaggle.vue
 -->
 <template>
@@ -89,47 +89,23 @@ export default {
   svg {
     transform: rotate(45deg);
   }
-
-  // box-shadow: 0 1rem 1rem var(--border-color);
 }
 
 .icon-1 {
-  animation: rotate 2s infinite;
-}
-
-@-webkit-keyframes rotate {
-  0% {
-    -webkit-transform-origin: center;
-    transform-origin: center;
-    -webkit-transform: rotate3d(0, 0, 1, -200deg);
-    transform: rotate3d(0, 0, 1, -200deg)
-  }
-
-  100% {
-    -webkit-transform-origin: center;
-    transform-origin: center;
-    -webkit-transform: none;
-    transform: none
-  }
+  animation: rotate 2s infinite linear;
 }
 
 @keyframes rotate {
   0% {
-    -webkit-transform-origin: center;
-    -ms-transform-origin: center;
-    transform-origin: center;
-    -webkit-transform: rotate3d(0, 0, 1, -200deg);
-    -ms-transform: rotate3d(0, 0, 1, -200deg);
-    transform: rotate3d(0, 0, 1, -200deg)
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
   }
 
   100% {
-    -webkit-transform-origin: center;
-    -ms-transform-origin: center;
-    transform-origin: center;
-    -webkit-transform: none;
-    -ms-transform: none;
-    transform: none
+    transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
   }
 }
 </style>
