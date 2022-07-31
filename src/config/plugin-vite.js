@@ -3,7 +3,7 @@
  * @Date: 2022-07-30 08:47:50
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-30 13:12:46
+ * @LastEditTime: 2022-07-31 14:57:29
  * @FilePath: \dev\src\config\plugin-vite.js
  */
 import envCompatible from 'vite-plugin-env-compatible'
@@ -16,7 +16,6 @@ import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import importToCDN from 'vite-plugin-cdn-import'
 import { cdn } from './index'
-console.log(process.cwd())
 const isPro = process.env.NODE_ENV === 'pro'
 const transformIndexHtml = (code) => {
   return code.replace(/__INDEX__/, `${isPro ? '/src/main.prod.js' : '/src/main.js'}`) // 生产环境

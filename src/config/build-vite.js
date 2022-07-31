@@ -3,12 +3,13 @@
  * @Date: 2022-07-30 12:53:09
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-30 13:06:30
+ * @LastEditTime: 2022-07-31 15:08:41
  * @FilePath: \dev\src\config\build-vite.js
  */
-const isPro = process.env.NODE_ENV === 'pro'
+// const isPro = import.meta.env.VITE_ENV === 'pro'
+// console.log(isPro)
 const build = {
-  sourcemap: !isPro,
+  sourcemap: false,
   assetsDir: 'dist',
   minify: 'terser',
   assetsInlineLimit: 4096,

@@ -1,3 +1,4 @@
 NODE_ENV=pro
+VITE_ENV=pro
 VUE_APP_URL= '/'
 VUE_APP_PUBLICPATH = '/'
