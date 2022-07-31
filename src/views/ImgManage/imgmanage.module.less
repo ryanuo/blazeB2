@@ -53,68 +53,10 @@
   line-height: 20px;
 }
 
-// .el-checkbox-group {
-//   display: flex;
-//   flex-wrap: wrap;
-//   margin: 10px 0;
-//   // justify-content: space-around;
-//   overflow: auto;
-//   max-height: 70vh;
-
-//   .el-checkbox {
-//     position: relative;
-//     border-radius: 10px;
-//     box-shadow: 0 0 5px #ccc;
-//     text-align: center;
-//     width: 15%;
-//     padding: 5px;
-//     box-sizing: border-box;
-//     margin: 10px;
-//     cursor: pointer;
-
-//     /deep/.el-checkbox__label {
-//       display: block;
-//       padding-left: 0;
-//       width: 100%;
-//     }
-
-//     /deep/.el-checkbox__input {
-//       position: absolute;
-//       top: 5%;
-//       left: 15px;
-
-
-//       .el-checkbox__inner {
-//         border-radius: 20%;
-//         width: 22px;
-//         height: 22px;
-
-//         &::after {
-//           height: 13px;
-//           left: 6px;
-//           width: 6px;
-//         }
-//       }
-//     }
-
-//     &:hover {
-//       box-shadow: 0 0 12px #ccc;
-
-//       /deep/ .more-w {
-//         box-shadow: 0 0 5px 0 #ccc;
-//         transition: all .4s ease-in;
-//         opacity: 1;
-//       }
-//     }
-
-
-//   }
-// }
 .el-checkbox-group {
   display: grid;
   flex-wrap: wrap;
   margin: 10px 0;
-  // justify-content: space-around;
   overflow: auto;
   max-height: 70vh;
 
@@ -142,6 +84,7 @@
 
 
       .el-checkbox__inner {
+        display: none;
         border-radius: 20%;
         width: 22px;
         height: 22px;
@@ -156,16 +99,16 @@
 
     &:hover {
       box-shadow: 0 0 12px #ccc;
-
-      // /deep/ .more-w {
-      //   box-shadow: 0 0 5px 0 #ccc;
-      //   transition: all .4s ease-in;
-      //   opacity: 1;
-      // }
     }
   }
 }
 
+.tog-checked-sty {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: 20;
+}
 
 .pic-list-t2 {
   .el-checkbox-group {
@@ -175,27 +118,17 @@
 
 
       .img-item-t1 {
-        // display: flex;
-
         /deep/ .el-image {
           display: none;
 
           img.el-image__inner {
             width: 100%;
-            // height: 155px;
             border-radius: 10px;
             object-fit: cover;
           }
         }
 
         /deep/ .item-t {
-          // flex: auto;
-          // display: flex;
-          // flex-direction: column;
-          // justify-content: space-between;
-          padding-top: 15px;
-          padding-bottom: 7px;
-
           .pic-tit {
             border: none;
           }
@@ -204,6 +137,9 @@
         /deep/ .time-span {
           display: none;
         }
+      }
+      .tog-checked-sty{
+        bottom: -41%;
       }
     }
   }
@@ -234,10 +170,22 @@
 }
 
 .tog-container {
-  // position: absolute;
-  // bottom: 0;
-  // left: 0;
   width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.mark-cont {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  // background-color: rgba(0, 0, 0, .1);
 }
 
 @media (min-width: 960px) {

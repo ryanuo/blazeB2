@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:37:06
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-29 20:20:47
+ * @LastEditTime: 2022-07-30 12:44:05
  * @FilePath: \dev\README.md
 -->
 <a href="https://b2.mr90.top/" >
@@ -92,6 +92,7 @@
 ## ✨ 贡献 | Contribution
 
 欢迎各种形式的贡献，包括但不限于：美化界面、增加功能、改进代码、 修复 Bug 等
+
 <a href="https://github.com/rr210/blazeB2/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=rr210/blazeB2" />
 </a>

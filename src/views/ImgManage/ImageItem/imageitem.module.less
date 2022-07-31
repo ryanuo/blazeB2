@@ -13,21 +13,28 @@
 .pic-tit {
   padding: 3px 10px;
   display: flex;
+  border-bottom: 1px dashed #f2f2f2;
+  align-items: center;
 
   span {
     flex: auto;
-    padding-left: 6px;
+    // padding-left: 15px;
     overflow: hidden; //超出的文本隐藏
     text-overflow: ellipsis; //溢出用省略号显示
     white-space: nowrap; //溢出不换行
-    border-bottom: 1px dashed #f2f2f2;
+    // border-bottom: 1px dashed #f2f2f2;
   }
 
-  >div {
-    svg {
-      width: 100%;
-    }
-  }
+  // >div {
+  //   svg {
+  //     width: 100%;
+  //   }
+  // }
+}
+
+.pic-tit-checked {
+  background-color: var(--b2-btn-time);
+  border-radius: 6px;
 }
 
 .time-span {
@@ -38,10 +45,9 @@
   margin-left: 0;
   font-size: .5rem;
   font-weight: 700;
-  color: #fff;
-  bottom: 45%;
-  right: 6%;
-  backdrop-filter: saturate(180%) blur(20px);
+  color: var(--bg-text);;
+  bottom: 3%;
+  left: 3%;
   z-index: 2;
 }
 

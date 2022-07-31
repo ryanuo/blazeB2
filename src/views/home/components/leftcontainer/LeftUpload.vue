@@ -3,16 +3,20 @@
  * @Date: 2022-07-17 10:26:50
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 17:20:45
+ * @LastEditTime: 2022-07-30 16:40:38
  * @FilePath: \dev\src\views\home\components\leftcontainer\LeftUpload.vue
 -->
 <template>
   <div class="left-upload">
-    <h2>临时上传管理</h2>
+    <h2>临时上传管理<span class="red-c">({{ list.length }})</span></h2>
     <div class="temp-content">
       <image-item @setshowdiag="handleDiag" @update="updatePicLists" v-for="(item, index) in list"
         :key="item.fileName + index" :picid="index" :piclink="prefixStatus + item.fileName" :pictitle="item.fileName"
-        :fileId="item.fileId" :picTime="timespan(item.uploadTimestamp)" />
+        :fileId="item.fileId" :picTime="timespan(item.uploadTimestamp)">
+        <template slot="pic" slot-scope="content">
+          <tog-checked :isshow="content.checked" class="tog-container" />
+        </template>
+      </image-item>
     </div>
     <el-dialog class="tpxq_w" title="图片详情" :visible.sync="centerDialogVisible" width="40%" center>
       <div><span>图片名称：</span>{{ currentitemdetail.filename }}</div>
@@ -27,8 +31,9 @@ import ImageItem from '@/views/ImgManage/ImageItem/ImageItem.vue'
 import { transiTime } from '@/plugin/filter'
 import { mapState, mapWritableState } from 'pinia'
 import useStore from '@/store'
+import TogChecked from '@/views/svg/TogChecked.vue'
 export default {
-  components: { ImageItem },
+  components: { ImageItem, TogChecked },
   data() {
     return {
       centerDialogVisible: false,
