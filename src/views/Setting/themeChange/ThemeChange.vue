@@ -3,8 +3,8 @@
  * @Date: 2022-07-04 12:24:22
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-04 14:14:55
- * @FilePath: \web\src\views\Setting\themeChange\ThemeChange.vue
+ * @LastEditTime: 2022-08-01 22:16:57
+ * @FilePath: \dev\src\views\Setting\themeChange\ThemeChange.vue
 -->
 <template>
   <div>

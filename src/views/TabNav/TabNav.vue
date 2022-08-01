@@ -3,17 +3,13 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-24 17:11:47
- * @FilePath: \vite\src\views\TabNav\TabNav.vue
+ * @LastEditTime: 2022-08-01 22:18:11
+ * @FilePath: \dev\src\views\TabNav\TabNav.vue
 -->
 <template>
   <div class="hd-w">
-    <!-- <GithubView /> -->
-    <div class="logo_w" @click="handleMainLogo">
-      <div>
-        <img src="@/icons/logo.svg" title="" />
-      </div>
-      <span>BlazeB2</span>
+    <div>
+      <SwitchTheme />
     </div>
     <div class="lay-out">
       <div v-if="isLogined" @click="openhandle">
@@ -23,14 +19,16 @@
         <SignSvg />
       </div>
     </div>
-    <!-- background-color="#545c64"
-      text-color="#fff" active-text-color="#ffd04b" -->
-    <el-menu :default-active="$route.name" class="el-menu-demo" mode="horizontal" router>
-      <el-menu-item index="home">首页</el-menu-item>
-      <el-menu-item v-if="isLogined" index="imanage">图床管理</el-menu-item>
-      <el-menu-item index="setting">配置管理</el-menu-item>
-      <el-menu-item index="about">关于程序</el-menu-item>
-    </el-menu>
+    <nav class="nav-container" @click="handleNav($event)">
+      <span :class="currentMenu === 'home' ? 'is-nav-selected' : ''" data-index="home">首页</span>
+      <span :class="currentMenu === 'imanage' ? 'is-nav-selected' : ''" v-if="isLogined"
+        data-index="imanage">图床管理</span>
+      <div class="logo-wrap">
+        <img src="@/icons/logo.svg" data-index="home" title="" />
+      </div>
+      <span :class="currentMenu === 'setting' ? 'is-nav-selected' : ''" data-index="setting">配置管理</span>
+      <span :class="currentMenu === 'about' ? 'is-nav-selected' : ''" data-index="about">关于程序</span>
+    </nav>
     <router-view />
     <footer>
       Copyright ©2021-{{ timeE }} <a href="https://github.com/Rr210/blazeB2" target="_blank"><svg aria-hidden="true"
@@ -51,16 +49,18 @@ import { mapState, mapActions } from 'pinia'
 import LayOut from '@/views/svg/LayOut.vue'
 import SignSvg from '@/views/svg/SignSvg.vue'
 import { Message, MessageBox } from 'element-ui'
-import { debounce } from '../../plugin/filter'
+import { debounce } from '@/plugin/filter'
+import SwitchTheme from '../../components/switchtheme/SwitchTheme.vue'
 export default {
   data() {
     return {
       currentMenu: 'home'
     }
   },
-  components: { LayOut, SignSvg },
+  components: { LayOut, SignSvg, SwitchTheme },
   mounted() {
     this.handleIsLogined()
+    this.handleReload()
     const theme = localStorage.getItem('themeb2')
     if (theme) {
       const dom = document.documentElement
@@ -73,6 +73,19 @@ export default {
     ...mapState(useStore, ['isLogined']) // 映射函数，取出tagslist
   },
   methods: {
+    // 页面刷新时的nav选中
+    handleReload() {
+      const name = this.$route.name
+      this.currentMenu = name
+    },
+    // 跳转
+    handleNav(e) {
+      const name = e.target.dataset.index
+      if (this.$route.name !== name) {
+        this.currentMenu = name
+        this.$router.push({ name })
+      }
+    },
     handleMainLogo() {
       if (this.$route.name !== 'home') {
         this.$router.push({ name: 'home' })

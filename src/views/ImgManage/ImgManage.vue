@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-30 21:48:17
+ * @LastEditTime: 2022-08-01 21:46:25
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -16,7 +16,6 @@
         {{ imgDefaultFile === '' ? '配置页面修改默认仓库地址' : `当前的仓库名：${imgDefaultFile}` }}
       </el-tag>
       <el-tag type="info" @click="$router.replace({ name: 'setting', query: { id: '3' } })">修改</el-tag>
-      <!-- <el-button size="small"></el-button> -->
       <div class="svg-w">
         <div title="升降序排列" @click="handleSort">
           <sort-view />
@@ -29,7 +28,6 @@
         </div>
       </div>
     </div>
-    <!-- <div class="waterfall-w"> -->
     <div class="pic-list-t1 animate__animated animate__fadeIn" :class="classType ? 'pic-list-t2' : ''" ref="picListRef">
       <div class="checkbox-wrap" v-if="selectList.length > 0">
         <b2-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">{{ selectText }}

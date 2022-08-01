@@ -3,14 +3,14 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 18:16:58
+ * @LastEditTime: 2022-08-01 21:32:18
  * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
   <div class="home-w">
-    <div class="left-aside" v-if="leftTempList.length > 0">
+    <!-- <div class="left-aside" v-if="leftTempList.length > 0">
       <LeftUpload v-model="leftTempList" />
-    </div>
+    </div> -->
     <div class="upload-w" style="width: 100%">
       <!-- @mouseenter="mouseHandle" @mouseleave.stop="mouseMoveHandle" -->
       <div id="tar_box" contenteditable=""></div>
@@ -83,12 +83,13 @@ import useStore from '@/store'
 import { mapActions, mapState } from 'pinia'
 import UploadList from './components/UploadList.vue'
 import Wmarkview from './components/wm/wmarkview.vue'
-import LeftUpload from './components/leftcontainer/LeftUpload.vue'
+// import LeftUpload from './components/leftcontainer/LeftUpload.vue'
 const CopyView = () => import('@/views/svg/CopyView.vue')
 export default {
-  components: { CopyView, UploadList, Wmarkview, LeftUpload },
+  components: { CopyView, UploadList, Wmarkview },
   data() {
     return {
+      // leftTempList: [],
       fdata: null,
       radio2: 'URL',
       isShowWm: false,
@@ -97,7 +98,6 @@ export default {
       loadings: false,
       fileList: [],
       uploadProgress: 0,
-      leftTempList: [],
       limit: 10,
       compressMsg: {
         iscompress: false,
