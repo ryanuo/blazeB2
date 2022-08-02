@@ -31,6 +31,7 @@
 <script>
 /* eslint-disable */
 import Emitter from 'element-ui/src/mixins/emitter'
+import { debounce } from '@/plugin/filter';
 
 export default {
   name: 'ElCheckbox',
@@ -162,7 +163,8 @@ export default {
         this.model = this.trueLabel || true
       }
     },
-    handleChange(ev) {
+
+    handleChange: debounce(function (ev) {
       if (this.isLimitExceeded) return
       let value
       if (ev.target.checked) {
@@ -176,7 +178,7 @@ export default {
           this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value])
         }
       })
-    }
+    }, 100, true)
   },
 
   created() {

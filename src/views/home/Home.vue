@@ -3,14 +3,14 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 18:16:58
+ * @LastEditTime: 2022-08-02 21:53:47
  * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
   <div class="home-w">
-    <div class="left-aside" v-if="leftTempList.length > 0">
+    <!-- <div class="left-aside" v-if="leftTempList.length > 0">
       <LeftUpload v-model="leftTempList" />
-    </div>
+    </div> -->
     <div class="upload-w" style="width: 100%">
       <!-- @mouseenter="mouseHandle" @mouseleave.stop="mouseMoveHandle" -->
       <div id="tar_box" contenteditable=""></div>
@@ -37,7 +37,7 @@
           </div>
           <span v-if="fileList.length > 0">
             <p class="p-upload-hd">{{ '上传进度：' + uploadProgress + "/" + fileList.length }}</p>
-            <ul class="upload-wrap">
+            <ul class="upload-wrap" @click="showImgPrew">
               <UploadList @watermarkhandle="handleMark" @changefilelist="handleDelete" v-for="(item, index) in fileList"
                 :styleCount="styC(index) ? 'width:97.2%' : ''" :file="item" :ref="'uploadRef' + index" :key="item.uid"
                 :pid="index" />
@@ -55,22 +55,6 @@
       </el-upload>
     </div>
     <!-- fileList.length <= 0 -->
-    <div style="margin: 20px 0;text-align: center;" v-if="0">
-      <el-radio-group v-model="radio2" size="medium" class="e-rg" @change="changeCopyStatus">
-        <el-tooltip v-for="(item, index) in defaultcopyformat.formatList" :content="item.replace(/%s/g, copycontent)"
-          :key="index" class="item" effect="dark" placement="top-start">
-          <el-radio-button class="e-rb" :label="index"></el-radio-button>
-        </el-tooltip>
-      </el-radio-group>
-      <div class="res-upload">
-        <div class="res-content" title="点击复制">
-          <p>{{ resultCopy }}</p>
-          <div @click="copyhandle">
-            <CopyView class="copy-view" />
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -83,21 +67,17 @@ import useStore from '@/store'
 import { mapActions, mapState } from 'pinia'
 import UploadList from './components/UploadList.vue'
 import Wmarkview from './components/wm/wmarkview.vue'
-import LeftUpload from './components/leftcontainer/LeftUpload.vue'
-const CopyView = () => import('@/views/svg/CopyView.vue')
 export default {
-  components: { CopyView, UploadList, Wmarkview, LeftUpload },
+  components: { UploadList, Wmarkview },
   data() {
     return {
       fdata: null,
-      radio2: 'URL',
       isShowWm: false,
       currentfileIndex: 0,
       copycontent: '',
       loadings: false,
       fileList: [],
       uploadProgress: 0,
-      leftTempList: [],
       limit: 10,
       compressMsg: {
         iscompress: false,
@@ -148,6 +128,19 @@ export default {
     ...mapActions(useStore, ['setDefaultFormat']),
     handleDelete(index) {
       this.fileList.splice(index, 1)
+    },
+    showImgPrew(e) {
+      console.log(e)
+      const { currentSrc } = e.target
+      console.log(currentSrc)
+      if (currentSrc) {
+        // const urlData = this.picListDatas.map(v => this.prefixStatus + v.fileName)
+        this.$hevueImgPreview({
+          url: currentSrc,
+          keyboard: true,
+          clickMaskCLose: true
+        })
+      }
     },
     // 处理水印结果
     handleWatermarkEnd(e) {
@@ -216,7 +209,6 @@ export default {
           data.push(r)
           if (r.fileName) {
             _this.uploadProgress += 1
-            _this.leftTempList.unshift(r)
           }
           return data
         })
@@ -236,7 +228,6 @@ export default {
         })
         await this.queue(pros)
         const errorL = _this.fileList.length - _this.uploadProgress
-        _this.handletempList(this.leftTempList)
         document.getElementById('tar_box').innerHTML = ''
         endLoading()
         Notification({
@@ -252,10 +243,6 @@ export default {
           type: 'error'
         })
       })
-    },
-    // 临时列表展示
-    handletempList(list) {
-      sessionStorage.setItem('templist', JSON.stringify(list))
     },
     // 文件检查
     checkFileType(file) {
