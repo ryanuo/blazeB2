@@ -3,21 +3,13 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-01 22:18:11
+ * @LastEditTime: 2022-08-02 10:45:11
  * @FilePath: \dev\src\views\TabNav\TabNav.vue
 -->
 <template>
   <div class="hd-w">
-    <div>
-      <SwitchTheme />
-    </div>
     <div class="lay-out">
-      <div v-if="isLogined" @click="openhandle">
-        <LayOut />
-      </div>
-      <div v-else @click="tapLoginPage">
-        <SignSvg />
-      </div>
+      <SwitchTheme />
     </div>
     <nav class="nav-container" @click="handleNav($event)">
       <span :class="currentMenu === 'home' ? 'is-nav-selected' : ''" data-index="home">首页</span>
@@ -45,44 +37,47 @@
 
 <script>
 import useStore from '@/store' // 引入store
-import { mapState, mapActions } from 'pinia'
-import LayOut from '@/views/svg/LayOut.vue'
-import SignSvg from '@/views/svg/SignSvg.vue'
-import { Message, MessageBox } from 'element-ui'
-import { debounce } from '@/plugin/filter'
-import SwitchTheme from '../../components/switchtheme/SwitchTheme.vue'
+import { mapState } from 'pinia'
+import SwitchTheme from '@/components/switchtheme/SwitchTheme.vue'
 export default {
   data() {
     return {
       currentMenu: 'home'
     }
   },
-  components: { LayOut, SignSvg, SwitchTheme },
+  watch: {
+    routerName: {
+      handler(n, o) {
+        if (n !== this.currentMenu) {
+          this.currentMenu = n
+        }
+      }
+    }
+  },
+  components: { SwitchTheme },
   mounted() {
-    this.handleIsLogined()
-    this.handleReload()
     const theme = localStorage.getItem('themeb2')
     if (theme) {
       const dom = document.documentElement
       const t_ = JSON.parse(theme).theme
       if (dom.className !== t_) { document.documentElement.className = t_ }
     }
+    this.handleReload()
   },
   computed: {
     timeE() { return (new Date()).getFullYear() },
-    ...mapState(useStore, ['isLogined']) // 映射函数，取出tagslist
+    ...mapState(useStore, ['isLogined']), // 映射函数，取出tagslist
+    ...mapState(useStore, ['routerName']) // 映射函数，取出tagslist
   },
   methods: {
     // 页面刷新时的nav选中
     handleReload() {
-      const name = this.$route.name
-      this.currentMenu = name
+      this.currentMenu = this.routerName
     },
     // 跳转
     handleNav(e) {
       const name = e.target.dataset.index
-      if (this.$route.name !== name) {
-        this.currentMenu = name
+      if (name && this.$route.name !== name) {
         this.$router.push({ name })
       }
     },
@@ -90,34 +85,7 @@ export default {
       if (this.$route.name !== 'home') {
         this.$router.push({ name: 'home' })
       }
-    },
-    ...mapActions(useStore, ['handleIsLogined']),
-    openhandle() {
-      MessageBox({
-        title: '提示',
-        message: '此操作将删除本地缓冲信息, 是否继续?',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        showCancelButton: true,
-        type: 'warning'
-      }).then(() => {
-        localStorage.removeItem('token_api')
-        localStorage.removeItem('authmsg')
-        localStorage.removeItem('pinia-store')
-        this.handleIsLogined()
-      }).then(() => {
-        Message({
-          type: 'success',
-          message: '缓冲清除成功,已退出!'
-        })
-      })
-    },
-    // 跳转登录页面
-    tapLoginPage: debounce(function () {
-      if (this.$route.name !== 'setting') {
-        this.$router.push({ name: 'setting', query: { id: '1' } })
-      }
-    }, 300, true)
+    }
   }
 }
 </script>

@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-01 21:46:25
+ * @LastEditTime: 2022-08-02 21:48:34
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -32,26 +32,12 @@
       <div class="checkbox-wrap" v-if="selectList.length > 0">
         <b2-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">{{ selectText }}
         </b2-checkbox>
-        <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">{{ selectText }}
-        </el-checkbox> -->
-        <!-- <el-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange">
-        <el-checkbox v-for="(item, index) in picListDatas" :label="index" :key="item.uid"
-          @contextmenu.prevent.stop.native="handleKeyClick($event, index)">
-          <template slot="csvg" slot-scope="content">
-            <TogChecked :isshow="content.checked" class="tog-container" />
-          </template>
-          <image-item @setshowdiag="handleDiag" @update="updatePicLists" :checked="checkAll" :picid="index"
-            :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
-            :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index">
-          </image-item>
-        </el-checkbox>
-      </el-checkbox-group> -->
         <span class="red-c">已选中{{ this.selectList.length }}张图片</span>
         <span class="cancel-btn" @click="handleCancel">取消选择</span>
         <CopyAll class="svg-btn" @click.native="copyAllHandle" />
         <DeleteSelect class="svg-btn" @click.native="delSelect" />
       </div>
-      <b2-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange">
+      <b2-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange" @dblclick.native="showImgPrew">
         <b2-checkbox v-for="(item, index) in picListDatas" :label="index" :key="item.uid"
           @contextmenu.prevent.stop.native="handleKeyClick($event, index)">
           <template slot="csvg" slot-scope="content">
@@ -67,7 +53,10 @@
     <div v-if="showMenu" class="mark-cont" @click="showMenu = false" @contextmenu.prevent.stop="showMenu = false">
       <contextmenu @menuEvent="handleMenuEvent" ref="contextmenu" :menu-style="menuTopLeft" />
     </div>
-    <!-- </div> -->
+    <div v-if="isDownload" class="isdload"><span><img src="/img/loading.gif" alt="" srcset="" />正在下载请耐心等待({{
+        downloadProgress
+    }}/{{ selectList.length }})</span>
+    </div>
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
       :current-page.sync="currentPage" :page-sizes="[50, 80, 100, 200]" :page-size="reqParams.maxFileCount"
       layout="sizes,next">
@@ -83,7 +72,7 @@
 <script>
 import { Message, MessageBox, Notification } from 'element-ui'
 import { mapActions, mapState, mapWritableState } from 'pinia'
-import { debounce, transiTime } from '@/plugin/filter'
+import { debounce, transiTime, urlToBase64, useText } from '@/plugin/filter'
 import useStore from '@/store'
 import { picList, deleteitemImg } from '@/utils/api'
 import LargeList from '@/views/svg/LargeList.vue'
@@ -96,10 +85,14 @@ import DeleteSelect from '@/views/svg/DeleteSelect.vue'
 import TogChecked from '@/views/svg/TogChecked.vue'
 import Contextmenu from '@/views/ImgManage/contextMenu/ContextMenu.vue'
 import { B2Checkbox, B2CheckboxGroup } from '@/package/checkbox/'
+import JSZip from 'jszip'
+import FileSaver from 'file-saver'
+
 export default {
   data() {
     return {
       inputval: '',
+      isDownload: false,
       onShfit: false,
       onCtrl: false,
       onAKey: false,
@@ -110,6 +103,7 @@ export default {
       checkAll: false,
       isIndeterminate: false,
       deleteprogress: 0,
+      downloadProgress: 0,
       currentitemdetail: {
         filesize: '',
         filename: '',
@@ -186,6 +180,66 @@ export default {
     window.removeEventListener('keyup', _this.watchKeyEvent)
   },
   methods: {
+    ...mapActions(useStore, ['handleIsLogined']),
+    // 下载图片zip
+    downloadFileZip() {
+      this.isDownload = true
+      this.downloadProgress = 0
+      const _this = this
+      const zip = new JSZip()
+      console.log(zip)
+      zip.file('使用文档.md', useText)
+      this.getImgObj().then(downlen => {
+        const imgF = zip.folder('images')
+        if (downlen.length > 0) {
+          for (const i of downlen) {
+            const data_ = i.bs64Data.split(',')[1]
+            imgF.file(i.filename, data_, { base64: true })
+            _this.downloadProgress += 1
+          }
+          return zip
+        }
+      }).then((zip) => {
+        zip.generateAsync({ type: 'blob' })
+          .then(function (content) {
+            // see FileSaver.js
+            FileSaver(content, 'example.zip')
+            _this.isDownload = false
+          })
+      })
+    },
+    // 获取页面选中的图片对象
+    async getImgObj() {
+      // return new Promise((resolve) => {
+      const imgObjList = []
+      const a = document.querySelectorAll('.el-image__inner')
+      for (const i of this.selectList) {
+        const urlSplit = a[i].src.split('/')
+        const filename = urlSplit[urlSplit.length - 1]
+        const fileFormat = filename.split('.')[filename.split('.').length - 1]
+        const res = await urlToBase64(a[i].src)
+        imgObjList.push({
+          filename,
+          format: fileFormat,
+          bs64Data: res
+        })
+      }
+      return imgObjList
+    },
+    // 图片预览功能
+    showImgPrew(e) {
+      console.log(e)
+      const { currentSrc } = e.target
+      console.log(currentSrc)
+      if (currentSrc) {
+        // const urlData = this.picListDatas.map(v => this.prefixStatus + v.fileName)
+        this.$hevueImgPreview({
+          url: currentSrc,
+          keyboard: true,
+          clickMaskCLose: true
+        })
+      }
+    },
     handleMenuEvent(e) {
       console.log(e)
       const _this = this
@@ -197,6 +251,9 @@ export default {
           break
         case 1: // 复制选中的所有图片链接
           _this.copyAllHandle()
+          break
+        case 4:
+          _this.downloadFileZip()
           break
         case 5: // 删除选中的所有图片
           _this.delSelect()
@@ -386,7 +443,6 @@ export default {
     updatePicLists(e) {
       this.picListDatas.splice(e, 1)
     },
-    ...mapActions(useStore, ['handleIsLogined']),
     // 获取数据
     getPicList(fn = null) {
       const _this = this

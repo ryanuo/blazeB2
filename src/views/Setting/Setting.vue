@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-29 20:30:16
+ * @LastEditTime: 2022-08-02 10:00:48
  * @FilePath: \dev\src\views\Setting\Setting.vue
 -->
 <template>
@@ -29,10 +29,6 @@
         <h2>默认检索的图片文件夹</h2>
         <set-default />
       </el-collapse-item>
-      <el-collapse-item title="🍥 主题设置" name="4">
-        <h2>主题选择</h2>
-        <theme-change />
-      </el-collapse-item>
     </el-collapse>
 
   </div>
@@ -41,18 +37,15 @@
 <script>
 import FormView from '@/views/formview/FormView.vue'
 import SetPrefix from './setprefix/SetPrefix.vue'
-import ThemeChange from './themeChange/ThemeChange.vue'
 import SetDefault from './setDefault/SetDefault.vue'
 import SetCompress from './setMain/SetCompress.vue'
 import SetUpload from './setUploadFile/SetUpload.vue'
 import SetCopy from './setcopy/SetCopy.vue'
 import SetDefaultCopy from './setdefaultCopy/SetDefaultCopy.vue'
-// import SetWatermark from './setwatermark/SetWatermark.vue'
 export default {
   components: {
     FormView,
     SetPrefix,
-    ThemeChange,
     SetDefault,
     SetCompress,
     SetUpload,

@@ -1,15 +1,19 @@
+@text-color: #2c3e50;
+
 :root {
     --b2-theme-c: #379ae8;
     --b2-theme-c-light: #4ea3e4;
     --b2-bg: #f8fbff;
     --b2-pre-bg: rgba(242, 246, 252, 0.859);
-    --b2-text: #2c3e50;
+    --b2-text: @text-color;
     --b2-active: #fff;
     --b2-text-active: #fff;
     --b2-nav-hover-bg: #f2f2f4;
+    --b2-nav-hover-text: @text-color;
     --b2-border: #EBEEF5;
     --b2-btn-time: rgba(200, 190, 190, 20%);
     --b2-close: #afafb2;
+    --b2-mark-bg: rgba(0, 0, 0, .3);
     --b2-main-span: #e6e6e6;
     --b2-upload-c-0: #e6a23c;
     --b2-upload-c-1: #409eff;
@@ -20,9 +24,11 @@
 html.dark {
     --b2-theme-c: #f7c099;
     --b2-theme-c-light: #d8a682;
-    --b2-bg: #2a2a2f;
-    --b2-pre-bg: #22272e;
-    --b2-text: #adbac7;
+    --b2-bg: #111727;
+    --b2-pre-bg: rgba(24, 27, 34, 0.685);
+    --b2-nav-hover-text: #fff;
+    --b2-nav-hover-bg: rgb(82, 82, 82);
+    --b2-text: #fff;
     --b2-active: #78757c;
     --b2-border: #78757c;
     --b2-main-span: #282525;

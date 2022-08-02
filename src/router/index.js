@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-29 20:59:29
+ * @LastEditTime: 2022-08-02 20:06:14
  * @FilePath: \dev\src\router\index.js
  */
 import Vue from 'vue'
@@ -72,9 +72,10 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
+
+  // storeInit
   next()
 })
-
 setTimeout(() => {
   router.afterEach(
     (to, from) => {
@@ -87,6 +88,7 @@ setTimeout(() => {
           console.log('您还未输入信息，还无法使用该程序')
         }
       }
+      storeInit.$patch({ routerName: to.name })
     }
   )
 })

@@ -3,7 +3,7 @@
  * @Date: 2022-07-30 16:50:32
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-30 20:18:34
+ * @LastEditTime: 2022-08-02 15:41:54
  * @FilePath: \dev\src\views\ImgManage\contextMenu\ContextMenu.vue
 -->
 <template>
@@ -67,10 +67,6 @@ export default {
     handleClickMenu(item) {
       console.log(item)
       this.$emit('menuEvent', item)
-      // switch (item) {
-      //   case 0:
-      //     break
-      // }
     }
   }
 }

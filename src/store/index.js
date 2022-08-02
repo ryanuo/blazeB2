@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-29 20:26:08
+ * @LastEditTime: 2022-08-02 09:01:21
  * @FilePath: \dev\src\store\index.js
  */
 import { defineStore } from 'pinia'
@@ -26,6 +26,7 @@ const useStore = defineStore('store', {
         },
         formatStr: 'URL'
       },
+      routerName: 'name',
       prefixImg: {
         support: [],
         defaultUrl: ''
