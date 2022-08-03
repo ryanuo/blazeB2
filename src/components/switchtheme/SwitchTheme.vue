@@ -8,6 +8,11 @@
         <SignSvg />
       </button>
     </div>
+    <div @click="handleSetting">
+      <button>
+        <SettingSvg />
+      </button>
+    </div>
     <div @click="handleThemeChange" style="display:inline-block">
       <button v-if="isLight">
         <VPIconSun />
@@ -32,8 +37,9 @@ import { mapActions, mapState } from 'pinia'
 import useStore from '@/store'
 import { Message, MessageBox } from 'element-ui'
 import { debounce } from '@/plugin/filter'
+import SettingSvg from '@/views/svg/SettingSvg.vue'
 export default {
-  components: { VPIconMoon, VPIconSun, VPIconGitHub, LayOut, SignSvg },
+  components: { VPIconMoon, VPIconSun, VPIconGitHub, LayOut, SignSvg, SettingSvg },
   data() {
     return {
       isLight: true
@@ -48,6 +54,11 @@ export default {
     ...mapState(useStore, ['isLogined']) // 映射函数，取出tagslist
   },
   methods: {
+    ...mapActions(useStore, ['handleIsLogined']),
+    ...mapActions(useStore, ['setShowSettingBtn']),
+    handleSetting() {
+      this.setShowSettingBtn(true)
+    },
     handleSelect(e) {
       const dom = document.documentElement
       dom.className = e
@@ -61,7 +72,6 @@ export default {
       const item = this.isLight ? '' : 'dark'
       this.handleSelect(item)
     },
-    ...mapActions(useStore, ['handleIsLogined']),
     openhandle() {
       MessageBox({
         title: '提示',
@@ -84,9 +94,7 @@ export default {
     },
     // 跳转登录页面
     tapLoginPage: debounce(function () {
-      if (this.$route.name !== 'setting') {
-        this.$router.push({ name: 'setting', query: { id: '1' } })
-      }
+      this.handleSetting()
     }, 300, true)
   }
 }
@@ -113,16 +121,6 @@ export default {
     &:hover {
       border-color: var(--b2-theme-c);
     }
-
-    // &::before {
-    //   content: "";
-    //   display: inline-block;
-    //   // margin-right: 8px;
-    //   // margin-left: 8px;
-    //   width: 1.5px;
-    //   height: 20px;
-    //   background-color: #e7e7e7;
-    // }
 
     svg {
       // margin-left: 12px;

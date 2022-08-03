@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 21:48:34
+ * @LastEditTime: 2022-08-03 21:24:46
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -15,7 +15,7 @@
       <el-tag>
         {{ imgDefaultFile === '' ? '配置页面修改默认仓库地址' : `当前的仓库名：${imgDefaultFile}` }}
       </el-tag>
-      <el-tag type="info" @click="$router.replace({ name: 'setting', query: { id: '3' } })">修改</el-tag>
+      <el-tag type="info" @click="setShowSettingBtn(true)">修改</el-tag>
       <div class="svg-w">
         <div title="升降序排列" @click="handleSort">
           <sort-view />
@@ -53,10 +53,8 @@
     <div v-if="showMenu" class="mark-cont" @click="showMenu = false" @contextmenu.prevent.stop="showMenu = false">
       <contextmenu @menuEvent="handleMenuEvent" ref="contextmenu" :menu-style="menuTopLeft" />
     </div>
-    <div v-if="isDownload" class="isdload"><span><img src="/img/loading.gif" alt="" srcset="" />正在下载请耐心等待({{
-        downloadProgress
-    }}/{{ selectList.length }})</span>
-    </div>
+    <MarkLoad :isDownload="isDownload" :totalnum="selectList.length" :progressnum="downloadProgress"
+      loadText="正在下载请耐心等待" />
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
       :current-page.sync="currentPage" :page-sizes="[50, 80, 100, 200]" :page-size="reqParams.maxFileCount"
       layout="sizes,next">
@@ -72,7 +70,7 @@
 <script>
 import { Message, MessageBox, Notification } from 'element-ui'
 import { mapActions, mapState, mapWritableState } from 'pinia'
-import { debounce, transiTime, urlToBase64, useText } from '@/plugin/filter'
+import { debounce, transiTime, useText } from '@/plugin/filter'
 import useStore from '@/store'
 import { picList, deleteitemImg } from '@/utils/api'
 import LargeList from '@/views/svg/LargeList.vue'
@@ -87,6 +85,7 @@ import Contextmenu from '@/views/ImgManage/contextMenu/ContextMenu.vue'
 import { B2Checkbox, B2CheckboxGroup } from '@/package/checkbox/'
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
+import MarkLoad from '../../components/loading/MarkLoad.vue'
 
 export default {
   data() {
@@ -125,11 +124,11 @@ export default {
       showMenu: false
     }
   },
-  components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect, Contextmenu, TogChecked, B2Checkbox, B2CheckboxGroup },
+  components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect, Contextmenu, TogChecked, B2Checkbox, B2CheckboxGroup, MarkLoad },
   computed: {
     ...mapWritableState(useStore, ['isLogined']), // 映射函数，取出isLogined
     ...mapState(useStore, ['prefixStatus']),
-    ...mapState(useStore, ['setdefaultFile']), // 映射函数，取出setdefaultFile
+    ...mapState(useStore, ['setdefaultFile']), // setdefaultFile
     ...mapState(useStore, ['imgDefaultFile']), // 映射函数，取出setdefaultFile
     ...mapState(useStore, ['noInvalid']),
     ...mapState(useStore, ['defaultCopyUrl']),
@@ -158,8 +157,10 @@ export default {
         }
       }
     },
-    val: {
+    imgDefaultFile: {
       handler(n, o) {
+        this.reqParams.prefix = n
+        this.refreshData()
         console.log(n, o)
       }
     }
@@ -181,6 +182,7 @@ export default {
   },
   methods: {
     ...mapActions(useStore, ['handleIsLogined']),
+    ...mapActions(useStore, ['setShowSettingBtn']),
     // 下载图片zip
     downloadFileZip() {
       this.isDownload = true
@@ -195,7 +197,6 @@ export default {
           for (const i of downlen) {
             const data_ = i.bs64Data.split(',')[1]
             imgF.file(i.filename, data_, { base64: true })
-            _this.downloadProgress += 1
           }
           return zip
         }
@@ -217,7 +218,7 @@ export default {
         const urlSplit = a[i].src.split('/')
         const filename = urlSplit[urlSplit.length - 1]
         const fileFormat = filename.split('.')[filename.split('.').length - 1]
-        const res = await urlToBase64(a[i].src)
+        const res = await this.urlToBase64(a[i].src)
         imgObjList.push({
           filename,
           format: fileFormat,
@@ -225,6 +226,31 @@ export default {
         })
       }
       return imgObjList
+    },
+    urlToBase64(url) {
+      const image = new Image()
+      const _this = this
+      image.crossOrigin = 'Anonymous'
+      image.src = url + '?response-content-type=application/octet-stream'
+      return new Promise((resolve, reject) => {
+        // image.setAttribute('crossOrigin', 'anonymous')
+        console.log(image)
+        image.onload = function () {
+          const canvas = document.createElement('canvas')
+          canvas.width = this.naturalWidth
+          canvas.height = this.naturalHeight
+          // 将图片插入画布并开始绘制
+          canvas.getContext('2d').drawImage(image, 0, 0)
+          // result
+          const result = canvas.toDataURL('image/png')
+          _this.downloadProgress += 1
+          resolve(result)
+        }
+        // 图片加载失败的错误处理
+        image.onerror = () => {
+          reject(new Error('转换失败'))
+        }
+      })
     },
     // 图片预览功能
     showImgPrew(e) {

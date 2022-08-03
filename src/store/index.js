@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 09:01:21
+ * @LastEditTime: 2022-08-03 21:09:41
  * @FilePath: \dev\src\store\index.js
  */
 import { defineStore } from 'pinia'
@@ -26,7 +26,7 @@ const useStore = defineStore('store', {
         },
         formatStr: 'URL'
       },
-      routerName: 'name',
+      isshowSetting: false,
       prefixImg: {
         support: [],
         defaultUrl: ''
@@ -34,7 +34,8 @@ const useStore = defineStore('store', {
       setdefaultFile: {
         methods: '1',
         valPt: '',
-        valAt: []
+        valAt: [],
+        valTt: ''
       },
       commpressParams: {
         iscompress: false,
@@ -62,12 +63,15 @@ const useStore = defineStore('store', {
     // 图片默认返回
     imgDefaultFile(state) {
       const med = state.setdefaultFile.methods
-      if (med === '1') {
-        return state.setdefaultFile.valPt
-      } else if (med === '2') {
-        return state.setdefaultFile.valAt.join('/') + '/'
-      } else {
-        return ''
+      switch (med) {
+        case '1':
+          return state.setdefaultFile.valPt
+        case '2':
+          return state.setdefaultFile.valAt.join('/') + '/'
+        case '3':
+          return state.setdefaultFile.valTt
+        default:
+          return ''
       }
     },
     // 配置默认返回
@@ -79,9 +83,15 @@ const useStore = defineStore('store', {
     },
     DefaultToFile(state) {
       return state.toFile
+    },
+    defaultCopyType(state) {
+      return state.openUploadOutMD
     }
   },
   actions: {
+    setShowSettingBtn(e) {
+      this.isshowSetting = e
+    },
     handleIsLogined(e = null) {
       this.isLogined = !!localStorage.getItem('token_api')
       this.noInvalid = !!localStorage.getItem('authmsg')
@@ -111,6 +121,7 @@ const useStore = defineStore('store', {
       this.setdefaultFile.methods = o.methods
       this.setdefaultFile.valAt = o.valAt
       this.setdefaultFile.valPt = o.valPt
+      this.setdefaultFile.valTt = o.valTt
     },
     setDefaultCompress(obj) {
       this.commpressParams = obj

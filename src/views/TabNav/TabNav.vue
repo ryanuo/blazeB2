@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 10:45:11
+ * @LastEditTime: 2022-08-03 20:24:32
  * @FilePath: \dev\src\views\TabNav\TabNav.vue
 -->
 <template>
@@ -18,10 +18,13 @@
       <div class="logo-wrap">
         <img src="@/icons/logo.svg" data-index="home" title="" />
       </div>
-      <span :class="currentMenu === 'setting' ? 'is-nav-selected' : ''" data-index="setting">配置管理</span>
+      <span :class="currentMenu === 'setting' ? 'is-nav-selected' : ''" data-index="setting">使用文档</span>
       <span :class="currentMenu === 'about' ? 'is-nav-selected' : ''" data-index="about">关于程序</span>
     </nav>
     <router-view />
+    <div v-if="isshowSetting">
+      <SettingView />
+    </div>
     <footer>
       Copyright ©2021-{{ timeE }} <a href="https://github.com/Rr210/blazeB2" target="_blank"><svg aria-hidden="true"
           height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true"
@@ -37,8 +40,9 @@
 
 <script>
 import useStore from '@/store' // 引入store
-import { mapState } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import SwitchTheme from '@/components/switchtheme/SwitchTheme.vue'
+import SettingView from '@/components/setting/SettingView.vue'
 export default {
   data() {
     return {
@@ -54,7 +58,7 @@ export default {
       }
     }
   },
-  components: { SwitchTheme },
+  components: { SwitchTheme, SettingView },
   mounted() {
     const theme = localStorage.getItem('themeb2')
     if (theme) {
@@ -66,24 +70,26 @@ export default {
   },
   computed: {
     timeE() { return (new Date()).getFullYear() },
+    ...mapState(useStore, ['isshowSetting']),
     ...mapState(useStore, ['isLogined']), // 映射函数，取出tagslist
     ...mapState(useStore, ['routerName']) // 映射函数，取出tagslist
   },
   methods: {
+    ...mapActions(useStore, ['setroutername']),
     // 页面刷新时的nav选中
     handleReload() {
-      this.currentMenu = this.routerName
+      this.currentMenu = this.$route.name
     },
     // 跳转
     handleNav(e) {
       const name = e.target.dataset.index
-      if (name && this.$route.name !== name) {
+      const toname = this.$route.name
+      if (name && toname !== name && name !== 'setting') {
         this.$router.push({ name })
+        this.currentMenu = name
       }
-    },
-    handleMainLogo() {
-      if (this.$route.name !== 'home') {
-        this.$router.push({ name: 'home' })
+      if (name === 'setting') {
+        window.open('https://blazeb2.js.org')
       }
     }
   }

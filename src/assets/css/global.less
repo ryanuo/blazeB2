@@ -24,10 +24,10 @@ svg {
     cursor: pointer;
 }
 
-@font-face {
-    font-family: 'myfont';
-    src: url(https://cdn.staticaly.com/gh/Rr210/image@master/hexo/4/myfont.woff2);
-}
+// @font-face {
+//     font-family: 'myfont';
+//     src: url(https://cdn.staticaly.com/gh/Rr210/image@master/hexo/4/myfont.woff2);
+// }
 
 .common-container {
     width: 98vw;
@@ -43,6 +43,7 @@ svg {
 .temp-content,
 .upload-wrap,
 .img-manage,
+.setting-content,
 .pic-list-t1 {
     &::-webkit-scrollbar {
         /* 滚动条宽度和高度 */
@@ -55,6 +56,7 @@ svg {
 .temp-content,
 .upload-wrap,
 .img-manage,
+.setting-content,
 .pic-list-t1 {
     &::-webkit-scrollbar-thumb {
         /*滚动条里面小方块*/
@@ -68,6 +70,7 @@ svg {
 .temp-content,
 .upload-wrap,
 .img-manage,
+.setting-content,
 .pic-list-t1 {
     &::-webkit-scrollbar-track-piece {
         /*滚动条里面轨道*/
@@ -79,7 +82,7 @@ svg {
 
 #app {
     .el-input__inner {
-        background-color: var(--b2-pre-bg);
+        background-color: var(--b2-input-bg);
         // border: 1px solid var(--bg-border);
         color: var(--bg-text);
 
@@ -91,6 +94,50 @@ svg {
             border-color: #E4E7ED;
             color: #C0C4CC;
             cursor: not-allowed;
+        }
+    }
+
+    .el-form-item {
+        margin-bottom: 0;
+    }
+}
+
+.setting-hd-h2 {
+    font-size: 15px;
+    font-weight: 550;
+}
+
+.flex-btw-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.isdload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    backdrop-filter: blur(8px);
+    background-color: var(--b2-mark-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+        background-color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        height: 30px;
+        vertical-align: middle;
+
+        img {
+            vertical-align: middle;
+            height: 100%;
+            margin-right: 10px;
         }
     }
 }

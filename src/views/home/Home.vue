@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 21:53:47
+ * @LastEditTime: 2022-08-03 21:21:49
  * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
@@ -25,12 +25,11 @@
         </div>
         <div slot="tip">
           <div class="el-upload__tip">
-            <div>当前上传路径:<el-tag :type="tofile ? '' : 'danger'" size="mini"
-                @click="$router.replace({ name: 'setting', query: { id: '2' } })">{{
-                    tofile ? tofile : '你还未填写路径，点击这里'
-                }}</el-tag>
+            <div>当前上传路径:<el-tag :type="tofile ? '' : 'danger'" size="mini" @click="handleopenSetting">{{
+                tofile ? tofile : '你还未填写路径，点击这里'
+            }}</el-tag>
             </div>
-            <div v-if="fdata && fdata.bucket_name" @click="$router.replace({ name: 'setting', query: { id: '1' } })">
+            <div v-if="fdata && fdata.bucket_name" @click="handleopenSetting">
               当前B2桶名称:
               <el-tag size="mini">{{ fdata.bucket_name }}</el-tag>
             </div>
@@ -92,9 +91,9 @@ export default {
   computed: {
     ...mapState(useStore, ['toFile']),
     ...mapState(useStore, ['defaultcopyformat']),
-    ...mapState(useStore, ['defaultCopy']),
     ...mapState(useStore, ['defaultCopyUrl']),
     ...mapState(useStore, ['CompressData']),
+    ...mapState(useStore, ['DefaultToFile']),
     timeE() {
       const t = new Date()
       return t.getFullYear()
@@ -112,9 +111,29 @@ export default {
       return this.copycontent !== '' ? this.defaultCopyUrl.replace(/%s/g, this.copycontent) : '暂无内容'
     }
   },
+  watch: {
+    CompressData: {
+      deep: true,
+      handler(n, o) {
+        this.compressMsg = this.CompressData
+      }
+    },
+    defaultCopyUrl: {
+      handler(n, o) {
+        if (n !== o) {
+          this.radio2 = n
+        }
+      }
+    },
+    DefaultToFile: {
+      handler(n, o) {
+        console.log(n)
+        this.tofile = n
+      }
+    }
+  },
   mounted() {
     this.compressMsg = this.CompressData
-    this.radio2 = this.defaultCopy
     window.addEventListener('paste', this.pasteHandle)
     const templist = sessionStorage.getItem('templist')
     this.tofile = this.toFile && this.toFile
@@ -126,6 +145,10 @@ export default {
   },
   methods: {
     ...mapActions(useStore, ['setDefaultFormat']),
+    ...mapActions(useStore, ['setShowSettingBtn']),
+    handleopenSetting() {
+      this.setShowSettingBtn(true)
+    },
     handleDelete(index) {
       this.fileList.splice(index, 1)
     },

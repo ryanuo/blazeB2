@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 21:23:52
+ * @LastEditTime: 2022-08-03 19:26:33
  * @FilePath: \dev\src\plugin\filter.js
  */
 export function transiTime(timestamp) {
@@ -33,7 +33,7 @@ export function transiTime(timestamp) {
 }
 // 设置图片信息
 export function getImageBase64(img, ext) {
-  img.setAttribute('crossOrigin', 'Anonymous')
+  img.setAttribute('crossorigin', 'Anonymous')
   var canvas = document.createElement('canvas') // 创建canvas DOM元素，并设置其宽高和图片一样
   canvas.width = img.width
   canvas.height = img.height
@@ -57,28 +57,6 @@ export function getUrlBase64(url, ext, callback) {
     callback.call(this, dataURL) // 回掉函数获取Base64编码
     canvas = null
   }
-}
-export function urlToBase64(url) {
-  return new Promise((resolve, reject) => {
-    const image = new Image()
-    image.onload = function () {
-      const canvas = document.createElement('canvas')
-      canvas.width = this.naturalWidth
-      canvas.height = this.naturalHeight
-      // 将图片插入画布并开始绘制
-      canvas.getContext('2d').drawImage(image, 0, 0)
-      // result
-      const result = canvas.toDataURL('image/png')
-      resolve(result)
-    }
-    // CORS 策略，会存在跨域问题https://stackoverflow.com/questions/20424279/canvas-todataurl-securityerror
-    image.setAttribute('crossOrigin', 'Anonymous')
-    image.src = url
-    // 图片加载失败的错误处理
-    image.onerror = () => {
-      reject(new Error('转换失败'))
-    }
-  })
 }
 
 export function downLoadQueue(arr) {
