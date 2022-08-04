@@ -3,12 +3,16 @@
  * @Date: 2022-08-03 20:08:17
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-03 20:17:02
+ * @LastEditTime: 2022-08-04 10:52:58
  * @FilePath: \dev\src\components\loading\MarkLoad.vue
 -->
 <template>
-  <div v-if="isDownload" class="isdload">
-    <span><img src="/img/loading.gif" alt="" srcset="" />{{ loadText }}({{ progressnum }}/{{ totalnum }})</span>
+  <div v-if="isload" class="isdload animate__animated animate__fadeIn">
+    <span><img src="/img/loading.gif" alt="" srcset="" />{{ loadText }}
+      <i v-if="totalnum">
+        ({{ progressnum }}/{{ totalnum }})
+      </i>
+    </span>
   </div>
 </template>
 
@@ -18,7 +22,7 @@ export default {
     return {}
   },
   props: {
-    isDownload: {
+    isload: {
       type: Boolean,
       default: false
     },

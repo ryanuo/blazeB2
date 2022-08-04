@@ -42,7 +42,8 @@ export default {
   components: { VPIconMoon, VPIconSun, VPIconGitHub, LayOut, SignSvg, SettingSvg },
   data() {
     return {
-      isLight: true
+      isLight: true,
+      disappear: false
     }
   },
   mounted() {
@@ -58,6 +59,7 @@ export default {
     ...mapActions(useStore, ['setShowSettingBtn']),
     handleSetting() {
       this.setShowSettingBtn(true)
+      // this.disappear = true
     },
     handleSelect(e) {
       const dom = document.documentElement

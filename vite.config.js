@@ -3,7 +3,7 @@
  * @Date: 2022-07-24 11:20:59
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-30 13:37:49
+ * @LastEditTime: 2022-08-03 22:33:54
  * @FilePath: \dev\vite.config.js
  */
 import { defineConfig, loadEnv } from 'vite'
@@ -19,7 +19,7 @@ export default ({ mode }) => {
     optimizeDeps: {
       exclude: ['__INDEX__'] // 排除 __INDEX__
     },
-    plugins,
+    plugins: plugins(mode),
     build,
     envPrefix: ['VUE_APP_'], // 很重要
     resolve: resolveC,

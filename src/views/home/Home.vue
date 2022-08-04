@@ -3,20 +3,17 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-03 21:21:49
+ * @LastEditTime: 2022-08-04 15:47:17
  * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
   <div class="home-w">
-    <!-- <div class="left-aside" v-if="leftTempList.length > 0">
-      <LeftUpload v-model="leftTempList" />
-    </div> -->
     <div class="upload-w" style="width: 100%">
-      <!-- @mouseenter="mouseHandle" @mouseleave.stop="mouseMoveHandle" -->
       <div id="tar_box" contenteditable=""></div>
-      <el-upload ref="uploadRef" v-loading="loadings" :auto-upload="false" class="upload-demo" action="customize"
-        :file-list="fileList" multiple :show-file-list="false" :limit="limit" :on-change="checkFileType" drag>
-        <div class="compress-remind" v-if="compressMsg.iscompress">开启压缩，压缩等级（<span class="red-c">{{ compressMsg.rank
+      <el-upload ref="uploadRef" :auto-upload="false" class="upload-demo" action="customize" :file-list="fileList"
+        multiple :show-file-list="false" :limit="limit" :on-change="checkFileType" drag>
+        <MarkLoad loadText="正在上传" :isload="loadings" :progressnum="uploadProgress" :totalnum="fileList.length" />
+        <div class="compress-remind" v-if="CompressData.iscompress">开启压缩，压缩等级（<span class="red-c">{{ CompressData.rank
         }}</span>）
         </div>
         <i class="el-icon-upload"></i>
@@ -36,7 +33,7 @@
           </div>
           <span v-if="fileList.length > 0">
             <p class="p-upload-hd">{{ '上传进度：' + uploadProgress + "/" + fileList.length }}</p>
-            <ul class="upload-wrap" @click="showImgPrew">
+            <ul class="upload-wrap">
               <UploadList @watermarkhandle="handleMark" @changefilelist="handleDelete" v-for="(item, index) in fileList"
                 :styleCount="styC(index) ? 'width:97.2%' : ''" :file="item" :ref="'uploadRef' + index" :key="item.uid"
                 :pid="index" />
@@ -46,14 +43,14 @@
                 <Wmarkview @waterpic="handleWatermarkEnd" @uninstall="handleClose" :file="fileList[currentfileIndex]" />
               </div>
             </div>
-            <!-- <el-button class="btn-upload" @click="handleSumbit" type="primary" plain>上传</el-button> -->
-            <el-button class="btn-upload" @click="moreUploadPic" type="primary" plain>上传</el-button>
+            <el-button class="btn-upload" @click="moreUploadPic" type="primary" plain :loading="isLoad">{{ isLoad ?
+                '正在上传' : '上传'
+            }}</el-button>
             <el-button class="btn-upload" @click="handleReSet" type="info" plain>清空</el-button>
           </span>
         </div>
       </el-upload>
     </div>
-    <!-- fileList.length <= 0 -->
   </div>
 </template>
 
@@ -61,13 +58,13 @@
 import { Message, Notification } from 'element-ui'
 import { debounce } from '@/plugin/filter'
 import { authIsexit } from '@/utils/common/login'
-import { startLoading, endLoading } from '@/utils/common/loading'
 import useStore from '@/store'
 import { mapActions, mapState } from 'pinia'
 import UploadList from './components/UploadList.vue'
 import Wmarkview from './components/wm/wmarkview.vue'
+import MarkLoad from '@/components/loading/MarkLoad.vue'
 export default {
-  components: { UploadList, Wmarkview },
+  components: { UploadList, Wmarkview, MarkLoad },
   data() {
     return {
       fdata: null,
@@ -78,10 +75,7 @@ export default {
       fileList: [],
       uploadProgress: 0,
       limit: 10,
-      compressMsg: {
-        iscompress: false,
-        rank: 0.8
-      },
+      isLoad: false,
       tofile: ''
     }
   },
@@ -89,11 +83,10 @@ export default {
     window.addEventListener('paste', this.pasteHandle)
   },
   computed: {
-    ...mapState(useStore, ['toFile']),
-    ...mapState(useStore, ['defaultcopyformat']),
     ...mapState(useStore, ['defaultCopyUrl']),
     ...mapState(useStore, ['CompressData']),
     ...mapState(useStore, ['DefaultToFile']),
+    ...mapState(useStore, ['prefixStatus']),
     timeE() {
       const t = new Date()
       return t.getFullYear()
@@ -106,26 +99,11 @@ export default {
         if (index === len - 1 && index % 2 === 0) return true
         return false
       }
-    },
-    resultCopy() {
-      return this.copycontent !== '' ? this.defaultCopyUrl.replace(/%s/g, this.copycontent) : '暂无内容'
     }
   },
   watch: {
-    CompressData: {
-      deep: true,
-      handler(n, o) {
-        this.compressMsg = this.CompressData
-      }
-    },
-    defaultCopyUrl: {
-      handler(n, o) {
-        if (n !== o) {
-          this.radio2 = n
-        }
-      }
-    },
     DefaultToFile: {
+      immediate: true,
       handler(n, o) {
         console.log(n)
         this.tofile = n
@@ -133,10 +111,8 @@ export default {
     }
   },
   mounted() {
-    this.compressMsg = this.CompressData
     window.addEventListener('paste', this.pasteHandle)
     const templist = sessionStorage.getItem('templist')
-    this.tofile = this.toFile && this.toFile
     this.fdata = localStorage.getItem('token_api') && JSON.parse(localStorage.getItem('token_api'))
     if (templist) this.leftTempList = JSON.parse(templist)
   },
@@ -152,22 +128,8 @@ export default {
     handleDelete(index) {
       this.fileList.splice(index, 1)
     },
-    showImgPrew(e) {
-      console.log(e)
-      const { currentSrc } = e.target
-      console.log(currentSrc)
-      if (currentSrc) {
-        // const urlData = this.picListDatas.map(v => this.prefixStatus + v.fileName)
-        this.$hevueImgPreview({
-          url: currentSrc,
-          keyboard: true,
-          clickMaskCLose: true
-        })
-      }
-    },
     // 处理水印结果
     handleWatermarkEnd(e) {
-      console.log(e)
       this.leftTempList.unshift(e)
       this.handletempList(this.leftTempList)
       console.log(this.leftTempList)
@@ -202,26 +164,6 @@ export default {
       this.fileList = [...this.fileList, file]
       // picPaste(event, this)
     }, 500, true),
-    // 链接赋值事件
-    changeCopyStatus(e) {
-      this.setDefaultFormat(e)
-    },
-    // 复制事件
-    copyhandle: debounce(function () {
-      const copyData = this.resultCopy
-      this.$copyText(copyData).then(() => {
-        // element ui的弹窗
-        Message({
-          message: this.copycontent !== '' ? '已复制到剪贴板' : '您还未上传图片',
-          type: this.copycontent !== '' ? 'success' : 'error'
-        })
-      }).catch(() => {
-        Message({
-          message: '复制失败，请手动复制',
-          type: 'error'
-        })
-      })
-    }, 300, true),
     // / 构建队列
     queue(arr) {
       const _this = this
@@ -242,8 +184,9 @@ export default {
     moreUploadPic() {
       const pros = []
       const _this = this
+      _this.isLoad = true
       authIsexit().then(async () => {
-        startLoading(document.querySelector('.el-upload'), '正在上传图片...')
+        _this.loadings = true
         _this.fileList.forEach((v, i) => {
           // 延时操作，同步操作接口异常
           pros.push(
@@ -252,14 +195,15 @@ export default {
         await this.queue(pros)
         const errorL = _this.fileList.length - _this.uploadProgress
         document.getElementById('tar_box').innerHTML = ''
-        endLoading()
+        _this.loadings = false
         Notification({
           title: '上传提示',
           type: errorL ? 'error' : 'success',
           message: `上传成功：${_this.uploadProgress}张,上传失败：${errorL}张；${errorL > 0 ? '失败原因：请求过于频繁，建议单张上传' : ''}`
         })
       }).catch(() => {
-        endLoading()
+        _this.loadings = false
+        _this.isLoad = false
         Notification({
           title: '提示',
           message: '请检查是否登陆,请检查keyid和key是否填写正确',
@@ -301,29 +245,6 @@ export default {
         return false
       }
       this.fileList.push(file)
-      // //   文件大小进行校验
-      // if (size > 1024 * 1024 * 100) {
-      //   this.$message.warning('文件大小不能超过100Mb')
-      //   const selectFileList = this.modelForm.fileList.filter(item => {
-      //     return item.uid !== uid
-      //   })
-      //   this.modelForm.fileList = selectFileList
-      //   return
-      // }
-      // //   文件总大小限制
-      // const totalSize = this.modelForm.fileList.reduce(
-      //   (total, item) => total + item.size,
-      //   0
-      // )
-      // if (totalSize + size > 1024 * 1024 * 100) {
-      //   this.$message.warning('总文件大小不能超过100Mb')
-      //   const selectFileList = this.modelForm.fileList.filter(item => {
-      //     return item.uid !== uid
-      //   })
-      //   this.modelForm.fileList = selectFileList
-      //   return
-      // }
-      //   文件重名限制
     }
   }
 }

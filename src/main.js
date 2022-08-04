@@ -3,13 +3,12 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 14:48:27
+ * @LastEditTime: 2022-08-04 10:51:45
  * @FilePath: \dev\src\main.js
  */
 import Vue from 'vue'
 import { createPersistedState } from 'pinia-persistedstate-plugin'
 import { createPinia, PiniaVuePlugin } from 'pinia'
-import hevueImgPreview from 'hevue-img-preview'
 import App from './App.vue'
 import router from './router'
 import element from 'element-ui'
@@ -17,7 +16,6 @@ import 'virtual:svg-icons-register'
 import './assets/css/global.less'
 import 'nprogress/nprogress.css'
 import VueClipboard from 'vue-clipboard2'
-Vue.use(hevueImgPreview)
 const pinia = createPinia()
 pinia.use(createPersistedState())
 VueClipboard.config.autoSetContainer = true

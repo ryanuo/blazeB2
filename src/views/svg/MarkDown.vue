@@ -3,7 +3,7 @@
  * @Date: 2022-07-04 21:11:48
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-03 21:12:11
+ * @LastEditTime: 2022-08-04 15:31:47
  * @FilePath: \dev\src\views\svg\MarkDown.vue
 -->
 <template>
@@ -59,18 +59,14 @@ export default {
   watch: {
     defaultCopyType: {
       deep: true,
+      immediate: true,
       handler(n, o) {
-        this.isMark = !!this.openUploadOutMD
+        this.isMark = n
         this.linktemp = this.isMark ? `![](${this.link})` : this.link
       }
     }
   },
-  mounted() {
-    this.isMark = !!this.openUploadOutMD
-    this.linktemp = this.isMark ? `![](${this.link})` : this.link
-  },
   computed: {
-    ...mapState(useStore, ['openUploadOutMD']),
     ...mapState(useStore, ['defaultCopyType'])
   },
   methods: {

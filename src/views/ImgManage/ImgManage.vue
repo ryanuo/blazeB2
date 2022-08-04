@@ -3,19 +3,29 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-03 21:24:46
+ * @LastEditTime: 2022-08-04 15:26:47
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
-  <div v-loading="loadingPicShow" class="img-m common-container">
+  <div class="img-m common-container">
+    <div v-if="isPreview">
+      <PicPreview :pindex="pindex" :imgsList="picListDatas" @closeLayer="isPreview = false"
+        :preFileName="prefixStatus" />
+    </div>
+    <mark-load loadText='正在加载请耐心等待' :isload="loadingPicShow" />
     <div class="inp-w">
       <!-- <el-input placeholder="请输入图片文件夹名称，eg:hexo/2/ 支持多级" v-model="reqParams.prefix" clearable>
       </el-input> -->
       <!-- <el-button type="primary" size="medium" round @click="searchList">搜索</el-button> -->
-      <el-tag>
-        {{ imgDefaultFile === '' ? '配置页面修改默认仓库地址' : `当前的仓库名：${imgDefaultFile}` }}
-      </el-tag>
-      <el-tag type="info" @click="setShowSettingBtn(true)">修改</el-tag>
+      <el-tooltip class="item" effect="dark" :content="'点击修改检索路径'" placement="right">
+        <el-breadcrumb separator="/" @click.native="setShowSettingBtn(true)">
+          <el-breadcrumb-item><span style="font-weight:600">Root</span></el-breadcrumb-item>
+          <div v-if="imgDefaultFile">
+            <el-breadcrumb-item v-for="item in breadcrumbNav" :key="item">{{ item }}</el-breadcrumb-item>
+          </div>
+          <span v-else>修改默认文件夹</span>
+        </el-breadcrumb>
+      </el-tooltip>
       <div class="svg-w">
         <div title="升降序排列" @click="handleSort">
           <sort-view />
@@ -32,18 +42,19 @@
       <div class="checkbox-wrap" v-if="selectList.length > 0">
         <b2-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">{{ selectText }}
         </b2-checkbox>
-        <span class="red-c">已选中{{ this.selectList.length }}张图片</span>
+        <span class="red-c">已选中{{ selectList.length }}张图片</span>
         <span class="cancel-btn" @click="handleCancel">取消选择</span>
         <CopyAll class="svg-btn" @click.native="copyAllHandle" />
         <DeleteSelect class="svg-btn" @click.native="delSelect" />
       </div>
-      <b2-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange" @dblclick.native="showImgPrew">
-        <b2-checkbox v-for="(item, index) in picListDatas" :label="index" :key="item.uid"
+      <b2-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange"
+        @dblclick.native.prevent="showImgPrew">
+        <b2-checkbox :data-pindex="index" v-for="(item, index) in picListDatas" :label="index" :key="item.uid"
           @contextmenu.prevent.stop.native="handleKeyClick($event, index)">
           <template slot="csvg" slot-scope="content">
             <TogChecked :isshow="content.checked" class="tog-container" />
           </template>
-          <image-item @setshowdiag="handleDiag" @update="updatePicLists" :checked="checkAll" :picid="index"
+          <image-item @update="updatePicLists" :checked="checkAll" :picid="index"
             :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
             :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index">
           </image-item>
@@ -53,17 +64,11 @@
     <div v-if="showMenu" class="mark-cont" @click="showMenu = false" @contextmenu.prevent.stop="showMenu = false">
       <contextmenu @menuEvent="handleMenuEvent" ref="contextmenu" :menu-style="menuTopLeft" />
     </div>
-    <MarkLoad :isDownload="isDownload" :totalnum="selectList.length" :progressnum="downloadProgress"
-      loadText="正在下载请耐心等待" />
+    <MarkLoad :isload="isDownload" :totalnum="selectList.length" :progressnum="downloadProgress" loadText="正在下载请耐心等待" />
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
       :current-page.sync="currentPage" :page-sizes="[50, 80, 100, 200]" :page-size="reqParams.maxFileCount"
       layout="sizes,next">
     </el-pagination>
-    <el-dialog class="tpxq_w" title="图片详情" :visible.sync="centerDialogVisible" width="40%" center>
-      <div><span>图片名称：</span>{{ currentitemdetail.filename }}</div>
-      <div><span>图片大小：</span>{{ currentitemdetail.filesize }}</div>
-      <div><span>上传时间：</span>{{ currentitemdetail.filetime }}</div>
-    </el-dialog>
   </div>
 </template>
 
@@ -77,7 +82,6 @@ import LargeList from '@/views/svg/LargeList.vue'
 import Refresh from '@/views/svg/Refresh.vue'
 import sortView from '@/views/svg/sortView.vue'
 import ImageItem from './ImageItem/ImageItem.vue'
-import { endLoading, startLoading } from '@/utils/common/loading'
 import CopyAll from '@/views/svg/CopyAll.vue'
 import DeleteSelect from '@/views/svg/DeleteSelect.vue'
 import TogChecked from '@/views/svg/TogChecked.vue'
@@ -85,18 +89,21 @@ import Contextmenu from '@/views/ImgManage/contextMenu/ContextMenu.vue'
 import { B2Checkbox, B2CheckboxGroup } from '@/package/checkbox/'
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
-import MarkLoad from '../../components/loading/MarkLoad.vue'
+import MarkLoad from '@/components/loading/MarkLoad.vue'
+import PicPreview from '@/components/picprew/PicPreview.vue'
 
 export default {
   data() {
     return {
       inputval: '',
+      pindex: 0,
+      isPreview: false,
+      mainImg: '',
       isDownload: false,
       onShfit: false,
       onCtrl: false,
       onAKey: false,
       selectList: [],
-      centerDialogVisible: false,
       picListDatas: [],
       currentPage: 1,
       checkAll: false,
@@ -124,7 +131,7 @@ export default {
       showMenu: false
     }
   },
-  components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect, Contextmenu, TogChecked, B2Checkbox, B2CheckboxGroup, MarkLoad },
+  components: { LargeList, Refresh, ImageItem, sortView, CopyAll, DeleteSelect, Contextmenu, TogChecked, B2Checkbox, B2CheckboxGroup, MarkLoad, PicPreview },
   computed: {
     ...mapWritableState(useStore, ['isLogined']), // 映射函数，取出isLogined
     ...mapState(useStore, ['prefixStatus']),
@@ -132,6 +139,10 @@ export default {
     ...mapState(useStore, ['imgDefaultFile']), // 映射函数，取出setdefaultFile
     ...mapState(useStore, ['noInvalid']),
     ...mapState(useStore, ['defaultCopyUrl']),
+    breadcrumbNav() {
+      console.log(this.imgDefaultFile.split('/'))
+      return this.imgDefaultFile.split('/')
+    },
     timespan() {
       return function (val) {
         return transiTime(val)
@@ -204,7 +215,7 @@ export default {
         zip.generateAsync({ type: 'blob' })
           .then(function (content) {
             // see FileSaver.js
-            FileSaver(content, 'example.zip')
+            FileSaver(content, `@BlazeB2-${Date.now()}.zip`)
             _this.isDownload = false
           })
       })
@@ -254,16 +265,10 @@ export default {
     },
     // 图片预览功能
     showImgPrew(e) {
-      console.log(e)
-      const { currentSrc } = e.target
-      console.log(currentSrc)
-      if (currentSrc) {
-        // const urlData = this.picListDatas.map(v => this.prefixStatus + v.fileName)
-        this.$hevueImgPreview({
-          url: currentSrc,
-          keyboard: true,
-          clickMaskCLose: true
-        })
+      const { pindex } = e.path[4].dataset
+      if (pindex) {
+        this.isPreview = true
+        this.pindex = parseInt(pindex)
       }
     },
     handleMenuEvent(e) {
@@ -457,22 +462,13 @@ export default {
       return res
     },
     // 执行删除的指令
-    handleDiag(e) {
-      const a_ = this.picListDatas[e]
-      this.currentitemdetail = {
-        filesize: (a_.contentLength / 1000).toFixed(2) + 'kb',
-        filename: a_.fileName,
-        filetime: transiTime(a_.uploadTimestamp)
-      }
-      this.centerDialogVisible = true
-    },
     updatePicLists(e) {
       this.picListDatas.splice(e, 1)
     },
     // 获取数据
     getPicList(fn = null) {
       const _this = this
-      startLoading(document.querySelector('.img-m'), '正在加载....')
+      _this.loadingPicShow = true
       const auth = localStorage.getItem('authmsg')
       if (auth) {
         const p_ = Object.assign(JSON.parse(auth), _this.reqParams)
@@ -491,7 +487,7 @@ export default {
               _this.picListDatas = [..._this.picListDatas, ...res.data.files]
               _this.handleUd()
             }
-            endLoading()
+            _this.loadingPicShow = false
             if (fn) return fn()
           })
       }

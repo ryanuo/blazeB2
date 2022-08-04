@@ -15,7 +15,7 @@
 body {
     background-color: var(--b2-bg);
     color: var(--b2-text);
-    font-family: 'myfont';
+    font-family: 'PingFang';
     height: 100vh;
     overflow-y: hidden;
 }
@@ -24,10 +24,10 @@ svg {
     cursor: pointer;
 }
 
-// @font-face {
-//     font-family: 'myfont';
-//     src: url(https://cdn.staticaly.com/gh/Rr210/image@master/hexo/4/myfont.woff2);
-// }
+@font-face {
+    font-family: 'PingFang';
+    src: url(https://cloud.mr90.top/admin/PingFang.ttf) format('truetype');
+}
 
 .common-container {
     width: 98vw;
@@ -44,6 +44,7 @@ svg {
 .upload-wrap,
 .img-manage,
 .setting-content,
+.thumb_imgs,
 .pic-list-t1 {
     &::-webkit-scrollbar {
         /* 滚动条宽度和高度 */
@@ -56,6 +57,7 @@ svg {
 .temp-content,
 .upload-wrap,
 .img-manage,
+.thumb_imgs,
 .setting-content,
 .pic-list-t1 {
     &::-webkit-scrollbar-thumb {
@@ -71,6 +73,7 @@ svg {
 .upload-wrap,
 .img-manage,
 .setting-content,
+.thumb_imgs,
 .pic-list-t1 {
     &::-webkit-scrollbar-track-piece {
         /*滚动条里面轨道*/

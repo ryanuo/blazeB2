@@ -3,12 +3,12 @@
  * @Date: 2022-08-03 15:15:33
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-03 20:30:09
+ * @LastEditTime: 2022-08-04 11:51:15
  * @FilePath: \dev\src\components\setting\SettingView.vue
 -->
 <template>
-  <div class="setting-view-wrap" @click.self="toclose">
-    <div class="setting-item-wrap animate__animated animate__fadeInDown">
+  <div class="setting-view-wrap" v-if="ShowSetting" @click.self="toclose">
+    <div class="setting-item-wrap animate__animated" :class="ishow ? 'animate__fadeInDown' : 'animate__fadeOutDown'">
       <div class="setting-hd">全局配置 | Global configuration
         <span class="close-setting" @click="toclose">
           <CloseSvg />
@@ -38,7 +38,7 @@ import SetUpload from '@/views/Setting/setUploadFile/SetUpload.vue'
 import SetCopy from '@/views/Setting/setcopy/SetCopy.vue'
 import SetDefaultCopy from '@/views/Setting/setdefaultCopy/SetDefaultCopy.vue'
 import CloseSvg from '@/views/svg/CloseSvg.vue'
-import { mapActions } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import useStore from '@/store'
 export default {
   components: {
@@ -51,15 +51,22 @@ export default {
     SetDefaultCopy, // SetWatermark
     CloseSvg
   },
-  props: {
-    isshowSetting: {
-      type: Boolean
+  computed: {
+    ...mapState(useStore, ['ShowSetting'])
+  },
+  data() {
+    return {
+      ishow: true
     }
   },
   methods: {
     ...mapActions(useStore, ['setShowSettingBtn']),
     toclose() {
-      this.setShowSettingBtn(false)
+      this.ishow = false
+      setTimeout(() => {
+        this.setShowSettingBtn(false)
+        this.ishow = true
+      }, 500)
     }
   }
 }

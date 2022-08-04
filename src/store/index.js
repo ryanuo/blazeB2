@@ -3,11 +3,11 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-03 21:09:41
+ * @LastEditTime: 2022-08-04 15:12:53
  * @FilePath: \dev\src\store\index.js
  */
 import { defineStore } from 'pinia'
-import { authIsexit } from '../utils/common/login'
+import { authIsexit } from '@/utils/common/login'
 const useStore = defineStore('store', {
   // 开启数据缓存
   persist: {
@@ -50,6 +50,9 @@ const useStore = defineStore('store', {
     siginStatus(state) {
       return !state.isLogined
     },
+    ShowSetting(state) {
+      return state.isshowSetting
+    },
     defaultCopy(state) {
       return state.defaultcopyformat.formatStr
     },
@@ -78,9 +81,11 @@ const useStore = defineStore('store', {
     defaultFile(state) {
       return state.setdefaultFile
     },
+    // 返回压缩图片的配置
     CompressData(state) {
       return state.commpressParams
     },
+    // 返回默认上传的文件路径
     DefaultToFile(state) {
       return state.toFile
     },
