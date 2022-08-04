@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-04 15:26:47
+ * @LastEditTime: 2022-08-04 18:19:05
  * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
 -->
 <template>
@@ -283,12 +283,17 @@ export default {
         case 1: // 复制选中的所有图片链接
           _this.copyAllHandle()
           break
-        case 4:
+        case 2:
+          _this.setShowSettingBtn(true)
+          break
+        case 5:
           _this.downloadFileZip()
           break
-        case 5: // 删除选中的所有图片
+        case 6: // 删除选中的所有图片
           _this.delSelect()
           break
+        default:
+          Notification({ type: 'info', message: '功能待开发' })
       }
     },
     handleMenuAfter(callback) {
