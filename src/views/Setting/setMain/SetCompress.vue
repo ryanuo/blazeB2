@@ -3,19 +3,23 @@
  * @Date: 2022-07-05 11:54:55
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-09 15:10:12
- * @FilePath: \master\src\views\Setting\setMain\SetCompress.vue
+ * @LastEditTime: 2022-08-03 20:18:08
+ * @FilePath: \dev\src\views\Setting\setMain\SetCompress.vue
 -->
 <template>
   <div class="set-commpress">
-    <el-switch v-model="value" @change="handleComp" active-text="开启" inactive-text="关闭" :active-value="true"
-      :inactive-value="false">
-    </el-switch>
-
+    <div class="set-commpress-hd">
+      <h2 class="setting-hd-h2">
+        是否开启压缩(<span class="red-c">首页</span>)
+      </h2>
+      <el-switch v-model="value" @change="handleComp" active-text="开启" inactive-text="关闭" :active-value="true"
+        :inactive-value="false">
+      </el-switch>
+    </div>
     <div class="block-compress" v-show="value">
       <span class="demonstration">压缩等级({{ value1 }})</span>
       <div class="slide-w">
-        <el-slider @change="handleComp" show-input v-model="value1" :step="0.1" :max="1" show-stops>
+        <el-slider @change="handleComp" v-model="value1" :step="0.1" :max="1" show-stops>
         </el-slider>
       </div>
     </div>
@@ -26,7 +30,6 @@
 // import { mapActions } from 'pinia'
 import useStore from '@/store/'
 import { Notification } from 'element-ui'
-const store = useStore()
 
 export default {
   data() {
@@ -36,6 +39,7 @@ export default {
     }
   },
   mounted() {
+    const store = useStore()
     this.$nextTick(() => {
       this.value = store.CompressData.iscompress
       this.value1 = store.CompressData.rank
@@ -43,8 +47,10 @@ export default {
   },
   methods: {
     handleComp: function (e) {
+      const store = useStore()
       const params = {
-        iscompress: this.value, rank: this.value1
+        iscompress: this.value,
+        rank: this.value1
       }
       store.setDefaultCompress(params)
       Notification({

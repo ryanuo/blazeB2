@@ -3,11 +3,12 @@
  * @Date: 2022-07-10 14:19:44
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-10 18:04:05
- * @FilePath: \master\src\views\Setting\setcopy\SetCopy.vue
+ * @LastEditTime: 2022-08-03 17:30:35
+ * @FilePath: \dev\src\views\Setting\setcopy\SetCopy.vue
 -->
 <template>
   <div>
+    <h2 class="setting-hd-h2" style="margin-bottom:10px;">图片外链默认复制格式 <span class="red-c">%s</span>为外链地址</h2>
     <el-radio-group @change="handleFormat" v-model="radiov" size="small">
       <el-tooltip v-for="(item, index) in defaultcopyformat.formatList" :key="index" class="item" effect="dark"
         :content="item || '您还未定义'" placement="top-start">

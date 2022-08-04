@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 20:06:14
+ * @LastEditTime: 2022-08-03 20:41:46
  * @FilePath: \dev\src\router\index.js
  */
 import Vue from 'vue'
@@ -14,12 +14,10 @@ import Home from '@/views/home/Home.vue'
 import TabNav from '@/views/TabNav/TabNav.vue'
 import About from '@/views/About/About.vue'
 // import ImgManage from '@/views/ImgManage/ImgManage.vue'
-// import Setting from '@/views/Setting/Setting.vue'
 // 按需引入
 // const TabNav = () => import('@/views/TabNav/TabNav.vue')
 // const About = () => import('@/views/About/About.vue')
 const ImgManage = () => import('@/views/ImgManage/ImgManage.vue')
-const Setting = () => import('@/views/Setting/Setting.vue')
 
 Vue.use(VueRouter)
 const routes = [
@@ -45,14 +43,6 @@ const routes = [
         }
       },
       {
-        path: '/setting',
-        name: 'setting',
-        component: Setting,
-        meta: {
-          title: '全局配置 | BlazeB2 图床'
-        }
-      },
-      {
         path: '/about',
         name: 'about',
         component: About,
@@ -72,8 +62,6 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
-
-  // storeInit
   next()
 })
 setTimeout(() => {
@@ -82,13 +70,13 @@ setTimeout(() => {
       const storeInit = useStore()
       if (to.path === '/home' || to.path === '/imanage' || to.path === '/setting') {
         storeInit.handleIsLogined()
+        storeInit.setShowSettingBtn(false)
         if (storeInit.isLogined) {
           storeInit.setNewAuthMsg()
         } else {
           console.log('您还未输入信息，还无法使用该程序')
         }
       }
-      storeInit.$patch({ routerName: to.name })
     }
   )
 })

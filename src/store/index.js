@@ -3,11 +3,11 @@
  * @Date: 2022-07-01 12:52:23
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 09:01:21
+ * @LastEditTime: 2022-08-04 15:12:53
  * @FilePath: \dev\src\store\index.js
  */
 import { defineStore } from 'pinia'
-import { authIsexit } from '../utils/common/login'
+import { authIsexit } from '@/utils/common/login'
 const useStore = defineStore('store', {
   // 开启数据缓存
   persist: {
@@ -26,7 +26,7 @@ const useStore = defineStore('store', {
         },
         formatStr: 'URL'
       },
-      routerName: 'name',
+      isshowSetting: false,
       prefixImg: {
         support: [],
         defaultUrl: ''
@@ -34,7 +34,8 @@ const useStore = defineStore('store', {
       setdefaultFile: {
         methods: '1',
         valPt: '',
-        valAt: []
+        valAt: [],
+        valTt: ''
       },
       commpressParams: {
         iscompress: false,
@@ -49,6 +50,9 @@ const useStore = defineStore('store', {
     siginStatus(state) {
       return !state.isLogined
     },
+    ShowSetting(state) {
+      return state.isshowSetting
+    },
     defaultCopy(state) {
       return state.defaultcopyformat.formatStr
     },
@@ -62,26 +66,37 @@ const useStore = defineStore('store', {
     // 图片默认返回
     imgDefaultFile(state) {
       const med = state.setdefaultFile.methods
-      if (med === '1') {
-        return state.setdefaultFile.valPt
-      } else if (med === '2') {
-        return state.setdefaultFile.valAt.join('/') + '/'
-      } else {
-        return ''
+      switch (med) {
+        case '1':
+          return state.setdefaultFile.valPt
+        case '2':
+          return state.setdefaultFile.valAt.join('/') + '/'
+        case '3':
+          return state.setdefaultFile.valTt
+        default:
+          return ''
       }
     },
     // 配置默认返回
     defaultFile(state) {
       return state.setdefaultFile
     },
+    // 返回压缩图片的配置
     CompressData(state) {
       return state.commpressParams
     },
+    // 返回默认上传的文件路径
     DefaultToFile(state) {
       return state.toFile
+    },
+    defaultCopyType(state) {
+      return state.openUploadOutMD
     }
   },
   actions: {
+    setShowSettingBtn(e) {
+      this.isshowSetting = e
+    },
     handleIsLogined(e = null) {
       this.isLogined = !!localStorage.getItem('token_api')
       this.noInvalid = !!localStorage.getItem('authmsg')
@@ -111,6 +126,7 @@ const useStore = defineStore('store', {
       this.setdefaultFile.methods = o.methods
       this.setdefaultFile.valAt = o.valAt
       this.setdefaultFile.valPt = o.valPt
+      this.setdefaultFile.valTt = o.valTt
     },
     setDefaultCompress(obj) {
       this.commpressParams = obj

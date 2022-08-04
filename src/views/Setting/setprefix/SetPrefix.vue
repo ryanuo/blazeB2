@@ -3,17 +3,20 @@
  * @Date: 2022-07-04 09:45:30
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-29 20:32:46
+ * @LastEditTime: 2022-08-03 17:24:48
  * @FilePath: \dev\src\views\Setting\setprefix\SetPrefix.vue
 -->
 <template>
   <div class="set-prefix">
-    <el-select v-model="value" placeholder="请选择" @change="handleSelect">
-      <el-option v-for="item in prefixImg.support" :key="item.url" :label="item.label" :value="item.url">
-      </el-option>
-    </el-select>
-    <el-input placeholder="请选择图床管理页面图片地址前缀" v-model="value" :disabled="true">
-    </el-input>
+    <div class="setting-hd-h2">图片前缀(默认选择 host_url 在密钥配置中可修改)</div>
+    <div class="flex-btw-center">
+      <el-input placeholder="请选择图床管理页面图片地址前缀" v-model="value" :disabled="true">
+      </el-input>
+      <el-select v-model="value" placeholder="请选择" @change="handleSelect">
+        <el-option v-for="item in prefixImg.support" :key="item.url" :label="item.label" :value="item.url">
+        </el-option>
+      </el-select>
+    </div>
   </div>
 </template>
 

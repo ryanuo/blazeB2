@@ -3,7 +3,7 @@
  * @Date: 2022-07-15 16:42:08
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 17:45:16
+ * @LastEditTime: 2022-08-04 15:06:46
  * @FilePath: \dev\src\views\home\components\UploadList.vue
 -->
 <template>
@@ -30,7 +30,7 @@
       <UploadTaggle :isshow="svgType" />
       <div class="config-warp">
         <span class="up-span" style="margin-right:auto">{{ TimeTran(file.uid) }}</span>
-        <span class="up-span" v-if="svgType === '0'" @click="$router.push({ name: 'setting', query: { id: 2 } })">{{
+        <span class="up-span" v-if="svgType === '0'" @click="setShowSettingBtn(true)">{{
             CompressData.iscompress ? '已开启压缩' : '未开启压缩'
         }}</span>
         <span class="up-span" @click="setwarterMark(pid)">水印设置</span>
@@ -43,7 +43,7 @@
 import { transiTime } from '@/plugin/filter'
 import UploadTaggle from '@/views/svg/uploadTaggle.vue'
 import { NewHandleCompressor } from '@/utils/common/compress'
-import { mapState } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import useStore from '@/store'
 import { uploadServer } from '@/utils/api'
 import MarkDown from '@/views/svg/MarkDown.vue'
@@ -103,6 +103,7 @@ export default {
   },
   components: { UploadTaggle, MarkDown },
   methods: {
+    ...mapActions(useStore, ['setShowSettingBtn']),
     // 执行上传图片的功能
     uploadSumit() {
       return new Promise((resolve) => {

@@ -3,7 +3,7 @@
  * @Date: 2022-07-30 16:50:32
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 15:41:54
+ * @LastEditTime: 2022-08-04 14:20:18
  * @FilePath: \dev\src\views\ImgManage\contextMenu\ContextMenu.vue
 -->
 <template>
@@ -32,21 +32,26 @@ export default {
         },
         {
           mid: 2,
-          name: '详情',
+          name: '修改复制格式',
           disable: false
         },
         {
           mid: 3,
-          name: '分享',
+          name: '详情',
           disable: false
         },
         {
           mid: 4,
-          name: '下载',
+          name: '分享',
           disable: false
         },
         {
           mid: 5,
+          name: '下载',
+          disable: false
+        },
+        {
+          mid: 6,
           name: '删除',
           disable: false
         }

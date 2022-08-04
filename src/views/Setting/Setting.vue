@@ -3,7 +3,7 @@
  * @Date: 2022-07-01 12:38:31
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-02 10:00:48
+ * @LastEditTime: 2022-08-03 16:21:26
  * @FilePath: \dev\src\views\Setting\Setting.vue
 -->
 <template>
@@ -36,12 +36,12 @@
 
 <script>
 import FormView from '@/views/formview/FormView.vue'
-import SetPrefix from './setprefix/SetPrefix.vue'
-import SetDefault from './setDefault/SetDefault.vue'
-import SetCompress from './setMain/SetCompress.vue'
-import SetUpload from './setUploadFile/SetUpload.vue'
-import SetCopy from './setcopy/SetCopy.vue'
-import SetDefaultCopy from './setdefaultCopy/SetDefaultCopy.vue'
+import SetPrefix from '@/view/Setting/setprefix/SetPrefix.vue'
+import SetDefault from '@/view/Setting/setDefault/SetDefault.vue'
+import SetCompress from '@/view/Setting/setMain/SetCompress.vue'
+import SetUpload from '@/view/Setting/setUploadFile/SetUpload.vue'
+import SetCopy from '@/view/Setting/setcopy/SetCopy.vue'
+import SetDefaultCopy from '@/view/Setting/setdefaultCopy/SetDefaultCopy.vue'
 export default {
   components: {
     FormView,

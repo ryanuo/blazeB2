@@ -3,8 +3,8 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-24 17:36:56
- * @FilePath: \vite\src\main.prod.js
+ * @LastEditTime: 2022-08-04 10:51:29
+ * @FilePath: \dev\src\main.prod.js
  */
 
 /* eslint-disable */
@@ -24,6 +24,7 @@ Vue.config.devtools = process.env.NODE_ENV === 'dev'
 Vue.use(ELEMENT)
 Vue.use(VueClipboard)
 Vue.use(PiniaVuePlugin)
+console.log(window);
 new Vue({
   pinia,
   router,

@@ -3,21 +3,22 @@
  * @Date: 2022-07-07 19:33:08
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-23 18:21:32
+ * @LastEditTime: 2022-08-03 18:54:57
  * @FilePath: \dev\src\views\Setting\setUploadFile\SetUpload.vue
 -->
 <template>
   <div class="set-upload">
+    <h2 class="setting-hd-h2" style="padding-bottom:10px;">B2桶图片上传路径（文件夹路径/名称） <span class="red-c">必填</span>（默认根目录下）
+    </h2>
     <el-input v-model="tofile" placeholder="eg:hexo/2/"></el-input>
     <el-button @click="saveToFile">保存</el-button>
-    <el-button @click="$router.replace({ name: 'home' })">返回</el-button>
   </div>
 </template>
 
 <script>
 import { Notification } from 'element-ui'
 import { mapActions, mapState } from 'pinia'
-import useStore from '../../../store'
+import useStore from '@/store'
 
 export default {
   data() {
@@ -33,6 +34,7 @@ export default {
   },
   methods: {
     ...mapActions(useStore, ['setDefaultToFile']),
+    ...mapActions(useStore, ['setShowSettingBtn']),
     saveToFile() {
       const a_ = this.tofile.slice(-1) === '/' || this.tofile === ''
       Notification({
@@ -42,6 +44,7 @@ export default {
       })
       if (a_) {
         this.setDefaultToFile(this.tofile)
+        this.setShowSettingBtn(false)
       }
     }
   }

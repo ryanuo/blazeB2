@@ -3,11 +3,12 @@
  * @Date: 2022-06-24 17:04:27
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-29 20:33:12
+ * @LastEditTime: 2022-08-03 17:29:29
  * @FilePath: \dev\src\views\formview\FormView.vue
 -->
 <template>
   <div class="form-w">
+    <h2 class="setting-hd-h2">密钥配置</h2>
     <el-form ref="formRef" :model="form" :rules="rules">
       <el-form-item label="application_key_id" prop="application_key_id">
         <el-input v-model="form.application_key_id" placeholder="请填写应用程序密钥id"></el-input>
@@ -23,8 +24,10 @@
         <el-input v-model="form.bucket_name" placeholder="请填写存储桶名称"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('formRef')">保存本地</el-button>
-        <el-button @click="resetForm('formRef')">重置</el-button>
+        <div class="btn-wrap-form">
+          <el-button type="primary" @click="submitForm('formRef')" plain>保存本地</el-button>
+          <el-button @click="resetForm('formRef')">重置</el-button>
+        </div>
       </el-form-item>
     </el-form>
   </div>

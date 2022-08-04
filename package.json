@@ -25,7 +25,6 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.15.6",
     "file-saver": "^2.0.5",
-    "hevue-img-preview": "^6.0.0",
     "html-webpack-plugin": "^4.5.0",
     "html2canvas": "^1.4.1",
     "jszip": "^3.10.0",
