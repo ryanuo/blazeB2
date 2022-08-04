@@ -3,7 +3,7 @@
  * @Date: 2022-04-20 20:40:43
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-04 15:47:17
+ * @LastEditTime: 2022-08-04 21:46:41
  * @FilePath: \dev\src\views\home\Home.vue
 -->
 <template>
@@ -196,6 +196,7 @@ export default {
         const errorL = _this.fileList.length - _this.uploadProgress
         document.getElementById('tar_box').innerHTML = ''
         _this.loadings = false
+        _this.isLoad = false
         Notification({
           title: '上传提示',
           type: errorL ? 'error' : 'success',
