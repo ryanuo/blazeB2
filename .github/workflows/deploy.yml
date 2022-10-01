@@ -30,13 +30,14 @@ jobs:
           cp -r temp/.git docs/.vitepress/dist/.git
           
 
-      - name: Check remote
-        run: |
-          cd docs/.vitepress/dist
-          ls
+      # - name: Check remote
+      #   run: |
+          
 
       - name: Deploy # 部署
         run: |
+          cd docs/.vitepress/dist
+          ls
           git config --global user.name "Rr210"
           git config --global user.email "1577791638@qq.com"
           git remote -v
