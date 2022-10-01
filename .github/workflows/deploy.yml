@@ -22,11 +22,12 @@ jobs:
       - name: Create temp folder
         run: |
           git clone https://github.com/blazeb2/blazeb2.github.io.git temp
+          cd temp
           ls
 
       - name: Move temp to main folder
         run: |
-          mv temp/.git docs/.vitepress/dist
+          mv /temp/.git docs/.vitepress/dist
           ls
 
       - name: Deploy # 部署
