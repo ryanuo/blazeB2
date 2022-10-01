@@ -35,7 +35,7 @@ jobs:
           cd docs/.vitepress/dist
           git config --global user.name "Rr210"
           git config --global user.email "1577791638@qq.com"
-          git add .
+          git add -A
           git commit -m "docs: 文档更新" 
           git push -uf https://Rr210:${{ secrets.DOCS_TOKEN }}@github.com/blazeb2/blazeb2.github.io.git master
 
