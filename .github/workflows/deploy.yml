@@ -33,7 +33,7 @@ jobs:
       - name: Check remote
         run: |
           cd docs
-          ll
+          ls
 
       - name: Deploy # 部署
         run: |
