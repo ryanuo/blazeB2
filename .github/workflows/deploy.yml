@@ -28,6 +28,10 @@ jobs:
         run: |
           mkdir -p docs/.vitepress/dist/.git/
           cp -r temp/.git docs/.vitepress/dist/.git
+          
+
+      - name: Check remote
+        run: |
           cd docs/.vitepress/dist
           ls
 
