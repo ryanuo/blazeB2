@@ -23,11 +23,13 @@ jobs:
         run: |
          git clone https://github.com/blazeb2/blazeb2.github.io.git temp
          ls
+
       - name: Move temp to main folder
         working-directory: /temp
         run: |
          mv .git docs/.vitepress/dist
          ls
+
     - name: Deploy # 部署
         working-directory: docs/.vitepress/dist
         run: |
@@ -35,7 +37,7 @@ jobs:
           git config --global user.email "1577791638@qq.com"
           git add -A
           git commit -m "docs: 文档更新"
-          git push origin https://Rr210: ${{ secrets.DOCS_TOKEN }}@github.com/blazeb2/blazeb2.github.io.git
+          git push origin https://Rr210:${{ secrets.DOCS_TOKEN }}@github.com/blazeb2/blazeb2.github.io.git
 
         
         
