@@ -25,14 +25,13 @@ jobs:
           ls
 
       - name: Move temp to main folder
-        working-directory: /temp
         run: |
-          mv .git docs/.vitepress/dist
+          mv temp/.git docs/.vitepress/dist
           ls
 
       - name: Deploy # 部署
-        working-directory: docs/.vitepress/dist
         run: |
+          cd docs/.vitepress/dist
           git config --global user.name "Rr210"
           git config --global user.email "1577791638@qq.com"
           git add -A
