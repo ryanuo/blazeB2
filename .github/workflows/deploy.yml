@@ -26,6 +26,7 @@ jobs:
 
       - name: Move temp to main folder
         run: |
+          mkdir -p docs/.vitepress/dist/.git/
           cp -r temp/.git docs/.vitepress/dist/.git
           ls
 
