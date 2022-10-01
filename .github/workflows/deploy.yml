@@ -28,11 +28,11 @@ jobs:
         run: |
           mkdir -p docs/.vitepress/dist/.git/
           cp -r temp/.git docs/.vitepress/dist/.git
+          cd docs/.vitepress/dist
           ls
 
       - name: Deploy # 部署
         run: |
-          cd docs/.vitepress/dist
           git config --global user.name "Rr210"
           git config --global user.email "1577791638@qq.com"
           git remote -v
