@@ -27,7 +27,7 @@ jobs:
       - name: Move temp to main folder
         run: |
           ls
-          mv temp docs/.vitepress/dist
+          cp temp/.git docs/.vitepress/dist
           ls
 
       - name: Deploy # 部署
