@@ -35,19 +35,19 @@ vercel.json    // vercel 相关配置
 5. 第五步：点击 `ROOT DIRECTORY` 右侧的 `Edit`，选择 `deploys/vercel-api`
 6. 第六步：点击 `Deploy`
 
-![](https://imgcdn.admirelight.com/img/f62063d6-855b-4d5f-b12d-4e743ea03e4d.png)
+![](https://cloud.mr90.top/hexo/api/8d4bfe1b-db6a-437c-9186-b8d7948bd451.png)
 
 ## 自定义域名
 
 按如图所示操作
 
-![](https://imgcdn.admirelight.com/img/4963379c-1aa5-4921-b47c-76f011565a02.png)
+![](https://cloud.mr90.top/hexo/api/e362938e-6415-4389-8e12-86058f4c94a7.png)
 
 在DNS中添加一条CNAME记录
 
-![](https://imgcdn.admirelight.com/img/da2725eb-1190-4fbc-b034-77c37ba25fdb.png)
+![](https://cloud.mr90.top/hexo/api/465d6266-a5a7-4e03-b01a-88bb0db4c267.png)
 
 域名即可访问
 
-![](https://imgcdn.admirelight.com/img/e8e5ceef-191a-47ce-92ff-570a605317c6.png)
+![](https://cloud.mr90.top/hexo/api/7d6035c8-7a9a-4da9-8cc6-9a1c93b5fe8d.png)
 >参考文章：[使用Cloudflare加速vercel](https://hin.cool/posts/cfvercel.html)

@@ -66,4 +66,4 @@ navbar: true
 
 - 将 **keyID** 和 **applicationKey** 保存好，我们接下来用得到
 
-![](https://imgcdn.admirelight.com/img/b0fadb09-26f2-4518-8e44-31c0f81592c4.png)
+![](https://cloud.mr90.top/hexo/api/4958eea4-be2e-429d-a614-4f74e1d3a3cf.png)

@@ -12,7 +12,7 @@ description: Cloudflare配置 将你的图床地址进行重写
 
 如：我将 `imgcdn.admirelight.com` 作为我的图床链接。那么我就要在DNS中添加一条CNAME记录，并指向[文件地址](/guide/prepare.html#step-4-查看桶域名)中的域名。
 
-![](https://imgcdn.admirelight.com/img/da2725eb-1190-4fbc-b034-77c37ba25fdb.png)
+![](https://cloud.mr90.top/hexo/api/0c69f9ba-b516-4799-9dba-1353e6d9e5df.png)
 
 ## Step. 2: 重定向&&缓冲处理
 
@@ -24,7 +24,7 @@ imgcdn.admirelight.com/file/你的桶名称/*
 https://f004.backblazeb2.com/file/你的桶名称/$1)
 ```
 
-![](https://imgcdn.admirelight.com/img/23d417d2-9b26-449e-9dc7-8dd8b47b06f1.png)
+![](https://cloud.mr90.top/hexo/api/68091800-449a-4daa-848b-e6c59d8d77b7.png)
 
 
 ## Step. 3: 重写URL
@@ -35,7 +35,7 @@ https://f004.backblazeb2.com/file/你的桶名称/$1)
 concat("/file/bucket", http.request.uri.path)
 ```
 
-![](https://imgcdn.admirelight.com/img/890b5149-05f8-46c6-baa4-b0e91b4a6e03.png)
+![](https://cloud.mr90.top/hexo/api/53b05dc8-180d-48d0-8460-e91dd2933de8.png)
 
 - 优化前访问路径为：https://imgcdn.admirelight.com/file/桶名字/xxx.txt
 - 优化后访问路径为：https://imgcdn.admirelight.comm/xxx.txt
@@ -57,4 +57,4 @@ x-bz-upload-timestamp
 - 转换规则 --> 创建转换规则 --> 修改响应头
 
 ![](https://cloud.mr90.top/hexo/4/e0b95f22-0aae-40d0-a6c9-30071bfa8035.png)
-![](https://imgcdn.admirelight.com/img/8a0f1f51-962c-4128-840d-65c3e003c883.png)
+![](https://cloud.mr90.top/hexo/api/759fa15d-d7b2-414b-bc30-f44af6c61ef9.png)
