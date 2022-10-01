@@ -1,0 +1,35 @@
+name: Deploy # 部署
+
+on: # 触发条件
+  push:
+    branches:
+      - master # 推送到 master 分支
+
+  release:
+    types:
+      - published # 推送新版本号
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout # Checkout 仓库
+      uses: actions/checkout@v2
+      with:
+        ref: master
+
+    - name: Deploy # 部署
+      run: |
+        git clone https://github.com/blazeb2/blazeb2.github.io.git temp
+        mv temp/.git docs/.vitepress/dist
+        rmdir tmp
+        cd docs/.vitepress/dist
+        git config --global user.name "Rr210"
+        git config --global user.email "1577791638@qq.com"
+        git add -A
+        git commit -m "docs: 文档更新"
+        git push origin https://Rr210:${{ secrets.DOCS_TOKEN }}@github.com/blazeb2/blazeb2.github.io.git
+
+        
+        

@@ -3,8 +3,8 @@
  * @Date: 2022-07-30 21:56:16
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-07-31 11:35:36
- * @FilePath: \dev\docs\docs\.vitepress\config.js
+ * @LastEditTime: 2022-10-01 21:45:47
+ * @FilePath: \dev\docs\.vitepress\config.js
  */
 import { sidebar, nav, head, markdown } from './configs/index'
 export default {
