@@ -32,7 +32,7 @@ jobs:
 
       - name: Check remote
         run: |
-          cd docs
+          cd docs/.vitepress/dist
           ls
 
       - name: Deploy # 部署
