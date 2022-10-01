@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout # Checkout 仓库
+      - name: Checkout # Checkout 仓库
       uses: actions/checkout@v2
       with:
         ref: master
 
-     - name: Create temp folder
+      - name: Create temp folder
         run: |
          git clone https://github.com/blazeb2/blazeb2.github.io.git temp
          ls
@@ -30,7 +30,7 @@ jobs:
          mv .git docs/.vitepress/dist
          ls
 
-    - name: Deploy # 部署
+      - name: Deploy # 部署
         working-directory: docs/.vitepress/dist
         run: |
           git config --global user.name "Rr210"
