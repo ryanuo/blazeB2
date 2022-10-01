@@ -17,7 +17,7 @@ jobs:
       - name: Checkout # Checkout 仓库
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: dev
 
       - name: Create temp folder
         run: |
