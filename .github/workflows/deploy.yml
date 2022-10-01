@@ -19,17 +19,23 @@ jobs:
       with:
         ref: master
 
+     - name: Create temp folder
+        run: |
+         git clone https://github.com/blazeb2/blazeb2.github.io.git temp
+         ls
+      - name: Move temp to main folder
+        working-directory: /temp
+        run: |
+         mv .git docs/.vitepress/dist
+         ls
     - name: Deploy # 部署
-      run: |
-        git clone https://github.com/blazeb2/blazeb2.github.io.git temp
-        mv temp/.git docs/.vitepress/dist
-        rmdir tmp
-        cd docs/.vitepress/dist
-        git config --global user.name "Rr210"
-        git config --global user.email "1577791638@qq.com"
-        git add -A
-        git commit -m "docs: 文档更新"
-        git push origin https://Rr210:${{ secrets.DOCS_TOKEN }}@github.com/blazeb2/blazeb2.github.io.git
+        working-directory: docs/.vitepress/dist
+        run: |
+          git config --global user.name "Rr210"
+          git config --global user.email "1577791638@qq.com"
+          git add -A
+          git commit -m "docs: 文档更新"
+          git push origin https://Rr210: ${{ secrets.DOCS_TOKEN }}@github.com/blazeb2/blazeb2.github.io.git
 
         
         
