@@ -37,7 +37,7 @@ jobs:
           git config --global user.email "1577791638@qq.com"
           git add -A
           git commit -m "docs: 文档更新"
-          git push origin https://github.com/blazeb2/blazeB2.git
+          git push  https://github.com/blazeb2/blazeb2.github.io.git master
 
         
         
