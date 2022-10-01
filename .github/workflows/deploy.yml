@@ -15,20 +15,20 @@ jobs:
 
     steps:
       - name: Checkout # Checkout 仓库
-      uses: actions/checkout@v2
-      with:
-        ref: master
+        uses: actions/checkout@v2
+        with:
+          ref: master
 
       - name: Create temp folder
         run: |
-         git clone https://github.com/blazeb2/blazeb2.github.io.git temp
-         ls
+          git clone https://github.com/blazeb2/blazeb2.github.io.git temp
+          ls
 
       - name: Move temp to main folder
         working-directory: /temp
         run: |
-         mv .git docs/.vitepress/dist
-         ls
+          mv .git docs/.vitepress/dist
+          ls
 
       - name: Deploy # 部署
         working-directory: docs/.vitepress/dist
