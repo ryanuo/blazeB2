@@ -3,8 +3,8 @@
  * @Date: 2022-07-30 08:47:50
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-03 22:34:24
- * @FilePath: \dev\src\config\plugin-vite.js
+ * @LastEditTime: 2023-07-02 19:43:53
+ * @FilePath: \blazeB2\src\config\plugin-vite.js
  */
 import envCompatible from 'vite-plugin-env-compatible'
 import { createVuePlugin as vue } from 'vite-plugin-vue2'
@@ -16,7 +16,7 @@ import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import importToCDN from 'vite-plugin-cdn-import'
 import { cdn } from './index'
-const plugins = function (mode) {
+const plugins = function(mode) {
   const isPro = mode === 'pro'
   const transformIndexHtml = (code) => {
     return code.replace(/__INDEX__/, `${isPro ? '/src/main.prod.js' : '/src/main.js'}`) // 生产环境
@@ -42,8 +42,8 @@ const plugins = function (mode) {
     algorithm: 'gzip' // 压缩算法
   }),
   eslintPlugin({ // eslint插件，开发时存在eslint错误组织构建并提示
-    cache: false,
-    throwOnError: !isPro // 生产环境打包不抛出异常
+    cache: false
+    // throwOnError: !isPro // 生产环境打包不抛出异常
   }),
   legacy({
     targets: ['ie >= 11'],
