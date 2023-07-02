@@ -3,8 +3,8 @@
  * @Date: 2022-07-01 11:19:24
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-04 15:45:31
- * @FilePath: \dev\src\views\TabNav\TabNav.vue
+ * @LastEditTime: 2023-07-02 21:25:46
+ * @FilePath: \blazeB2\src\views\TabNav\TabNav.vue
 -->
 <template>
   <div class="hd-w">
@@ -13,10 +13,9 @@
     </div>
     <nav class="nav-container" @click="handleNav($event)">
       <span :class="currentMenu === 'home' ? 'is-nav-selected' : ''" data-index="home">首页</span>
-      <span :class="currentMenu === 'imanage' ? 'is-nav-selected' : ''" v-if="isLogined"
-        data-index="imanage">图床管理</span>
+      <span :class="currentMenu === 'imanage' ? 'is-nav-selected' : ''" v-if="isLogined" data-index="imanage">图床管理</span>
       <div class="logo-wrap">
-        <img src="@/icons/logo.svg" data-index="home" title="" />
+        <img src="/img/icons/logo.svg" data-index="home" title="" />
       </div>
       <span :class="currentMenu === 'setting' ? 'is-nav-selected' : ''" data-index="setting">使用文档</span>
       <span :class="currentMenu === 'about' ? 'is-nav-selected' : ''" data-index="about">关于程序</span>
