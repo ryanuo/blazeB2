@@ -1,11 +1,3 @@
-<!--
- * @Author: Harry
- * @Date: 2022-04-20 20:40:43
- * @LastEditors: harry
- * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-04 21:46:41
- * @FilePath: \dev\src\views\home\Home.vue
--->
 <template>
   <div class="home-w">
     <div class="upload-w" style="width: 100%">
@@ -23,7 +15,7 @@
         <div slot="tip">
           <div class="el-upload__tip">
             <div>当前上传路径:<el-tag :type="tofile ? '' : 'danger'" size="mini" @click="handleopenSetting">{{
-                tofile ? tofile : '你还未填写路径，点击这里'
+              tofile ? tofile : '你还未填写路径，点击这里'
             }}</el-tag>
             </div>
             <div v-if="fdata && fdata.bucket_name" @click="handleopenSetting">
@@ -44,7 +36,7 @@
               </div>
             </div>
             <el-button class="btn-upload" @click="moreUploadPic" type="primary" plain :loading="isLoad">{{ isLoad ?
-                '正在上传' : '上传'
+              '正在上传' : '上传'
             }}</el-button>
             <el-button class="btn-upload" @click="handleReSet" type="info" plain>清空</el-button>
           </span>
@@ -93,7 +85,7 @@ export default {
     },
     styC() {
       const len = this.fileList.length
-      return function (index) {
+      return function(index) {
         if (len === 1) return true
         console.log(index === len - 1 && index % 2 !== 0)
         if (index === len - 1 && index % 2 === 0) return true
@@ -149,7 +141,7 @@ export default {
       this.uploadProgress = 0
     },
     // 图片的粘贴事件
-    pasteHandle: debounce(function (event) {
+    pasteHandle: debounce(function(event) {
       console.log(event.clipboardData.files)
       const file = {
         percentage: 0,
@@ -169,7 +161,7 @@ export default {
       const _this = this
       const data = []
       let sequence = Promise.resolve()
-      arr.forEach(function (item) {
+      arr.forEach(function(item) {
         sequence = sequence.then(item).then(r => {
           data.push(r)
           if (r.fileName) {

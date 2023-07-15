@@ -1,11 +1,4 @@
-/*
- * @Author: Harry
- * @Date: 2022-04-20 20:40:43
- * @LastEditors: harry
- * @Github: https://github.com/rr210
- * @LastEditTime: 2023-07-01 10:12:04
- * @FilePath: \blazeB2\src\main.js
- */
+
 import Vue from 'vue'
 import { createPersistedState } from 'pinia-persistedstate-plugin'
 import { createPinia, PiniaVuePlugin } from 'pinia'

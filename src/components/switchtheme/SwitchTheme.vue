@@ -1,5 +1,5 @@
 <template>
-  <div class="switch-theme-wrap">
+  <div class="switch-theme-wrap" v-if="!isMobile">
     <div>
       <button v-if="isLogined" @click="openhandle">
         <LayOut />
@@ -25,6 +25,45 @@
       <VPIconGitHub />
     </button>
   </div>
+  <div v-else>
+    <div class="dropdown">
+      <div class="dropdown-trigger" @click="toggleDropdown">
+        <button class="dropdown-button">{{ selectedOption }}</button>
+      </div>
+      <transition name="fade">
+        <div v-if="isOpen" class="dropdown-menu" :style="getComputedStyle">
+          <ul class="dropdown-options">
+            <li>
+              <button v-if="isLogined" @click="openhandle">
+                <LayOut />
+              </button>
+              <button v-else @click="tapLoginPage">
+                <SignSvg />
+              </button>
+            </li>
+            <li @click="handleSetting">
+              <button>
+                <SettingSvg />
+              </button>
+            </li>
+            <li @click="handleThemeChange" style="display:inline-block">
+              <button v-if="isLight">
+                <VPIconSun />
+              </button>
+              <button v-else>
+                <VPIconMoon />
+              </button>
+            </li>
+            <li>
+              <button @click="handleTogGithub">
+                <VPIconGitHub />
+              </button>
+            </li>
+          </ul>
+        </div>
+      </transition>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,12 +77,21 @@ import useStore from '@/store'
 import { Message, MessageBox } from 'element-ui'
 import { debounce } from '@/plugin/filter'
 import SettingSvg from '@/views/svg/SettingSvg.vue'
+
 export default {
   components: { VPIconMoon, VPIconSun, VPIconGitHub, LayOut, SignSvg, SettingSvg },
   data() {
     return {
       isLight: true,
-      disappear: false
+      disappear: false,
+      isOpen: false,
+      selectedOption: '🍥'
+    }
+  },
+  props: {
+    isMobile: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
@@ -52,7 +100,12 @@ export default {
     this.isLight = theme ? JSON.parse(theme).theme !== 'dark' : true
   },
   computed: {
-    ...mapState(useStore, ['isLogined']) // 映射函数，取出tagslist
+    ...mapState(useStore, ['isLogined']), // 映射函数，取出tagslist
+    getComputedStyle() {
+      return {
+        top: `${-38.5 * 4}px`
+      }
+    }
   },
   methods: {
     ...mapActions(useStore, ['handleIsLogined']),
@@ -67,12 +120,19 @@ export default {
       localStorage.setItem('themeb2', JSON.stringify({ theme: e }))
     },
     handleTogGithub() {
-      window.open('https://github.com/Rr210/blazeB2')
+      window.open('https://github.com/rr210/blazeB2')
     },
     handleThemeChange() {
       this.isLight = !this.isLight
       const item = this.isLight ? '' : 'dark'
       this.handleSelect(item)
+    },
+    toggleDropdown() {
+      this.isOpen = !this.isOpen
+    },
+    selectOption(option) {
+      this.selectedOption = option
+      this.isOpen = false
     },
     openhandle() {
       MessageBox({
@@ -95,7 +155,7 @@ export default {
       })
     },
     // 跳转登录页面
-    tapLoginPage: debounce(function () {
+    tapLoginPage: debounce(function() {
       this.handleSetting()
     }, 300, true)
   }
@@ -103,14 +163,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.switch-theme-wrap {
-  display: flex;
-
+.common(@mg-left) {
   button {
     border: 1px solid #d4d4d4;
     background-color: transparent;
     outline: none;
-    margin-left: 12px;
+    margin-left: @mg-left;
     width: 28px;
     height: 28px;
     text-align: center;
@@ -125,10 +183,67 @@ export default {
     }
 
     svg {
-      // margin-left: 12px;
       width: 20px;
       height: 20px;
     }
   }
+}
+
+.switch-theme-wrap {
+  display: flex;
+  .common(12px)
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger {
+  display: inline-block;
+}
+
+.dropdown-button {
+  padding: 4px 10px;
+  // background-color: #f0f0f0;
+  border: .1px solid #ccc;
+  /* 修改边框样式为细线 */
+  border-radius: 5px;
+  /* 圆角样式 */
+}
+
+.dropdown-menu {
+  // background-color: #f0f0f0;
+  border: .1px solid #ccc;
+  /* 修改边框样式为细线 */
+  border-radius: 5px;
+  /* 圆角样式 */
+  position: absolute;
+  width: 39px;
+  right: 0;
+  background: #f5f6ff;
+  filter: blur(0.2px);
+}
+
+.dropdown-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  .common(0)
+}
+
+.dropdown-options li {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
