@@ -144,6 +144,3 @@ class B2:
                             headers={'Authorization': account_authorization_token})
         print(res.json())
         return json.dumps(res.json(), ensure_ascii=False)
-
-if __name__ == '__main__':
-   app.run(host='0.0.0.0',port=9000)
