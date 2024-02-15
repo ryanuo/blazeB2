@@ -21,7 +21,7 @@ description: Cloudflare配置 将你的图床地址进行重写
 ```
 imgcdn.admirelight.com/file/你的桶名称/*
 
-https://f004.backblazeb2.com/file/你的桶名称/$1)
+https://f004.backblazeb2.com/file/你的桶名称/$1
 ```
 
 ![](https://cloud.mr90.top/hexo/api/68091800-449a-4daa-848b-e6c59d8d77b7.png)
