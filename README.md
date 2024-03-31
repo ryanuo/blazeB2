@@ -9,9 +9,11 @@
 
 > 📷基于 backBlazeb2 API  ⚡ cloudflare 开发的具有 CDN 加速功能的图床工具
 
-- 在线使用 [传送](https://blazeb2.mr90.cf)  | 镜像站点 [传送](https://b2.mr90.top) | 功能展示 [传送](https://www.bilibili.com/video/BV1gB4y1v7qs)
+- 在线使用 [传送](https://b2.mr90.top/)  功能展示 [传送](https://www.bilibili.com/video/BV1gB4y1v7qs)
 - `deploys` 文件为项目部署文件 [传送](https://blazeb2.js.org/zh/guide/deploy.html)
 
+> [!NOTE]
+> backblaze 创建公共的桶需要绑卡支付，此项目不在维护。
 
 ## 🎉 功能特点 | Features
 
