@@ -3,14 +3,13 @@
  * @Date: 2022-07-01 12:37:58
  * @LastEditors: harry
  * @Github: https://github.com/rr210
- * @LastEditTime: 2022-08-04 18:19:05
- * @FilePath: \dev\src\views\ImgManage\ImgManage.vue
+ * @LastEditTime: 2023-07-08 23:10:09
+ * @FilePath: \blazeB2\src\views\ImgManage\ImgManage.vue
 -->
 <template>
   <div class="img-m common-container">
     <div v-if="isPreview">
-      <PicPreview :pindex="pindex" :imgsList="picListDatas" @closeLayer="isPreview = false"
-        :preFileName="prefixStatus" />
+      <PicPreview :pindex="pindex" :imgsList="picListDatas" @closeLayer="isPreview = false" :preFileName="prefixStatus" />
     </div>
     <mark-load loadText='正在加载请耐心等待' :isload="loadingPicShow" />
     <div class="inp-w">
@@ -47,16 +46,16 @@
         <CopyAll class="svg-btn" @click.native="copyAllHandle" />
         <DeleteSelect class="svg-btn" @click.native="delSelect" />
       </div>
-      <b2-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange"
-        @dblclick.native.prevent="showImgPrew">
+      <b2-checkbox-group v-model="selectList" @change="handleCheckedCitiesChange">
         <b2-checkbox :data-pindex="index" v-for="(item, index) in picListDatas" :label="index" :key="item.uid"
+          @dblclick.native.prevent="showImgPrew($event, index)"
           @contextmenu.prevent.stop.native="handleKeyClick($event, index)">
           <template slot="csvg" slot-scope="content">
             <TogChecked :isshow="content.checked" class="tog-container" />
           </template>
-          <image-item @update="updatePicLists" :checked="checkAll" :picid="index"
-            :piclink="prefixStatus + item.fileName" :pictitle="item.fileName" :fileId="item.fileId"
-            :picTime="timespan(item.uploadTimestamp)" :ref="'deleteRef' + index">
+          <image-item @update="updatePicLists" :checked="checkAll" :picid="index" :piclink="prefixStatus + item.fileName"
+            :pictitle="item.fileName" :fileId="item.fileId" :picTime="timespan(item.uploadTimestamp)"
+            :ref="'deleteRef' + index">
           </image-item>
         </b2-checkbox>
       </b2-checkbox-group>
@@ -65,7 +64,7 @@
       <contextmenu @menuEvent="handleMenuEvent" ref="contextmenu" :menu-style="menuTopLeft" />
     </div>
     <MarkLoad :isload="isDownload" :totalnum="selectList.length" :progressnum="downloadProgress" loadText="正在下载请耐心等待" />
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+    <el-pagination @size-change="handleSizeChange" small @current-change="handleCurrentChange"
       :current-page.sync="currentPage" :page-sizes="[50, 80, 100, 200]" :page-size="reqParams.maxFileCount"
       layout="sizes,next">
     </el-pagination>
@@ -144,7 +143,7 @@ export default {
       return this.imgDefaultFile.split('/')
     },
     timespan() {
-      return function (val) {
+      return function(val) {
         return transiTime(val)
       }
     },
@@ -213,7 +212,7 @@ export default {
         }
       }).then((zip) => {
         zip.generateAsync({ type: 'blob' })
-          .then(function (content) {
+          .then(function(content) {
             // see FileSaver.js
             FileSaver(content, `@BlazeB2-${Date.now()}.zip`)
             _this.isDownload = false
@@ -246,7 +245,7 @@ export default {
       return new Promise((resolve, reject) => {
         // image.setAttribute('crossOrigin', 'anonymous')
         console.log(image)
-        image.onload = function () {
+        image.onload = function() {
           const canvas = document.createElement('canvas')
           canvas.width = this.naturalWidth
           canvas.height = this.naturalHeight
@@ -264,11 +263,12 @@ export default {
       })
     },
     // 图片预览功能
-    showImgPrew(e) {
-      const { pindex } = e.path[4].dataset
-      if (pindex) {
+    showImgPrew(e, index) {
+      console.log(index)
+      const currentSrc = index
+      if (currentSrc.toString()) {
         this.isPreview = true
-        this.pindex = parseInt(pindex)
+        this.pindex = parseInt(currentSrc)
       }
     },
     handleMenuEvent(e) {
@@ -276,7 +276,7 @@ export default {
       const _this = this
       switch (e) {
         case 0: // 打开图片到新的窗口
-          _this.handleMenuAfter(function (i) {
+          _this.handleMenuAfter(function(i) {
             window.open(_this.prefixStatus + _this.picListDatas[i].fileName)
           })
           break
@@ -333,17 +333,17 @@ export default {
             break
         }
       }, 100, true)
-      window.addEventListener('keydown', function (e) {
+      window.addEventListener('keydown', function(e) {
         e.stopPropagation()
-        document.body.onselectstart = function () {
+        document.body.onselectstart = function() {
           return false
         }
         // document.getElementById('app').style.userSelect = 'none'
         handleKey(e.key, true)
       })
-      window.addEventListener('keyup', function (e) {
+      window.addEventListener('keyup', function(e) {
         e.stopPropagation()
-        document.body.onselectstart = function () {
+        document.body.onselectstart = function() {
           return false
         }
         // document.getElementById('app').style.userSelect = 'none'
@@ -403,7 +403,7 @@ export default {
       const _this = this
       const data = []
       let sequence = Promise.resolve()
-      arr.forEach(function (item) {
+      arr.forEach(function(item) {
         sequence = sequence.then(item).then(r => {
           data.push(r)
           if (!r.status) {
@@ -432,7 +432,7 @@ export default {
         that.currentTempNum = len
         that.deleteprogress = 0
         for (const i of that.selectList) {
-          waitDelList.push(function () {
+          waitDelList.push(function() {
             return new Promise((resolve, reject) => {
               const n = that.deleteImg(that.picListDatas[i], i)
               resolve(n)
@@ -498,7 +498,7 @@ export default {
       }
     },
     // 根据文件夹前缀进行搜索
-    searchList: debounce(function () {
+    searchList: debounce(function() {
       this.picListDatas = []
       this.reqParams.startFileName = ''
       const val = this.reqParams.prefix.trim()
@@ -532,7 +532,7 @@ export default {
         console.log('时间降序')
       }
     },
-    refreshData: debounce(function () {
+    refreshData: debounce(function() {
       this.picListDatas = []
       this.reqParams.startFileName = ''
       // this.reqParams.prefix = ''

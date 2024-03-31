@@ -1,15 +1,8 @@
-<!--
- * @Author: Harry
- * @Date: 2022-07-01 11:19:24
- * @LastEditors: harry
- * @Github: https://github.com/rr210
- * @LastEditTime: 2023-07-02 21:25:46
- * @FilePath: \blazeB2\src\views\TabNav\TabNav.vue
--->
+
 <template>
   <div class="hd-w">
-    <div class="lay-out">
-      <SwitchTheme />
+    <div :class="isMobile ? 'lay-out-mobile' : 'lay-out'">
+      <SwitchTheme :isMobile="isMobile" />
     </div>
     <nav class="nav-container" @click="handleNav($event)">
       <span :class="currentMenu === 'home' ? 'is-nav-selected' : ''" data-index="home">首页</span>
@@ -38,7 +31,8 @@ export default {
   data() {
     return {
       currentMenu: 'home',
-      disappear: false
+      disappear: false,
+      isMobile: false
     }
   },
   watch: {
@@ -53,12 +47,18 @@ export default {
   components: { SwitchTheme, SettingView },
   mounted() {
     const theme = localStorage.getItem('themeb2')
+    this.getIsMobile()
+
+    window.addEventListener('resize', this.getIsMobile)
     if (theme) {
       const dom = document.documentElement
       const t_ = JSON.parse(theme).theme
       if (dom.className !== t_) { document.documentElement.className = t_ }
     }
     this.handleReload()
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.getIsMobile)
   },
   computed: {
     timeE() { return (new Date()).getFullYear() },
@@ -70,6 +70,9 @@ export default {
     // 页面刷新时的nav选中
     handleReload() {
       this.currentMenu = this.$route.name
+    },
+    getIsMobile() {
+      this.isMobile = window.screen.availWidth < 768
     },
     // 跳转
     handleNav(e) {
