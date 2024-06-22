@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install pnpm
+    - name: Install pnpm & build
       run: |
         cd docs
         npm install -g pnpm
@@ -26,9 +26,7 @@ jobs:
         pnpm config set global-bin-dir ~/.pnpm-global
         echo "$HOME/.pnpm-global" >> $GITHUB_PATH
         pnpm install
-
-    - name: Build Docs
-      run: pnpm run docs:b  # 执行构建文档的命令
+        pnpm run docs:b
 
     - name: Deploy to gh-pages
       uses: JamesIves/github-pages-deploy-action@v4.6.1  # 使用部署到gh-pages的Action
