@@ -21,11 +21,11 @@ navbar: true
 2. 按照此图流程操作
 
 
-![](https://cloud.mr90.top/hexo/4/e615dd65-19af-42a6-826f-cf62f53f751c.png)
+![](https://cloud.ryanuo.cc/hexo/4/e615dd65-19af-42a6-826f-cf62f53f751c.png)
 
 - 创建完成后如图所示
 
-![](https://cloud.mr90.top/hexo/4/2ccb3d00-0ccf-48a1-bceb-c92d4861ad06.png)
+![](https://cloud.ryanuo.cc/hexo/4/2ccb3d00-0ccf-48a1-bceb-c92d4861ad06.png)
 
 ## Step. 3: 桶设定
 
@@ -35,7 +35,7 @@ navbar: true
 {"cache-control":"max-age=43200"}
 ```
 
-![](https://cloud.mr90.top/hexo/4/30cfef4b-3111-48b4-ac88-762e600aa618.png)
+![](https://cloud.ryanuo.cc/hexo/4/30cfef4b-3111-48b4-ac88-762e600aa618.png)
 
 - CORS 规则跨域配置可根据需要进行配置
 
@@ -45,8 +45,8 @@ navbar: true
 
 - 记住 **友好 URL** 的链接，我们接下来会用的到
 
-![](https://cloud.mr90.top/hexo/4/a30a1d56-54fa-4d29-bddb-a4c860755e14.png)
-![](https://cloud.mr90.top/hexo/5/6e6ceacd-194e-4c7b-978b-40c2acfa417d.png)
+![](https://cloud.ryanuo.cc/hexo/4/a30a1d56-54fa-4d29-bddb-a4c860755e14.png)
+![](https://cloud.ryanuo.cc/hexo/5/6e6ceacd-194e-4c7b-978b-40c2acfa417d.png)
 
 ## Step. 5: 生成应用密钥
 
@@ -62,8 +62,8 @@ navbar: true
 
 允许列出所有储存桶名称：允许列出所有存储桶名称，包括存储桶创建日期（S3列表存储桶API必需）
 
-![](https://cloud.mr90.top/hexo/4/c85aceb4-475c-450d-8f9b-b26ced99e563.png)
+![](https://cloud.ryanuo.cc/hexo/4/c85aceb4-475c-450d-8f9b-b26ced99e563.png)
 
 - 将 **keyID** 和 **applicationKey** 保存好，我们接下来用得到
 
-![](https://cloud.mr90.top/hexo/api/4958eea4-be2e-429d-a614-4f74e1d3a3cf.png)
+![](https://cloud.ryanuo.cc/hexo/api/4958eea4-be2e-429d-a614-4f74e1d3a3cf.png)

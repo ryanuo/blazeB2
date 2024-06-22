@@ -1,8 +1,8 @@
 /*
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-04-20 22:28:23
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-07-18 20:01:30
  * @FilePath: \dev\vue.config.js
  */
@@ -64,7 +64,7 @@ module.exports = {
       .plugin('html')
       .tap(args => {
         args[0].cdn = isProd ? cdn : {}
-        args[0].title = 'BlazeB2图床 @Harry'
+        args[0].title = 'BlazeB2图床 @Ryanuo'
         return args
       })
     // if (isProd) {

@@ -1,8 +1,8 @@
 /*
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-03 12:14:36
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-07-03 18:29:50
  * @FilePath: \web\src\utils\common\paste.js
  */

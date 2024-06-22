@@ -1,8 +1,8 @@
 /*
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-24 11:17:52
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-07-24 20:48:54
  * @FilePath: \vite\.eslintrc.js
  */

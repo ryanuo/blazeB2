@@ -1,8 +1,8 @@
 /*
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-04-20 21:07:44
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-07-08 12:25:57
  * @FilePath: \web\src\utils\http.js
  */

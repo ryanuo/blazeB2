@@ -1,19 +1,19 @@
 /*
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-06-24 16:09:24
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-07-07 10:55:28
  * @FilePath: \web\src\plugin\elements.js
  */
 /***
  * @Description:
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2021-09-22 21:36:25
- * @Url: https://u.mr90.top
- * @github: https://github.com/rr210
+ * @Url: https://u.ryanuo.cc
+ * @github: https://github.com/ryanuo
  * @LastEditTime: 2021-11-03 16:56:48
- * @LastEditors: Harry
+ * @LastEditors: Ryanuo
  */
 // 导入自己需要的组件
 import {

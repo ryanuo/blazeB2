@@ -2,11 +2,11 @@
   "name": "blazeb2-vercel",
   "version": "1.5.2",
   "description": "📷基于 backBlazeb2 API & ⚡ cloudflare 开发的具有 CDN 加速功能的图床工具",
-  "author": "rr210 <author> (https://github.com/rr210)",
+  "author": "ryanuo <author> (https://github.com/ryanuo)",
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Rr210/blazeB2.git"
+    "url": "https://github.com/ryanuo/blazeB2.git"
   },
   "homepage": "https://blazeb2.js.org"
 }

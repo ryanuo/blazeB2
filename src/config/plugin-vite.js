@@ -1,8 +1,8 @@
 /*
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-30 08:47:50
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2023-07-02 19:43:53
  * @FilePath: \blazeB2\src\config\plugin-vite.js
  */

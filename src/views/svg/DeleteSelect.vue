@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-18 11:01:03
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-07-18 11:13:17
  * @FilePath: \dev\src\views\svg\DeleteSelect.vue
 -->

@@ -30,10 +30,10 @@ description: 使用Heroku一键部署balzeb2图床项目
 1. 如果 您还没有 `Heroku` 帐户，可前往 [Heroku](https://dashboard.heroku.com/login) 注册一个免费帐户。
 2. 注册邮箱建议使用`谷歌邮箱`（qq,163无法注册）
 3. 创建新的 `Heroku App`
-4. 拉取代码部署（或者直接[fork](https://github.com/Rr210/blazeB2)本仓库）
+4. 拉取代码部署（或者直接[fork](https://github.com/ryanuo/blazeB2)本仓库）
 
 ```js
-git clone -b build https://github.com/Rr210/blazeB2.git
+git clone -b build https://github.com/ryanuo/blazeB2.git
 ```
 - fork无需拉取上传
 - 将代码创建并保存到自己的`github`仓库
@@ -42,15 +42,15 @@ git clone -b build https://github.com/Rr210/blazeB2.git
 
 - 选择`github`方式部署，绑定自己的仓库
 
-![](https://cloud.mr90.top/hexo/4/abf21307-628b-4b03-80d1-202a3a83a605.png)
+![](https://cloud.ryanuo.cc/hexo/4/abf21307-628b-4b03-80d1-202a3a83a605.png)
 
 - 选择下面手动部署 选择分支build 如果是fork项目，根据情况选择
 
-![](https://cloud.mr90.top/hexo/4/56144394-87f5-43ca-b149-855b7251f273.png)
+![](https://cloud.ryanuo.cc/hexo/4/56144394-87f5-43ca-b149-855b7251f273.png)
 
 ## 方式二
 
 - [使用Herku cli](https://www.jianshu.com/p/b3478aaa82d3)
 
-![](https://cloud.mr90.top/hexo/4/182df770-6256-4589-8b54-50593c7bd7e0.png)
+![](https://cloud.ryanuo.cc/hexo/4/182df770-6256-4589-8b54-50593c7bd7e0.png)
 

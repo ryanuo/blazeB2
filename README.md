@@ -1,15 +1,15 @@
-<a href="https://b2.mr90.top/" >
-<img width="100" align="right" alt="blazeB2" src="https://cloud.mr90.top/hexo/4/16533db7-b477-46ec-bbf8-44ae848bc771.png">
+<a href="https://b2.ryanuo.cc/" >
+<img width="100" align="right" alt="blazeB2" src="https://cloud.ryanuo.cc/hexo/4/16533db7-b477-46ec-bbf8-44ae848bc771.png">
 </a>
 
 # Blaze B2图床
 
-[![文档](https://img.shields.io/badge/docs-%E6%96%87%E6%A1%A3-blueviolet)](https://blazeb2.js.org/) [![Author](https://img.shields.io/badge/author-Rr210-violet.svg)](https://github.com/Rr210)  [![Release](https://img.shields.io/github/release/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/releases)  [![License](https://img.shields.io/github/license/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/blob/master/LICENSE)  [![Stars](https://img.shields.io/github/stars/Rr210/blazeB2)](https://github.com/Rr210/blazeB2)   [![Issues](https://img.shields.io/github/issues/Rr210/blazeB2)](https://github.com/Rr210/blazeB2/issues)
+[![文档](https://img.shields.io/badge/docs-%E6%96%87%E6%A1%A3-blueviolet)](https://blazeb2.js.org/) [![Author](https://img.shields.io/badge/author-ryanuo-violet.svg)](https://github.com/ryanuo)  [![Release](https://img.shields.io/github/release/ryanuo/blazeB2.svg)](https://github.com/ryanuo/blazeB2/releases)  [![License](https://img.shields.io/github/license/ryanuo/blazeB2.svg)](https://github.com/ryanuo/blazeB2/blob/master/LICENSE)  [![Stars](https://img.shields.io/github/stars/ryanuo/blazeB2)](https://github.com/ryanuo/blazeB2)   [![Issues](https://img.shields.io/github/issues/ryanuo/blazeB2)](https://github.com/ryanuo/blazeB2/issues)
 ## 📃 仓库介绍 | Warehouse introduction
 
 > 📷基于 backBlazeb2 API  ⚡ cloudflare 开发的具有 CDN 加速功能的图床工具
 
-- 在线使用 [传送](https://b2.mr90.top/)  功能展示 [传送](https://www.bilibili.com/video/BV1gB4y1v7qs)
+- 在线使用 [传送](https://b2.ryanuo.cc/)  功能展示 [传送](https://www.bilibili.com/video/BV1gB4y1v7qs)
 - `deploys` 文件为项目部署文件 [传送](https://blazeb2.js.org/zh/guide/deploy.html)
 
 > [!NOTE]
@@ -56,7 +56,7 @@
 <strong>上传图片</strong>
 </td>
 <td>
-<img src="https://cloud.mr90.top/hexo/5/d15c17f1-b06f-4560-a363-dd9adce488b2.gif" />
+<img src="https://cloud.ryanuo.cc/hexo/5/d15c17f1-b06f-4560-a363-dd9adce488b2.gif" />
 </td>
 </tr>
 <tr>
@@ -64,7 +64,7 @@
 <strong>水印上传</strong>
 </td>
 <td>
-<img src="https://cloud.mr90.top/hexo/5/c8f15ba7-b934-4ef6-afb2-22dd472fb4d2.gif" />
+<img src="https://cloud.ryanuo.cc/hexo/5/c8f15ba7-b934-4ef6-afb2-22dd472fb4d2.gif" />
 </td>
 </tr>
 <tr>
@@ -72,7 +72,7 @@
 <strong>图床管理</strong>
 </td>
 <td>
-<img src="https://cloud.mr90.top/hexo/5/1d146393-3012-4b55-8083-01b8c0e562c8.gif" />
+<img src="https://cloud.ryanuo.cc/hexo/5/1d146393-3012-4b55-8083-01b8c0e562c8.gif" />
 </td>
 </tr>
 </table>
@@ -80,23 +80,23 @@
 
 ## ⭐ 历史star | Star History
 
-![Star History Chart](https://api.star-history.com/svg?repos=Rr210/blazeB2&type=Date)
+![Star History Chart](https://api.star-history.com/svg?repos=ryanuo/blazeB2&type=Date)
 
 
 ## ✨ 贡献 | Contribution
 
 欢迎各种形式的贡献，包括但不限于：美化界面、增加功能、改进代码、 修复 Bug 等
 
-<a href="https://github.com/rr210/blazeB2/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=rr210/blazeB2" />
+<a href="https://github.com/ryanuo/blazeB2/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ryanuo/blazeB2" />
 </a>
 
 ## 🎃 反馈 | Feedback
 
-在使用过程中，如遇问题，请仔细阅读 **[文档](https://blazeb2.js.org)** ，或给作者提 **[Issue](https://github.com/rr210/blazeB2/issues)**
+在使用过程中，如遇问题，请仔细阅读 **[文档](https://blazeb2.js.org)** ，或给作者提 **[Issue](https://github.com/ryanuo/blazeB2/issues)**
 
 ## 💿 许可 | License
 
-**[Apache License 2.0](https://github.com/Rr210/blazeB2/blob/master/LICENSE)** 
+**[Apache License 2.0](https://github.com/ryanuo/blazeB2/blob/master/LICENSE)** 
 
 Copyright © 2022-Present blazeB2

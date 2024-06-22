@@ -17,7 +17,7 @@ layout: doc
 
 ## 功能支持
 
-[![Author](https://img.shields.io/badge/author-Rr210-violet.svg)](https://github.com/Rr210)  [![Release](https://img.shields.io/github/release/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/releases)  [![License](https://img.shields.io/github/license/Rr210/blazeB2.svg)](https://github.com/Rr210/blazeB2/blob/master/LICENSE)  [![Stars](https://img.shields.io/github/stars/Rr210/blazeB2)](https://github.com/Rr210/blazeB2)   [![Issues](https://img.shields.io/github/issues/Rr210/blazeB2)](https://github.com/Rr210/blazeB2/issues)
+[![Author](https://img.shields.io/badge/author-ryanuo-violet.svg)](https://github.com/ryanuo)  [![Release](https://img.shields.io/github/release/ryanuo/blazeB2.svg)](https://github.com/ryanuo/blazeB2/releases)  [![License](https://img.shields.io/github/license/ryanuo/blazeB2.svg)](https://github.com/ryanuo/blazeB2/blob/master/LICENSE)  [![Stars](https://img.shields.io/github/stars/ryanuo/blazeB2)](https://github.com/ryanuo/blazeB2)   [![Issues](https://img.shields.io/github/issues/ryanuo/blazeB2)](https://github.com/ryanuo/blazeB2/issues)
 
 
 - 支持 **拖拽**、**复制粘贴**、**选择文件** 等方式进行选择图片
@@ -43,7 +43,7 @@ layout: doc
 <strong>上传图片</strong>
 </td>
 <td>
-<img src="https://cloud.mr90.top/hexo/5/d15c17f1-b06f-4560-a363-dd9adce488b2.gif" />
+<img src="https://cloud.ryanuo.cc/hexo/5/d15c17f1-b06f-4560-a363-dd9adce488b2.gif" />
 </td>
 </tr>
 <tr>
@@ -51,7 +51,7 @@ layout: doc
 <strong>水印上传</strong>
 </td>
 <td>
-<img src="https://cloud.mr90.top/hexo/5/c8f15ba7-b934-4ef6-afb2-22dd472fb4d2.gif" />
+<img src="https://cloud.ryanuo.cc/hexo/5/c8f15ba7-b934-4ef6-afb2-22dd472fb4d2.gif" />
 </td>
 </tr>
 <tr>
@@ -59,7 +59,7 @@ layout: doc
 <strong>图床管理</strong>
 </td>
 <td>
-<img src="https://cloud.mr90.top/hexo/5/1d146393-3012-4b55-8083-01b8c0e562c8.gif" />
+<img src="https://cloud.ryanuo.cc/hexo/5/1d146393-3012-4b55-8083-01b8c0e562c8.gif" />
 </td>
 </tr>
 </table>

@@ -16,8 +16,8 @@
     <router-view />
     <SettingView />
     <footer>
-      Copyright ©2021-{{ timeE }} <a style="text-decoration : none" href="https://u.mr90.top" target="_blank"
-        rel="noopener noreferrer">Harry</a> Dev.
+      Copyright ©2021-{{ timeE }} <a style="text-decoration : none" href="https://u.ryanuo.cc" target="_blank"
+        rel="noopener noreferrer">Ryanuo</a> Dev.
     </footer>
   </div>
 </template>

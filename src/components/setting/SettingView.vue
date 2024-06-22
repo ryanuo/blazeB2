@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-08-03 15:15:33
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-08-04 11:51:15
  * @FilePath: \dev\src\components\setting\SettingView.vue
 -->

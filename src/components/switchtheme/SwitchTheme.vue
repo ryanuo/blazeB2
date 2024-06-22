@@ -120,7 +120,7 @@ export default {
       localStorage.setItem('themeb2', JSON.stringify({ theme: e }))
     },
     handleTogGithub() {
-      window.open('https://github.com/rr210/blazeB2')
+      window.open('https://github.com/ryanuo/blazeB2')
     },
     handleThemeChange() {
       this.isLight = !this.isLight

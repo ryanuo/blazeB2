@@ -1,8 +1,8 @@
 /*
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-30 21:56:16
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-10-01 21:45:47
  * @FilePath: \dev\docs\.vitepress\config.js
  */
@@ -21,7 +21,7 @@ export default {
         sidebar,
         logo: '/img/logo.svg',
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/rr210/blazeb2' }
+            { icon: 'github', link: 'https://github.com/ryanuo/blazeb2' }
         ],
         algolia: {
             apiKey: '96df3907aa74556f4746511deee28203',
@@ -37,7 +37,7 @@ export default {
         lastUpdated: '上次更新',
         footer: {
             message: 'Released under the Apache License 2.0.',
-            copyright: 'Copyright © 2021-present Harry'
+            copyright: 'Copyright © 2021-present Ryanuo'
         }
     }
 }

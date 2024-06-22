@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-05 11:54:55
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-08-03 20:18:08
  * @FilePath: \dev\src\views\Setting\setMain\SetCompress.vue
 -->

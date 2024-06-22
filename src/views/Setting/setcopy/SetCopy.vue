@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-10 14:19:44
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-08-03 17:30:35
  * @FilePath: \dev\src\views\Setting\setcopy\SetCopy.vue
 -->

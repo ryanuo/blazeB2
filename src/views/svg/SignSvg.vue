@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-06-24 18:26:52
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-06-24 18:27:17
  * @FilePath: \web\src\views\SignSvg.vue
 -->

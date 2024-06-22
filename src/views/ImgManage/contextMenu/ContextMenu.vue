@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-30 16:50:32
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-08-04 14:20:18
  * @FilePath: \dev\src\views\ImgManage\contextMenu\ContextMenu.vue
 -->

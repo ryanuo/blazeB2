@@ -14,7 +14,7 @@ hero:
       link: /guide/summary
     - theme: alt
       text: 在 GitHub 上查看
-      link: https://github.com/Rr210/blazeB2
+      link: https://github.com/ryanuo/blazeB2
 
 features:
 

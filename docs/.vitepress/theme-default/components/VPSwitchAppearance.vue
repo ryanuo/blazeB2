@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-31 21:22:44
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-07-31 21:30:04
  * @FilePath: \dev\docs\docs\.vitepress\theme-default\components\VPSwitchAppearance.vue
 -->

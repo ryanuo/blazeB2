@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-06-24 17:04:27
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-08-03 17:29:29
  * @FilePath: \dev\src\views\formview\FormView.vue
 -->
@@ -17,7 +17,7 @@
         <el-input v-model="form.application_key" show-password placeholder="请填写应用程序密钥"></el-input>
       </el-form-item>
       <el-form-item label="host_url(图床自定义域名)" prop="host_url">
-        <el-input v-model="form.host_url" placeholder="请填写地址,eg: https://cloud.mr90.top/file/imagecloud/ 注意:结尾必须加 ‘/’">
+        <el-input v-model="form.host_url" placeholder="请填写地址,eg: https://cloud.ryanuo.cc/file/imagecloud/ 注意:结尾必须加 ‘/’">
         </el-input>
       </el-form-item>
       <el-form-item label=" bucket_name" prop="bucket_name">

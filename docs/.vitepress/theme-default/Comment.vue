@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-31 20:52:35
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2022-07-31 21:12:27
  * @FilePath: \dev\docs\docs\.vitepress\theme\components\Comment.vue
 -->
@@ -25,9 +25,9 @@ export default {
       clientSecret: "4c4dcc532189d7716296c80cebe6775e9557f70f",
       // 评论项目名
       repo: 'blazeb2',
-      owner: 'rr210',
-      admin: ['rr210'],
-      githubID: 'rr210',
+      owner: 'ryanuo',
+      admin: ['ryanuo'],
+      githubID: 'ryanuo',
       id: decodeURI(window.location.pathname),
       language: 'zh-CN',
       distractionFreeMode: true

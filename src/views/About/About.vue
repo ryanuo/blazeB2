@@ -1,8 +1,8 @@
 <!--
- * @Author: Harry
+ * @Author: Ryanuo
  * @Date: 2022-07-01 14:18:36
- * @LastEditors: harry
- * @Github: https://github.com/rr210
+ * @LastEditors: ryanuo
+ * @Github: https://github.com/ryanuo
  * @LastEditTime: 2023-07-02 21:26:07
  * @FilePath: \blazeB2\src\views\About\About.vue
 -->
@@ -27,12 +27,12 @@ export default {
   data() {
     return {
       shieldsList: [
-        { link: 'https://github.com/Rr210', alt: 'Author', svgpic: 'https://img.shields.io/badge/author-Rr210-violet.svg' },
+        { link: 'https://github.com/ryanuo', alt: 'Author', svgpic: 'https://img.shields.io/badge/author-ryanuo-violet.svg' },
         { link: 'https://blazeb2.js.org/', alt: 'docs', svgpic: 'https://img.shields.io/badge/docs-%E6%96%87%E6%A1%A3-blueviolet' },
-        { link: 'https://github.com/Rr210/blazeB2/releases', alt: 'Release', svgpic: 'https://img.shields.io/github/release/Rr210/blazeB2.svg' },
-        { link: 'https://github.com/Rr210/blazeB2/blob/master/LICENSE', alt: 'License', svgpic: 'https://img.shields.io/github/license/Rr210/blazeB2.svg' },
-        { link: 'https://github.com/Rr210/blazeB2', alt: 'Stars', svgpic: 'https://img.shields.io/github/stars/Rr210/blazeB2' },
-        { link: 'https://github.com/Rr210/blazeB2/issues', alt: 'Issues', svgpic: 'https://img.shields.io/github/issues/Rr210/blazeB2' }
+        { link: 'https://github.com/ryanuo/blazeB2/releases', alt: 'Release', svgpic: 'https://img.shields.io/github/release/ryanuo/blazeB2.svg' },
+        { link: 'https://github.com/ryanuo/blazeB2/blob/master/LICENSE', alt: 'License', svgpic: 'https://img.shields.io/github/license/ryanuo/blazeB2.svg' },
+        { link: 'https://github.com/ryanuo/blazeB2', alt: 'Stars', svgpic: 'https://img.shields.io/github/stars/ryanuo/blazeB2' },
+        { link: 'https://github.com/ryanuo/blazeB2/issues', alt: 'Issues', svgpic: 'https://img.shields.io/github/issues/ryanuo/blazeB2' }
       ]
     }
   }

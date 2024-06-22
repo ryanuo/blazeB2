@@ -35,7 +35,7 @@ description: 使用docker+nginx一键部署balzeb2图床项目
 
 ```js
 // github
-git clone -b build https://github.com/Rr210/blazeB2.git
+git clone -b build https://github.com/ryanuo/blazeB2.git
 // gitee
 git clone -b build https://gitee.com/rbozo/blazeB2.git
 ```
@@ -82,11 +82,11 @@ docker logs flask_v1
 ```js
 server {
     listen  80; # 监听80端口
-    root       /www/wwwroot/b2.mr90.top; 
-    server_name b2.mr90.top; # 配置域名
+    root       /www/wwwroot/b2.ryanuo.cc; 
+    server_name b2.ryanuo.cc; # 配置域名
     # 处理静态资源:
     location ~ ^\/static\/.*$ {
-        root /www/wwwroot/b2.mr90.top/static/;
+        root /www/wwwroot/b2.ryanuo.cc/static/;
     }
     fastcgi_param   HTTPS    on;
 	fastcgi_param   HTTP_SCHEME   https;

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @File  : index.py
-# @Author: Harry
+# @Author: Ryanuo
 # @Date  : 24/6/2022
 # @Desc  :
 import hashlib, uuid, base64, json, requests
