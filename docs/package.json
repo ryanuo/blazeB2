@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.11.0",
+    "gitalk": "^1.8.0",
     "markdown-it-custom-attrs": "^1.0.2"
   }
 }
