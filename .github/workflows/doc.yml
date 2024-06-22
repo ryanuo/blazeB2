@@ -32,7 +32,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4.6.1  # 使用部署到gh-pages的Action
       with:
         token: ${{ secrets.ACCESS_TOKEN }}  # GitHub Token，需要在仓库Secrets中设置
-        branch: gh-pages  # 要部署到的分支
+        branch: master  # 要部署到的分支
         repository-name: blazeb2/blazeb2.github.io
         folder: ./docs/.vitepress/dist
 
