@@ -95,19 +95,19 @@ svg {
   align-items: center;
   padding-bottom: 10px;
 
-  /deep/.el-color-picker__trigger {
+  :deep(.el-color-picker__trigger) {
     border-radius: 0;
   }
 
-  /deep/.el-input__inner {
+  :deep(.el-input__inner) {
     width: 168px;
     height: 30px;
   }
 
-  /deep/.el-select {
+  :deep(.el-select) {
     margin: 0 !important;
 
-    /deep/.el-input__suffix {
+    :deep(.el-input__suffix) {
       top: 23%;
     }
   }
