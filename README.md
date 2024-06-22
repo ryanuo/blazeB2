@@ -38,15 +38,15 @@
 
 ## 🍥 部署方法 | Deployment method
 
-- 支持 `vercel` 一键部署 [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=flat&logo=vercel&logoColor=white)](https://blazeb2.js.org/zh/guide/deploy.html#vercel%E4%B8%80%E9%94%AE%E7%A7%92%E9%83%A8%E7%BD%B2)
+- 支持 `vercel` 一键部署 [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=flat&logo=vercel&logoColor=white)](https://blazeb2.js.org/guide/deploy/vercel.html)
 
 - 支持 `serverless` [![serverless](https://img.shields.io/badge/serverless-%23000000.svg?style=flat&logo=serverless&logoColor=white)](https://cloud.tencent.com/login?s_url=https%3A%2F%2Fconsole.cloud.tencent.com%2Fscf%2Flist-create%3Frid%3D1%26ns%3Ddefault%26createType%3Dempty)
 
-- 支持 `heroku` 部署 [![heroku](https://img.shields.io/badge/heroku-%23000000.svg?style=flat&logo=heroku&logoColor=white)](https://blazeb2.js.org/zh/guide/deploy.html#heroku-%E9%83%A8%E7%BD%B2)
+- 支持 `heroku` 部署 [![heroku](https://img.shields.io/badge/heroku-%23000000.svg?style=flat&logo=heroku&logoColor=white)](https://blazeb2.js.org/guide/deploy/heroku.html)
 
-- 支持 `Docker` 部署 [![docker](https://img.shields.io/badge/docker-%23000000.svg?style=flat&logo=docker&logoColor=white)](https://blazeb2.js.org/zh/guide/deploy.html#%E5%9F%BA%E4%BA%8Edocker-nginx-%E9%83%A8%E7%BD%B2)
+- 支持 `Docker` 部署 [![docker](https://img.shields.io/badge/docker-%23000000.svg?style=flat&logo=docker&logoColor=white)](https://blazeb2.js.org/guide/deploy/docker.html)
 
-- 支持 `netlify` 部署 [![netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=flat&logo=netlify&logoColor=white)](https://blazeb2.js.org/zh/guide/deploy.html#netlify-%E9%83%A8%E7%BD%B2)
+- 支持 `netlify` 部署 [![netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=flat&logo=netlify&logoColor=white)](https://blazeb2.js.org/guide/deploy/netlify.html)
 ## 📸 预览 | preview
 
 <details>

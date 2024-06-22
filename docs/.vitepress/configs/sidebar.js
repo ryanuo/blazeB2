@@ -32,7 +32,8 @@ function getGuideSidebar() {
                 { text: 'Vercel部署', link: '/guide/deploy/vercel' },
                 { text: 'Docker部署', link: '/guide/deploy/docker' },
                 { text: 'Heroku部署', link: '/guide/deploy/heroku' },
-                { text: 'Serverless部署', link: '/guide/deploy/serverless' }
+                { text: 'Serverless部署', link: '/guide/deploy/serverless' },
+                { text: 'Netlify部署', link: '/guide/deploy/netlify' }
             ]
         },
         {
