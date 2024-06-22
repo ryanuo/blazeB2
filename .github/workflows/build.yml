@@ -10,16 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Configure pnpm global bin directory
         run: |
-          npm i pnpm -g
-          pnpm install -g workbox-cli
-          pnpm i
+          mkdir -p ~/.pnpm-global
+          pnpm config set global-bin-dir ~/.pnpm-global
+        shell: bash
+
+      - name: Add pnpm global bin to PATH
+        run: echo "export PATH=$HOME/.pnpm-global:$PATH" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Install global dependencies
+        run: pnpm add -g workbox-cli
 
       - name: Build project
         run: pnpm run build:vsw
