@@ -70,7 +70,8 @@
     "vite-plugin-env-compatible": "^1.1.1",
     "vite-plugin-svg-icons": "^2.0.1",
     "vitepress": "^1.0.0-alpha.17",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "workbox-cli": "^7.1.0"
   },
   "browserslist": [
     "last 2 version",

@@ -32,9 +32,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Install global dependencies
-        run: pnpm add -g workbox-cli
-
       - name: Build project
         run: pnpm run build:vsw
       
