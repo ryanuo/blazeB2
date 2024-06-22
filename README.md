@@ -19,7 +19,7 @@
 
 - [x] 支持 **拖拽**、**复制粘贴**、**选择文件** 等方式进行选择图片
 - [x] 支持 **一键复制** 图片外链支持多种格式(**MarkDown**、**HTML**、**自定义**)
-- [x] 支持 **一键部署**（Vercel,ServerLess,Heroku,Docker）[查看部署方法](https://blazeb2.js.org/zh/guide/deploy.html)
+- [x] 支持 **一键部署**（Vercel,ServerLess,Heroku,Docker）[查看部署方法](https://blazeb2.js.org/guide/deploy/vercel.html)
 - [x] 支持 图片名称 **唯一性** 后端生成uuid字符串，暂不支持自定义名称
 - [x] 支持 **显示仓库下所有文件夹名称** 支持自定义默认搜索仓库名
 - [x] 支持 **图片压缩** 可自定义压缩等级 默认关闭，开启默认(**0.8**)
@@ -34,7 +34,7 @@
 
 ## 💻 使用教程 | Using the tutorial
 
-- 点击这里查看 [传送门](https://blazeb2.js.org/zh/guide/)
+- 点击这里查看 [传送门](https://blazeb2.js.org/guide/summary.html)
 
 ## 🍥 部署方法 | Deployment method
 
@@ -45,6 +45,8 @@
 - 支持 `heroku` 部署 [![heroku](https://img.shields.io/badge/heroku-%23000000.svg?style=flat&logo=heroku&logoColor=white)](https://blazeb2.js.org/zh/guide/deploy.html#heroku-%E9%83%A8%E7%BD%B2)
 
 - 支持 `Docker` 部署 [![docker](https://img.shields.io/badge/docker-%23000000.svg?style=flat&logo=docker&logoColor=white)](https://blazeb2.js.org/zh/guide/deploy.html#%E5%9F%BA%E4%BA%8Edocker-nginx-%E9%83%A8%E7%BD%B2)
+
+- 支持 `netlify` 部署 [![netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=flat&logo=netlify&logoColor=white)](https://blazeb2.js.org/zh/guide/deploy.html#netlify-%E9%83%A8%E7%BD%B2)
 ## 📸 预览 | preview
 
 <details>

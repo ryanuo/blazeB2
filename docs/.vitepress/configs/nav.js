@@ -10,7 +10,7 @@
 export const nav = [
     {
         text: '在线使用', items: [
-            { text: "推荐较快", link: 'https://blazeb2.mr90.cf/' },
+            { text: "推荐较快", link: 'https://blazeb2.ryanuo.cc/' },
             { text: "镜像站点", link: 'https://b2.ryanuo.cc/' },
         ]
     }

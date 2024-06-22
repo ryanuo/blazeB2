@@ -32,8 +32,9 @@ description: 使用Heroku一键部署balzeb2图床项目
 3. 创建新的 `Heroku App`
 4. 拉取代码部署（或者直接[fork](https://github.com/ryanuo/blazeB2)本仓库）
 
-```js
-git clone -b build https://github.com/ryanuo/blazeB2.git
+```bash
+git clone https://github.com/ryanuo/blazeB2.git
+cd deploys/other
 ```
 - fork无需拉取上传
 - 将代码创建并保存到自己的`github`仓库

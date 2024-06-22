@@ -33,11 +33,13 @@ description: 使用docker+nginx一键部署balzeb2图床项目
 
 - 拉取代码到服务端
 
-```js
-// github
-git clone -b build https://github.com/ryanuo/blazeB2.git
-// gitee
-git clone -b build https://gitee.com/rbozo/blazeB2.git
+```bash
+# // github
+git clone https://github.com/ryanuo/blazeB2.git
+# // gitee
+# git clone https://gitee.com/rbozo/blazeB2.git
+
+cd deploys/other
 ```
 
 ## Step. 3: 修改默认配置信息
