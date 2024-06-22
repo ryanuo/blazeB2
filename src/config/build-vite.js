@@ -18,7 +18,7 @@ const build = {
     output: {
       chunkFileNames: 'js/[name]-[hash].js',
       entryFileNames: 'js/[name]-[hash].js',
-      assetFileNames: '[ext]/[name]-[hash].[ext]'
+      assetFileNames: '[ext]/[name]-[hash].[ext]',
     }
   },
   terserOptions: {

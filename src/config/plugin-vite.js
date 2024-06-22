@@ -14,8 +14,8 @@ import eslintPlugin from 'vite-plugin-eslint'
 import legacy from '@vitejs/plugin-legacy'
 import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import importToCDN from 'vite-plugin-cdn-import'
-import { cdn } from './index'
+// import importToCDN from 'vite-plugin-cdn-import'
+// import { cdn } from './index'
 const plugins = function(mode) {
   const isPro = mode === 'pro'
   const transformIndexHtml = (code) => {
@@ -53,9 +53,10 @@ const plugins = function(mode) {
     iconDirs: [path.resolve(process.cwd(), './src/icons')], // 在src下新建文件夹icons
     symbolId: 'icon-[dir]-[name]'
   }),
-  importToCDN({
-    modules: cdn
-  })]
+  // importToCDN({
+  //   modules: cdn
+  // })
+  ]
 }
 
 export default plugins
