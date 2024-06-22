@@ -1,0 +1,22 @@
+{
+  "name": "vite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:d": "vitepress dev",
+    "docs:b": "vitepress build",
+    "docs:p": "vitepress preview"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@docsearch/css": "^3.6.0",
+    "@docsearch/js": "^3.6.0",
+    "body-scroll-lock": "4.0.0-beta.0",
+    "vitepress": "^1.2.3"
+  },
+  "dependencies": {
+    "@vueuse/core": "^10.11.0"
+  }
+}

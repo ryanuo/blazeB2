@@ -1,0 +1,40 @@
+name: Build and Deploy Docs
+
+on:
+  push:
+    branches:
+      - master  # 当在main分支上有代码推送时触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # 检出代码
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4  
+      with:
+        node-version: '18'
+
+    - name: Install pnpm
+      run: |
+        cd docs
+        npm install -g pnpm
+        mkdir -p ~/.pnpm-global
+        pnpm config set global-bin-dir ~/.pnpm-global
+        echo "$HOME/.pnpm-global" >> $GITHUB_PATH
+        pnpm install
+
+    - name: Build Docs
+      run: pnpm run docs:b  # 执行构建文档的命令
+
+    - name: Deploy to gh-pages
+      uses: JamesIves/github-pages-deploy-action@v4.6.1  # 使用部署到gh-pages的Action
+      with:
+        token: ${{ secrets.ACCESS_TOKEN }}  # GitHub Token，需要在仓库Secrets中设置
+        branch: gh-pages  # 要部署到的分支
+        repository-name: blazeb2/blazeb2.github.io
+        folder: ./.vitepress/dist
+

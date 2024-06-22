@@ -55,5 +55,5 @@ jobs:
           git config --global user.email "1577791638@qq.com"
           git config --global user.name "ryanuo"
           git add .
-          git diff-index --quiet HEAD || git commit -m "chore:auto update deploy static files"
+          git diff-index --quiet HEAD || git commit -m "chore: auto update deploy static files;"
           git push

@@ -1,0 +1,46 @@
+{
+  "hash": "55f7d2f9",
+  "configHash": "ffae2dd5",
+  "lockfileHash": "af21d09c",
+  "browserHash": "78a4cadd",
+  "optimized": {
+    "vue": {
+      "src": "../../../node_modules/.pnpm/vue@3.4.29/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "0b98e597",
+      "needsInterop": false
+    },
+    "vitepress > @vue/devtools-api": {
+      "src": "../../../node_modules/.pnpm/@vue+devtools-api@7.3.3/node_modules/@vue/devtools-api/dist/index.js",
+      "file": "vitepress___@vue_devtools-api.js",
+      "fileHash": "9f566f28",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/core": {
+      "src": "../../../node_modules/.pnpm/@vueuse+core@10.11.0_vue@3.4.29/node_modules/@vueuse/core/index.mjs",
+      "file": "vitepress___@vueuse_core.js",
+      "fileHash": "ff1befe7",
+      "needsInterop": false
+    },
+    "gitalk": {
+      "src": "../../../../node_modules/.pnpm/gitalk@1.8.0/node_modules/gitalk/dist/gitalk.js",
+      "file": "gitalk.js",
+      "fileHash": "0136e433",
+      "needsInterop": true
+    },
+    "body-scroll-lock": {
+      "src": "../../../node_modules/.pnpm/body-scroll-lock@4.0.0-beta.0/node_modules/body-scroll-lock/lib/bodyScrollLock.esm.js",
+      "file": "body-scroll-lock.js",
+      "fileHash": "32fd390d",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-WZEPNJCE": {
+      "file": "chunk-WZEPNJCE.js"
+    },
+    "chunk-BUSYA2B4": {
+      "file": "chunk-BUSYA2B4.js"
+    }
+  }
+}
