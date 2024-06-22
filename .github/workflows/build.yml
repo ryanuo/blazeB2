@@ -33,7 +33,7 @@ jobs:
         run: pnpm install
 
       - name: Build project
-        run: pnpm run build:vsw
+        run: pnpm run build
       
       - name: Remove old static files
         run: |

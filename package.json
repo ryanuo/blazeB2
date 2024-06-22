@@ -3,16 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode pro",
-    "lint": "vue-cli-service lint",
+    "build": "pnpm run build:vite && pnpm run sw",
     "dev": "vite --mode dev",
     "build:vite": "vite build --mode pro",
-    "d:vite": "vite build --mode develop",
     "preview": "vite preview",
     "sw": "workbox generateSW workbox-config.js",
-    "build:sw": "npm run build && npm run sw",
-    "b:vsw": "npm run build:vite && npm run sw",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
