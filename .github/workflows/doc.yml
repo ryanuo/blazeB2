@@ -6,7 +6,7 @@ on:
       - master  # 当在main分支上有代码推送时触发
 
 jobs:
-  build-and-deploy:
+  docs-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,5 +34,5 @@ jobs:
         token: ${{ secrets.ACCESS_TOKEN }}  # GitHub Token，需要在仓库Secrets中设置
         branch: gh-pages  # 要部署到的分支
         repository-name: blazeb2/blazeb2.github.io
-        folder: ./.vitepress/dist
+        folder: ./docs/.vitepress/dist
 
