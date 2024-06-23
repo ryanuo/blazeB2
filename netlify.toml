@@ -1,0 +1,7 @@
+[[redirects]]
+  from = "index.html"
+  to = "deploys/other/static/index.html"
+  status = 200
+
+[functions]
+  directory = "deploys/other/"
