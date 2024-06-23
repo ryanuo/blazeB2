@@ -1,7 +1,12 @@
+
+[build]
+  command = "pip install -r requirements.txt"
+  functions = "deploys/other"
+
 [[redirects]]
-  from = "index.html"
-  to = "deploys/other/static/index.html"
+  from = "/index.html"
+  to = "/deploys/other/static/index.html"
   status = 200
 
 [functions]
-  directory = "deploys/other/"
+  directory = "deploys/other"

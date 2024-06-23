@@ -8,3 +8,4 @@ Jinja2==3.0.1
 MarkupSafe==2.0.1
 Werkzeug==2.0.1
 requests
+serverless-wsgi==1.7.8
